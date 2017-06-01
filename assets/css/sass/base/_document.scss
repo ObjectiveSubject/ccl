@@ -1,0 +1,61 @@
+
+/* Global
+ * ------------------------------------------- */
+
+*,
+*:before,
+*:after { /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+@include selection {
+	color: $color-selection-text;
+    background: $color-background-selection;
+}
+
+/* Media Size indicator
+ *
+ * Used to display the current media size.
+ * See footer.php for the element.
+ * ---------------------------------------- */
+.media-size  {
+	display: block;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background: rgba(white, 0.25);
+	padding: 5px;
+	color: #bbb;
+	font-size: 12px;
+	&:before {
+		content: "default";
+	}
+	@include media($sm) {
+		&:before {
+			content: "small";
+		}
+	}
+	@include media($md) {
+		&:before {
+			content: "medium";
+		}
+	}
+	@include media($lg) {
+		&:before {
+			content: "large";
+		}
+	}
+	@include media($xl) {
+		&:before {
+			content: "xlarge";
+		}
+	}
+}

@@ -1,0 +1,31 @@
+{
+  "name": "ccl",
+  "title": "CCL",
+  "description": "Theme for Claremont Colleges Library",
+  "version": "0.1.0",
+  "homepage": "http://github.com/ObjectiveSubject/ccl",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/ObjectiveSubject/ccl"
+  },
+  "author": {
+    "name": "Objective Subject",
+    "email": "tech@objectivesubject.com",
+    "url": "http://objectivesubject.com"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-add-src": "^0.2.0",
+    "gulp-clean-css": "^3.3.0",
+    "gulp-concat-util": "^0.5.5",
+    "gulp-jshint": "^2.0.4",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^2.1.2",
+    "jshint": "^2.9.4"
+  },
+  "keywords": []
+}

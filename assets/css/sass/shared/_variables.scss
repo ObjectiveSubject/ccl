@@ -1,0 +1,76 @@
+// Structure
+// ------------------------------------------- /
+$max-width: rem(1040) !global;
+$grid-columns: 12 !global;
+
+$container-padding: 20px;
+
+// Breakpoints
+// ------------------------------------------- /
+$sm: 500px;
+$md: 768px;
+$lg: 1000px;
+$xl: 1500px;
+
+// Colors
+// ------------------------------------------- /
+$color-text-main: black;
+
+$color-link: lightcoral;
+$color-link-visited: lightcoral;
+$color-link-hover: darken( $color-link, 20% );
+
+$color-code: black;
+
+$color-blockquote: black;
+
+$color-background-body: white;
+$color-background-hr: lightgray;
+$color-background-pre: #eeeeee;
+
+$color-background-selection: lightblue;
+$color-selection-text: white;
+
+$color-btn: $color-text-main;
+$color-btn-hover: $color-text-main;
+$color-btn-bg: lightgray;
+$color-btn-bg-hover: gray;
+$color-btn-disabled: gray;
+$color-btn-disabled-bg: lightgray;
+
+$color-border-input: #cccccc;
+$color-border-input-hover: #cccccc;
+$color-border-input-focus: #cccccc;
+
+$color-text-input: #333333;
+$color-text-input-hover: #111111;
+$color-text-input-focus: lightblue;
+
+$color-text-muted: lightgray;
+
+$color-facebook: #3b5997;
+$color-twitter: #55abed;
+$color-youtube: #cd201f;
+$color-linkedin: #0077b4;
+$color-google: #F44336;
+
+
+// Typography
+// ------------------------------------------- /
+$font-main: "Helvetica", Arial, sans-serif;
+$font-code: "Menlo", monospace;
+$font-pre: "Menlo", monospace;
+$leading: 1.5rem;
+$font-line-height-pre: 1.6rem;
+
+
+// Tables
+// ------------------------------------------- /
+$table-bg: transparent;
+$table-bg-accent: gray;
+$table-bg-hover: gray;
+$table-bg-nested: transparent;
+$table-cell-padding: 0.5em;
+$line-height-base: $leading;
+$table-border-color: gray;
+$table-condensed-cell-padding: 5px;

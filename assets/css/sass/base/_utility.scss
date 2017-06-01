@@ -1,0 +1,104 @@
+/*
+ * Utility Classes
+ *
+ * Utility classes are helpful, single (or limited) purpose, classes usually created for the styles you apply the most. Utility classes are always prefixed with `u-`.
+ */
+
+// Clearfix
+// ------------------------------------------ /
+.u-clearfix {
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// Layout
+// --------------------------------------- /
+.u-container {
+	max-width: $max-width;
+	margin: 0 auto;
+	padding: 0 $container_padding;
+}
+
+// Spacing
+// --------------------------------------- /
+.u-hug { margin-top: 0; }
+.u-nudge { margin-top: $leading/2; }
+.u-push { margin-top: $leading; }
+.u-pad { padding: $leading; }
+@for $i from 2 through 6 {
+	.u-push-#{$i}x {
+		margin-top: $leading * $i;
+	}
+}
+
+// Typography
+// --------------------------------------- /
+.u-weight-light { font-weight: 300; }
+.u-weight-normal { font-weight: 400; }
+.u-weight-medium { font-weight: 500; }
+.u-weight-bold { font-weight: 700; }
+.u-caps { text-transform: uppercase; }
+.u-font-size-sm { font-size: 75%; }
+.u-font-size-lg { font-size: 125%; }
+.u-font-size-xl { font-size: 150%; }
+.u-text-left { text-align: left; }
+.u-text-center { text-align: center; }
+.u-text-right { text-align: right; }
+
+
+// Display
+// ------------------------------------------ /
+.u-display-block { display: block; }
+.u-display-none { display: none; }
+.u-display-inline { display: inline; }
+.u-display-inline-block { display: inline-block; }
+
+.u-display-block-sm {
+	display: none;
+	@include media($sm) {
+		display: block !important;
+    }
+}
+.u-display-block-md {
+	display: none;
+	@include media($md) {
+		display: block !important;
+    }
+}
+.u-display-block-lg {
+	display: none;
+	@include media($lg) {
+		display: block !important;
+    }
+}
+.u-display-block-xl {
+	display: none;
+	@include media($xl) {
+		display: block !important;
+    }
+}
+.u-display-none-sm {
+	@include media($sm) {
+		display: none !important;
+    }
+}
+.u-display-none-md {
+	@include media($md) {
+		display: none !important;
+    }
+}
+.u-display-none-lg {
+	@include media($lg) {
+		display: none !important;
+    }
+}
+.u-display-none-xl {
+	@include media($xl) {
+		display: none !important;
+    }
+}

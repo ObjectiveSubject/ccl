@@ -1,0 +1,60 @@
+
+/* Media
+ * -----------------------------------------------------------*/
+
+/* Make sure embeds and iframes fit their containers. */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	max-width: 100%; /* Adhere to container width. */
+}
+
+figure {
+ 	margin: $leading 0 0;
+}
+
+.wp-caption {
+	max-width: 100%;
+}
+.wp-caption-text {
+	font-size: rem(12);
+	color: gray;
+}
+
+/* Responsive Media
+ * -----------------------------------------------------------*/
+[class*="responsive-media-"] {
+	position: relative;
+	height: 0;
+	overflow: hidden;
+
+	&[class*="1x2"] {
+		padding-top: 50%;
+	}
+
+	&[class*="16x9"] {
+		padding-top: 56.25%;
+	}
+
+	&[class*="4x3"] {
+		padding-top: 75%;
+	}
+
+	&[class*="1x1"] {
+		padding-top: 100%;
+	}
+
+	iframe, video, object, img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 1;
+	}
+}
