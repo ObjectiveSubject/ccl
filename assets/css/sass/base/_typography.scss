@@ -28,12 +28,12 @@ textarea {
  h1, .h1 {
 	margin-top: $leading;
 	margin-bottom: 0;
-	font-family: $font-main;
-	font-size: rem(32);
-	line-height: 1.1em;
+	font-family: $gotham-narrow-light;
 	font-weight: 300;
+	font-size: rem(34);
+	line-height: 1.1em;
 	@include media($md) {
-		font-size: rem(44);
+		font-size: rem(54);
 		line-height: 1em;
 	}
  }
@@ -42,11 +42,10 @@ textarea {
 	margin-bottom: 0;
 	font-size: rem(24);
 	line-height: 1.25em;
-	font-weight: 400;
-	font-family: $font-main;
-	text-transform: none;
+	font-weight: 600;
+	font-family: $gotham-narrow-medium;
 	@include media($md) {
-		font-size: rem(34);
+		font-size: rem(36);
 		line-height: 1.1em;
 	}
  }
@@ -55,11 +54,10 @@ textarea {
 	margin-bottom: 0;
 	font-size: rem(20);
 	line-height: 1.25em;
-	font-weight: 400;
-	font-family: $font-main;
-	text-transform: none;
+	font-weight: 600;
+	font-family: $gotham-narrow-medium;
 	@include media($md) {
-		font-size: rem(26);
+		font-size: rem(24);
 	}
  }
  h4, .h4 {
@@ -67,9 +65,8 @@ textarea {
 	margin-bottom: 0;
 	font-size: rem(18);
 	line-height: 1.2em;
-	font-weight: 400;
-	font-family: $font-main;
-	text-transform: none;
+	font-weight: 600;
+	font-family: $gotham-narrow-medium;
 	@include media($md) {
 		font-size: rem(20);
 	}
@@ -77,19 +74,18 @@ textarea {
  h5, .h5 {
 	margin-top: $leading;
 	margin-bottom: 0;
-	font-family: $font-main;
+	font-family: $gotham-narrow-medium;
 	font-size: rem(14);
 	line-height: 1.3em;
-	font-weight: 700;
+	font-weight: 600;
  }
  h6, .h6 {
 	margin-top: $leading;
 	margin-bottom: 0;
-	font-family: $font-main;
+	font-family: $gotham-narrow-medium;
 	font-size: rem(12);
 	line-height: 1.4em;
-	font-weight: 700;
-	letter-spacing: 0.1em;
+	font-weight: 600;
  }
 
  /* Links

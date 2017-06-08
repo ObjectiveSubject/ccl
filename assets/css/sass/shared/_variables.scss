@@ -5,7 +5,7 @@ $grid-columns: 12 !global;
 
 $container-padding: 20px;
 
-// Breakpoints
+// Common Breakpoints
 // ------------------------------------------- /
 $sm: 500px;
 $md: 768px;
@@ -14,6 +14,11 @@ $xl: 1500px;
 
 // Colors
 // ------------------------------------------- /
+$color-map: (
+    'black': black,
+    'white': white
+);
+
 $color-text-main: black;
 
 $color-link: lightcoral;
@@ -57,7 +62,10 @@ $color-google: #F44336;
 
 // Typography
 // ------------------------------------------- /
-$font-main: "Helvetica", Arial, sans-serif;
+$gotham-narrow-light: "GothamNarrow-Light", "Arial", sans-serif;
+$gotham-narrow-book: "GothamNarrow-Book", "Arial", sans-serif;
+$gotham-narrow-medium: "GothamNarrow-Medium", "Arial", sans-serif;
+$font-main: $gotham-narrow-book;
 $font-code: "Menlo", monospace;
 $font-pre: "Menlo", monospace;
 $leading: 1.5rem;

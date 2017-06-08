@@ -1,0 +1,9 @@
+
+/*
+ * Convert a pixel value into a 'rem' value
+ * $px: (int) pixel value without 'px'
+ * returns: rem value
+ */
+@function rem( $px: 16 ) {
+    @return #{ $px / 16 }rem;
+}

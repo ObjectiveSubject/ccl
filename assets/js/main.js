@@ -1,5 +1,5 @@
-/*! CCL Pattern Library - v0.1.0
- * http://github.com/ObjectiveSubject/ccl-pattern-library
+/*! CCL - v0.1.0
+ * http://github.com/ObjectiveSubject/ccl
  * Copyright (c) 2017; * Licensed GPLv2+ */
 
 /**

@@ -13,25 +13,8 @@
  */
 
 
-@import
-    "shared/bourbon/bourbon",
-    "shared/neat/neat",
-    "shared/variables",
-    "shared/mixins";
-
-@import
-    "base/normalize",
-    "base/document",
-    "base/typography",
-    "base/utility";
-
-@import
-    "blocks/buttons",
-    "blocks/forms",
-    "blocks/media",
-    "blocks/tables";
-
-@import
-    "views/content",
-    "views/footer",
-    "views/header";
+@import "shared/shared";
+@import "base/base";
+@import "blocks/blocks";
+@import "components/components";
+@import "views/views";

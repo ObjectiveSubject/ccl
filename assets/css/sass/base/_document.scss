@@ -14,6 +14,35 @@ html {
 
 body {
 	overflow-x: hidden;
+
+	
+	// In javascript, we can query the value of the "content" property on this pseudo element.
+	// Useful when we want to conditionally program javascript based on viewport width 
+	
+	&:before {
+		content: "default";
+		display: none;
+	}
+	@include media($sm) {
+		&:before {
+			content: "sm";
+		}
+	}
+	@include media($md) {
+		&:before {
+			content: "md";
+		}
+	}
+	@include media($lg) {
+		&:before {
+			content: "lg";
+		}
+	}
+	@include media($xl) {
+		&:before {
+			content: "xl";
+		}
+	}
 }
 
 @include selection {
