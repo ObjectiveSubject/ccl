@@ -12,7 +12,7 @@
 </head>
 <body <?php body_class(); ?>>
 
-	<div id="page" class="u-container">
+	<div id="page" class="container">
 
 		<header id="masthead" class="site-header" role="banner">
 			<div class="site-branding">
