@@ -1,4 +1,4 @@
-<div class="grid-container u-my-3">
+<div class="grid-row u-my-3">
     
     <?php
 
