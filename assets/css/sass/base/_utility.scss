@@ -19,9 +19,9 @@
 
 // Spacing
 // --------------------------------------- /
-.u-mt-nudge { margin-top: $leading/2 !important; }
-.u-mb-nudge { margin-bottom: $leading/2 !important; }
-.u-my-nudge { margin-top: $leading/2 !important; margin-bottom: $leading/2 !important; }
+.u-mt-nudge { margin-top: $leading/3 !important; }
+.u-mb-nudge { margin-bottom: $leading/3 !important; }
+.u-my-nudge { margin-top: $leading/3 !important; margin-bottom: $leading/3 !important; }
 @for $i from 0 through 6 {
     $val: $leading * $i;
     .u-ma-#{$i} { margin: $val !important; }
@@ -72,6 +72,13 @@
     .u-bg-#{$color-name} {
     	background-color: $color-value !important;
 	}
+}
+.u-color-muted { 
+	opacity: 0.3;
+}
+a.u-color-muted:hover,
+a.u-color-muted:focus {
+	opacity: 1;
 }
 
 

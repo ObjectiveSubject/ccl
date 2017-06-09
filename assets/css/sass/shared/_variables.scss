@@ -1,10 +1,3 @@
-// Structure
-// ------------------------------------------- /
-$max-width: rem(1040) !global;
-$grid-columns: 12 !global;
-
-$container-padding: 20px;
-
 // Common Breakpoints
 // ------------------------------------------- /
 $sm: 500px;
@@ -12,18 +5,55 @@ $md: 768px;
 $lg: 1000px;
 $xl: 1500px;
 
+// Grid
+// ------------------------------------------- /
+$max-width: rem(1080) !global;
+
+$gutter: 18px;
+$default-columns: 2;
+$sm-columns: 4;
+$md-columns: 6;
+$lg-columns: 10;
+$max-columns: $lg-columns;
+
+$neat-grid: (
+  columns: $default-columns,
+  gutter: $gutter,
+);
+$neat-grid-sm: (
+  columns: $sm-columns,
+  gutter: $gutter,
+  media: $sm
+);
+$neat-grid-md: (
+  columns: $md-columns,
+  gutter: $gutter,
+  media: $md
+);
+$neat-grid-lg: (
+  columns: $lg-columns,
+  gutter: $gutter,
+  media: $lg
+);
+
+
 // Colors
 // ------------------------------------------- /
+$red: #CC0000;
+$blue: #126DB5;
+
 $color-map: (
-    'black': black,
-    'white': white
+    'black' : black,
+    'white' : white,
+    'red'   : $red,
+    'blue'  : $blue,
 );
 
 $color-text-main: black;
 
-$color-link: lightcoral;
-$color-link-visited: lightcoral;
-$color-link-hover: darken( $color-link, 20% );
+$color-link: black;
+$color-link-visited: $red;
+$color-link-hover: $red;
 
 $color-code: black;
 
