@@ -14,15 +14,20 @@ $xl: 1500px;
 
 // Colors
 // ------------------------------------------- /
+$red: #CC0000;
+$blue: #126DB5;
+
 $color-map: (
-    'black': black,
-    'white': white
+    'black' : black,
+    'white' : white,
+    'red'   : $red,
+    'blue'  : $blue,
 );
 
 $color-text-main: black;
 
-$color-link: lightcoral;
-$color-link-visited: lightcoral;
+$color-link: $red;
+$color-link-visited: $red;
 $color-link-hover: darken( $color-link, 20% );
 
 $color-code: black;
