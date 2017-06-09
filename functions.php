@@ -23,6 +23,9 @@ require_once CCL_INC . 'shortcodes.php';
 require_once CCL_INC . 'taxonomies.php';
 require_once CCL_INC . 'template-tags.php';
 
+// Include integrations
+require_once CCL_INC . 'integrations/springshare.php';
+
 // Include lib classes
 include( CCL_INC . 'libraries/extended-cpts.php' );
 include( CCL_INC . 'libraries/extended-taxos.php' );
