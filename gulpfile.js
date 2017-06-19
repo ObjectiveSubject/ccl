@@ -1,5 +1,6 @@
 var gulp 		 = require('gulp'),
 	addsrc 		 = require('gulp-add-src'),
+	autoprefixer = require('gulp-autoprefixer'),
 	concat 		 = require('gulp-concat-util'),
 	jshint 		 = require('gulp-jshint'),
 	cleancss 	 = require('gulp-clean-css'),
@@ -21,6 +22,10 @@ var pkg	   = require('./package.json'),
 // Styles
 gulp.task('styles', function() {
 	return sass('assets/css/sass/style.scss', { style: 'expanded', sourcemap: true })
+		.pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('assets/css'))
 		.pipe(rename({suffix: '.min'}))
