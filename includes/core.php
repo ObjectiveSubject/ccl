@@ -52,10 +52,18 @@ function features() {
 function scripts( $debug = false ) {
 	$min = ( $debug || defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
+	wp_register_script( 
+		'slick', 
+		CCL_TEMPLATE_URL . "/assets/js/vendor/slick{$min}.js", 
+		array(), 
+		CCL_VERSION, 
+		true 
+	);
+
 	wp_enqueue_script(
 		'main',
 		CCL_TEMPLATE_URL . "/assets/js/main{$min}.js",
-		array('jquery'),
+		array('jquery', 'slick'),
 		CCL_VERSION,
 		true
 	);
