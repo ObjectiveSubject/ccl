@@ -37,7 +37,7 @@ gulp.task('styles', function() {
 
 // Scripts
 gulp.task('scripts', function() {
-  return gulp.src(['assets/js/vendor/*.js', 'assets/js/src/*.js'])
+  return gulp.src(['assets/js/src/*.js'])
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(sourcemaps.init())
