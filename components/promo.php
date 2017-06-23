@@ -1,8 +1,8 @@
-<div class="promo promo--news">
+<div class="promo">
 
     <header class="promo__header">
-        <div class="promo__title">News Promo</div>
-        <p class="promo__action"><a href="#" class="h4 u-color-black u-color-hover-red">View All News</a></p>
+        <div class="promo__title">Default Promo</div>
+        <p class="promo__action"><a href="#" class="h4 u-color-black u-color-hover-red">View All</a></p>
     </header>
 
     <div class="promo__content">        
@@ -12,7 +12,7 @@
             <?php 
             $i = 0;
             do { ?>
-                <article class="promo__item">
+                <article class="grid-2">
                     <a href="#">
                         <?php if ($i !== 1) : ?>
                             <div class="u-mb-nudge"><img src="http://unsplash.it/400/<?php echo 400 - ($i * 50); ?>/"/></div>

@@ -1,0 +1,34 @@
+.promo__item {
+
+    .promo--bio-quote &.bio-image,
+    .promo--bio-quote &.quote {
+        @include grid-column(2);
+        @include grid-media($neat-grid-sm) {
+            @include grid-column(2);
+        }
+        @include media($md) {
+            @include grid-column(2, ( columns: 4 ));
+        }
+        @include media($lg) {
+            @include grid-column(3, ( columns: 8 ));
+        }
+    }
+
+    .promo--bio-quote &.bio-image {
+        @include media($lg) {
+            @include grid-shift(1, ( columns: 8 ));
+        }
+        img {
+            display: block;
+            border-radius: 50%;
+        }
+    }
+
+    .promo--bio-quote &.quote {
+        @include media($lg) {
+            @include grid-shift(1, ( columns: 8 ));
+        }
+        blockquote { margin: 0; }
+    }
+
+}

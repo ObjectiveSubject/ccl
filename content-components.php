@@ -1,10 +1,10 @@
 
 <div class="u-my-3">
-    <?php get_template_part( 'components/promo-carousel' ); ?>
+    <?php get_template_part( 'components/promo' ); ?>
 </div>
 
 <div class="u-my-3">
-    <?php get_template_part( 'components/promo-news' ); ?>
+    <?php get_template_part( 'components/promo-carousel' ); ?>
 </div>
 
 <div class="u-my-3">
