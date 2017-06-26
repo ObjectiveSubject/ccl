@@ -1,7 +1,7 @@
 // Media queries
 // ------------------------------------- //
-@mixin media($size) {
-    @media screen and (min-width: $size) {
+@mixin media($size, $minmax: min) {
+    @media screen and (#{$minmax}-width: $size) {
         @content;
     }
 }

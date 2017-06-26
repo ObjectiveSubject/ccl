@@ -10,31 +10,32 @@ $xl: 1500px;
 $max-width: rem(1080) !global;
 
 $gutter: 18px;
-$default-columns: 2;
-$sm-columns: 4;
-$md-columns: 6;
-$lg-columns: 10;
-$max-columns: $lg-columns;
+$columns: 10;
+// $default-columns: 2;
+// $sm-columns: 4;
+// $md-columns: 6;
+// $lg-columns: 10;
+// $max-columns: $lg-columns;
 
-$neat-grid: (
-  columns: $default-columns,
-  gutter: $gutter,
-);
-$neat-grid-sm: (
-  columns: $sm-columns,
-  gutter: $gutter,
-  media: $sm
-);
-$neat-grid-md: (
-  columns: $md-columns,
-  gutter: $gutter,
-  media: $md
-);
-$neat-grid-lg: (
-  columns: $lg-columns,
-  gutter: $gutter,
-  media: $lg
-);
+// $neat-grid: (
+//   columns: $default-columns,
+//   gutter: $gutter,
+// );
+// $neat-grid-sm: (
+//   columns: $sm-columns,
+//   gutter: $gutter,
+//   media: $sm
+// );
+// $neat-grid-md: (
+//   columns: $md-columns,
+//   gutter: $gutter,
+//   media: $md
+// );
+// $neat-grid-lg: (
+//   columns: $lg-columns,
+//   gutter: $gutter,
+//   media: $lg
+// );
 
 
 // Colors

@@ -1,6 +1,6 @@
 .promo {
     @extend .u-clearfix;
-    @extend .grid-row;
+    // @extend .grid-row;
     border-top: 1px solid black;
     padding-top: $leading;
     @include media($lg) {
@@ -16,14 +16,14 @@
     @extend .u-mb-1;
     position: relative;
     z-index: 2;
-    @include grid-column(2);
+    // @include grid-column(2);
     
-    @include media($md) {
-        @include grid-column(2, $neat-grid-md);
-    }
-    @include media($lg) {
-        @include grid-column(2, $neat-grid-lg);
-    }
+    // @include media($md) {
+    //     @include grid-column(2, $neat-grid-md);
+    // }
+    // @include media($lg) {
+    //     @include grid-column(2, $neat-grid-lg);
+    // }
 }
 
 .promo__title {
@@ -43,14 +43,14 @@
     @extend .u-clearfix;
     position: relative;
     z-index: 1;
-    @include grid-column(2);
+    // @include grid-column(2);
     
-    @include grid-media($neat-grid-md) {
-        @include grid-column(4);
-    }
-    @include grid-media($neat-grid-lg) {
-        @include grid-column(8);
-    }
+    // @include grid-media($neat-grid-md) {
+    //     @include grid-column(4);
+    // }
+    // @include grid-media($neat-grid-lg) {
+    //     @include grid-column(8);
+    // }
 }
 
 // .promo__item {
@@ -64,7 +64,7 @@
 //             @include grid-column(2, ( columns: 8 ));
 //         }
 //     }
-    
+
 // }
 
 .promo__carousel {
