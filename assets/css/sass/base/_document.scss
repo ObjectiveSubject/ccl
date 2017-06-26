@@ -18,7 +18,6 @@ body {
 	
 	// In javascript, we can query the value of the "content" property on this pseudo element.
 	// Useful when we want to conditionally program javascript based on viewport width 
-	
 	&:before {
 		content: "default";
 		display: none;

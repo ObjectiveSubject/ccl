@@ -1,0 +1,13 @@
+table {
+    background-color: $table-bg;
+	margin: $leading 0 0;
+}
+caption {
+    @extend .ccl-u-text-left;
+    padding-top: $table-cell-padding;
+    padding-bottom: $table-cell-padding;
+    color: $color-text-muted;
+}
+th {
+    @extend .ccl-u-text-left;
+}

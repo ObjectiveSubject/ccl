@@ -13,8 +13,9 @@
  */
 
 
-@import "shared/shared";
-@import "base/base";
-@import "blocks/blocks";
-@import "components/components";
-@import "views/views";
+@import "tools/all";
+@import "settings/all";
+@import "base/all";
+@import "blocks/all";
+@import "components/all";
+@import "views/all";

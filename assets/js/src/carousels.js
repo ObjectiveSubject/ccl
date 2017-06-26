@@ -15,7 +15,7 @@
 
         init: function() {
             
-            $('.promo__carousel').each(function(){
+            $('.js-promo-carousel').each(function(){
                 carousels.promo(this);
             });
 
@@ -27,7 +27,7 @@
                     infinite: false,
                     mobileFirst: true,
                     dots: true,
-                    dotsClass: 'promo__carousel-paging slick-dots'
+                    dotsClass: 'ccl-c-carousel-paging slick-dots'
                 },
                 options = $this.data('slick');
 

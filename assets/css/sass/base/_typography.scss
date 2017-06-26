@@ -25,7 +25,7 @@ textarea {
 
 /* Headings
  * ------------------------------------------ */
- h1, .h1 {
+ h1, .ccl-h1 {
 	margin-top: $leading;
 	margin-bottom: 0;
 	font-family: $gotham-narrow-light;
@@ -37,7 +37,7 @@ textarea {
 		line-height: 1em;
 	}
  }
- h2, .h2 {
+ h2, .ccl-h2 {
 	margin-top: $leading;
 	margin-bottom: 0;
 	font-size: rem(24);
@@ -49,7 +49,7 @@ textarea {
 		line-height: 1.1em;
 	}
  }
- h3, .h3 {
+ h3, .ccl-h3 {
 	margin-top: $leading;
 	margin-bottom: 0;
 	font-size: rem(20);
@@ -60,7 +60,7 @@ textarea {
 		font-size: rem(24);
 	}
  }
- h4, .h4 {
+ h4, .ccl-h4 {
 	margin-top: $leading;
 	margin-bottom: 0;
 	font-size: rem(18);
@@ -71,7 +71,7 @@ textarea {
 		font-size: rem(20);
 	}
  }
- h5, .h5 {
+ h5, .ccl-h5 {
 	margin-top: $leading;
 	margin-bottom: 0;
 	font-family: $gotham-narrow-medium;
@@ -79,7 +79,7 @@ textarea {
 	line-height: 1.3em;
 	font-weight: 500;
  }
- h6, .h6 {
+ h6, .ccl-h6 {
 	margin-top: $leading;
 	margin-bottom: 0;
 	font-family: $gotham-narrow-medium;
@@ -142,8 +142,8 @@ dfn, cite, em, i {
 }
 
 blockquote {
-	@extend h3;
-	@extend .u-display-block;
+	@extend .ccl-h3;
+	@extend .ccl-u-display-block;
 	position: relative;
 	font-family: $font-main;
 	margin: ($leading * 2) 0;
@@ -154,7 +154,7 @@ blockquote {
 	}
 
 	cite {
-		@extend .h4;
+		@extend .ccl-h4;
 		display: block;
 		margin-top: $leading;
 		font-style: normal;

@@ -1,22 +1,6 @@
 
-/* Media
+/* Wordpress Media elements
  * -----------------------------------------------------------*/
-
-/* Make sure embeds and iframes fit their containers. */
-embed,
-iframe,
-object {
-	max-width: 100%;
-}
-
-img {
-	height: auto; /* Make sure images are scaled correctly. */
-	max-width: 100%; /* Adhere to container width. */
-}
-
-figure {
- 	margin: $leading 0 0;
-}
 
 .wp-caption {
 	max-width: 100%;
@@ -28,28 +12,12 @@ figure {
 
 /* Responsive Media
  * -----------------------------------------------------------*/
-[class*="responsive-media-"] {
+.ccl-b-media {
 	position: relative;
 	height: 0;
 	overflow: hidden;
 
-	&[class*="1x2"] {
-		padding-top: 50%;
-	}
-
-	&[class*="16x9"] {
-		padding-top: 56.25%;
-	}
-
-	&[class*="4x3"] {
-		padding-top: 75%;
-	}
-
-	&[class*="1x1"] {
-		padding-top: 100%;
-	}
-
-	iframe, video, object, img {
+	iframe, video, object {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -57,4 +25,24 @@ figure {
 		width: 100%;
 		z-index: 1;
 	}
+}
+
+.ccl-b-media--1x2 {
+	@extend .ccl-b-media;
+	padding-top: 50%;
+}
+
+.ccl-b-media--16x9 {
+	@extend .ccl-b-media;
+	padding-top: 56.25%;
+}
+
+.ccl-b-media--4x3 {
+	@extend .ccl-b-media;
+	padding-top: 75%;
+}
+
+.ccl-b-media--1x1 {
+	@extend .ccl-b-media;
+	padding-top: 100%;
 }

@@ -1,7 +1,8 @@
 .slick-track {
-    @extend .u-clearfix;
+    @extend .ccl-u-clearfix;
 }
 .slick-slide {
+    float: left;
     transition: opacity 300ms ease-out;
 }
 .slick-past {
@@ -18,7 +19,7 @@
     }
 }
 .slick-dots li button {
-    @extend .u-transition;
+    @extend .ccl-u-transition;
     border: 1px solid black;
     background: none;
     width: rem(14);
@@ -32,12 +33,25 @@
     }
 }
 
-.carousel {
-    @extend .u-clearfix;
+.ccl-c-carousel {
+    @extend .ccl-u-clearfix;
+ 
+    .ccl-c-promo--carousel & {
+        width: calc( 100% + #{$gutter} );
+        margin-left: $gutter * -1;
+        margin-right: $gutter;
+    }
 }
 
-.carousel-arrow {
-    @extend .u-transition;
+.ccl-c-carousel-paging {
+    .ccl-c-promo--carousel & {
+        margin-top: $leading;
+        margin-left: $gutter;
+    }
+}
+
+.ccl-c-carousel-arrow {
+    @extend .ccl-u-transition;
     position: relative;
     border: 1px solid black;
     border-radius: 50%;

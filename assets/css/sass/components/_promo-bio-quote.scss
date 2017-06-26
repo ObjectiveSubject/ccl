@@ -1,7 +1,7 @@
-.promo__item {
+.ccl-c-promo__item {
 
-    .promo--bio-quote &.bio-image,
-    .promo--bio-quote &.quote {
+    .ccl-c-promo--bio-quote &.bio-image,
+    .ccl-c-promo--bio-quote &.quote {
         // @include grid-column(2);
         // @include grid-media($neat-grid-sm) {
         //     @include grid-column(2);
@@ -14,7 +14,7 @@
         // }
     }
 
-    .promo--bio-quote &.bio-image {
+    .ccl-c-promo--bio-quote &.bio-image {
         // @include media($lg) {
         //     @include grid-shift(1, ( columns: 8 ));
         // }
@@ -24,7 +24,7 @@
         }
     }
 
-    .promo--bio-quote &.quote {
+    .ccl-c-promo--bio-quote &.quote {
         // @include media($lg) {
         //     @include grid-shift(1, ( columns: 8 ));
         // }

@@ -1,6 +1,6 @@
-<div class="floor-map">
+<div class="ccl-c-floor-map">
 
-    <h2 class="u-mb-2">Contextual Map</h2>
+    <h2 class="ccl-u-mb-2">Contextual Map</h2>
 
     <div class="floor-map-plans">
     

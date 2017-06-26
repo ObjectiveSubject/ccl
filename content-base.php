@@ -62,46 +62,45 @@ ornare consectetur massa velit vel tellus.</pre>
 
 <h3>Forms</h3>
 
-<form action="#">
-    <div class="form-group">
-      <label for="text">Text Input <abbr title="Required">*</abbr></label>
-      <input id="text" type="text" class="form-field" placeholder="Text Input">
+<form class="ccl-c-form" action="#">
+    <div class="ccl-c-form__group">
+      <label class="ccl-label" for="text">Text Input <abbr title="Required">*</abbr></label>
+      <input id="text" type="text" class="ccl-c-form__field" placeholder="Text Input">
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input id="password" type="password" class="form-field" placeholder="Type your Password">
+    <div class="ccl-c-form__group">
+      <label class="ccl-label" for="password">Password</label>
+      <input id="password" type="password" class="ccl-c-form__field" placeholder="Type your Password">
     </div>
-    <div class="form-group">
-      <label for="webaddress">Web Address</label>
-      <input id="webaddress" type="url" class="form-field" placeholder="http://yoursite.com">
+    <div class="ccl-c-form__group">
+      <label class="ccl-label" for="webaddress">Web Address</label>
+      <input id="webaddress" type="url" class="ccl-c-form__field" placeholder="http://yoursite.com">
     </div>
-    <div class="form-group">
-      <label for="emailaddress">Email Address</label>
-      <input id="emailaddress" type="email" class="form-field" placeholder="name@email.com">
+    <div class="ccl-c-form__group">
+      <label class="ccl-label" for="emailaddress">Email Address</label>
+      <input id="emailaddress" type="email" class="ccl-c-form__field" placeholder="name@email.com">
     </div>
-    <div class="form-group">
-      <label for="search">Search</label>
-      <input id="search" type="search" class="form-field" placeholder="Enter Search Term">
+    <div class="ccl-c-form__group">
+      <label class="ccl-label" for="search">Search</label>
+      <input id="search" type="search" class="ccl-c-form__field" placeholder="Enter Search Term">
     </div>
-    <div class="form-group">
-      <label for="number">Number Input <abbr title="Required">*</abbr></label>
-      <input id="number" type="number" class="form-field" placeholder="Enter a Number" pattern="[0-9]*">
+    <div class="ccl-c-form__group">
+      <label class="ccl-label" for="number">Number Input <abbr title="Required">*</abbr></label>
+      <input id="number" type="number" class="ccl-c-form__field" placeholder="Enter a Number" pattern="[0-9]*">
     </div>
-    <div class="form-group">
-      <label for="textarea">Textarea</label>
-      <textarea id="textarea" class="form-field" rows="8" cols="48" placeholder="Enter your message here"></textarea>
+    <div class="ccl-c-form__group">
+      <label class="ccl-label" for="textarea">Textarea</label>
+      <textarea id="textarea" class="ccl-c-form__field" rows="8" cols="48" placeholder="Enter your message here"></textarea>
     </div>
 
-    <p><input id="submit" value="Standard Button" type="button" class="button"/></p>
-    <p><input id="reset" value="Inverse Button" type="button" class="button button--inverse"/></p>
-    <p><input id="button" value="Small Button" type="button" class="button button--small"/></p>
-    <p><input id="disabled" value="Disabled Button" type="button" class="button button--disabled" disabled/></p>
+    <p><input id="submit" value="Standard Button" type="button" class="ccl-b-btn"/></p>
+    <p><input id="reset" value="Inverse Button" type="button" class="ccl-b-btn--inverse"/></p>
+    <p><input id="button" value="Small Button" type="button" class="ccl-b-btn--small"/></p>
+    <p><input id="disabled" value="Disabled Button" type="button" class="ccl-b-btn--disabled" disabled/></p>
 </form>
 
 <hr/>
 
-<h3>Table with <code>.table</code> and <code>.table--bordered</code> classes</h3>
-<table class="table table--bordered">
+<table class="ccl-b-table ccl-b-table--bordered">
     <tr>
         <th>Table Heading 1</th>
         <th>Table Heading 2</th>

@@ -2,7 +2,7 @@
  * -----------------------------------------------------------*/
 
 // Baseline styles
-.table {
+.ccl-b-table {
   // width: 100%;
   max-width: 100%;
     // Cells
@@ -39,13 +39,13 @@
     }
 
     // Nesting
-    .table {
+    .ccl-b-table {
         background-color: $table-bg-nested;
     }
 }
 
 
-.table--ruled {
+.ccl-b-table--ruled {
     > thead,
     > tbody,
     > tfoot {
@@ -68,7 +68,7 @@
 // Bordered version
 //
 // Add borders all around the table and between all the columns.
-.table--bordered {
+.ccl-b-table--bordered {
   border: 1px solid $table-border-color;
   > thead,
   > tbody,
@@ -94,7 +94,7 @@
 //
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
 
-.table--striped {
+.ccl-b-table--striped {
     > thead,
     > tbody,
     > tfoot {
@@ -119,22 +119,8 @@
 //
 // Placed here since it has to come after the potential zebra striping
 
-.table--hover {
+.ccl-b-table--hover {
   > tbody > tr:hover {
     background-color: $table-bg-hover;
   }
-}
-
-table {
-    background-color: $table-bg;
-	margin: $leading 0 0;
-}
-caption {
-  @extend .u-text-left;
-  padding-top: $table-cell-padding;
-  padding-bottom: $table-cell-padding;
-  color: $color-text-muted;
-}
-th {
-  @extend .u-text-left;
 }
