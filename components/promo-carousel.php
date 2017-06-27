@@ -1,6 +1,6 @@
-<div class="ccl-c-promo ccl-columns">
+<div class="ccl-c-promo">
 
-    <header class="ccl-c-promo__header ccl-column is-one-third-tablet is-one-quarter-desktop">
+    <header class="ccl-c-promo__header">
         <div class="ccl-c-promo__title">Carousel Promo</div>
         <p class="ccl-c-promo__action"><a href="#" class="ccl-h4 ccl-u-color-black ccl-u-color-hover-red">View All</a></p>
         <div class="ccl-c-promo__action">
@@ -9,7 +9,7 @@
         </div>
     </header>
 
-    <div class="ccl-c-promo__content ccl-column is-two-thirds-tablet is-three-quarters-desktop">        
+    <div class="ccl-c-promo__content">        
 
         <div class="ccl-c-carousel js-promo-carousel" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-1-prev", "nextArrow": "#carousel-1-next" }'>
 

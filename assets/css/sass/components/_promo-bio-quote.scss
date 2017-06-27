@@ -1,34 +1,20 @@
-.ccl-c-promo__item {
-
-    .ccl-c-promo--bio-quote &.bio-image,
-    .ccl-c-promo--bio-quote &.quote {
-        // @include grid-column(2);
-        // @include grid-media($neat-grid-sm) {
-        //     @include grid-column(2);
-        // }
-        // @include media($md) {
-        //     @include grid-column(2, ( columns: 4 ));
-        // }
-        // @include media($lg) {
-        //     @include grid-column(3, ( columns: 8 ));
-        // }
+.ccl-c-promo__bio-image {
+    @include media($lg) {
+        width: 45%;
+        padding-right: $gutter/2;
+        float: left;
     }
-
-    .ccl-c-promo--bio-quote &.bio-image {
-        // @include media($lg) {
-        //     @include grid-shift(1, ( columns: 8 ));
-        // }
-        img {
-            display: block;
-            border-radius: 50%;
-        }
+    
+    img {
+        display: block;
+        border-radius: 50%;
     }
-
-    .ccl-c-promo--bio-quote &.quote {
-        // @include media($lg) {
-        //     @include grid-shift(1, ( columns: 8 ));
-        // }
-        blockquote { margin: 0; }
+}
+.ccl-c-promo__quote {
+    blockquote { margin: 0; }
+    @include media($lg) {
+        width: 45%;
+        padding-left: $gutter/2;
+        float: left;
     }
-
 }

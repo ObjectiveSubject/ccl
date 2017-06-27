@@ -1,11 +1,11 @@
-<div class="ccl-c-promo ccl-columns">
+<div class="ccl-c-promo">
 
-    <header class="ccl-c-promo__header ccl-column is-one-third-tablet is-one-quarter-desktop">
+    <header class="ccl-c-promo__header">
         <div class="ccl-c-promo__title">Default Promo</div>
         <p class="ccl-c-promo__action"><a href="#" class="ccl-h4 ccl-u-color-black ccl-u-color-hover-red">View All</a></p>
     </header>
 
-    <div class="ccl-c-promo__content ccl-column">        
+    <div class="ccl-c-promo__content">        
 
         <div class="ccl-columns is-multiline is-mobile">
 

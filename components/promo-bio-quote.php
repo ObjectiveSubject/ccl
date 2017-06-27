@@ -9,11 +9,11 @@
 
         <div class="grid-row">
 
-            <div class="ccl-c-promo__item bio-image">
+            <div class="ccl-c-promo__bio-image">
                 <img src="http://unsplash.it/600/600"/>
             </div>
 
-            <div class="ccl-c-promo__item quote">
+            <div class="ccl-c-promo__quote">
                 <blockquote>
                     <span class="ldquo">&ldquo;</span>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.

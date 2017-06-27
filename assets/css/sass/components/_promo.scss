@@ -15,6 +15,14 @@
     @extend .ccl-u-mb-1;
     position: relative;
     z-index: 2;
+    @include media($md) {
+        width: calc(33.333% - #{$gutter/2});
+        margin-right: $gutter/2;
+        float: left;
+    }
+    @include media($lg) {
+        width: calc(25% - #{$gutter/2});
+    }
 }
 
 .ccl-c-promo__title {
@@ -33,4 +41,12 @@
     @extend .ccl-u-clearfix;
     position: relative;
     z-index: 1;
+    @include media($md) {
+        width: calc(66.666% - #{$gutter/2});
+        margin-left: $gutter/2;
+        float: left;
+    }
+    @include media($lg) {
+        width: calc(75% - #{$gutter/2});
+    }
 }

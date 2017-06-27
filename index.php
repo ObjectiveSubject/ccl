@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-	<div class="site-content">x
+	<div class="site-content">
 
 		<?php get_template_part( 'content', 'components' ); ?>
 
