@@ -1,4 +1,4 @@
-<div class="ccl-c-promo ccl-c-promo--carousel ccl-columns">
+<div class="ccl-c-promo ccl-columns">
 
     <header class="ccl-c-promo__header ccl-column is-one-third-tablet is-one-quarter-desktop">
         <div class="ccl-c-promo__title">Carousel Promo</div>

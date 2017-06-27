@@ -10,7 +10,7 @@
 .ccl-c-carousel {
     @extend .ccl-u-clearfix;
  
-    .ccl-c-promo--carousel & {
+    .ccl-c-promo & {
         width: calc( 100% + #{$gutter} );
         margin-left: -$gutter/2;
         margin-right: -$gutter/2;
