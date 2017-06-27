@@ -1,5 +1,9 @@
 
 <div class="ccl-u-my-3">
+    <?php get_template_part( 'components/quiz-card' ); ?>
+</div>
+
+<div class="ccl-u-my-3">
     <?php get_template_part( 'components/promo' ); ?>
 </div>
 

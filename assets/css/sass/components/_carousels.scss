@@ -17,7 +17,7 @@
     transition: opacity 300ms ease-out;
 
     &.ccl-is-past {
-        opacity: 0.2;
+        opacity: 0.05;
         pointer-events: none;
     }
 }

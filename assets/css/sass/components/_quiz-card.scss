@@ -1,0 +1,37 @@
+.ccl-c-quiz-card {
+    background-color: $blue;
+    color: white;
+    padding: $gutter;
+    padding-left: #{$gutter * 5};
+    padding-right: #{$gutter * 2};
+    @include media($sm) {
+        padding-left: #{$gutter * 6};
+    }
+}
+
+.ccl-c-quiz-card__header {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    min-height: rem(120);
+    margin-bottom: 2rem;
+}
+
+.ccl-c-quiz-card__number {
+    @extend .ccl-u-mt-0;
+    font-size: rem(120);
+    line-height: 0.7;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    left: calc( #{$gutter * -4} );
+    @include media($sm) {
+        left: calc( #{$gutter * -5} );
+    }
+}
+
+.ccl-c-quiz-card__title {
+    @extend .ccl-h2;
+    @extend .ccl-u-mt-0;
+}

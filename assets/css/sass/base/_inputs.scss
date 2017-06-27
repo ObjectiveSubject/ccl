@@ -1,0 +1,100 @@
+.ccl-b-label {
+    @extend .ccl-u-transition;
+    display: block;
+
+    .ccl-b-input--radio + & {
+        
+        $radio-size: 40px;
+
+        display: flex;
+        align-items: center;
+        position: relative;        
+        cursor: pointer;
+        width: auto;
+        min-height: $radio-size;
+        padding-left: $radio-size + $gutter;
+        // @include media($sm) {
+            padding-left: $radio-size + ($gutter * 2);
+        // }
+
+        .ccl-c-quiz-card & {
+            @extend .ccl-u-mb-1;
+            margin-left: -$radio-size + $gutter;
+            // @include media($sm) {
+                margin-left: -$radio-size + (-$gutter * 2);
+            // }
+        }
+    
+        &:before {  
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: $radio-size;
+            height: $radio-size;
+            border: 3px solid black;
+            border-radius: 50%;
+            cursor: pointer;
+            @include transform( translateY(-50%) );
+            .ccl-c-quiz-card & {
+                border-color: white;
+            }
+        }
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: $radio-size/4;
+            background: black;
+            width: $radio-size/2;
+            height: $radio-size/2;
+            border-radius: 50%;
+            @include transform( translateY(-50%) scale(0) );
+            @include transition( all 100ms ease-out );
+            .ccl-c-quiz-card & {
+                background: white;
+            }
+        }
+    }
+    .ccl-b-input--radio:not(:checked) + &:hover:after {
+        @include transform( translateY(-50%) scale(0.5) );
+    }
+    .ccl-b-input--radio:checked + &:after {
+        @include transform( translateY(-50%) scale(1) );
+        background: black;
+        .ccl-c-quiz-card & {
+            background: white;
+        }
+    }
+    
+}
+
+.ccl-b-input {
+    display: block;
+    width: 100%;
+    color: $color-text-input;
+    border: 1px solid $color-border-input;
+    border-radius: 0;
+    box-sizing: border-box;
+    padding: 0.5em;
+    outline: 0;
+    @include transition( all 300ms ease );
+
+    &:hover {
+        color: $color-text-input-hover;
+    }
+    &:focus {
+        border-color: $color-text-input-focus;
+        color: $color-text-input-focus;
+    }
+
+    @include placeholder {
+        color: lightgray;
+    }
+}
+
+.ccl-b-input--radio {
+    display: none;
+}
