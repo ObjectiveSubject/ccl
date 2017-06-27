@@ -1,102 +1,57 @@
+// Slick Library styles
+// ------------------------------------------- //
 .slick-track {
     @extend .ccl-u-clearfix;
-}
-.slick-slide {
-    float: left;
-    transition: opacity 300ms ease-out;
-}
-.slick-past {
-    opacity: 0.2;
-    pointer-events: none;
+    margin: 0 -$gutter/2;
 }
 
-.slick-dots li {
-    display: inline-block;
-    margin-right: 0.5rem;
-
-    &.slick-active button {
-        background: black;
-    }
-}
-.slick-dots li button {
-    @extend .ccl-u-transition;
-    border: 1px solid black;
-    background: none;
-    width: rem(14);
-    height: rem(14);
-    border-radius: 50%;
-    text-indent: -9999px;
-    overflow: hidden;
-    outline: 0;
-    &:hover {
-        background: black;
-    }
-}
-
+// CCL Carousel styles
+// ------------------------------------------- //
 .ccl-c-carousel {
     @extend .ccl-u-clearfix;
  
     .ccl-c-promo--carousel & {
         width: calc( 100% + #{$gutter} );
-        margin-left: $gutter * -1;
-        margin-right: $gutter;
+        margin-left: -$gutter/2;
+        margin-right: -$gutter/2;
     }
 }
 
-.ccl-c-carousel-paging {
-    .ccl-c-promo--carousel & {
-        margin-top: $leading;
-        margin-left: $gutter;
+.ccl-c-carousel__slide {
+    float: left;
+    padding: 0 $gutter/2;
+    transition: opacity 300ms ease-out;
+
+    &.ccl-is-past {
+        opacity: 0.2;
+        pointer-events: none;
     }
 }
 
-.ccl-c-carousel-arrow {
-    @extend .ccl-u-transition;
-    position: relative;
-    border: 1px solid black;
-    border-radius: 50%;
-    width: rem(48);
-    height: rem(48);
-    font-size: rem(24);
-    line-height: 0;
-    outline: 0;
-    background: rgba( white, 0.5 );
-    @include media($lg) {
-        width: rem(60);
-        height: rem(60);
-    }
+.ccl-c-carousel__paging {
+    margin-top: $leading;
 
-    &:before {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0%;
-        left: 0%;
-        width: 100%;
-        height: 100%;
-        background: black;
-        border-radius: 50%;
-        z-index: -1;
-        transform: scale(0);
-        transition: all 100ms ease-out;
-    }
-    &:hover {
-        background: rgba( white, 0 );
-        color: white;
-        &:before {
-            transform: scale(1);
+    li {
+        display: inline-block;
+        margin-right: 0.5rem;
+
+        &.slick-active button {
+            background: black;
         }
-     }
-     &:active {
-         transform: scale(0.9);
-     }
-    &.slick-disabled {
-        opacity: 0.3;
-        color: black;
-        background: rgba( white, 0.5 );
-        cursor: default;
-        &:before {
-            transform: scale(0);
+    }
+
+    button {
+        @extend .ccl-u-transition;
+        border: 1px solid black;
+        background: none;
+        width: rem(14);
+        height: rem(14);
+        border-radius: 50%;
+        text-indent: -9999px;
+        overflow: hidden;
+        outline: 0;
+        &:hover {
+            background: black;
         }
     }
 }

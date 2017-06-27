@@ -12,7 +12,7 @@
             <?php 
             $i = 0;
             do { ?>
-                <article class="ccl-column is-half-mobile is-half-tablet is-one-third-desktop">
+                <article class="ccl-column is-half-mobile is-half-tablet is-one-third-desktop ccl-u-mb-1">
                     <a href="#">
                         <div class="ccl-u-mb-nudge"><img src="http://unsplash.it/400/400/"/></div>
                         <p class="ccl-h4 ccl-u-mt-0">Library Acquires Portait Collection</p>

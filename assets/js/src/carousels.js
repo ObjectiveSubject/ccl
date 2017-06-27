@@ -27,7 +27,7 @@
                     infinite: false,
                     mobileFirst: true,
                     dots: true,
-                    dotsClass: 'ccl-c-carousel-paging slick-dots'
+                    dotsClass: 'ccl-c-carousel__paging slick-dots'
                 },
                 options = $this.data('slick');
 
@@ -40,8 +40,8 @@
             var carousel = $this.slick(options);
             carousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
                 console.log($this);
-                $this.find('.slick-slide').removeClass('slick-past');
-                $this.find('.slick-slide[data-slick-index="'+nextSlide+'"]').prevAll().addClass('slick-past');
+                $this.find('.slick-slide').removeClass('ccl-is-past');
+                $this.find('.slick-slide[data-slick-index="'+nextSlide+'"]').prevAll().addClass('ccl-is-past');
             });
         }
 
