@@ -50,7 +50,7 @@
                         </header>
                         <div class="ccl-c-quiz-card__content">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-                            <p><input type="submit" class="ccl-b-btn" value="Submit"/></p>
+                            <p><input type="submit" class="ccl-b-btn--light" value="Submit"/></p>
                         </div>
                     </div>
 
