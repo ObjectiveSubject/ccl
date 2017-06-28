@@ -2,32 +2,30 @@
     background-color: $blue;
     color: white;
     padding: $gutter;
-    padding-left: #{$gutter * 5};
-    padding-right: #{$gutter * 2};
-    @include media($sm) {
-        padding-left: #{$gutter * 6};
-    }
 }
 
 .ccl-c-quiz-card__header {
     position: relative;
     display: flex;
     align-items: flex-end;
-    flex-wrap: wrap;
-    min-height: rem(120);
+    min-height: rem(88);
     margin-bottom: 2rem;
+    @include media($sm) {
+        min-height: rem(120);
+    }
 }
 
 .ccl-c-quiz-card__number {
     @extend .ccl-u-mt-0;
-    font-size: rem(120);
+    font-size: rem(88);
     line-height: 0.7;
-    position: absolute;
-    bottom: 0;
     text-align: center;
-    left: calc( #{$gutter * -4} );
+    width: #{ 40 + $gutter };
+    flex-shrink: 0;
+    flex-grow: 0;
     @include media($sm) {
-        left: calc( #{$gutter * -5} );
+        font-size: rem(120);
+        width: #{ 40 + ($gutter * 2) };
     }
 }
 

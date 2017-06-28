@@ -4,7 +4,7 @@
 .ccl-b-btn {
     @extend .ccl-b-btn;
 	@extend .ccl-u-transition-quick;
-    @extend .ccl-u-appearance-none;
+    appearance: none;
     background-color: rgba(white, 0.5);
     border: 1px solid black;
     border-radius: 0;

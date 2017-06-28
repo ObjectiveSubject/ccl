@@ -6,23 +6,16 @@
         
         $radio-size: 40px;
 
-        display: flex;
-        align-items: center;
         position: relative;        
         cursor: pointer;
         width: auto;
-        min-height: $radio-size;
         padding-left: $radio-size + $gutter;
-        // @include media($sm) {
+        @include media($sm) {
             padding-left: $radio-size + ($gutter * 2);
-        // }
+        }
 
         .ccl-c-quiz-card & {
             @extend .ccl-u-mb-1;
-            margin-left: -$radio-size + $gutter;
-            // @include media($sm) {
-                margin-left: -$radio-size + (-$gutter * 2);
-            // }
         }
     
         &:before {  
@@ -30,13 +23,17 @@
             display: block;
             position: absolute;
             top: 50%;
-            left: 0;
+            left: $gutter/2;
             width: $radio-size;
             height: $radio-size;
             border: 3px solid black;
             border-radius: 50%;
             cursor: pointer;
             @include transform( translateY(-50%) );
+            @include media($sm) {
+                left: $gutter;
+            }
+            
             .ccl-c-quiz-card & {
                 border-color: white;
             }
@@ -46,7 +43,7 @@
             display: block;
             position: absolute;
             top: 50%;
-            left: $radio-size/4;
+            left: $gutter + ($radio-size/4);
             background: black;
             width: $radio-size/2;
             height: $radio-size/2;

@@ -7,7 +7,7 @@ get_header(); ?>
 
 	<div class="site-content">
 
-		<?php get_template_part( 'content', 'base' ); ?>
+		<?php get_template_part( 'content', 'components' ); ?>
 
 	</div>
 

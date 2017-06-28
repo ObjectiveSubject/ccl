@@ -56,6 +56,13 @@
 .ccl-u-text-right { text-align: right !important; }
 
 
+// Colors
+// ------------------------------------------ /
+.ccl-u-clean-list {
+	margin: 0; padding: 0;
+	list-style: none;
+}
+
 
 // Colors
 // ------------------------------------------ /
@@ -142,8 +149,4 @@ a.ccl-u-faded:focus {
 }
 .ccl-u-transition-quick {
 	transition: all 100ms ease-out;
-}
-
-.ccl-u-appearance-none {
-	@include appearance(none);
 }

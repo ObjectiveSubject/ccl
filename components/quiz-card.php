@@ -26,7 +26,7 @@
                                 <p class="ccl-c-quiz-card__title">Lorem Ipsum Question?</p>
                             </header>
                             <div class="ccl-c-quiz-card__content">
-                                <ul>
+                                <ul class="ccl-u-clean-list">
                                     <?php
                                     $ii = 0;
                                     do { $radio_id = 'radio-' . $i . '-' . $ii; ?>
