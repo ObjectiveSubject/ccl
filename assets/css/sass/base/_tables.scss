@@ -1,12 +1,12 @@
 table {
-    background-color: $table-bg;
+    background-color: transparent;
 	margin: $leading 0 0;
 }
 caption {
     @extend .ccl-u-text-left;
-    padding-top: $table-cell-padding;
-    padding-bottom: $table-cell-padding;
-    color: $color-text-muted;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    color: lightgray;
 }
 th {
     @extend .ccl-u-text-left;

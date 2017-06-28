@@ -74,8 +74,8 @@
 .ccl-b-input {
     display: block;
     width: 100%;
-    color: $color-text-input;
-    border: 1px solid $color-border-input;
+    color: $color-text-main;
+    border: 1px solid lightgray;
     border-radius: 0;
     box-sizing: border-box;
     padding: 0.5em;
@@ -83,11 +83,11 @@
     @include transition( all 300ms ease );
 
     &:hover {
-        color: $color-text-input-hover;
+        color: $blue;
     }
     &:focus {
-        border-color: $color-text-input-focus;
-        color: $color-text-input-focus;
+        border-color: $blue;
+        color: $blue;
     }
 
     @include placeholder {

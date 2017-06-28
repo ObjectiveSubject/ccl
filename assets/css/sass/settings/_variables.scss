@@ -60,22 +60,8 @@ $color-code: black;
 
 $color-blockquote: black;
 
-$color-background-body: white;
-$color-background-hr: lightgray;
-$color-background-pre: #eeeeee;
-
 $color-background-selection: lightblue;
 $color-selection-text: white;
-
-$color-border-input: #cccccc;
-$color-border-input-hover: #cccccc;
-$color-border-input-focus: #cccccc;
-
-$color-text-input: #333333;
-$color-text-input-hover: #111111;
-$color-text-input-focus: lightblue;
-
-$color-text-muted: lightgray;
 
 $color-facebook: #3b5997;
 $color-twitter: #55abed;
@@ -94,15 +80,3 @@ $font-code: "Menlo", monospace;
 $font-pre: "Menlo", monospace;
 $leading: 1.5rem;
 $font-line-height-pre: 1.6rem;
-
-
-// Tables
-// ------------------------------------------- /
-$table-bg: transparent;
-$table-bg-accent: gray;
-$table-bg-hover: gray;
-$table-bg-nested: transparent;
-$table-cell-padding: 0.5em;
-$line-height-base: $leading;
-$table-border-color: gray;
-$table-condensed-cell-padding: 5px;

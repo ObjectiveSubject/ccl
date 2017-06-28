@@ -119,22 +119,6 @@ p {
     margin-bottom: 0;
 }
 
-ul, ol {
-	margin: $leading 0 0;
-    padding: 0 0 0 1rem;
-	ul, ol {
-		margin-top: 0;
-	}
-}
-
-ol ol {
-	list-style: lower-alpha;
-}
-
-ol ol ol {
-	list-style: lower-roman;
-}
-
 dt {
 	font-weight: 700;
 }
@@ -184,7 +168,7 @@ address {
 }
 
 pre {
-	background: $color-background-pre;
+	background: #eee;
 	font-family: $font-pre;
 	font-size: rem(14);
 	line-height: $font-line-height-pre;
@@ -197,7 +181,7 @@ pre {
 code, kbd, tt, var {
 	font-family: $font-code;
 	font-family: 400;
-	background: $color-background-pre;
+	background: #eee;
 	color: $color-code;
 	p & {
 		padding: 0.25em;
@@ -216,7 +200,7 @@ mark, ins {
 }
 
 hr {
-	background-color: $color-background-hr;
+	background-color: lightgray;
 	border: 0;
 	height: 1px;
 	margin: $leading 0 0;

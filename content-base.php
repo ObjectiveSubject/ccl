@@ -74,35 +74,35 @@ ornare consectetur massa velit vel tellus.</pre>
 
 <h3>Forms</h3>
 
-<form class="ccl-c-form" action="#">
-    <div class="ccl-c-form__group">
-      <label class="ccl-label" for="text">Text Input <abbr title="Required">*</abbr></label>
-      <input id="text" type="text" class="ccl-c-form__field" placeholder="Text Input">
-    </div>
-    <div class="ccl-c-form__group">
-      <label class="ccl-label" for="password">Password</label>
-      <input id="password" type="password" class="ccl-c-form__field" placeholder="Type your Password">
-    </div>
-    <div class="ccl-c-form__group">
-      <label class="ccl-label" for="webaddress">Web Address</label>
-      <input id="webaddress" type="url" class="ccl-c-form__field" placeholder="http://yoursite.com">
-    </div>
-    <div class="ccl-c-form__group">
-      <label class="ccl-label" for="emailaddress">Email Address</label>
-      <input id="emailaddress" type="email" class="ccl-c-form__field" placeholder="name@email.com">
-    </div>
-    <div class="ccl-c-form__group">
-      <label class="ccl-label" for="search">Search</label>
-      <input id="search" type="search" class="ccl-c-form__field" placeholder="Enter Search Term">
-    </div>
-    <div class="ccl-c-form__group">
-      <label class="ccl-label" for="number">Number Input <abbr title="Required">*</abbr></label>
-      <input id="number" type="number" class="ccl-c-form__field" placeholder="Enter a Number" pattern="[0-9]*">
-    </div>
-    <div class="ccl-c-form__group">
-      <label class="ccl-label" for="textarea">Textarea</label>
-      <textarea id="textarea" class="ccl-c-form__field" rows="8" cols="48" placeholder="Enter your message here"></textarea>
-    </div>
+<form>
+    <p>
+      <label class="ccl-b-label" for="text">Text Input <abbr title="Required">*</abbr></label>
+      <input id="text" type="text" class="ccl-b-input" placeholder="Text Input">
+    </p>
+    <p>
+      <label class="ccl-b-label" for="password">Password</label>
+      <input id="password" type="password" class="ccl-b-input" placeholder="Type your Password">
+    </p>
+    <p>
+      <label class="ccl-b-label" for="webaddress">Web Address</label>
+      <input id="webaddress" type="url" class="ccl-b-input" placeholder="http://yoursite.com">
+    </p>
+    <p>
+      <label class="ccl-b-label" for="emailaddress">Email Address</label>
+      <input id="emailaddress" type="email" class="ccl-b-input" placeholder="name@email.com">
+    </p>
+    <p>
+      <label class="ccl-b-label" for="search">Search</label>
+      <input id="search" type="search" class="ccl-b-input" placeholder="Enter Search Term">
+    </p>
+    <p>
+      <label class="ccl-b-label" for="number">Number Input <abbr title="Required">*</abbr></label>
+      <input id="number" type="number" class="ccl-b-input" placeholder="Enter a Number" pattern="[0-9]*">
+    </p>
+    <p>
+      <label class="ccl-b-label" for="textarea">Textarea</label>
+      <textarea id="textarea" class="ccl-b-input" rows="8" cols="48" placeholder="Enter your message here"></textarea>
+    </p>
 
     <p><input id="submit" value="Standard Button" type="button" class="ccl-b-btn"/></p>
     <p><input id="reset" value="Inverse Button" type="button" class="ccl-b-btn--inverse"/></p>
