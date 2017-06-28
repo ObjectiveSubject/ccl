@@ -27,6 +27,9 @@
         font-size: rem(120);
         width: #{ 40 + ($gutter * 2) };
     }
+    @include media($md) {
+        margin-right: $gutter;
+    }
 }
 
 .ccl-c-quiz-card__title {

@@ -16,6 +16,9 @@
 
         .ccl-c-quiz-card & {
             @extend .ccl-u-mb-1;
+            @include media($md) {
+                padding-left: $radio-size + ($gutter * 3);
+            }
         }
     
         &:before {  
@@ -36,6 +39,9 @@
             
             .ccl-c-quiz-card & {
                 border-color: white;
+                // @include media($md) {
+                //     left: $gutter * 1.5;
+                // }
             }
         }
         &:after {
