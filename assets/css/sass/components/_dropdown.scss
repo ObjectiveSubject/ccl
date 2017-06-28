@@ -33,6 +33,7 @@
 }
 
 .ccl-c-dropdown__item {
+    @extend .ccl-h4;
     @extend .ccl-u-mt-0;
     border-top: 1px solid black;
 
@@ -46,7 +47,6 @@
 
     a {
         @extend .ccl-u-display-block;
-        font-weight: 600;
         padding: 0.5em 0;
     }
 }

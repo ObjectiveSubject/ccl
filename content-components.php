@@ -4,6 +4,11 @@
 </div>
 
 <div class="ccl-u-my-3 ccl-container">
+    <h2 class="ccl-u-mb-1">Dropdowns</h2>
+    <?php get_template_part( 'components/dropdown' ); ?>
+</div>
+
+<div class="ccl-u-my-3 ccl-container">
     <?php get_template_part( 'components/quiz-card' ); ?>
 </div>
 
