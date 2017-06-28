@@ -120,9 +120,19 @@ p {
 }
 
 ul, ol {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+	margin: $leading 0 0;
+    padding: 0 0 0 1rem;
+	ul, ol {
+		margin-top: 0;
+	}
+}
+
+ol ol {
+	list-style: lower-alpha;
+}
+
+ol ol ol {
+	list-style: lower-roman;
 }
 
 dt {

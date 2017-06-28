@@ -26,7 +26,13 @@
     <li>
         Lists can be nested inside of each other
         <ul>
-            <li>This is a nested list item</li>
+            <li>
+                This is a nested list item
+                <ul>
+                    <li>This is a nested list item</li>
+                    <li>This is another nested list item in an unordered list</li>
+                </ul>
+            </li>
             <li>This is another nested list item in an unordered list</li>
         </ul>
     </li>
@@ -41,7 +47,13 @@
     <li>
         Lists can be nested inside of each other
         <ol>
-            <li>This is a nested list item</li>
+            <li>
+                This is a nested list item
+                <ol>
+                    <li>This is a nested list item</li>
+                    <li>This is another nested list item in an ordered list</li>
+                </ol>
+            </li>
             <li>This is another nested list item in an ordered list</li>
         </ol>
     </li>
