@@ -1,31 +1,37 @@
 // Standard Button
 // ------------------------------------------ //
+
 .ccl-b-btn {
-	@extend .ccl-u-transition;
-	background-color: $color-btn-bg;
-	border: 0;
-	border-radius: 0;
-	box-shadow: none;
-	color: $color-btn;
-	cursor: pointer;
+    @extend .ccl-b-btn;
+	@extend .ccl-u-transition-quick;
+    @extend .ccl-u-appearance-none;
+    background-color: rgba(white, 0.5);
+    border: 1px solid black;
+    border-radius: 0;
+    box-shadow: none;
+    color: $color-text-main;
+    cursor: pointer;
 	display: inline-block;
-	font-family: $font-main;
-	font-size: rem(12);
-	font-weight: 700;
-	letter-spacing: 0.1em;
+    font-family: $font-main;
+	font-size: 1rem;
+	font-weight: 600;
 	line-height: 1em;
 	padding: 1.25em 2.5em;	
-	text-align: center;
-	text-shadow: none;
-    text-transform: uppercase;
-
-	&:hover, &:focus {
-		background-color: $color-btn-bg-hover;
-		color: $color-btn-hover;
+    text-align: center;
+    text-shadow: none;
+	
+	&:hover {
+		color: $red;
+        border-color: $red;
 	}
 
+    &:active {
+        transform: scale(0.95);
+    }
+
 	&:focus {
-		outline: none;
+		outline: 0;
+        box-shadow: 0 0 12px -3px;
 	}
 }
 
@@ -33,12 +39,17 @@
 // ------------------------------------------ //
 .ccl-b-btn--inverse {
 	@extend .ccl-b-btn;
-	background-color: $color-btn;
-	color: $color-btn-bg;
+	background-color: $color-text-main;
+    border: 0;
+	color: white;
 	&:hover, &:focus {
-		color: $color-btn-bg;
-		background-color: lighten( $color-btn, 15% );
+		color: white;
+		background-color: $red;
 	}
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 12px -3px $red;
+    }
 }
 
 // Small Button
@@ -52,27 +63,44 @@
 // ------------------------------------------ //
 .ccl-b-btn[disabled], .ccl-b-btn--disabled {
 	@extend .ccl-b-btn;
-	background-color: $color-btn-disabled-bg;
-	color: $color-btn-disabled;
 	cursor: default;
+    opacity: 0.3;
+    &:hover, &:focus {
+		color: $color-text-main;
+        border-color: black;
+	}
 }
 
 // Circular Button
 // ------------------------------------------ //
 .ccl-b-btn--circular {
-    @extend .ccl-u-transition;
-    position: relative;
+    background: rgba(white, 0.5);
     border: 1px solid black;
     border-radius: 50%;
-    width: rem(48);
-    height: rem(48);
     font-size: rem(24);
+    height: rem(48);
     line-height: 0;
-    outline: 0;
-    background: rgba( white, 0.5 );
+    position: relative;
+    width: rem(48);
+    @include transition(all 100ms ease-out);
     @include media($lg) {
         width: rem(60);
         height: rem(60);
+    }
+
+    &:hover {
+        background: rgba( white, 0 );
+        color: white;
+        &:before {
+            transform: scale(1);
+        }
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 12px -3px black;
     }
 
     &:before {
@@ -89,22 +117,13 @@
         transform: scale(0);
         transition: all 100ms ease-out;
     }
-    &:hover {
-        background: rgba( white, 0 );
-        color: white;
-        &:before {
-            transform: scale(1);
-        }
-     }
-     &:active {
-         transform: scale(0.9);
-     }
+
     [disabled],
 	&.ccl-b-btn--disabled,
 	&.slick-disabled {
         opacity: 0.3;
         color: black;
-        background: rgba( white, 0.5 );
+        background: rgba(white, 0.5);
         cursor: default;
         &:before {
             transform: scale(0);

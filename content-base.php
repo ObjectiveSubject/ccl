@@ -96,6 +96,10 @@ ornare consectetur massa velit vel tellus.</pre>
     <p><input id="reset" value="Inverse Button" type="button" class="ccl-b-btn--inverse"/></p>
     <p><input id="button" value="Small Button" type="button" class="ccl-b-btn--small"/></p>
     <p><input id="disabled" value="Disabled Button" type="button" class="ccl-b-btn--disabled" disabled/></p>
+    <p>
+        <button class="ccl-b-btn--circular">&larr;</button>
+        <button class="ccl-b-btn--circular">&rarr;</button>
+    </p>
 </form>
 
 <hr/>
