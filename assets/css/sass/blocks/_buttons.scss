@@ -30,7 +30,7 @@
 
 	&:focus {
 		outline: 0;
-        box-shadow: 0 0 25px -5px;
+        box-shadow: $focus-box-shadow-lg;
 	}
 }
 
@@ -45,7 +45,7 @@
 	}
     &:focus {
         outline: 0;
-        box-shadow: 0 0 25px -5px;
+        box-shadow: $focus-box-shadow-lg;
     }
 }
 
@@ -97,7 +97,7 @@
     }
     &:focus {
         outline: 0;
-        box-shadow: 0 0 25px -5px black;
+        box-shadow: $focus-box-shadow-lg black;
     }
 
     &:before {
