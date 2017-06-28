@@ -84,6 +84,9 @@
     padding: 0.5em;
     outline: 0;
     @include transition( all 300ms ease );
+    @include placeholder {
+        color: lightgray;
+    }
 
     &:hover {
         color: $blue;
@@ -93,8 +96,15 @@
         color: $blue;
     }
 
-    @include placeholder {
-        color: lightgray;
+    .ccl-c-search__bar & {
+        @extend .ccl-h3;
+        @extend .ccl-u-mt-0;
+        color: black;
+        border: 0;
+        padding: 0;
+        @include placeholder {
+            color: black;
+        }
     }
 }
 
