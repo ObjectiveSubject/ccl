@@ -38,3 +38,40 @@
     }
   }
 }
+
+// Grid row
+// ------------------------------------- //
+@mixin ccl-l-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -$gutter/2;
+    margin-right: -$gutter/2;
+    
+    &.ccl-is-nowrap {
+        flex-wrap: nowrap;
+    }
+}
+
+// Grid column
+// ------------------------------------- //
+@mixin ccl-l-column($span: 0, $viewport: 0) {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-left: $gutter/2;
+    margin-right: $gutter/2;
+    max-width: 100%;
+
+    @if ( $span != 0 ) {
+        flex-grow: 0;
+        flex-basis: 100%;
+
+        @if ( $viewport != 0 ) {
+            @include media($viewport) {
+                flex-basis: calc( #{$span} - #{$gutter} );    
+            }
+        } @else {
+            flex-basis: calc( #{$span} - #{$gutter} );
+        }
+    }
+}

@@ -7,11 +7,7 @@
 }
 
 .ccl-l-row {
-    @extend .ccl-u-clearfix;
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -$gutter/2;
-    margin-right: -$gutter/2;
+    @include ccl-l-row;
 }
 
 .ccl-l-column {
@@ -21,18 +17,86 @@
     margin-left: $gutter/2;
     margin-right: $gutter/2;
     max-width: 100%;
+}
 
-    &[class*="ccl-l-span-"] {
-        flex-grow: 0;
+[class*="ccl-l-span-"] {
+    flex-grow: 0;
+    flex-basis: 100%;
+}
+
+.ccl-l-span-quarter {
+    flex-basis: calc(25% - #{$gutter});
+}
+.ccl-l-span-third {
+    flex-basis: calc(33.333% - #{$gutter});
+}
+.ccl-l-span-half {
+    flex-basis: calc(50% - #{$gutter});
+}
+.ccl-l-span-two-thirds {
+    flex-basis: calc(66.666% - #{$gutter});
+}
+.ccl-l-span-three-quarters {
+    flex-basis: calc(75% - #{$gutter});
+}
+
+@include media($sm) {
+    .ccl-l-span-quarter-sm {
+        flex-basis: calc(25% - #{$gutter});
+    }
+    .ccl-l-span-third-sm {
+        flex-basis: calc(33.333% - #{$gutter});
+    }
+    .ccl-l-span-half-sm {
+        flex-basis: calc(50% - #{$gutter});
+    }
+    .ccl-l-span-two-thirds-sm {
+        flex-basis: calc(66.666% - #{$gutter});
+    }
+    .ccl-l-span-three-quarters-sm {
+        flex-basis: calc(75% - #{$gutter});
+    }
+}
+
+@include media($md) {
+    .ccl-l-span-quarter-md {
+        flex-basis: calc(25% - #{$gutter});
+    }
+    .ccl-l-span-third-md {
+        flex-basis: calc(33.333% - #{$gutter});
+    }
+    .ccl-l-span-half-md {
+        flex-basis: calc(50% - #{$gutter});
+    }
+    .ccl-l-span-two-thirds-md {
+        flex-basis: calc(66.666% - #{$gutter});
+    }
+    .ccl-l-span-three-quarters-md {
+        flex-basis: calc(75% - #{$gutter});
+    }
+}
+
+@include media($lg) {
+    .ccl-l-span-quarter-lg {
+        flex-basis: calc(25% - #{$gutter});
+    }
+    .ccl-l-span-third-lg {
+        flex-basis: calc(33.333% - #{$gutter});
+    }
+    .ccl-l-span-half-lg {
+        flex-basis: calc(50% - #{$gutter});
+    }
+    .ccl-l-span-two-thirds-lg {
+        flex-basis: calc(66.666% - #{$gutter});
+    }
+    .ccl-l-span-three-quarters-lg {
+        flex-basis: calc(75% - #{$gutter});
     }
 }
 
 @for $i from 1 through $max-columns {
 
-    .ccl-l-span-#{$i},
-    .ccl-l-span-#{$i}-sm,
-    .ccl-l-span-#{$i}-md,
-    .ccl-l-span-#{$i}-lg {
+    .ccl-l-span-#{$i} {
         flex-basis: ccl-span( $i );
     }
 

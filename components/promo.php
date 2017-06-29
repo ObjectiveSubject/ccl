@@ -5,14 +5,14 @@
         <p class="ccl-c-promo__action"><a href="#" class="ccl-h4 ccl-u-color-black ccl-u-color-hover-red">View All</a></p>
     </header>
 
-    <div class="ccl-c-promo__content">        
+    <div class="ccl-c-promo__content">
 
-        <div class="ccl-columns is-multiline is-mobile">
+        <div class="ccl-l-row">
 
             <?php 
             $i = 0;
             do { ?>
-                <article class="ccl-column is-half-mobile is-half-tablet is-one-third-desktop ccl-u-mb-1">
+                <article class="ccl-l-column ccl-l-span-half ccl-l-span-quarter-md ccl-l-span-third-lg ccl-u-mb-1">
                     <a href="#">
                         <div class="ccl-u-mb-nudge"><img src="http://unsplash.it/400/400/"/></div>
                         <p class="ccl-h4 ccl-u-mt-0">Library Acquires Portait Collection</p>
