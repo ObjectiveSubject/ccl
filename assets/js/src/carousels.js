@@ -1,10 +1,8 @@
 /**
- * Every piece of UI that requires javascript should have its own
- * javascript file. Use this file as a template for structuring
- * all JS source files.
- *
- * {Document Title}
- * {Description}
+ * Carousels
+ * 
+ * Initialize and define behavior for carousels. 
+ * Uses the Slick Slides jQuery plugin --> http://kenwheeler.github.io/slick/
  */
 
 ( function( window, $ ) {
