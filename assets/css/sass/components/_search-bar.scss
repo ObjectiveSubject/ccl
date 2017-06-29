@@ -24,6 +24,8 @@
     color: white;
     margin-top: -$search-bar-padding;
     margin-bottom: -$search-bar-padding;
+    padding-left: 3rem;
+    padding-right: 3rem;
     &:hover {
         background-color: $blue;
     }

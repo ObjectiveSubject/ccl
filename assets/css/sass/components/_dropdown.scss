@@ -12,16 +12,21 @@
 .ccl-c-dropdown__toggle {
     @extend .ccl-u-display-block;
     height: 100%;
+    &:hover {
+        color: $color-link-hover;
+    }
 }
 
 .ccl-c-dropdown__menu {
     background: white;
+    border: 1px solid black;
+    border-top: 0;
     box-shadow: 0 2px 5px -3px;
     display: none;
     left: 0;
     list-style: none;
     max-width: rem(200);
-    margin: 0;
+    margin: -1px 0 0;
     padding: 0 1rem;
     position: absolute;
     top: 100%;
