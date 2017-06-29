@@ -4,7 +4,6 @@ var gulp 		 = require('gulp'),
 	concat 		 = require('gulp-concat-util'),
 	jshint 		 = require('gulp-jshint'),
 	cleancss 	 = require('gulp-clean-css'),
-	notify 		 = require('gulp-notify'),
 	rename 		 = require('gulp-rename'),
 	sass 		 = require('gulp-ruby-sass'),
 	uglify 		 = require('gulp-uglify'),
@@ -31,7 +30,6 @@ gulp.task('styles', function() {
 		.pipe(rename({suffix: '.min'}))
 		.pipe(cleancss())
 		.pipe(gulp.dest('assets/css'))
-		.pipe(notify({ message: 'Styles task complete' }))
         .pipe(livereload());
 });
 
@@ -48,7 +46,6 @@ gulp.task('scripts', function() {
 		.pipe(rename({suffix: '.min'}))
 		.pipe(uglify({preserveComments: 'license'}))
 		.pipe(gulp.dest('assets/js'))
-		.pipe(notify({ message: 'Scripts task complete' }))
         .pipe(livereload());
 });
 
