@@ -1,9 +1,9 @@
 .ccl-container {
+    @extend .ccl-u-clearfix;
     max-width: $max-width;
     padding: 0 $gutter;
     margin-left: auto;
     margin-right: auto;
-    @include clearfix;
 }
 
 .ccl-column {

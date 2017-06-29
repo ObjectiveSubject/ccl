@@ -92,9 +92,9 @@ textarea {
   * ------------------------------------------- */
 
  a {
+	@extend .ccl-u-transition;
  	color: $color-link;
  	text-decoration: none;
- 	@include transition(all 300ms ease);
 
  	&:hover,
  	&:focus,

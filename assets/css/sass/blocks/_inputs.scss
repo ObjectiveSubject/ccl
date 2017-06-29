@@ -32,7 +32,7 @@
             border: 3px solid black;
             border-radius: 50%;
             cursor: pointer;
-            @include transform( translateY(-50%) );
+            transform: translateY(-50%);
             @include media($sm) {
                 left: $gutter;
             }
@@ -54,18 +54,18 @@
             width: $radio-size/2;
             height: $radio-size/2;
             border-radius: 50%;
-            @include transform( translateY(-50%) scale(0) );
-            @include transition( all 100ms ease-out );
+            transition: all 100ms ease-out;
+            transform: translateY(-50%) scale(0);
             .ccl-c-quiz-card & {
                 background: white;
             }
         }
     }
     .ccl-b-input--radio:not(:checked) + &:hover:after {
-        @include transform( translateY(-50%) scale(0.5) );
+        transform: translateY(-50%) scale(0.5);
     }
     .ccl-b-input--radio:checked + &:after {
-        @include transform( translateY(-50%) scale(1) );
+        transform: translateY(-50%) scale(1);
         background: black;
         .ccl-c-quiz-card & {
             background: white;
@@ -75,6 +75,7 @@
 }
 
 .ccl-b-input {
+    @extend .ccl-u-transition;
     display: block;
     width: 100%;
     color: $color-text-main;
@@ -83,7 +84,6 @@
     box-sizing: border-box;
     padding: 0.5em;
     outline: 0;
-    @include transition( all 300ms ease );
     @include placeholder {
         color: lightgray;
     }

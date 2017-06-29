@@ -5,3 +5,36 @@
         @content;
     }
 }
+
+// Placeholder text
+// ------------------------------------- //
+@mixin placeholder {
+  $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+  @each $placeholder in $placeholders {
+    &:#{$placeholder}-placeholder {
+      @content;
+    }
+  }
+}
+
+// Selection
+// ------------------------------------- //
+@mixin selection($current-selector: false) {
+  @if $current-selector {
+    &::-moz-selection {
+      @content;
+    }
+
+    &::selection {
+      @content;
+    }
+  } @else {
+    ::-moz-selection {
+      @content;
+    }
+
+    ::selection {
+      @content;
+    }
+  }
+}

@@ -3,7 +3,7 @@
 
 .ccl-b-btn {
     @extend .ccl-h4;
-	@extend .ccl-u-transition-quick;
+	@extend .ccl-u-transition-100;
     appearance: none;
     background: none;
     border: 1px solid black;
@@ -71,6 +71,7 @@
 // Circular Button
 // ------------------------------------------ //
 .ccl-b-btn--circular {
+    @extend .ccl-u-transition-100;
     background: rgba(white, 0.5);
     border: 1px solid black;
     border-radius: 50%;
@@ -79,7 +80,6 @@
     line-height: 0;
     position: relative;
     width: rem(48);
-    @include transition(all 100ms ease-out);
     @include media($lg) {
         width: rem(60);
         height: rem(60);
