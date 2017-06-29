@@ -14,7 +14,7 @@
 
 	<div id="page">
 
-		<header id="masthead" class="site-header ccl-container" role="banner">
+		<header id="masthead" class="site-header ccl-l-container" role="banner">
 			<div class="site-branding">
 				<?php
 				if ( is_front_page() && is_home() ) : ?>

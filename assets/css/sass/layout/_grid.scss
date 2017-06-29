@@ -1,0 +1,72 @@
+.ccl-l-container {
+    @extend .ccl-u-clearfix;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $max-width;
+    padding: 0 $gutter;
+}
+
+.ccl-l-row {
+    @extend .ccl-u-clearfix;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -$gutter/2;
+    margin-right: -$gutter/2;
+}
+
+.ccl-l-column {
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-left: $gutter/2;
+    margin-right: $gutter/2;
+    max-width: 100%;
+
+    &[class*="ccl-l-span-"] {
+        flex-grow: 0;
+    }
+}
+
+@for $i from 1 through $max-columns {
+
+    .ccl-l-span-#{$i},
+    .ccl-l-span-#{$i}-sm,
+    .ccl-l-span-#{$i}-md,
+    .ccl-l-span-#{$i}-lg {
+        flex-basis: ccl-span( $i );
+    }
+
+}
+
+@for $i from 1 through $max-columns {
+
+    @include media($sm) {
+        .ccl-l-span-#{$i},
+        .ccl-l-span-#{$i}-sm {
+            flex-basis: ccl-span( $i, $sm-columns );
+        }
+    }
+
+}
+
+@for $i from 1 through $max-columns {
+
+    @include media($md) {
+        .ccl-l-span-#{$i},
+        .ccl-l-span-#{$i}-md {
+            flex-basis: ccl-span( $i, $md-columns );
+        }
+    }
+
+}
+
+@for $i from 1 through $max-columns {
+
+    @include media($lg) {
+        .ccl-l-span-#{$i},
+        .ccl-l-span-#{$i}-lg {
+            flex-basis: ccl-span( $i, $lg-columns );
+        }
+    }
+
+}

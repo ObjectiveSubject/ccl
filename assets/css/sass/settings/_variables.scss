@@ -10,31 +10,35 @@ $xl: 1500px;
 $max-width: rem(1080);
 
 $gutter: 18px;
-$columns: 10;
-// $default-columns: 2;
-// $sm-columns: 4;
-// $md-columns: 6;
-// $lg-columns: 10;
-// $max-columns: $lg-columns;
+$default-columns: 2;
+$sm-columns: 4;
+$md-columns: 8;
+$lg-columns: 12;
+$max-columns: $lg-columns;
 
-// $neat-grid: (
-//   columns: $default-columns,
-//   gutter: $gutter,
+// $grid-default: (
+//   'columns': 1 1,
+//   'gutters': $gutter,
+//   'spread' : 'narrow',
+//   'container-spread' : 'narrow'
 // );
-// $neat-grid-sm: (
-//   columns: $sm-columns,
-//   gutter: $gutter,
-//   media: $sm
+// $grid-sm: (
+//   'columns': 1 1 1 1,
+//   'gutters': $gutter,
+//   'spread' : 'narrow',
+//   'container-spread' : 'narrow'
 // );
-// $neat-grid-md: (
-//   columns: $md-columns,
-//   gutter: $gutter,
-//   media: $md
+// $grid-md: (
+//   'columns': 1 1 1 1 1 1 1 1,
+//   'gutters': $gutter,
+//   'spread' : 'narrow',
+//   'container-spread' : 'narrow'
 // );
-// $neat-grid-lg: (
-//   columns: $lg-columns,
-//   gutter: $gutter,
-//   media: $lg
+// $grid-lg: (
+//   'columns': 1 1 1 1 1 1 1 1 1 1 1 1,
+//   'gutters': $gutter,
+//   'spread' : 'narrow',
+//   'container-spread' : 'narrow'
 // );
 
 

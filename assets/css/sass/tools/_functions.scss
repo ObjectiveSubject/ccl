@@ -1,9 +1,32 @@
 
+
 /*
  * Convert a pixel value into a 'rem' value
+ *
  * $px: (int) pixel value without 'px'
+ *
  * returns: rem value
  */
 @function rem( $px: 16 ) {
     @return #{ $px / 16 }rem;
 }
+
+
+/*
+ * Return a calculated span value for grid columns 
+ *
+ * $span: (int) grid columns to span
+ * $columns: (int) total columns
+ *
+ * returns: a calc() value;
+ */
+@function ccl-span( $span, $columns: $default-columns ) {
+    
+    $ratio: $span / $columns;
+    @if ( $ratio > 1 ) {
+        $ratio: 1;
+    }
+    $calc: calc( #{ $ratio * 100% } - #{ $gutter } );
+
+    @return $calc;
+};

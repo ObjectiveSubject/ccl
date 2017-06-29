@@ -1,6 +1,6 @@
 <div class="ccl-u-px-3 ccl-u-py-6" style="background-color: #eee;">
 
-    <div class="ccl-container">
+    <div class="ccl-l-container">
 
         <div class="ccl-c-search">
 

@@ -25,8 +25,7 @@
     "gulp-ruby-sass": "^2.1.1",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^2.1.2",
-    "jshint": "^2.9.4",
-    "susy": "^2.2.12"
+    "jshint": "^2.9.4"
   },
   "keywords": []
 }
