@@ -20,9 +20,9 @@
  *
  * returns: a calc() value;
  */
-@function ccl-span( $span, $columns: $default-columns ) {
+@function ccl-span( $span, $total-columns: $columns ) {
     
-    $ratio: $span / $columns;
+    $ratio: $span / $total-columns;
     @if ( $ratio > 1 ) {
         $ratio: 1;
     }

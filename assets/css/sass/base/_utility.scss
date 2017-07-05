@@ -1,20 +1,18 @@
 /*
  * Utility Classes
  *
- * Utility classes are helpful, single (or limited) purpose, classes usually created for the styles you apply the most. Utility classes are always prefixed with `u-`.
+ * These are helpful, single (or limited) purpose, classes 
+ * usually created for the styles you apply the most.
+ * You can include them in your markup or use @extend to 
+ * extend them to various components in your CSS.
+ *
+ * NOTE: Utility classes are always prefixed with `ccl-u-`. 
  */
 
 // Clearfix
 // ------------------------------------------ /
 .ccl-u-clearfix {
-	&:before,
-	&:after {
-		content: "";
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+	@include clearfix;
 }
 
 // Spacing
