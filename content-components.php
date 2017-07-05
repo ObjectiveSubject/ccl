@@ -1,4 +1,17 @@
 
+<div class="ccl-u-my-3 ccl-l-container">
+    <h2 class="ccl-u-mb-1">Accordions</h2>
+    <div class="ccl-l-row">
+        <div class="ccl-l-column ccl-l-span-8-md ccl-l-offset-2-md">
+            <p>Literally synth stumptown ethical, austin pickled pop-up narwhal deep v pug banjo keytar celiac keffiyeh swag. Taxidermy hella deep v farm-to-table aesthetic synth air plant mustache. Forage kinfolk chambray four loko, humblebrag fanny pack affogato raclette coloring book plaid offal echo park.</p>
+            <?php get_template_part( 'components/accordion' ); ?>
+            <?php get_template_part( 'components/accordion' ); ?>
+            <?php get_template_part( 'components/accordion' ); ?>
+            <p>Literally synth stumptown ethical, austin pickled pop-up narwhal deep v pug banjo keytar celiac keffiyeh swag. Taxidermy hella deep v farm-to-table aesthetic synth air plant mustache. Forage kinfolk chambray four loko, humblebrag fanny pack affogato raclette coloring book plaid offal echo park.</p>
+        </div>
+    </div>
+</div>
+
 <div class="ccl-u-my-3">
     <?php get_template_part( 'components/search-box' ); ?>
 </div>
