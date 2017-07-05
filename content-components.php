@@ -1,4 +1,8 @@
 
+<div class="ccl-u-my-3">
+    <?php get_template_part( 'components/hero' ); ?>
+</div>
+
 <div class="ccl-u-my-3 ccl-l-container">
     <h2 class="ccl-u-mb-1">Accordions</h2>
     <div class="ccl-l-row">
