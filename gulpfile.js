@@ -1,14 +1,15 @@
-var gulp 		 = require('gulp'),
-	addsrc 		 = require('gulp-add-src'),
+var addsrc 		 = require('gulp-add-src'),
 	autoprefixer = require('gulp-autoprefixer'),
-	concat 		 = require('gulp-concat-util'),
-	jshint 		 = require('gulp-jshint'),
 	cleancss 	 = require('gulp-clean-css'),
+	combineMq	 = require('gulp-combine-mq'),
+	concat 		 = require('gulp-concat-util'),
+	gulp 		 = require('gulp'),
+	jshint 		 = require('gulp-jshint'),
+	livereload   = require('gulp-livereload'),
 	rename 		 = require('gulp-rename'),
 	sass 		 = require('gulp-ruby-sass'),
-	uglify 		 = require('gulp-uglify'),
 	sourcemaps 	 = require('gulp-sourcemaps'),
-    livereload   = require('gulp-livereload');
+    uglify 		 = require('gulp-uglify');
 	
 var pkg	   = require('./package.json'),
 	banner = '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
@@ -28,6 +29,9 @@ gulp.task('styles', function() {
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('assets/css'))
 		.pipe(rename({suffix: '.min'}))
+		.pipe(combineMq({
+			beautify: false
+		}))
 		.pipe(cleancss())
 		.pipe(gulp.dest('assets/css'))
         .pipe(livereload());
