@@ -13,7 +13,9 @@
 
         <form>
 
-            <div class="ccl-c-carousel js-promo-carousel" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-2-prev", "nextArrow": "#carousel-2-next" }'>
+            <div class="ccl-c-carousel" 
+                 data-options='{ "prevArrow": "#carousel-2-prev", "nextArrow": "#carousel-2-next" }'
+                 data-options-md='{ "slidesToShow": 2 }'>
 
                 <?php 
                 $i = 0;

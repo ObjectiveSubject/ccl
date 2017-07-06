@@ -27,6 +27,24 @@
 
 <div class="ccl-u-my-3 ccl-l-container">
     <?php get_template_part( 'components/quiz-card' ); ?>
+
+    
+        <div class="ccl-l-row ccl-l-visual-grid" style="height:100px">
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+            <div class="ccl-l-column"></div>
+        </div>
+    
+
 </div>
 
 <div class="ccl-u-my-3 ccl-l-container">

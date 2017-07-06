@@ -9,6 +9,7 @@
 // ------------------------------------------- //
 .ccl-c-carousel {
     @extend .ccl-u-clearfix;
+    margin-right: -$gutter;
 }
 
 .ccl-c-carousel__slide {

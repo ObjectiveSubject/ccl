@@ -15,6 +15,9 @@
         this.globalDefaults = {
             mobileFirst: true,
             dotsClass: 'ccl-c-carousel__paging',
+            infinite: false,
+            dots: true,
+            slidesToScroll: 1
         };
 
         this.init();
@@ -22,22 +25,37 @@
     };
 
     Carousel.prototype.init = function() {
-        
-        if ( this.$el.hasClass('js-promo-carousel') ) {
-            this.promo();
+        var data = this.$el.data(),
+            options = data.options || {};
+            
+        options.responsive = [];
+
+        if ( data.optionsSm ) {
+            options.responsive.push({
+                breakpoint: 500, 
+                settings: data.optionsSm
+            })
+        }
+        if ( data.optionsMd ) {
+            options.responsive.push({
+                breakpoint: 768, 
+                settings: data.optionsMd
+            })
+        }
+        if ( data.optionsLg ) {
+            options.responsive.push({
+                breakpoint: 1000, 
+                settings: data.optionsLg
+            })
+        }
+        if ( data.optionsXl ) {
+            options.responsive.push({
+                breakpoint: 1500, 
+                settings: data.optionsXl
+            })
         }
 
-    };
-
-    Carousel.prototype.promo = function() {
-        var defaults = {
-                infinite: false,
-                dots: true,
-                slidesToScroll: 1
-            },
-            options = this.$el.data('slick');
-
-        options = $.extend( this.globalDefaults, defaults, options );
+        options = $.extend( this.globalDefaults, options );
 
         var carousel = this.$el.slick(options),
             _this = this;
