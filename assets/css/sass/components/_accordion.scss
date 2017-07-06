@@ -64,7 +64,7 @@ $bar-width: 2px;
         height: 2px;
         margin-top: -1px;
         animation: 500ms to-plus;
-        .ccl-is-open & {
+        .ccl-is-open > & {
             animation: 400ms to-minus;
             transform: rotate(90deg) scaleX(0.01);
         }
@@ -75,7 +75,7 @@ $bar-width: 2px;
         height: $bar-length;
         margin-top: -$bar-length/2;
         margin-left: calc( #{ $bar-length/2 } - #{ $bar-width/2 } );
-        .ccl-is-open & {
+        .ccl-is-open > & {
             transform: rotate(90deg);
         }
     }

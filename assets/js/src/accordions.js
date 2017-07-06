@@ -10,8 +10,8 @@
 
     var Accordion = function(el){
         this.$el = $(el);
-        this.$toggle = this.$el.find('.ccl-c-accordion__toggle');
-        this.$content = this.$el.find('.ccl-c-accordion__content');
+        this.$toggle = this.$el.children('.ccl-c-accordion__toggle');
+        this.$content = this.$el.children('.ccl-c-accordion__content');
         this.init();
     };
 
