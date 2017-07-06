@@ -29,35 +29,48 @@
 
 .ccl-c-hero__container {
     @include ccl-l-container;
-    padding: 0 $gutter/2;
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-wrap: wrap;
+    @include media($lg) {
+        padding: 0 $gutter/2;
+        display: flex;
+    }
+}
+
+.ccl-c-hero__header,
+.ccl-c-hero__content {
+    @include media($lg) {
+        flex-shrink: 1;
+        flex-grow: 1;
+        margin: 0 $gutter/2;
+    }
 }
 
 .ccl-c-hero__header {
-    flex-basis: calc( 33.333% - #{ $gutter } );
-    flex-shrink: 0;
-    flex-grow: 0;
-    margin: 0 $gutter/2;
+    @include media($lg) {
+        flex-basis: calc( 33.333% - #{ $gutter } );
+    }
 }
 
 .ccl-c-hero__content {
-    flex-basis: calc( 66.666% - #{ $gutter });
-    flex-shrink: 0;
-    flex-grow: 0;
-    margin: 0 $gutter/2; 
-    display: flex;
+    
+    @include media($md) {
+        display: flex;
+    }
+    @include media($lg) {
+        flex-basis: calc( 66.666% - #{ $gutter } );
+    }
 
     & > * {
         flex-basis: 0;
         flex-grow: 1;
         flex-shrink: 1;
         max-width: 100%;
-        margin-left: $gutter;
-        &:first-child {
-            margin-left: 0;
+        @include media($lg) {
+            margin-left: $gutter;
+            &:first-child {
+                margin-left: 0;
+            }
         }
     }
 
