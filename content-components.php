@@ -3,6 +3,10 @@
     <?php get_template_part( 'components/hero' ); ?>
 </div>
 
+<div class="ccl-u-my-5 ccl-l-container">
+    <?php get_template_part( 'components/room' ); ?>
+</div>
+
 <div class="ccl-u-my-3 ccl-l-container">
     <h2 class="ccl-u-mb-1">Accordions</h2>
     <div class="ccl-l-row">
@@ -27,24 +31,6 @@
 
 <div class="ccl-u-my-3 ccl-l-container">
     <?php get_template_part( 'components/quiz-card' ); ?>
-
-    
-        <div class="ccl-l-row ccl-l-visual-grid" style="height:100px">
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-            <div class="ccl-l-column"></div>
-        </div>
-    
-
 </div>
 
 <div class="ccl-u-my-3 ccl-l-container">
