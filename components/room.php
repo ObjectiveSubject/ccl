@@ -7,7 +7,9 @@
         <a href="#" class="ccl-c-room__link">View Photos</a>
     </header>
     <div class="ccl-c-room__content">
-        <img class="ccl-c-room__image" src="http://unsplash.it/190/100/" />
+        <div class="ccl-c-room__image">
+            <img src="http://unsplash.it/500/280/" width="500" height="280"/>
+        </div>
         <div class="ccl-c-room__schedule">
 
             <?php $i = 8 * 60; do {

@@ -45,18 +45,22 @@
 }
 
 .ccl-c-room__image {
-    @extend .ccl-u-display-block;
-    flex-basis: 190px;
-    flex-grow: 0;
-    flex-shrink: 0;
-    width: 100%;
-    height: auto;
     margin: $leading 0;
+
     @include media($sm) {
         width: 50%;
+        float: right;
     }
     @include media($lg) {
+        flex-basis: 190px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        float: none;
         width: auto;
+    }
+
+    img {
+        @extend .ccl-u-display-block;
     }
 }
 
@@ -67,7 +71,7 @@
     flex-grow: 1;
     flex-wrap: wrap;
     margin: $leading 0;
-    clear: left;
+    clear: both;
     @include media($lg) {
         margin-left: $leading;
         flex-wrap: nowrap;
@@ -86,6 +90,7 @@
     }
     @include media($lg) {
         flex-basis: 0;
+        margin-bottom: 0;
     }
 
     [type="checkbox"] {
