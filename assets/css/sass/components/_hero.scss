@@ -1,16 +1,11 @@
 .ccl-c-hero {
     position: relative;
-    display: flex;
-    align-items: flex-end;
     background-size: cover;
     background-color: $blue;
     background-position: top center;
     background-repeat: no-repeat;
     color: white;
-    padding: 3rem 0;
-    min-height: 350px;
-    max-height: 750px;
-    height: 40vw;
+    padding: 25vw 0 3rem;
 
     &:before {
         content: "";
@@ -34,6 +29,7 @@
 
 .ccl-c-hero__container {
     @include ccl-l-container;
+    padding: 0 $gutter/2;
     position: relative;
     z-index: 1;
     display: flex;
@@ -42,14 +38,27 @@
 
 .ccl-c-hero__header {
     flex-basis: calc( 33.333% - #{ $gutter } );
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 0 $gutter/2;
 }
 
 .ccl-c-hero__content {
-    flex-basis: calc( 66.666% - #{ $gutter } );
+    flex-basis: calc( 66.666% - #{ $gutter });
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 0 $gutter/2; 
     display: flex;
 
     & > * {
-        flex-basis: calc( 50% - #{ $gutter } );
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 1;
+        max-width: 100%;
+        margin-left: $gutter;
+        &:first-child {
+            margin-left: 0;
+        }
     }
 
 }
