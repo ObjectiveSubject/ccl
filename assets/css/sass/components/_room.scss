@@ -1,5 +1,7 @@
 .ccl-c-room {
     @extend .ccl-u-clearfix;
+    border-top: 1px solid black;
+    padding-top: $leading;
 }
 
 .ccl-c-room__header {
