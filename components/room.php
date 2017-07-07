@@ -7,9 +7,11 @@
         <a href="#" class="ccl-c-room__link">View Photos</a>
     </header>
     <div class="ccl-c-room__content">
+        
         <div class="ccl-c-room__image">
             <img src="http://unsplash.it/500/280/" width="500" height="280"/>
         </div>
+
         <div class="ccl-c-room__schedule">
 
             <?php $i = 8 * 60; do {
@@ -17,22 +19,23 @@
                 $hours = floor( $i / 60 );
                 $ampm = ( $hours >= 12 ) ? 'p' : 'a';
                 $hours = ( $hours > 12 ) ? $hours - 12 : $hours;
-                $minutes = ( $i % 60 > 0 ) ? $i % 60 : '';
                 ?>
-                <div class="ccl-c-room__slot <?php echo ( $minutes ) ? 'ccl-is-half-hour' : ''; ?> ">
+                <div class="ccl-c-room__slot">
                     <input type="checkbox" id="slot-<?php echo $i; ?>" name="slot-<?php echo $i; ?>" />
                     <label class="ccl-c-room__slot-label" for="slot-<?php echo $i; ?>">
-                        <span class="ccl-c-room__slot-time">
-                            <?php if ( $minutes ) { 
-                                echo ':' . $minutes;
-                            } else {
-                                echo $hours . $ampm;
-                            } ?>
-                        </span>
+                        <?php echo $hours . $ampm; ?>
                     </label>
                 </div>
-            <?php $i += 30; } while( $i <= 1230 ); ?>
+            <?php $i += 60; } while( $i <= 1020 ); ?>
             
         </div>
+
     </div>
+
+    <ul class="ccl-c-room__legend">
+        <li class="ccl-c-room__key--available">Available</li>
+        <li class="ccl-c-room__key--occupied">Occupied</li>
+        <li class="ccl-c-room__key--selected">Selected</li>
+    </ul>
+
 </div>

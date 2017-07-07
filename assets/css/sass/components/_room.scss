@@ -1,11 +1,12 @@
 .ccl-c-room {
     @extend .ccl-u-clearfix;
     border-top: 1px solid black;
-    padding-top: $leading;
 }
 
+// Room Header
+// ------------------------------------- //
 .ccl-c-room__header {
-    margin-bottom: $leading;
+    
     @include media($sm) {
         float: left;
         width: 50%;
@@ -40,12 +41,18 @@
     @extend .ccl-u-faded;
 }
 
+
+// Room Content
+// ------------------------------------- //
 .ccl-c-room__content {
     @include media($lg) {
         display: flex;
     } 
 }
 
+
+// Room Image
+// ------------------------------------- //
 .ccl-c-room__image {
     margin: $leading 0;
 
@@ -59,6 +66,7 @@
         flex-shrink: 0;
         float: none;
         width: auto;
+        max-width: 190px;
     }
 
     img {
@@ -66,6 +74,9 @@
     }
 }
 
+
+// Room Schedule
+// ------------------------------------- //
 .ccl-c-room__schedule {
     display: flex;
     flex-basis: 0;
@@ -81,19 +92,10 @@
 }
 
 .ccl-c-room__slot {
-    flex-basis: 25%;
+    flex-basis: 0;
     flex-grow: 1;
     flex-shrink: 1;
-    margin-bottom: $leading * 1.5;
     padding: 0 1px;
-
-    @include media($md) {
-        flex-basis: 16.666%;
-    }
-    @include media($lg) {
-        flex-basis: 0;
-        margin-bottom: 0;
-    }
 
     [type="checkbox"] {
         @extend .ccl-u-display-none;
@@ -107,6 +109,7 @@
     height: 100%;
     cursor: pointer;
     color: gray;
+    position: relative;
 
     &:hover {
         color: black;
@@ -123,10 +126,25 @@
         content: "";
         display: block;
         height: 100%;
-        min-height: rem(32);
+        min-height: rem(56);
         background: lightgray;
         transition: all 200ms ease-out;
         margin-bottom: 5px;
+    }
+
+    &:after {
+        content: "\271a";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: white;
+        opacity: 0.5;
+        font-size: 1rem;
+        transform: translate3d(-50%,-50%,0);
+        line-height: 1;
+        @include media($md) {
+            font-size: 2rem;
+        }
     }
 
     [type="checkbox"]:not(:checked) + &:hover:before {
@@ -138,18 +156,46 @@
     .ccl-is-full &:before {
         background: black !important;
     }
+    [type="checkbox"]:checked + &:after,
+    .ccl-is-full &:after {
+        content: "\2714";
+    }
+
 }
 
-.ccl-c-room__slot-time {
-    .ccl-is-half-hour & {
-        @include media($lg) {
-            display: none;
-        }
-    }
-    .ccl-c-room__slot-label:hover &,
-    [type="checkbox"]:checked + .ccl-c-room__slot-label &,
-    .ccl-is-full & {
-        display: block;
+// Room Legend
+// -------------------------------------- //
+.ccl-c-room__legend {
+    @extend .ccl-u-clean-list;
+    margin-top: 2rem;
+    text-align: right;
+    @include media($lg) {
+        margin-top: $leading/2;
     }
 }
 
+.ccl-c-room__key {
+    @extend .ccl-h5;
+    margin: 0 0 0 1em;
+    display: inline-block;
+
+    &:before {
+        content: "";
+        display: inline-block;
+        border: 5px solid;
+        vertical-align: baseline;
+        margin-right: 0.25rem;
+    }
+}
+.ccl-c-room__key--available {
+    @extend .ccl-c-room__key;
+    color: gray;
+}
+.ccl-c-room__key--occupied {
+    @extend .ccl-c-room__key;
+    color: black;
+}
+.ccl-c-room__key--selected {
+    @extend .ccl-c-room__key;
+    color: $blue;
+}
