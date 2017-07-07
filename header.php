@@ -14,24 +14,18 @@
 
 	<div id="page">
 
-		<header id="masthead" class="site-header ccl-l-container" role="banner">
-			<div class="site-branding">
-				<?php
-				if ( is_front_page() && is_home() ) : ?>
-					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php else : ?>
-					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-				endif;
-				$description = get_bloginfo( 'description', 'display' );
-				if ( $description || is_customize_preview() ) : ?>
-					<p class="site-description"><?php echo $description; ?></p>
-				<?php
-				endif; ?>
-			</div><!-- .site-branding -->
+		<nav class="ccl-c-user-nav">
 
-			<nav id="site-navigation" class="main-navigation" role="navigation">
-				<button class="menccl-u-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', '_s' ); ?></button>
-				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-			</nav><!-- #site-navigation -->
+			<div class="ccl-l-container ccl-u-text-right">
+				<div class="ccl-h5 ccl-u-mt-0 ccl-u-py-nudge"><span class="ccl-u-faded">Welcome</span> User_Name</div>
+			</div>
+
+		</nav>
+
+		<header id="masthead" class="ccl-c-masthead " role="banner">
+			
+			<div class="ccl-l-container">
+				<h2 class="ccl-u-pb-1 ccl-u-faded">(CCL Header)</h2>
+			</div>
+
 		</header><!-- #masthead -->
