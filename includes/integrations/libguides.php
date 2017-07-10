@@ -96,3 +96,36 @@ function get_all_guides() {
 	}
 
 }
+
+/**
+ * Retrieve all People
+ *
+ * LIBGUIDES_SITE_ID and LIBGUIDES_SITE_KEY are defined as constants in wp-config. Will be converted to wp options at some point
+ *
+ * @return array|string|\WP_Error
+ */
+function get_all_people() {
+
+	$params = array(
+		'site_id' => LIBGUIDES_SITE_ID,
+		'key'     => LIBGUIDES_SITE_KEY,
+		'expand'  => 'profile'
+	);
+
+	$query_string = http_build_query( $params );
+
+	$request = wp_remote_get( 'http://lgapi-us.libapps.com/1.1/accounts/?' . $query_string );
+
+	if ( is_wp_error( $request ) ) {
+
+		return $request->get_error_message();
+
+	} else {
+		// check for API errors??
+
+		$results = $request;
+
+		return $results;
+	}
+
+}
