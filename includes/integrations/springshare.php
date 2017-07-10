@@ -1,10 +1,10 @@
 <?php
-namespace CCL\Integrations\Springshare;
+namespace CCL\Integrations\LibGuides;
 
 /**
- * Retrieve Springshare token needed to access API data
+ * Retrieve LibGuides token from Springshare needed to access v1.2 API data
  *
- * SPRINGSHARE_ID and SPRINGSHARE_SECRET are defined as constants in wp-config. Will be converted to wp options at some point
+ * LIBGUIDES_CLIENT_ID and LIBGUIDES_CLIENT_SECRET are defined as constants in wp-config. Will be converted to wp options at some point
  *
  * @return string|\WP_Error will return access code or an error message
  */
@@ -12,8 +12,8 @@ function get_token() {
 	$token_request = wp_remote_post( 'https://lgapi-us.libapps.com/1.2/oauth/token', array(
 		'header' => array(),
 		'body'   => array(
-			'client_id'     => SPRINGSHARE_ID,
-			'client_secret' => SPRINGSHARE_SECRET,
+			'client_id'     => LIBGUIDES_CLIENT_ID,
+			'client_secret' => LIBGUIDES_CLIENT_SECRET,
 			'grant_type' => 'client_credentials'
 		)
 	) );
@@ -34,11 +34,11 @@ function get_token() {
 }
 
 /**
- * Retrieve all Guides
+ * Retrieve all Databases
  *
  * @return array|string|\WP_Error
  */
-function get_all_guides() {
+function get_all_databases() {
 
 	$token = get_token();
 
