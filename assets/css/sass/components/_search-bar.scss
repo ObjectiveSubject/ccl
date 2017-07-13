@@ -26,6 +26,8 @@
     margin-bottom: -$search-bar-padding;
     padding-left: 3rem;
     padding-right: 3rem;
+    font-size: 1.8rem;
+    line-height: 1;
     &:hover {
         background-color: $blue;
     }
@@ -74,4 +76,8 @@
     @extend .ccl-u-faded;
     @extend .ccl-u-display-inline-block;
     width: rem(150);
+
+    [class*="ccl-b-icon-"] {
+        vertical-align: -0.1em;
+    }
 }
