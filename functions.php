@@ -39,6 +39,7 @@ include( CCL_INC . 'libraries/cmb2-post-search-field/cmb2_post_search_field.php'
 CCL\Core\setup();
 CCL\Comments\setup();
 CCL\Guides\setup();
+CCL\Integrations\LibGuides\setup();
 CCL\Shortcodes\setup();
 CCL\PostTypes\setup();
 CCL\Taxonomies\setup();
