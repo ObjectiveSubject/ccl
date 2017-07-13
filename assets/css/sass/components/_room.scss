@@ -141,6 +141,7 @@
         opacity: 0.5;
         font-size: 1rem;
         transform: translate3d(-50%,-50%,0);
+        transition: transform 100ms ease-out;
         line-height: 1;
         @include media($md) {
             font-size: 2rem;
@@ -158,7 +159,7 @@
     }
     [type="checkbox"]:checked + &:after,
     .ccl-is-full &:after {
-        content: "\2714";
+        transform: translate3d(-50%,-50%,0) rotate(45deg);
     }
 
 }
