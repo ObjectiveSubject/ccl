@@ -77,6 +77,7 @@ function get_all_guides() {
 		'site_id' => LIBGUIDES_SITE_ID,
 		'key'     => LIBGUIDES_SITE_KEY,
 		'status'  => 1, // only retrieve published guides
+		'guide_types' => '1,2,3,4' // General Purpose, Course, Subject, Topic
 	);
 
 	$query_string = http_build_query( $params );
