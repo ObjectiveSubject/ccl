@@ -1,0 +1,32 @@
+.ccl-b-caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    margin-left: 0.25em;
+}
+
+.ccl-b-caret-up {
+    @extend .ccl-b-caret;
+    border-bottom: 5px solid;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.ccl-b-caret-down {
+    @extend .ccl-b-caret;
+    border-top: 5px solid;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.ccl-b-caret-left {
+    @extend .ccl-b-caret;
+    border-right: 5px solid;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+}
+.ccl-b-caret-right {
+    @extend .ccl-b-caret;
+    border-left: 5px solid;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+}

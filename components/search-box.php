@@ -7,7 +7,7 @@
             <form class="ccl-c-search__bar">
                 <input type="text" class="ccl-b-input" placeholder="Start typing to search"/>
                 <div class="ccl-c-dropdown">
-                    <button class="ccl-c-dropdown__toggle ccl-b-btn">As: Keyword <i class="ccl-b-icon--caret-down">&darr;</i></button>
+                    <button class="ccl-c-dropdown__toggle ccl-b-btn">As: Keyword <i class="ccl-b-caret-down" aria-hidden="true"></i></button>
                     <ul class="ccl-c-dropdown__menu">
                         <li class="ccl-c-dropdown__item"><a href="#">All</a></li>
                         <li class="ccl-c-dropdown__item"><a href="#">Title</a></li>
@@ -17,7 +17,7 @@
                     </ul>
                 </div>
                 <div class="ccl-c-dropdown">
-                    <button class="ccl-c-dropdown__toggle ccl-b-btn">In: Databases <i class="ccl-b-icon--caret-down">&darr;</i></button>
+                    <button class="ccl-c-dropdown__toggle ccl-b-btn">In: Databases <i class="ccl-b-caret-down" aria-hidden="true"></i></button>
                     <ul class="ccl-c-dropdown__menu">
                         <li class="ccl-c-dropdown__item"><a href="#">DB Name</a></li>
                         <li class="ccl-c-dropdown__item"><a href="#">DB Name</a></li>
