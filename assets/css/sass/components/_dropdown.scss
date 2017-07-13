@@ -35,6 +35,10 @@
     .ccl-c-dropdown__toggle:focus + & {
         display: block;
     }
+
+    .ccl-c-user-nav & {
+        min-width: rem(150);
+    }
 }
 
 .ccl-c-dropdown__item {
@@ -48,6 +52,10 @@
     
     &:hover, &:focus {
         color: $blue;
+    }
+
+    .ccl-c-user-nav & {
+        @extend .ccl-h5;
     }
 
     a {

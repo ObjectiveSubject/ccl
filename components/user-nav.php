@@ -13,11 +13,17 @@
                     Login <i class="ccl-b-caret-down" aria-hidden="true"></i>
                 </a>
                 <ul id="dropdown-1" class="ccl-c-dropdown__menu">
-                    <li class="ccl-c-dropdown__item"><a href="#">Dropdown Item</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Dropdown Item</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Dropdown Item</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Dropdown Item</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Dropdown Item</a></li>
+                    <li class="ccl-c-dropdown__item">
+                        <a href="#">
+                            <i class="ccl-b-icon-person" aria-hidden="true"></i>
+                            My Account
+                        </a>
+                    </li>
+                    <li class="ccl-c-dropdown__item">
+                        <a href="#">
+                            Sign Up
+                        </a>
+                    </li>
                 </ul>
             </li>
 
