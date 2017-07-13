@@ -17,6 +17,7 @@ define( 'CCL_ASSETS',       CCL_TEMPLATE_URL . '/assets/' );
 require_once CCL_INC . 'core.php';
 
 require_once CCL_INC . 'comments.php';
+require_once CCL_INC . 'guides.php';
 require_once CCL_INC . 'helpers.php';
 require_once CCL_INC . 'metaboxes.php';
 require_once CCL_INC . 'post-types.php';
@@ -37,6 +38,7 @@ include( CCL_INC . 'libraries/cmb2-post-search-field/cmb2_post_search_field.php'
 // Run the setup functions
 CCL\Core\setup();
 CCL\Comments\setup();
+CCL\Guides\setup();
 CCL\Shortcodes\setup();
 CCL\PostTypes\setup();
 CCL\Taxonomies\setup();
