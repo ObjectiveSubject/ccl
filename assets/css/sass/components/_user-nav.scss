@@ -1,4 +1,44 @@
 .ccl-c-user-nav {
-    background: $blue;
+    background: black;
     color: white;
+
+    .ccl-u-faded {
+        opacity: 0.7;
+    }
+}
+
+.ccl-c-user-nav__menu {
+    @extend .ccl-u-clean-list;
+    padding: 0.25em 0;
+    @include media($md) {
+        display: flex;
+    }
+}
+
+.ccl-c-user-nav__menu-item {
+    @extend .ccl-h5;
+    @extend .ccl-u-mt-0;
+    padding: 0.5em 0;
+    @include media($md) {
+        margin-right: 1em;
+    }
+
+    &.ccl-pull-right {
+        @include media($md) {
+            align-self: flex-end;
+            margin-left: 1em;
+            margin-right: 0;
+            .ccl-c-user-nav__menu-item:not(.ccl-pull-right) + & {
+                margin-left: auto;
+            }
+        }
+    }
+
+    & > a {
+        color: white;
+        &:hover, &:focus {
+            color: white;
+            opacity: 0.7;
+        }
+    }
 }

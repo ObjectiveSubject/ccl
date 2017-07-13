@@ -4,10 +4,14 @@
         
         <ul class="ccl-c-user-nav__menu">
 
-            <li class="ccl-h5 ccl-u-mt-0 ccl-u-py-nudge"><span class="ccl-u-faded">Welcome</span> User_Name</li>
+            <li class="ccl-c-user-nav__menu-item">
+                Library Open 7am - 9pm Today
+            </li>
             
-            <li class="ccl-c-user-nav__menu-item ccl-c-dropdown">
-                <button href="#dropdown-1" class="ccl-c-dropdown__toggle"><span class="ccl-u-faded">Welcome</span> <User_Name></User_Name></button>
+            <li class="ccl-c-user-nav__menu-item ccl-c-dropdown ccl-pull-right">
+                <a href="#dropdown-1" class="ccl-c-dropdown__toggle">
+                    Login <i class="ccl-b-caret-down" aria-hidden="true"></i>
+                </a>
                 <ul id="dropdown-1" class="ccl-c-dropdown__menu">
                     <li class="ccl-c-dropdown__item"><a href="#">Dropdown Item</a></li>
                     <li class="ccl-c-dropdown__item"><a href="#">Dropdown Item</a></li>
@@ -17,7 +21,9 @@
                 </ul>
             </li>
 
-            <li class="ccl-h5 ccl-u-mt-0 ccl-u-py-nudge"><span class="ccl-u-faded">Chat with a librarian</span></li>
+            <li class="ccl-c-user-nav__menu-item ccl-pull-right">
+                <a href="#">Chat with a librarian</a>
+            </li>
 
         </ul>
 
