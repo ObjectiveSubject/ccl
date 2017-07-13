@@ -26,6 +26,8 @@
     margin-bottom: -$search-bar-padding;
     padding-left: 3rem;
     padding-right: 3rem;
+    font-size: 1.8rem;
+    line-height: 1;
     &:hover {
         background-color: $blue;
     }
@@ -61,17 +63,32 @@
     @extend .ccl-h3;
     @extend .ccl-u-mt-0;
     border-bottom: 1px solid black;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
+    min-height: rem(65);
 
     a {
-        @extend .ccl-u-display-block;
+        display: flex;
+        align-items: center;
+        line-height: calc( #{rem(65)} - 1rem );
     }
 }
 
 .ccl-c-search-item__type {
     @extend .ccl-h4;
     @extend .ccl-u-mt-0;
-    @extend .ccl-u-faded;
-    @extend .ccl-u-display-inline-block;
+    @extend .ccl-u-transition;
+    display: flex;
+    align-items: center;
     width: rem(150);
+    opacity: 0.2;
+
+    [class*="ccl-b-icon-"] {
+        vertical-align: -0.1em;
+        margin-right: 0.5em;
+    }
+
+    .ccl-c-search-item a:hover & {
+        opacity: 1;
+        color: black;
+    }
 }

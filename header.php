@@ -14,13 +14,7 @@
 
 	<div id="page">
 
-		<nav class="ccl-c-user-nav">
-
-			<div class="ccl-l-container ccl-u-text-right">
-				<div class="ccl-h5 ccl-u-mt-0 ccl-u-py-nudge"><span class="ccl-u-faded">Welcome</span> User_Name</div>
-			</div>
-
-		</nav>
+		<?php get_template_part( 'components/user-nav' ); ?>
 
 		<header id="masthead" class="ccl-c-masthead " role="banner">
 			

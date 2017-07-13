@@ -93,13 +93,13 @@ textarea {
 
  a {
 	@extend .ccl-u-transition;
- 	color: $color-link;
+ 	color: $color-text-main;
  	text-decoration: none;
 
  	&:hover,
  	&:focus,
  	&:active {
- 		color: $color-link-hover;
+ 		color: $color-link;
  	}
  	&:focus {
  		outline: 0;

@@ -1,0 +1,8 @@
+.ccl-c-entry-content {
+    a {
+        color: $color-link;
+        &:hover, &:focus, &:active {
+            color: $color-link-active;
+        }
+    }
+}

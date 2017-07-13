@@ -26,8 +26,7 @@ $color-map: (
 $color-text-main: black;
 
 $color-link: $blue;
-$color-link-visited: $blue;
-$color-link-hover: $red;
+$color-link-active: darken( $color-link, 20% );
 
 $color-code: black;
 
