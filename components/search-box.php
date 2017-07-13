@@ -42,7 +42,7 @@
                             <a href="#">
                                 <span class="ccl-c-search-item__type">
                                     <i class="ccl-b-icon-<?php echo $icons[$i]; ?>" aria-hidden="true"></i>
-                                    <?php echo $types[$i]; ?>
+                                    <span class="ccl-c-search-item__type-text"><?php echo $types[$i]; ?></span>
                                 </span>
                                 <span class="ccl-c-search-item__title">Search Result Item <?php echo $i; ?></span>
                             </a>
