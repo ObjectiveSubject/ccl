@@ -18,7 +18,7 @@
     text-shadow: none;
 	
 	&:hover {
-        background-color: rgba(white, 0.3);
+        background-color: rgba(black, 0.1);
 	}
 
     &:focus {
@@ -32,40 +32,70 @@
             border: 1px solid black;
         }
     }
-}
 
-// Light Button
-// ------------------------------------------ //
-.ccl-b-btn--light {
-	@extend .ccl-b-btn;
-    border-color: white;
-	color: white;
-	&:hover, &:focus {
-		color: white;
-	}
-    &:focus {
-        outline: 0;
-        box-shadow: $focus-box-shadow-lg;
+
+    // Inverse Button
+    // ------------------------------------------ //
+    &.ccl-is-inverse {
+        border-color: white;
+        color: white;
+        &:hover, &:focus {
+            color: white;
+            background-color: rgba(white, 0.25);
+        }
+        &:focus {
+            outline: 0;
+            box-shadow: $focus-box-shadow-lg;
+        }
     }
-}
 
-// Small Button
-// ------------------------------------------ //
-.ccl-b-btn--small {
-	@extend .ccl-b-btn;
-	padding: 0.5em 1em;
-}
+    // Small Button
+    // ------------------------------------------ //
+    &.ccl-is-small {
+        @extend .ccl-h5;
+        margin-top: 0;
+        padding: 0.4em 0.5em;
+    }
 
-// Disabled Button
-// ------------------------------------------ //
-.ccl-b-btn[disabled], .ccl-b-btn--disabled {
-	@extend .ccl-b-btn;
-	cursor: default;
-    opacity: 0.3;
-    &:hover, &:focus {
-		color: $color-text-main;
-        border-color: black;
-	}
+    // Disabled Button
+    // ------------------------------------------ //
+    &[disabled], &.ccl-is-disabled {
+        cursor: default;
+        opacity: 0.3;
+        &:hover, &:focus {
+            color: $color-text-main;
+            border-color: black;
+            background: none;
+        }
+    }
+
+    // Solid Button
+    // ------------------------------------------ //
+    &.ccl-is-solid {
+        border-color: transparent;
+        background: $color-text-main;
+        color: white;
+        &:hover, &:focus {
+            background: rgba($color-text-main, 0.75);
+        }
+    }
+
+    &.ccl-is-solid.ccl-is-inverse {
+        background: white;
+        color: $color-text-main;
+        &:hover, &:focus {
+            background: rgba(white, 0.75);
+        }
+    }
+
+    &.ccl-is-solid[disabled], 
+    &.ccl-is-solid.ccl-is-disabled {
+        background: rgba(black, 0.35);
+        &:hover, &:focus {
+            border-color: transparent;
+            color: white;
+        }
+    }
 }
 
 // Circular Button
