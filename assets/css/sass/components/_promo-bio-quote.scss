@@ -11,7 +11,9 @@
     }
 }
 .ccl-c-promo__quote {
-    blockquote { margin: 0; }
+    blockquote { 
+        margin: 0;
+    }
     @include media($lg) {
         width: 45%;
         padding-left: $gutter/2;

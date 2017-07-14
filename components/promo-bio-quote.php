@@ -15,7 +15,6 @@
 
             <div class="ccl-c-promo__quote">
                 <blockquote>
-                    <span class="ldquo">&ldquo;</span>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                     <cite>Firstname Lastname<br><span class="ccl-u-faded">Title/Position</span></cite>
                 </blockquote>

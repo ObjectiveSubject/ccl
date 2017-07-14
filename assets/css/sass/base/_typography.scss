@@ -154,7 +154,8 @@ blockquote {
 		font-style: normal;
 	}
 
-	.ldquo {
+	:before {
+		content: "\201C";
 		position: absolute;
 		top: $leading;
 		left: 0;

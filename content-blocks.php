@@ -1,4 +1,9 @@
 <div class="ccl-l-container">
+    
+    <div class="ccl-u-my-3">
+        <?php get_template_part( 'components/promo-bio-quote' ); ?>
+    </div>
+
     <div class="ccl-l-row ccl-u-pb-3">
       
         <div class="ccl-l-column ccl-l-span-4-md ccl-l-span-3-lg">
@@ -28,7 +33,10 @@
 
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="#">Morbi justo lorem</a>, congue eu ipsum eu, feugiat ornare ex. Nulla eleifend tortor vitae lorem accumsan, ac pellentesque elit pretium. Mauris ac ipsum eros. Suspendisse dolor mi, viverra sit amet diam in, convallis tempus ex. Ut cursus mi vel lacus facilisis suscipit. Curabitur facilisis turpis in augue finibus, eu congue magna condimentum.</p>
 
-            <blockquote><p>Blockquote, massa ut fermentum maximus, nisl libero eleifend odio, ornare consectetur massa velit vel tellus.</p></blockquote>
+            <blockquote>
+                Blockquote, massa ut fermentum maximus, nisl libero eleifend odio, ornare consectetur massa velit vel tellus.
+                <cite>Firstname Lastname<br><span class="ccl-u-faded">title/position</span></cite>
+            </blockquote>
 
             <p>Aenean at volutpat urna, quis mattis augue. Maecenas tincidunt sollicitudin bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur et interdum sem, et convallis lacus. Fusce efficitur, massa ut fermentum maximus, nisl libero eleifend odio, ornare consectetur massa velit vel tellus. Morbi rhoncus arcu at orci blandit, non dapibus est vestibulum. Fusce in vestibulum metus. Sed gravida eu mi non pharetra. Suspendisse egestas nibh imperdiet augue iaculis posuere. Donec bibendum diam rhoncus, porta nulla nec, facilisis est. Donec in erat nec odio venenatis faucibus et ac nunc.</p>
 
