@@ -1,0 +1,40 @@
+
+// Colors
+// ------------------------------------------- /
+
+$red: #CC0000;
+$blue: #126DB5;
+
+$color-map: (
+    'black' : black,
+    'white' : white,
+    'red'   : $red,
+    'blue'  : $blue,
+);
+
+$color-pomona: #006FB9;
+$color-cgu: #EE3A42;
+$color-cuc: #472782;
+$color-scripps: #4A857F;
+$color-claremont-mckenna: #860A2D;
+$color-harvey-mudd: #FDBD10;
+$color-pitzer: #F79F3D;
+$color-kgi: #00758F;
+
+$color-text-main: black;
+
+$color-link: $blue;
+$color-link-active: darken( $color-link, 20% );
+
+$color-code: black;
+
+$color-blockquote: black;
+
+$color-background-selection: lightblue;
+$color-selection-text: white;
+
+$color-facebook: #3b5997;
+$color-twitter: #55abed;
+$color-youtube: #cd201f;
+$color-linkedin: #0077b4;
+$color-google: #F44336;
