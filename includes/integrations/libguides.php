@@ -105,9 +105,9 @@ function get_all_guides() {
 		return $request->get_error_message();
 
 	} else {
-		// check for API errors??
+		// check for API authentication errors??
 
-		$results = $request;
+		$results = json_decode( $request['body'] );
 
 		return $results;
 	}
