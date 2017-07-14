@@ -20,7 +20,7 @@
                         <p class="ccl-u-mt-nudge">Itaquia voluptati optae con reti optae con reris aut ad quiaspe ruptam quibus. Icaepro deseque lacerum cus abore pratque.</p>
                     </a>
                 </article>
-            <?php $i++; } while ( $i < 4 ); ?>
+            <?php $i++; } while ( $i < 3 ); ?>
             
         </div>
 
