@@ -12,9 +12,6 @@
 .ccl-c-dropdown__toggle {
     @extend .ccl-u-display-inline-block;
     height: 100%;
-    &:hover {
-        color: $color-link-active;
-    }
 }
 
 .ccl-c-dropdown__menu {
