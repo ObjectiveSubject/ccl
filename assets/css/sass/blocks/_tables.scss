@@ -1,0 +1,67 @@
+
+// Normalize tables
+
+table {
+    border-collapse: collapse;
+    background-color: transparent;
+	margin: $leading 0 0;
+}
+caption {
+    @extend .ccl-u-text-left;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    color: lightgray;
+}
+th {
+    @extend .ccl-u-text-left;
+}
+
+// CCL Table styles
+
+.ccl-b-table {
+    width: 100%;
+    
+    td, th {
+        padding: 0.5rem;
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+    thead th {
+        @extend .ccl-h4;
+        @extend .ccl-u-mt-0;
+        border-bottom: 1px solid;
+        
+    }
+    tfoot th {
+        border-top: 1px solid;
+    }
+}
+
+.ccl-b-table--striped {
+    @extend .ccl-b-table;
+    
+    td, th {
+        padding: 0.5rem;
+        &:first-child, &:last-child {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+    }
+    
+    tbody > tr:nth-child(odd) {
+        background: rgba(black, 0.05);
+    }
+}
+
+.ccl-is-hoverable {
+    &.ccl-b-table,
+    &.ccl-b-table--striped {
+        tbody tr:hover td {
+            background: rgba(black, 0.1);
+        }
+    }
+}

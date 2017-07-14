@@ -81,10 +81,11 @@
             <h3>Preformatted & code</h3>
 
             <pre>
-            Fusce efficitur,
-            massa ut <code>fermentum</code> maximus,
-            nisl libero eleifend odio,
-            ornare consectetur massa velit vel tellus.</pre>
+.example {
+    display: block;
+    margin: 1em;
+    float: left;
+}</pre>
 
             <hr/>
 
@@ -143,49 +144,92 @@
 
             <hr/>
 
-            <table class="ccl-b-table ccl-b-table--bordered">
-                <tr>
-                    <th>Table Heading 1</th>
-                    <th>Table Heading 2</th>
-                    <th>Table Heading 3</th>
-                    <th>Table Heading 4</th>
-                    <th>Table Heading 5</th>
-                </tr>
-                <tr>
-                    <td>Table Cell 1</td>
-                    <td>Table Cell 2</td>
-                    <td>Table Cell 3</td>
-                    <td>Table Cell 4</td>
-                    <td>Table Cell 5</td>
-                </tr>
-                <tr>
-                    <td>Table Cell 1</td>
-                    <td>Table Cell 2</td>
-                    <td>Table Cell 3</td>
-                    <td>Table Cell 4</td>
-                    <td>Table Cell 5</td>
-                </tr>
-                <tr>
-                    <td>Table Cell 1</td>
-                    <td>Table Cell 2</td>
-                    <td>Table Cell 3</td>
-                    <td>Table Cell 4</td>
-                    <td>Table Cell 5</td>
-                </tr>
-                <tr>
-                    <td>Table Cell 1</td>
-                    <td>Table Cell 2</td>
-                    <td>Table Cell 3</td>
-                    <td>Table Cell 4</td>
-                    <td>Table Cell 5</td>
-                </tr>
-                <tr>
-                    <th>Table Footer 1</th>
-                    <th>Table Footer 2</th>
-                    <th>Table Footer 3</th>
-                    <th>Table Footer 4</th>
-                    <th>Table Footer 5</th>
-                </tr>
+            <h3>Tables</h3>
+
+            <h4>Default</h4>
+
+            <pre><code>&lt;table class="ccl-b-table"&gt;</code></pre>
+
+            <table class="ccl-b-table">
+                <thead>
+                    <tr>
+                        <th>Table Heading 1</th>
+                        <th>Table Heading 2</th>
+                        <th>Table Heading 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Table Footer 1</th>
+                        <th>Table Footer 2</th>
+                        <th>Table Footer 3</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h4>Striped & Hoverable</h4>
+
+            <pre><code>&lt;table class="ccl-b-table--striped ccl-is-hoverable"&gt;</code></pre>
+
+            <table class="ccl-b-table--striped ccl-is-hoverable">
+                <thead>
+                    <tr>
+                        <th>Table Heading 1</th>
+                        <th>Table Heading 2</th>
+                        <th>Table Heading 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                    <tr>
+                        <td>Table Cell 1</td>
+                        <td>Table Cell 2</td>
+                        <td>Table Cell 3</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Table Footer 1</th>
+                        <th>Table Footer 2</th>
+                        <th>Table Footer 3</th>
+                    </tr>
+                </tfoot>
             </table>
 
 
