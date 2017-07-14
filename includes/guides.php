@@ -65,25 +65,25 @@ function import_page_html() {
 
 		<h2>Import</h2>
 
-		<p>Use this tool to import and update guides from Libcal.</p>
+		<p>Use this tool to import and update guides from libguide.</p>
 
 		<?php // Currently imported stats, api query for recently updated? ?>
 
-		<div id="libcal-importer">
-			<div id="libcal-info" class="hidden">
+		<div id="libguide-importer">
+			<div id="libguide-info" class="hidden">
 
 				<div class="spinner is-active" style="float:none;width:auto;height:auto;padding:10px 0 10px 40px;background-position:0;">
-					Importing events from Libcal&hellip;
+					Importing guides from Springshare&hellip;
 				</div>
 
-				<div id="libcal-import-response" class="libcal-response"></div>
+				<div id="libguide-import-response" class="libguide-response"></div>
 
 			</div>
 
-			<input type="hidden" name="libcal-import-nonce" id="libcal-import-nonce" value="<?php echo wp_create_nonce( 'libcal_import_nonce' ); ?>" />
+			<input type="hidden" name="libguide-import-nonce" id="libguide-import-nonce" value="<?php echo wp_create_nonce( 'libguide_import_nonce' ); ?>" />
 
 			<p class="submit">
-				<input type="submit" name="libcal-import" id="libcal-import" class="button button-primary" value="Import from Libcal">
+				<input type="submit" name="libguide-import" id="libguide-import" class="button button-primary" value="Import from Springshare">
 			</p>
 
 		</div>
