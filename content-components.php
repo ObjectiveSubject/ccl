@@ -1,5 +1,5 @@
 
-<div class="ccl-u-my-3">
+<div class="">
     <?php get_template_part( 'components/hero' ); ?>
 </div>
 

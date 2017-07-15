@@ -1,8 +1,4 @@
 <div class="ccl-l-container">
-    
-    <div class="ccl-u-my-3">
-        <?php get_template_part( 'components/promo-bio-quote' ); ?>
-    </div>
 
     <div class="ccl-l-row ccl-u-pb-3">
       
