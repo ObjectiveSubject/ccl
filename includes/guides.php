@@ -153,12 +153,11 @@ function process_guides() {
 
 	// Events are stored as an indexed array under Event
 	foreach ( $guides as $guide ) {
-		// $add_event = add_event( $event );
-		$add_event = '';
+		$add_guide = add_guide( $guide );
 
-		if ( 'added' == $add_event ) {
+		if ( 'added' == $add_guide ) {
 			$results['added'] = $results['added'] + 1;
-		} elseif ( 'duplicate' == $add_event ) {
+		} elseif ( 'duplicate' == $add_guide ) {
 			$results['duplicates'] = $results['duplicates'] + 1;
 		} else {
 			//
@@ -166,4 +165,63 @@ function process_guides() {
 	}
 
 	return $results;
+}
+
+/**
+ *
+ */
+function add_guide( $guide ) {
+
+	// quick and dirty way to convert multi-dimensional object to array
+	$guide = json_decode( json_encode( $guide ), true );
+
+	// check against custom id field to see if post already exists
+	$libguide_id = $guide['id'];
+
+	// meta query to check if the Gid already exists
+	$duplicate_check = new \WP_Query( array(
+		'post_type' => 'guide',
+		'meta_query' => array(
+			array(
+				'key' => 'libguide_id',
+				'value' => $libguide_id
+			)
+		),
+	) );
+
+	if ( ! $duplicate_check->have_posts() ) {
+		/*
+		 * Construct arguments to use for wp_insert_post()
+		 */
+		$args = array();
+
+		$args['post_title']   = $guide['name']; // post_title
+		$args['post_content'] = $guide['description']; // post_content
+		// $args['post_status'] = 'draft'; // default is draft
+		$args['post_type']    = 'guide';
+
+		/*
+		 * Process dates and times
+		 * Date format (string) "13 Dec 2016 06:30 PM PT"
+		 */
+
+		// Prepare event start date and time
+
+		/*
+		 * Create the Guide
+		 */
+		$guide_id = wp_insert_post( $args );
+
+		// Insert Gid into post_meta after event is created
+		add_post_meta( $guide_id, 'friendly_url', $guide['friendly_url'], true); // custom field -> tribe_event_gid (generate RSVP link), also EventWebsite?
+		add_post_meta( $guide_id, 'owner_id', $guide['owner_id'], true); // custom field -> tribe_event_gid (generate RSVP link), also EventWebsite?
+
+		// Set category in XX taxonomy and create if it doesn't exist
+		// $category = $guide['category'];
+		// wp_set_object_terms( $guide_id, $category, 'XX' );
+
+		return "added";
+	} else {
+		return "duplicate";
+	}
 }

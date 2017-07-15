@@ -90,10 +90,11 @@ function get_all_databases() {
 function get_all_guides() {
 
 	$params = array(
-		'site_id' => LIBGUIDES_SITE_ID,
-		'key'     => LIBGUIDES_SITE_KEY,
-		'status'  => 1, // only retrieve published guides
-		'guide_types' => '1,2,3,4' // General Purpose, Course, Subject, Topic
+		'site_id'     => LIBGUIDES_SITE_ID,
+		'key'         => LIBGUIDES_SITE_KEY,
+		'status'      => 1, // only retrieve published guides
+		'guide_types' => '1,2,3,4', // General Purpose, Course, Subject, Topic
+		'expand'      => 'owner' // need to know who created the guide
 	);
 
 	$query_string = http_build_query( $params );
