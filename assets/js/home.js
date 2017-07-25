@@ -58,7 +58,7 @@
 
 			// Build results count/link
 			resultsLink.html( "View all " + count + " results <i class=\"ccl-b-icon-arrow-right\" aria-hidden=\"true\"></i>" );
-			resultsLink.prop("href", "/?s=" + query);
+			resultsLink.attr("href", "/?s=" + query);
 
 			// Build results list
 			posts.forEach(function(post) {
