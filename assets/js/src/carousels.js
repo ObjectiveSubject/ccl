@@ -34,25 +34,25 @@
             options.responsive.push({
                 breakpoint: 500, 
                 settings: data.optionsSm
-            })
+            });
         }
         if ( data.optionsMd ) {
             options.responsive.push({
                 breakpoint: 768, 
                 settings: data.optionsMd
-            })
+            });
         }
         if ( data.optionsLg ) {
             options.responsive.push({
                 breakpoint: 1000, 
                 settings: data.optionsLg
-            })
+            });
         }
         if ( data.optionsXl ) {
             options.responsive.push({
                 breakpoint: 1500, 
                 settings: data.optionsXl
-            })
+            });
         }
 
         options = $.extend( this.globalDefaults, options );

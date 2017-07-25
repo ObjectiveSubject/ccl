@@ -10,23 +10,23 @@
  	'use strict';
 	var document = window.document;
 
-     var SearchAutocomplete = function(){
-         this.init();
+     var SearchAutocomplete = function(elem){
+		this.input = $(elem);
+        this.init();
      };
 
-     SearchAutocomplete.prototype.init = function () {
-		 var timeout,
-			 form = $('#ccl-c-search__bar'),
-			 input = $('#ccl-b-input');
+     SearchAutocomplete.prototype.init = function (elem) {
+		var _this = this,
+			timeout;
 
-		 input
+		 this.input
 			 .keyup(function () {
 				 var query = $(this);
 				 clearTimeout(timeout);
 				 timeout = setTimeout(function () {
 					 if (query.val() !== "") {
 
-					 	SearchAutocomplete.fetchResults( query );
+					 	_this.fetchResults( query );
 
 					 }
 				 }, 600);
@@ -36,7 +36,7 @@
 			 });
 	 };
 
-	SearchAutocomplete.fetchResults = function( query ) {
+	SearchAutocomplete.prototype.fetchResults = function( query ) {
 
 		var responseArea = $('.ccl-c-search__list'),
 			responseItems = $('.ccl-c-search-item');
@@ -84,10 +84,10 @@
 	}
 
      $(document).ready(function(){
-		 if ($('body').hasClass('home')) {
-			 new SearchAutocomplete();
-		 }
-
+		// .each() will fail gracefully if no elements are found
+		$('#ccl-search').each(function(){
+			new SearchAutocomplete(this);
+		 });
      });
 
 } )( this, jQuery );
