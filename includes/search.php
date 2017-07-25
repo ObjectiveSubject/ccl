@@ -39,7 +39,9 @@ function scripts( $debug = false ) {
  * Load search results from WordPress
  */
 function load_search_results() {
-	$query = $_POST['query'];
+
+	$query = apply_filters( 'get_search_query', $_POST['query'] );
+	$query = esc_attr( $query );
 
 	$args   = array(
 		'post_type'           => array( 'book', 'post', 'guide', 'staff' ),
