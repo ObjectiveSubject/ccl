@@ -66,8 +66,9 @@ function load_search_results() {
 		while ( $search->have_posts() ) : $search->the_post();
 
 			$post = array(
-				'title'     => get_the_title(),
-				'post_type' => get_post_type()
+				'type'  => get_post_type(),
+				'title' => get_the_title(),
+				'link'  => get_the_permalink()
 			);
 
 			$search_results['posts'][] = $post;
