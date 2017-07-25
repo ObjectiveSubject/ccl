@@ -37,6 +37,8 @@ function scripts( $debug = false ) {
 
 /**
  * Load search results from WordPress
+ *
+ * @todo error trapping for no results
  */
 function load_search_results() {
 
@@ -54,20 +56,28 @@ function load_search_results() {
 
 	$search_results = array();
 
+	// Add query details to array
+	$search_results['query'] = $query;
+	$search_results['count'] = $search->post_count;
+
 	if ( $search->have_posts() ) :
 
+		// Loop through returned posts and push into the array
 		while ( $search->have_posts() ) : $search->the_post();
 
-			$search_results[] = array(
+			$post = array(
 				'title'     => get_the_title(),
 				'post_type' => get_post_type()
 			);
+
+			$search_results['posts'][] = $post;
 
 		endwhile;
 
 	endif;
 
-	var_dump( json_encode( $search_results ) );
+	// Encode array as JSON and return
+	wp_send_json( wp_json_encode( $search_results ) );
 
 	wp_die();
 

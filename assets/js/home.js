@@ -12,7 +12,6 @@
 
      var SearchAutocomplete = function(){
          this.init();
-         // this.fetchResults();
      };
 
      SearchAutocomplete.prototype.init = function () {
@@ -34,7 +33,6 @@
 			 })
 			 .keydown(function () {
 				 clearTimeout(timeout);
-				 console.log('keypress!');
 			 });
 	 };
 
@@ -42,21 +40,14 @@
 
 		var responseArea = $('.ccl-c-search__results');
 
-		console.log( query.val() );
-
 		var data = {
 			action: 'load_search_results', // this should probably be able to do people & assets too (maybe DBs)
 			query : query.val()
 		};
 
-		console.log( data );
-
 		$.post(ajaxurl, data, function (response) {
-			// spinner.removeClass('is-active');
-			// spinner.hide();
-			responseArea.append( response );
-
-			// console.log( response );
+			//responseArea.append( response );
+			 console.log( response );
 		});
 
 	}
