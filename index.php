@@ -10,14 +10,8 @@ get_header(); ?>
 		<?php //get_template_part( 'content', 'grid' ); ?>
 		<?php //get_template_part( 'content', 'icons' ); ?>
 		<?php //get_template_part( 'content', 'blocks' ); ?>
-		<?php // get_template_part( 'content', 'components' ); ?>
+		<?php get_template_part( 'content', 'components' ); ?>
 
-		<pre>
-		<?php
-		$staff = \CCL\Integrations\LibGuides\get_all_staff();
-		var_dump( $staff );
-		echo $staff;
-		?>
 		</pre>
 	</div>
 
