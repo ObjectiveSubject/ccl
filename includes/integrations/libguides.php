@@ -97,9 +97,9 @@ function get_all_guides() {
 		'expand'      => 'owner' // need to know who created the guide
 	);
 
-	$query_string = http_build_query( $params );
+	$query_string = urldecode_deep( http_build_query( $params ) );
 
-	$request = wp_remote_get( 'http://lgapi-us.libapps.com/1.1/guides/?' . $query_string );
+	$request = wp_remote_get( 'http://lgapi-us.libapps.com/1.1/guides/?' . $query_string ); // urldecode is necessary to prevent the comma from being encoded
 
 	if ( is_wp_error( $request ) ) {
 
@@ -116,21 +116,23 @@ function get_all_guides() {
 }
 
 /**
- * Retrieve all People
+ * Retrieve all Staff members
  *
  * LIBGUIDES_SITE_ID and LIBGUIDES_SITE_KEY are defined as constants in wp-config. Will be converted to wp options at some point
  *
  * @return array|string|\WP_Error
  */
-function get_all_people() {
+function get_all_staff() {
 
 	$params = array(
 		'site_id' => LIBGUIDES_SITE_ID,
 		'key'     => LIBGUIDES_SITE_KEY,
-		'expand'  => 'profile'
+		'expand'  => 'profile,subjects'
 	);
 
-	$query_string = http_build_query( $params );
+	// $query_string = urldecode_deep( http_build_query( $params ) ); // urldecode is necessary to prevent the comma from being encoded
+
+	$query_string = 'site_id=' . LIBGUIDES_SITE_ID . '&key=' . LIBGUIDES_SITE_KEY . '&expand[]=profile&expand[]=subjects';
 
 	$request = wp_remote_get( 'http://lgapi-us.libapps.com/1.1/accounts/?' . $query_string );
 
@@ -141,7 +143,7 @@ function get_all_people() {
 	} else {
 		// check for API errors??
 
-		$results = $request;
+		$results = json_decode( $request['body'] );
 
 		return $results;
 	}

@@ -23,6 +23,7 @@ require_once CCL_INC . 'metaboxes.php';
 require_once CCL_INC . 'post-types.php';
 require_once CCL_INC . 'search.php';
 require_once CCL_INC . 'shortcodes.php';
+require_once CCL_INC . 'staff.php';
 require_once CCL_INC . 'taxonomies.php';
 require_once CCL_INC . 'template-tags.php';
 
@@ -43,5 +44,6 @@ CCL\Guides\setup();
 CCL\Integrations\LibGuides\setup();
 CCL\Search\setup();
 CCL\Shortcodes\setup();
+CCL\Staff\setup();
 CCL\PostTypes\setup();
 CCL\Taxonomies\setup();
