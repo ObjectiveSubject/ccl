@@ -29,6 +29,7 @@ require_once CCL_INC . 'template-tags.php';
 
 // Include integrations
 require_once CCL_INC . 'integrations/libguides.php';
+require_once CCL_INC . 'integrations/settings.php';
 
 // Include lib classes
 include( CCL_INC . 'libraries/extended-cpts.php' );
@@ -42,6 +43,7 @@ CCL\Core\setup();
 CCL\Comments\setup();
 CCL\Guides\setup();
 CCL\Integrations\LibGuides\setup();
+CCL\Integrations\Settings\setup();
 CCL\Search\setup();
 CCL\Shortcodes\setup();
 CCL\Staff\setup();
