@@ -150,3 +150,58 @@ function get_space_item( $id ) {
 	}
 
 }
+
+/**
+ * Book a space on LibCal
+ *
+ * Use a POST request, example payload:
+ * 
+ * $payload = array(
+ *		'iid'      => 123, // internal id?
+ *		'start'    => '2017-07-31T14:00:00-07:00',
+ *		'fname'    => 'First',
+ *		'lname'    => 'Last',
+ *		'email'    => 'email@example.com',
+ *		'nickname' => 'Study session',
+ *		'bookings' => array(
+ *		    array(
+ *		        'id' => 1234, // must be int, not string
+ *		        'to' => '2017-07-31T15:00:00-07:00'
+ *		    )
+ *		)
+ * );
+ *
+ * @param $payload
+ *
+ * @return array|string|\WP_Error
+ */
+function reserve_space( $payload ) {
+
+	$token = get_token();
+
+	// verify/error check payload before request
+	// (check for valid JSON and all fields, maybe a claremont email address too)
+
+	$request = wp_remote_post( '	https://api2.libcal.com/1.1/space/reserve', array(
+		'headers' => array(
+			'Authorization' => 'Bearer '. $token,
+			'Content-Type'  => 'application/json'
+		),
+		'body'   => $payload,
+		'debug'  => true
+	) );
+
+	if ( is_wp_error ( $request ) ) {
+
+		return $request->get_error_message();
+
+	} else {
+		// check for API errors??
+
+		// $results = json_decode( $request );
+		$results = $request;
+
+		return $results;
+	}
+
+}
