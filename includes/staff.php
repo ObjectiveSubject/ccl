@@ -33,9 +33,24 @@ function setup() {
 function register_staff_post_type() {
 
 	register_extended_post_type( 'staff', array(
-		'menu_icon' 		=> 'dashicons-book-alt',
-		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' )
-	) );
+		'menu_icon' 		=> 'dashicons-id',
+		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+		'capability_type' => 'post',
+		'capabilities' => array(
+			'create_posts' => false, // Remove support for "Add New"
+		),
+		'map_meta_cap' => true, // Allows created posts to be edited
+	),
+
+		array(
+
+			# Override the base names used for labels:
+			'singular'  => 'Staff Member',
+			'plural'    => 'Staff',
+			'slug'      => 'staff'
+
+		)
+	);
 
 }
 
