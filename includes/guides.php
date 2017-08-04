@@ -189,7 +189,7 @@ function add_guide( $guide ) {
 		'post_type' => 'guide',
 		'meta_query' => array(
 			array(
-				'key' => 'libguide_id',
+				'key' => 'guide_id',
 				'value' => $libguide_id
 			)
 		),
@@ -214,13 +214,14 @@ function add_guide( $guide ) {
 		// Prepare event start date and time
 
 		/*
-		 * Create the Guide
+		 * Create the Guide and grab post id (for post meta insertion)
 		 */
-		$guide_id = wp_insert_post( $args );
+		$post_id = wp_insert_post( $args );
 
-		// Insert Gid into post_meta after event is created
-		add_post_meta( $guide_id, 'friendly_url', $guide['friendly_url'], true); // custom field -> tribe_event_gid (generate RSVP link), also EventWebsite?
-		add_post_meta( $guide_id, 'owner_id', $guide['owner_id'], true); // custom field -> tribe_event_gid (generate RSVP link), also EventWebsite?
+		// Insert data into custom fields
+		add_post_meta( $post_id, 'guide_id', $guide['id'], true);
+		add_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url'], true);
+		add_post_meta( $post_id, 'guide_owner_id', $guide['owner_id'], true);
 
 		// Set category in XX taxonomy and create if it doesn't exist
 		// $category = $guide['category'];
