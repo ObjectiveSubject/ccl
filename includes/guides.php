@@ -34,7 +34,12 @@ function register_guides_post_type() {
 
 	register_extended_post_type( 'guide', array(
 		'menu_icon' 		=> 'dashicons-book-alt',
-		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' )
+		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+		'capability_type' => 'post',
+		'capabilities' => array(
+			'create_posts' => false, // Remove support for "Add New" (can also change to a role, rather than false)
+		),
+		'map_meta_cap' => true, // Allows created posts to be edited
 	) );
 
 }
