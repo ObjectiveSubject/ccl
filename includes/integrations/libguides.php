@@ -52,6 +52,50 @@ function get_token() {
 }
 
 /**
+ * Fetch the libguide key from either WordPress database option or constant
+ *
+ * @return int|string libguide id or empty string
+ */
+function get_libguide_id() {
+
+	$site_id = '';
+	$libguides_settings = get_option( 'libguides-api-v1_1-settings ');
+
+	if ( array_key_exists( 'site_id', $libguides_settings ) ) {
+		$site_id = $libguides_settings['site_id'];
+	}
+
+	// Constant will override option page setting
+	if ( LIBGUIDES_SITE_ID ) {
+		$site_id = LIBGUIDES_SITE_ID;
+	}
+
+	return $site_id;
+}
+
+/**
+ * Fetch the libguide key from either WordPress database option or constant
+ *
+ * @return string libguide key or empty string
+ */
+function get_libguide_key() {
+
+	$site_key = '';
+	$libguides_settings = get_option( 'libguides-api-v1_1-settings ');
+
+	if ( array_key_exists( 'site_id', $libguides_settings ) ) {
+		$site_key = $libguides_settings['site_key'];
+	}
+
+	// Constant will override option page setting
+	if ( LIBGUIDES_SITE_KEY ) {
+		$site_key = LIBGUIDES_SITE_KEY;
+	}
+
+	return $site_key;
+}
+
+/**
  * Retrieve all Databases
  *
  * @return array|string|\WP_Error
@@ -91,9 +135,16 @@ function get_all_databases() {
  */
 function get_all_guides() {
 
+	$site_id = get_libguide_id();
+	$site_key = get_libguide_key();
+
+	if ( ! $site_id || ! $site_key ) {
+		return new \WP_Error( 'api_error', "Missing API settings" );
+	}
+
 	$params = array(
-		'site_id'     => LIBGUIDES_SITE_ID,
-		'key'         => LIBGUIDES_SITE_KEY,
+		'site_id'     => $site_id,
+		'key'         => $site_key,
 		'status'      => 1, // only retrieve published guides
 		'guide_types' => '1,2,3,4', // General Purpose, Course, Subject, Topic
 		'expand'      => 'owner' // need to know who created the guide
@@ -108,7 +159,7 @@ function get_all_guides() {
 		return $request->get_error_message();
 
 	} else {
-		// check for API authentication errors??
+		// @todo will currently fail if API key is specified but invalid
 
 		$results = json_decode( $request['body'] );
 
@@ -125,6 +176,13 @@ function get_all_guides() {
  * @return array|string|\WP_Error
  */
 function get_all_staff() {
+
+	$site_id = get_libguide_id();
+	$site_key = get_libguide_key();
+
+	if ( ! $site_id || ! $site_key ) {
+		return new \WP_Error( 'api_error', "Missing API settings" );
+	}
 
 	$params = array(
 		'site_id' => LIBGUIDES_SITE_ID,

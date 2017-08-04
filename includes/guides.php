@@ -126,7 +126,6 @@ function retrieve_guides() {
 	if ( $guides == 'error' ) {
 		$response .= '<p>Error</p>';
 	} else {
-		$response .= '<p>Success!</p>';
 		$response .= '<ul>';
 		$response .= '<li><strong>Retrieved:</strong> ' . $guides['retrieved'] . ' guides</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $guides['added'] . '</li>';
@@ -150,6 +149,8 @@ function process_guides() {
 	$results['retrieved']  = count( $guides );
 	$results['added']      = 0;
 	$results['duplicates'] = 0;
+
+	// @todo check if this is a Guides array or an error object
 
 	// Events are stored as an indexed array under Event
 	foreach ( $guides as $guide ) {
