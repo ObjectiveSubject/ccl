@@ -4,6 +4,7 @@
  * JavaScript unique to the home page
  *
  * @todo gulpify so we get linting, mininfication, remove console.logs
+ * @todo rename home to search (reflect the nature of the file)
  */
 
 ( function( window, $ ) {
