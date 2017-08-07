@@ -22,17 +22,36 @@ function setup() {
 /**
  * Retrieve LibGuides token from Springshare needed to access v1.2 API data
  *
- * LIBGUIDES_CLIENT_ID and LIBGUIDES_CLIENT_SECRET are defined as constants in wp-config. Will be converted to wp options at some point
+ * LIBGUIDES_CLIENT_ID and LIBGUIDES_CLIENT_SECRET can be defined as constants in wp-config.
  *
  * @return string|\WP_Error will return access code or an error message
  */
 function get_token() {
+
+	$client_id          = '';
+	$client_secret      = '';
+	$libguides_settings = get_option( 'libguides-api-v1_2-settings ' );
+
+	// Get Client ID (constant will override option page setting)
+	if ( LIBGUIDES_CLIENT_ID ) {
+		$client_id = LIBGUIDES_CLIENT_ID;
+	} elseif ( array_key_exists( 'client_id', $libguides_settings ) ) {
+		$client_id = $libguides_settings['client_id'];
+	}
+
+	// Get Client Secret (constant will override option page setting)
+	if ( LIBGUIDES_CLIENT_SECRET ) {
+		$client_secret = LIBGUIDES_CLIENT_SECRET;
+	} elseif ( array_key_exists( 'client_secret', $libguides_settings ) ) {
+		$client_secret = $libguides_settings['client_secret'];
+	}
+
 	$token_request = wp_remote_post( 'https://lgapi-us.libapps.com/1.2/oauth/token', array(
 		'header' => array(),
 		'body'   => array(
-			'client_id'     => LIBGUIDES_CLIENT_ID,
-			'client_secret' => LIBGUIDES_CLIENT_SECRET,
-			'grant_type' => 'client_credentials'
+			'client_id'     => $client_id,
+			'client_secret' => $client_secret,
+			'grant_type'    => 'client_credentials'
 		)
 	) );
 
