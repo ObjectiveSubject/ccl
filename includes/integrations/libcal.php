@@ -22,16 +22,35 @@ function setup() {
 /**
  * Retrieve LibCal token from Springshare needed to access v1.1 API data
  *
- * LIBCAL_CLIENT_ID and LIBCAL_CLIENT_SECRET are defined as constants in wp-config. Will be converted to wp options at some point
+ * LIBCAL_CLIENT_ID and LIBCAL_CLIENT_SECRET can be defined as constants in wp-config.
  *
  * @return string|\WP_Error will return access code or an error message
  */
 function get_token() {
+
+	$client_id          = '';
+	$client_secret      = '';
+	$libcal_settings = get_option( 'libcal-api-v1_1-settings ' );
+
+	// Get Client ID (constant will override option page setting)
+	if ( LIBCAL_CLIENT_ID ) {
+		$client_id = LIBCAL_CLIENT_ID;
+	} elseif ( array_key_exists( 'client_id', $libcal_settings ) ) {
+		$client_id = $libcal_settings['client_id'];
+	}
+
+	// Get Client Secret (constant will override option page setting)
+	if ( LIBCAL_CLIENT_SECRET ) {
+		$client_secret = LIBCAL_CLIENT_SECRET;
+	} elseif ( array_key_exists( 'client_secret', $libcal_settings ) ) {
+		$client_secret = $libcal_settings['client_secret'];
+	}
+
 	$token_request = wp_remote_post( 'https://api2.libcal.com/1.1/oauth/token', array(
 		'header' => array(),
 		'body'   => array(
-			'client_id'     => LIBCAL_CLIENT_ID,
-			'client_secret' => LIBCAL_CLIENT_SECRET,
+			'client_id'     => $client_id,
+			'client_secret' => $client_secret,
 			'grant_type' => 'client_credentials'
 		)
 	) );
