@@ -119,7 +119,7 @@ function get_all_databases() {
 	} else {
 		// check for API errors??
 
-		$results = $request;
+		$results = json_decode( $request['body'] );
 
 		return $results;
 	}
