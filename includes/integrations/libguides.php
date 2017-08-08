@@ -46,6 +46,10 @@ function get_token() {
 		$client_secret = $libguides_settings['client_secret'];
 	}
 
+	if ( ! $client_id || ! $client_secret ) {
+		return new \WP_Error( 'api_error', "Missing API settings" );
+	}
+
 	$token_request = wp_remote_post( 'https://lgapi-us.libapps.com/1.2/oauth/token', array(
 		'header' => array(),
 		'body'   => array(
@@ -57,10 +61,10 @@ function get_token() {
 
 	if ( is_wp_error ( $token_request ) ) {
 
-		return $token_request->get_error_message();
+		return $token_request->get_error_message(); // not sure if this will ever get triggered
 
 	} else {
-		// check for API errors??
+		// check for API errors, like invalid keys?
 		$results = json_decode( $token_request['body'] );
 
 		// token is valid for an hour (3600 seconds), should probably store for like 30 mins in a transient
