@@ -17,9 +17,9 @@ function setup() {
 
 	add_action( 'admin_menu', $n( 'import_page' ) );
 
-	add_action( 'wp_ajax_retrieve_guides', __NAMESPACE__ . '\\retrieve_guides' );
-	// add_action( 'wp_ajax_nopriv_retrieve_guides', __NAMESPACE__ . '\\retrieve_guides' );
+	add_action( 'wp_ajax_retrieve_guides', __NAMESPACE__ . '\\retrieve_guides' ); // not sure why $n wrapper doesn't work here
 
+	add_action( 'add_meta_boxes_guide', $n('add_guide_meta_box' ) );
 }
 
 /**
@@ -174,7 +174,11 @@ function process_guides() {
 }
 
 /**
+ * Create or update guide
  *
+ * @param $guide
+ *
+ * @return string added|updated
  */
 function add_guide( $guide ) {
 
@@ -195,6 +199,10 @@ function add_guide( $guide ) {
 		),
 	) );
 
+	// check if duplicate exists, grab post id
+	// update post with id, rather than skip
+	// return "updated" rather than "duplicate"
+
 	if ( ! $duplicate_check->have_posts() ) {
 		/*
 		 * Construct arguments to use for wp_insert_post()
@@ -207,13 +215,6 @@ function add_guide( $guide ) {
 		$args['post_type']    = 'guide';
 
 		/*
-		 * Process dates and times
-		 * Date format (string) "13 Dec 2016 06:30 PM PT"
-		 */
-
-		// Prepare event start date and time
-
-		/*
 		 * Create the Guide and grab post id (for post meta insertion)
 		 */
 		$post_id = wp_insert_post( $args );
@@ -223,6 +224,7 @@ function add_guide( $guide ) {
 		add_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url'], true);
 		add_post_meta( $post_id, 'guide_owner_id', $guide['owner_id'], true);
 
+		// @todo use this for subject?
 		// Set category in XX taxonomy and create if it doesn't exist
 		// $category = $guide['category'];
 		// wp_set_object_terms( $guide_id, $category, 'XX' );
@@ -231,4 +233,40 @@ function add_guide( $guide ) {
 	} else {
 		return "duplicate";
 	}
+}
+
+/**
+ * Create a metabox to display data retrieved from the API
+ *
+ * @param $post
+ */
+function add_guide_meta_box( $post ) {
+	add_meta_box(
+		'api_data_meta_box',
+		__( 'Data from LibGuides' ),
+		__NAMESPACE__ . '\\render_guide_data_metabox',
+		'guide',
+		'advanced',
+		'high'
+	);
+}
+
+/**
+ * Render the API data metabox
+ */
+function render_guide_data_metabox() {
+	global $post;
+
+	$friendly_url = get_post_meta( $post->ID, 'guide_friendly_url', true );
+
+	echo '<p>';
+
+	echo '<strong>Guide ID:</strong> ' . get_post_meta( $post->ID, 'guide_id', true ) . '<br>';
+
+	if ( $friendly_url ) {
+		echo '<strong>Friendly URL:</strong> <a href="' . $friendly_url . '" target="_blank">' . $friendly_url . '</a><br>';
+	}
+	echo '<strong>Owner ID:</strong> ' . get_post_meta( $post->ID, 'guide_owner_id', true ) . '<br>'; // replace with link to Librarian if they exist
+
+	echo '</p>';
 }
