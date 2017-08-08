@@ -258,6 +258,18 @@ function render_guide_data_metabox() {
 	global $post;
 
 	$friendly_url = get_post_meta( $post->ID, 'guide_friendly_url', true );
+	$owner_id = get_post_meta( $post->ID, 'guide_owner_id', true );
+
+	// Find owner in Staff
+	$owner = new \WP_Query( array(
+		'post_type' => 'staff',
+		'meta_query' => array(
+			array(
+				'key' => 'member_id',
+				'value' => $owner_id
+			)
+		),
+	) );
 
 	echo '<p>';
 
@@ -266,7 +278,15 @@ function render_guide_data_metabox() {
 	if ( $friendly_url ) {
 		echo '<strong>Friendly URL:</strong> <a href="' . $friendly_url . '" target="_blank">' . $friendly_url . '</a><br>';
 	}
-	echo '<strong>Owner ID:</strong> ' . get_post_meta( $post->ID, 'guide_owner_id', true ) . '<br>'; // replace with link to Librarian if they exist
+
+	if ( $owner->have_posts() ) {
+		$owner->the_post();
+
+		echo '<strong>Owner:</strong> <a href="' . get_the_permalink() . '">' . get_the_title() . '</a> (owner id: ' . $owner_id . ')<br>';
+	} else {
+		echo '<strong>Owner ID:</strong> ' . get_post_meta( $post->ID, 'guide_owner_id', true ) . ' (no local staff member found)<br>'; // replace with link to Librarian if they exist
+
+	}
 
 	echo '</p>';
 }
