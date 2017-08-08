@@ -18,7 +18,9 @@ function setup() {
 	add_action( 'admin_menu', $n( 'import_page' ) );
 
 	add_action( 'wp_ajax_retrieve_staff', __NAMESPACE__ . '\\retrieve_staff' );
-	// add_action( 'wp_ajax_nopriv_retrieve_staff', __NAMESPACE__ . '\\retrieve_staff' );
+
+	add_action( 'add_meta_boxes_staff', $n('add_staff_meta_box' ) );
+
 
 }
 
@@ -227,4 +229,33 @@ function add_staff_member( $member ) {
 	} else {
 		return "duplicate";
 	}
+}
+
+/**
+ * Create a metabox to display data retrieved from the API
+ *
+ * @param $post
+ */
+function add_staff_meta_box( $post ) {
+	add_meta_box(
+		'api_data_meta_box',
+		__( 'Data from LibGuides' ),
+		__NAMESPACE__ . '\\render_staff_data_metabox',
+		'staff',
+		'advanced',
+		'high'
+	);
+}
+
+/**
+ * Render the API data metabox
+ */
+function render_staff_data_metabox() {
+	global $post;
+
+	echo '<p>';
+
+	echo '<strong>Member ID:</strong> ' . get_post_meta( $post->ID, 'member_id', true ) . '<br>';
+
+	echo '</p>';
 }
