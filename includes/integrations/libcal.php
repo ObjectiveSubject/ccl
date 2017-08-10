@@ -31,6 +31,8 @@ function get_token() {
 	$client_id          = '';
 	$client_secret      = '';
 	$libcal_settings = get_option( 'libcal-api-v1_1-settings ' );
+	$token              = get_transient( 'libcal_token' );
+
 
 	// Get Client ID (constant will override option page setting)
 	if ( LIBCAL_CLIENT_ID ) {
@@ -50,26 +52,36 @@ function get_token() {
 		return new \WP_Error( 'api_error', "Missing API settings" );
 	}
 
-	$token_request = wp_remote_post( 'https://api2.libcal.com/1.1/oauth/token', array(
-		'header' => array(),
-		'body'   => array(
-			'client_id'     => $client_id,
-			'client_secret' => $client_secret,
-			'grant_type'    => 'client_credentials'
-		)
-	) );
+	if ( ! $token ) {
 
-	if ( is_wp_error ( $token_request ) ) {
+		$token_request = wp_remote_post( 'https://api2.libcal.com/1.1/oauth/token', array(
+			'header' => array(),
+			'body'   => array(
+				'client_id'     => $client_id,
+				'client_secret' => $client_secret,
+				'grant_type'    => 'client_credentials'
+			)
+		) );
 
-		return $token_request->get_error_message(); // not sure if this will ever get triggered
+		if ( is_wp_error ( $token_request ) ) {
+			// not sure if this will ever get triggered
+			// it's not really being handled properly either way
+			return $token_request->get_error_message();
 
-	} else {
-		// check for API errors, like invalid keys?
-		$results = json_decode( $token_request['body'] );
+		} else {
+			// check for API errors, like invalid keys?
+			$token_request_data = json_decode( $token_request['body'] );
 
-		// token is valid for an hour (3600 seconds), should probably store for like 30 mins in a transient
-		return $results->access_token;
+			$token = $token_request_data->access_token;
+
+			// token is valid for an hour (3600 seconds), store in transient for 30 minutes
+			set_transient( 'libcal_token', $token, 30 * MINUTE_IN_SECONDS );
+
+		}
+
 	}
+
+	return $token;
 
 }
 
