@@ -134,7 +134,7 @@ function retrieve_guides() {
 		$response .= '<ul>';
 		$response .= '<li><strong>Retrieved:</strong> ' . $guides['retrieved'] . ' guides</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $guides['added'] . '</li>';
-		$response .= '<li><strong>Duplicates:</strong> ' . $guides['duplicates'] . '</li>';
+		$response .= '<li><strong>Updated:</strong> ' . $guides['updated'] . '</li>';
 		$response .= '</ul>';
 	}
 
@@ -153,7 +153,7 @@ function process_guides() {
 	$results               = array();
 	$results['retrieved']  = count( $guides );
 	$results['added']      = 0;
-	$results['duplicates'] = 0;
+	$results['updated'] = 0;
 
 	// @todo check if this is a Guides array or an error object
 
@@ -163,8 +163,8 @@ function process_guides() {
 
 		if ( 'added' == $add_guide ) {
 			$results['added'] = $results['added'] + 1;
-		} elseif ( 'duplicate' == $add_guide ) {
-			$results['duplicates'] = $results['duplicates'] + 1;
+		} elseif ( 'updated' == $add_guide ) {
+			$results['updated'] = $results['updated'] + 1;
 		} else {
 			//
 		}
@@ -188,7 +188,7 @@ function add_guide( $guide ) {
 	// check against custom id field to see if post already exists
 	$libguide_id = $guide['id'];
 
-	// meta query to check if the Gid already exists
+	// meta query to check if the guide already exists
 	$duplicate_check = new \WP_Query( array(
 		'post_type' => 'guide',
 		'meta_query' => array(
@@ -199,39 +199,42 @@ function add_guide( $guide ) {
 		),
 	) );
 
-	// check if duplicate exists, grab post id
-	// update post with id, rather than skip
-	// return "updated" rather than "duplicate"
+	/*
+	 * Construct arguments to use for wp_insert_post()
+	 */
+	$args = array();
 
-	if ( ! $duplicate_check->have_posts() ) {
-		/*
-		 * Construct arguments to use for wp_insert_post()
-		 */
-		$args = array();
+	if ( $duplicate_check->have_posts() ) {
 
-		$args['post_title']   = $guide['name']; // post_title
-		$args['post_content'] = $guide['description']; // post_content
-		// $args['post_status'] = 'draft'; // default is draft
-		$args['post_type']    = 'guide';
+		$duplicate_check->the_post();
+		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
 
-		/*
-		 * Create the Guide and grab post id (for post meta insertion)
-		 */
-		$post_id = wp_insert_post( $args );
+	}
 
-		// Insert data into custom fields
-		add_post_meta( $post_id, 'guide_id', $guide['id'], true);
-		add_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url'], true);
-		add_post_meta( $post_id, 'guide_owner_id', $guide['owner_id'], true);
+	$args['post_title']   = $guide['name']; // post_title
+	$args['post_content'] = $guide['description']; // post_content
+	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_type']    = 'guide';
 
-		// @todo use this for subject?
-		// Set category in XX taxonomy and create if it doesn't exist
-		// $category = $guide['category'];
-		// wp_set_object_terms( $guide_id, $category, 'XX' );
+	/*
+	 * Create/update the Guide and grab post id (for post meta insertion)
+	 */
+	$post_id = wp_insert_post( $args );
 
+	// Insert data into custom fields
+	add_post_meta( $post_id, 'guide_id', $guide['id'], true);
+	add_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url'], true);
+	add_post_meta( $post_id, 'guide_owner_id', $guide['owner_id'], true);
+
+	// @todo use this for subject?
+	// Set category in XX taxonomy and create if it doesn't exist
+	// $category = $guide['category'];
+	// wp_set_object_terms( $post_id, $category, 'XX' );
+
+	if ( $duplicate_check->have_posts() ) {
 		return "added";
 	} else {
-		return "duplicate";
+		return "updated";
 	}
 }
 
