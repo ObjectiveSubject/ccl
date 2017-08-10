@@ -147,7 +147,7 @@ function retrieve_staff() {
 		$response .= '<ul>';
 		$response .= '<li><strong>Retrieved:</strong> ' . $staff['retrieved'] . ' staff</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $staff['added'] . '</li>';
-		$response .= '<li><strong>Duplicates:</strong> ' . $staff['duplicates'] . '</li>';
+		$response .= '<li><strong>Updated:</strong> ' . $staff['updated'] . '</li>';
 		$response .= '</ul>';
 	}
 
@@ -166,15 +166,15 @@ function process_staff() {
 	$results               = array();
 	$results['retrieved']  = count( $members );
 	$results['added']      = 0;
-	$results['duplicates'] = 0;
+	$results['updated'] = 0;
 
 	foreach ( $members as $member ) {
 		$add_member = add_staff_member( $member );
 
 		if ( 'added' == $add_member ) {
 			$results['added'] = $results['added'] + 1;
-		} elseif ( 'duplicate' == $add_member ) {
-			$results['duplicates'] = $results['duplicates'] + 1;
+		} elseif ( 'updated' == $add_member ) {
+			$results['updated'] = $results['updated'] + 1;
 		} else {
 			//
 		}
@@ -184,7 +184,11 @@ function process_staff() {
 }
 
 /**
+ * Create or update staff member
  *
+ * @param $member
+ *
+ * @return string added|updated
  */
 function add_staff_member( $member ) {
 
@@ -196,39 +200,46 @@ function add_staff_member( $member ) {
 
 	// meta query to check if the member id already exists
 	$duplicate_check = new \WP_Query( array(
-		'post_type' => 'staff',
+		'post_type'  => 'staff',
 		'meta_query' => array(
 			array(
-				'key' => 'member_id',
+				'key'   => 'member_id',
 				'value' => $member_id
 			)
 		),
 	) );
 
-	if ( ! $duplicate_check->have_posts() ) {
-		/*
-		 * Construct arguments to use for wp_insert_post()
-		 */
-		$args = array();
+	/*
+	 * Construct arguments to use for wp_insert_post()
+	 */
+	$args = array();
 
-		$args['post_title']   = $member['first_name'] . " " . $member['last_name']; // post_title
-		// $args['post_content'] = $member['description']; // post_content
-		// $args['post_status'] = 'draft'; // default is draft
-		$args['post_type']    = 'staff';
+	if ( $duplicate_check->have_posts() ) {
 
-		/*
-		 * Create the Staff Member
-		 */
-		$member_post_id = wp_insert_post( $args );
+		$duplicate_check->the_post();
+		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
 
-		// Insert Gid into post_meta after event is created
-		//add_post_meta( $member_post_id, 'friendly_url', $member['friendly_url'], true); // custom field ->
-		add_post_meta( $member_post_id, 'member_id', $member['id'], true); // custom field ->
+	}
 
+	$args['post_title'] = $member['first_name'] . " " . $member['last_name']; // post_title
+	// $args['post_content'] = $member['description']; // post_content
+	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_type'] = 'staff';
+
+	/*
+	 * Create the Staff Member
+	 */
+	$member_post_id = wp_insert_post( $args );
+
+	// Insert data into custom fields
+	add_post_meta( $member_post_id, 'member_id', $member['id'], true ); // custom field ->
+
+	if ( $duplicate_check->have_posts() ) {
 		return "added";
 	} else {
-		return "duplicate";
+		return "updated";
 	}
+
 }
 
 /**
