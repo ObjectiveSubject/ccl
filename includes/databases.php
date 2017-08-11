@@ -134,7 +134,7 @@ function retrieve_databases() {
 		$response .= '<ul>';
 		$response .= '<li><strong>Retrieved:</strong> ' . $databases['retrieved'] . ' databases</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $databases['added'] . '</li>';
-		$response .= '<li><strong>Duplicates:</strong> ' . $databases['duplicates'] . '</li>';
+		$response .= '<li><strong>Updated:</strong> ' . $databases['updated'] . '</li>';
 		$response .= '</ul>';
 	}
 
@@ -153,7 +153,7 @@ function process_databases() {
 	$results               = array();
 	$results['retrieved']  = count( $databases );
 	$results['added']      = 0;
-	$results['duplicates'] = 0;
+	$results['updated']    = 0;
 
 	// @todo check if this is a Databases array or an error object
 
@@ -163,8 +163,8 @@ function process_databases() {
 
 		if ( 'added' == $add_database ) {
 			$results['added'] = $results['added'] + 1;
-		} elseif ( 'duplicate' == $add_database ) {
-			$results['duplicates'] = $results['duplicates'] + 1;
+		} elseif ( 'updated' == $add_database ) {
+			$results['updated'] = $results['updated'] + 1;
 		} else {
 			//
 		}
@@ -199,38 +199,42 @@ function add_database( $database ) {
 		),
 	) );
 
-	// check if duplicate exists, grab post id
-	// update post with id, rather than skip
-	// return "updated" rather than "duplicate"
-
-	if ( ! $duplicate_check->have_posts() ) {
-		/*
+	/*
 		 * Construct arguments to use for wp_insert_post()
 		 */
-		$args = array();
+	$args = array();
 
-		$args['post_title']   = $database['name']; // post_title
-		$args['post_content'] = $database['description']; // post_content
-		// $args['post_status'] = 'draft'; // default is draft
-		$args['post_type']    = 'database';
+	if ( $duplicate_check->have_posts() ) {
 
-		/*
-		 * Create the Database and grab post id (for post meta insertion)
-		 */
-		$post_id = wp_insert_post( $args );
+		$duplicate_check->the_post();
+		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
 
-		// Insert data into custom fields
-		add_post_meta( $post_id, 'database_id', $database['id'], true);
-		// add_post_meta( $post_id, 'database_friendly_url', $database['friendly_url'], true);
-		// add_post_meta( $post_id, 'database_owner_id', $database['owner_id'], true);
+	}
 
-		// @todo use this for subject?
-		// Set category in XX taxonomy and create if it doesn't exist
-		// $category = $database['category'];
-		// wp_set_object_terms( $database_id, $category, 'XX' );
+	$args['post_title']   = $database['name']; // post_title
+	$args['post_content'] = $database['description']; // post_content
+	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_type']    = 'database';
 
+	/*
+	 * Create the Database and grab post id (for post meta insertion)
+	 */
+	$post_id = wp_insert_post( $args );
+
+	// Insert data into custom fields
+	add_post_meta( $post_id, 'database_id', $database['id'], true);
+
+	// Raw data for development
+	add_post_meta( $post_id, 'database_raw_data', $database, true);
+
+	// @todo use this for subject?
+	// Set category in XX taxonomy and create if it doesn't exist
+	// $category = $database['category'];
+	// wp_set_object_terms( $database_id, $category, 'XX' );
+
+	if ( $duplicate_check->have_posts() ) {
 		return "added";
 	} else {
-		return "duplicate";
+		return "updated";
 	}
 }
