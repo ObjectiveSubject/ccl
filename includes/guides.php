@@ -305,6 +305,8 @@ function render_guide_data_metabox() {
 	echo '<hr>';
 
 	echo '<h4>Raw Data</h4>';
+	echo '<em>Currently crossed with expand: <code>owner</code>. Can also cross with: <code>group</code>, <code>pages</code>, 
+		  <code>pages.boxes</code>, <code>subjects</code>, <code>tags</code>, <code>metadata</code>.</em>';
 	echo '<pre>';
 	print_r( $raw_data );
 	echo '</pre>';
