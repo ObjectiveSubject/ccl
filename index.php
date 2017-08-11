@@ -12,7 +12,6 @@ get_header(); ?>
 		<?php //get_template_part( 'content', 'blocks' ); ?>
 		<?php get_template_part( 'content', 'components' ); ?>
 
-		</pre>
 	</div>
 
 <?php get_footer();
