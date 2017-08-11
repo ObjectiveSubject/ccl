@@ -46,7 +46,7 @@ function load_search_results() {
 	$query = esc_attr( $query );
 
 	$args   = array(
-		'post_type'           => array( 'book', 'post', 'guide', 'staff' ),
+		'post_type'           => array( 'post', 'guide', 'staff', 'database', 'room', 'book', 'reference' ), // book/reference don't exist yet
 		'post_status'         => 'publish',
 		'no_found_rows'       => true,
 		'ignore_sticky_posts' => true,
