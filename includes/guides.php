@@ -226,6 +226,9 @@ function add_guide( $guide ) {
 	add_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url'], true);
 	add_post_meta( $post_id, 'guide_owner_id', $guide['owner_id'], true);
 
+	// Raw data for development
+	add_post_meta( $post_id, 'guide_raw_data', $guide, true);
+
 	// @todo use this for subject?
 	// Set category in XX taxonomy and create if it doesn't exist
 	// $category = $guide['category'];
@@ -262,6 +265,8 @@ function render_guide_data_metabox() {
 
 	$friendly_url = get_post_meta( $post->ID, 'guide_friendly_url', true );
 	$owner_id = get_post_meta( $post->ID, 'guide_owner_id', true );
+	$raw_data = get_post_meta( $post->ID, 'guide_raw_data', true );
+
 
 	// Find owner in Staff
 	$owner = new \WP_Query( array(
@@ -284,12 +289,23 @@ function render_guide_data_metabox() {
 
 	if ( $owner->have_posts() ) {
 		$owner->the_post();
-
 		echo '<strong>Owner:</strong> <a href="' . get_the_permalink() . '">' . get_the_title() . '</a> (owner id: ' . $owner_id . ')<br>';
 	} else {
 		echo '<strong>Owner ID:</strong> ' . get_post_meta( $post->ID, 'guide_owner_id', true ) . ' (no local staff member found)<br>'; // replace with link to Librarian if they exist
 
 	}
 
+	// These don't seem to work, subsequent post->ID calls use $owner query
+	// We may need to use get_posts() in the admin area, this is weird
+	wp_reset_query();
+	wp_reset_postdata();
+
 	echo '</p>';
+
+	echo '<hr>';
+
+	echo '<h4>Raw Data</h4>';
+	echo '<pre>';
+	print_r( $raw_data );
+	echo '</pre>';
 }

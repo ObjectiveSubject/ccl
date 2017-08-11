@@ -234,6 +234,9 @@ function add_staff_member( $member ) {
 	// Insert data into custom fields
 	add_post_meta( $member_post_id, 'member_id', $member['id'], true ); // custom field ->
 
+	// Raw data for development
+	add_post_meta( $member_post_id, 'member_raw_data', $member, true);
+
 	if ( $duplicate_check->have_posts() ) {
 		return "added";
 	} else {
@@ -269,4 +272,13 @@ function render_staff_data_metabox() {
 	echo '<strong>Member ID:</strong> ' . get_post_meta( $post->ID, 'member_id', true ) . '<br>';
 
 	echo '</p>';
+
+	echo '<hr>';
+
+	$raw_data = get_post_meta( $post->ID, 'member_raw_data', true );
+
+	echo '<h4>Raw Data</h4>';
+	echo '<pre>';
+	print_r( $raw_data );
+	echo '</pre>';
 }
