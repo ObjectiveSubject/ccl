@@ -59,7 +59,7 @@ function load_search_results() {
 
 	// Add query details to array
 	$search_results['query'] = $query;
-	$search_results['count'] = $search->post_count;
+	$search_results['count'] = $search->post_count; // this is not returning total (just paged total)
 
 	if ( $search->have_posts() ) :
 
