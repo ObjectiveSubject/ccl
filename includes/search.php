@@ -50,7 +50,8 @@ function load_search_results() {
 		'post_status'         => 'publish',
 		'no_found_rows'       => true,
 		'ignore_sticky_posts' => true,
-		's'                   => $query
+		's'                   => $query,
+		'posts_per_page'      => 15 // probably need to figure out how to do a limited number from each type
 	);
 	$search = new \WP_Query( $args );
 

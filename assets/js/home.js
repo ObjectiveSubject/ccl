@@ -61,19 +61,31 @@
 			resultsLink.html( "View all " + count + " results <i class=\"ccl-b-icon-arrow-right\" aria-hidden=\"true\"></i>" );
 			resultsLink.attr("href", "/?s=" + query);
 
+			var listItem = '<li class="ccl-c-search-item">' +
+				'<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + query + '">' +
+				'<span class="ccl-c-search-item__type">' +
+				'<i class="ccl-b-icon-pointer-right" aria-hidden="true"></i>' +
+				'<span class="ccl-c-search-item__type-text">External</span>' +
+				'</span>' +
+				'<span class="ccl-c-search-item__title\">Search for ' + query + ' on WorldCat</span>' +
+				'</a>' +
+				'</li>';
+
+			responseArea.append(listItem);
+
 			// Build results list
 			posts.forEach(function(post) {
 				console.log(post);
 
-				var listItem = "<li class=\"ccl-c-search-item\">" +
-					"<a href=\"" + post["link"] + "\">" +
-					"<span class=\"ccl-c-search-item__type\">" +
-					"<i class=\"ccl-b-icon-clip\" aria-hidden=\"true\"></i>" +
-					"<span class=\"ccl-c-search-item__type-text\">" + post["type"] + "</span>" +
-					"</span>" +
-					"<span class=\"ccl-c-search-item__title\">" + post["title"] + "</span>" +
-					"</a>" +
-					"</li>";
+				listItem = '<li class="ccl-c-search-item">' +
+					'<a href="' + post["link"] + '">' +
+					'<span class=\"ccl-c-search-item__type\">' +
+					'<i class="ccl-b-icon-clip" aria-hidden="true"></i>' +
+					'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
+					'</span>' +
+					'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
+					'</a>' +
+					'</li>';
 
 				responseArea.append(listItem);
 			});
