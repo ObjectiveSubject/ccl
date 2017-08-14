@@ -24,15 +24,15 @@ function scripts( $debug = false ) {
 	$min = ( $debug || defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 	wp_register_script(
-		'home',
-		CCL_TEMPLATE_URL . "/assets/js/home{$min}.js",
+		'search',
+		//CCL_TEMPLATE_URL . "/assets/js/search{$min}.js", // not currently minified
+		CCL_TEMPLATE_URL . "/assets/js/search.js",
 		array( 'jquery' ),
 		CCL_VERSION,
 		true
 	);
 
-	wp_enqueue_script( 'home' );
-	wp_localize_script( 'home', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+	wp_enqueue_script( 'search' );
 }
 
 /**
@@ -66,7 +66,7 @@ function load_search_results() {
 		// Loop through returned posts and push into the array
 		while ( $search->have_posts() ) {
 			$search->the_post();
-			
+
 			switch ( get_post_type() ) {
 				case 'book':
 					$post_type_icon      = 'book';
