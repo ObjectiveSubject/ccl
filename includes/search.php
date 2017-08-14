@@ -61,22 +61,55 @@ function load_search_results() {
 	$search_results['query'] = $query;
 	$search_results['count'] = $search->post_count; // this is not returning total (just paged total)
 
-	if ( $search->have_posts() ) :
+	if ( $search->have_posts() ) {
 
 		// Loop through returned posts and push into the array
-		while ( $search->have_posts() ) : $search->the_post();
+		while ( $search->have_posts() ) {
+			$search->the_post();
+			
+			switch ( get_post_type() ) {
+				case 'book':
+					$post_type_icon      = 'book';
+					$post_type_nice_name = 'Book';
+					break;
+				case 'database':
+					$post_type_icon      = 'pointer-right';
+					$post_type_nice_name = 'Database';
+					break;
+				case 'faq':
+					$post_type_icon      = 'pointer-question';
+					$post_type_nice_name = 'FAQ';
+					break;
+				case 'guide':
+					$post_type_icon      = 'clip';
+					$post_type_nice_name = 'Research Guide';
+					break;
+				case 'journal':
+					$post_type_icon      = 'asterisk';
+					$post_type_nice_name = 'Journal';
+					break;
+				case 'staff':
+					$post_type_icon      = 'person';
+					$post_type_nice_name = 'Librarian';
+					break;
+				default:
+					$post_type_icon      = 'clip'; // do we have a default icon?
+					$post_type_nice_name = 'Post';
+					break;
+			}
 
 			$post = array(
-				'type'  => get_post_type(),
+				'type'  => $post_type_nice_name,
+				'icon'  => $post_type_icon,
 				'title' => get_the_title(),
 				'link'  => get_the_permalink()
 			);
 
 			$search_results['posts'][] = $post;
 
-		endwhile;
-
-	endif;
+		}
+		
+	}
 
 	// Encode array as JSON and return
 	wp_send_json( wp_json_encode( $search_results ) );

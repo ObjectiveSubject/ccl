@@ -77,45 +77,11 @@
 			posts.forEach(function(post) {
 				console.log(post);
 
-				var postIcon,
-					postType;
-
-				switch(post["type"]) {
-					case 'book':
-						postIcon = 'book';
-						postType = 'Book';
-						break;
-					case 'database':
-						postIcon = 'pointer-right';
-						postType = 'Database';
-						break;
-					case 'faq':
-						postIcon = 'pointer-question';
-						postType = 'FAQ';
-						break;
-					case 'guide':
-						postIcon = 'clip';
-						postType = 'Research Guide';
-						break;
-					case 'journal':
-						postIcon = 'asterisk';
-						postType = 'Journal';
-						break;
-					case 'staff':
-						postIcon = 'person';
-						postType = 'Librarian';
-						break;
-					default:
-						postIcon = 'clip'; // do we have a default icon?
-						postType = 'Post'
-						break;
-				}
-
 				listItem = '<li class="ccl-c-search-item">' +
 					'<a href="' + post["link"] + '">' +
 					'<span class=\"ccl-c-search-item__type\">' +
-					'<i class="ccl-b-icon-' + postIcon + '" aria-hidden="true"></i>' +
-					'<span class="ccl-c-search-item__type-text">' + postType + '</span>' +
+					'<i class="ccl-b-icon-' + post["icon"] + '" aria-hidden="true"></i>' +
+					'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
 					'</span>' +
 					'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
 					'</a>' +
