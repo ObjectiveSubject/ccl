@@ -33,13 +33,13 @@ function setup() {
 function register_guides_post_type() {
 
 	register_extended_post_type( 'guide', array(
-		'menu_icon' 		=> 'dashicons-book-alt',
-		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+		'menu_icon'       => 'dashicons-book-alt',
+		'supports'        => array( 'title' ), // content, editor, thumbnail would allow content to be edited
 		'capability_type' => 'post',
-		'capabilities' => array(
+		'capabilities'    => array(
 			'create_posts' => false, // Remove support for "Add New" (can also change to a role, rather than false)
 		),
-		'map_meta_cap' => true, // Allows created posts to be edited
+		'map_meta_cap'    => true, // Allows created posts to be edited
 	) );
 
 }
@@ -252,7 +252,7 @@ function add_guide_meta_box( $post ) {
 		__( 'Data from LibGuides' ),
 		__NAMESPACE__ . '\\render_guide_data_metabox',
 		'guide',
-		'advanced',
+		'normal',
 		'high'
 	);
 }
@@ -267,6 +267,15 @@ function render_guide_data_metabox() {
 	$owner_id = get_post_meta( $post->ID, 'guide_owner_id', true );
 	$raw_data = get_post_meta( $post->ID, 'guide_raw_data', true );
 
+	$content = $post->post_content;
+
+	echo '<p>';
+
+	echo '<strong>Guide ID:</strong> ' . get_post_meta( $post->ID, 'guide_id', true ) . '<br>';
+
+	if ( $friendly_url ) {
+		echo '<strong>Friendly URL:</strong> <a href="' . $friendly_url . '" target="_blank">' . $friendly_url . '</a><br>';
+	}
 
 	// Find owner in Staff
 	$owner = new \WP_Query( array(
@@ -278,14 +287,6 @@ function render_guide_data_metabox() {
 			)
 		),
 	) );
-
-	echo '<p>';
-
-	echo '<strong>Guide ID:</strong> ' . get_post_meta( $post->ID, 'guide_id', true ) . '<br>';
-
-	if ( $friendly_url ) {
-		echo '<strong>Friendly URL:</strong> <a href="' . $friendly_url . '" target="_blank">' . $friendly_url . '</a><br>';
-	}
 
 	if ( $owner->have_posts() ) {
 		$owner->the_post();
@@ -302,12 +303,24 @@ function render_guide_data_metabox() {
 
 	echo '</p>';
 
+	if ( $content ) {
+		echo '<h4>Content</h4>';
+		echo apply_filters( 'the_content', $content );
+	}
+
+	// Raw Data
 	echo '<hr>';
 
-	echo '<h4>Raw Data</h4>';
-	echo '<em>Currently crossed with expand: <code>owner</code>. Can also cross with: <code>group</code>, <code>pages</code>, 
-		  <code>pages.boxes</code>, <code>subjects</code>, <code>tags</code>, <code>metadata</code>.</em>';
+	echo '<strong>Raw Data</strong> (<span id="raw-data-toggle" style="color:#21759B;cursor:pointer">show</span>)';
+
+	echo '<div id="raw-api-data" class="hidden">';
+
+	echo '<p><em>Currently crossed with expand: <code>owner</code>. Can also cross with: <code>group</code>, <code>pages</code>, 
+		  <code>pages.boxes</code>, <code>subjects</code>, <code>tags</code>, <code>metadata</code>.</em></p>';
+
 	echo '<pre>';
 	print_r( $raw_data );
 	echo '</pre>';
+
+	echo '</div>';
 }

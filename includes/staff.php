@@ -35,13 +35,13 @@ function setup() {
 function register_staff_post_type() {
 
 	register_extended_post_type( 'staff', array(
-		'menu_icon' 		=> 'dashicons-id',
-		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+		'menu_icon'       => 'dashicons-id',
+		'supports'        => array( 'title' ), // content, editor, thumbnail would allow content to be edited
 		'capability_type' => 'post',
-		'capabilities' => array(
+		'capabilities'    => array(
 			'create_posts' => false, // Remove support for "Add New" (can also change to a role, rather than false)
 		),
-		'map_meta_cap' => true, // Allows created posts to be edited
+		'map_meta_cap'    => true, // Allows created posts to be edited
 	),
 
 		array(
@@ -233,6 +233,9 @@ function add_staff_member( $member ) {
 
 	// Insert data into custom fields
 	add_post_meta( $member_post_id, 'member_id', $member['id'], true ); // custom field ->
+	add_post_meta( $member_post_id, 'member_first_name', $member['first_name'], true ); // custom field ->
+	add_post_meta( $member_post_id, 'member_last_name', $member['last_name'], true ); // custom field ->
+	add_post_meta( $member_post_id, 'member_email', $member['email'], true ); // custom field ->
 
 	// Raw data for development
 	add_post_meta( $member_post_id, 'member_raw_data', $member, true);
@@ -256,7 +259,7 @@ function add_staff_meta_box( $post ) {
 		__( 'Data from LibGuides' ),
 		__NAMESPACE__ . '\\render_staff_data_metabox',
 		'staff',
-		'advanced',
+		'normal',
 		'high'
 	);
 }
@@ -270,6 +273,9 @@ function render_staff_data_metabox() {
 	echo '<p>';
 
 	echo '<strong>Member ID:</strong> ' . get_post_meta( $post->ID, 'member_id', true ) . '<br>';
+	echo '<strong>First Name:</strong> ' . get_post_meta( $post->ID, 'member_first_name', true ) . '<br>';
+	echo '<strong>Last Name:</strong> ' . get_post_meta( $post->ID, 'member_last_name', true ) . '<br>';
+	echo '<strong>Email:</strong> ' . get_post_meta( $post->ID, 'member_email', true ) . '<br>';
 
 	echo '</p>';
 
@@ -277,8 +283,15 @@ function render_staff_data_metabox() {
 
 	$raw_data = get_post_meta( $post->ID, 'member_raw_data', true );
 
-	echo '<h4>Raw Data</h4>';
+	echo '<strong>Raw Data</strong> (<span id="raw-data-toggle" style="color:#21759B;cursor:pointer">show</span>)';
+
+	echo '<div id="raw-api-data" class="hidden">';
+
+	echo '<p><em>Currently crossed with expand: <code>profile</code>. Can also cross with: <code>subjects</code>.</p>';
+
 	echo '<pre>';
 	print_r( $raw_data );
 	echo '</pre>';
+
+	echo '</div>';
 }

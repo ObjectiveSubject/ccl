@@ -64,8 +64,8 @@
 			var listItem = '<li class="ccl-c-search-item">' +
 				'<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + query + '">' +
 				'<span class="ccl-c-search-item__type">' +
-				'<i class="ccl-b-icon-pointer-right" aria-hidden="true"></i>' +
-				'<span class="ccl-c-search-item__type-text">External</span>' +
+				'<i class="ccl-b-icon-book" aria-hidden="true"></i>' +
+				'<span class="ccl-c-search-item__type-text">WorldCat</span>' +
 				'</span>' +
 				'<span class="ccl-c-search-item__title\">Search for ' + query + ' on WorldCat</span>' +
 				'</a>' +
