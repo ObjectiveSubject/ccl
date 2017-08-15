@@ -20,6 +20,7 @@ function setup() {
 	add_action( 'wp_ajax_retrieve_databases', __NAMESPACE__ . '\\retrieve_databases' );
 	// add_action( 'wp_ajax_nopriv_retrieve_databases', __NAMESPACE__ . '\\retrieve_databases' );
 
+	add_action( 'add_meta_boxes_database', $n('add_database_meta_box' ) );
 }
 
 /**
@@ -34,7 +35,7 @@ function register_databases_post_type() {
 
 	register_extended_post_type( 'database', array(
 		'menu_icon' 		=> 'dashicons-archive',
-		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+		'supports'        => array( 'title' ), // content, editor, thumbnail would allow content to be edited
 		'capability_type' => 'post',
 		'capabilities' => array(
 			'create_posts' => false, // Remove support for "Add New" (can also change to a role, rather than false)
@@ -237,4 +238,56 @@ function add_database( $database ) {
 	} else {
 		return "updated";
 	}
+}
+
+
+/**
+ * Create a metabox to display data retrieved from the API
+ *
+ * @param $post
+ */
+function add_database_meta_box( $post ) {
+	add_meta_box(
+		'api_data_meta_box',
+		__( 'Data from LibGuides' ),
+		__NAMESPACE__ . '\\render_database_data_metabox',
+		'database',
+		'normal',
+		'high'
+	);
+}
+
+/**
+ * Render the API data metabox
+ */
+function render_database_data_metabox() {
+	global $post;
+
+	$raw_data = get_post_meta( $post->ID, 'database_raw_data', true );
+
+	$content = $post->post_content;
+
+	echo '<p>';
+
+	echo '<strong>Database ID:</strong> ' . get_post_meta( $post->ID, 'database_id', true ) . '<br>';
+
+	echo '</p>';
+
+	if ( $content ) {
+		echo '<h4>Content</h4>';
+		echo apply_filters( 'the_content', $content );
+	}
+
+	// Raw Data
+	echo '<hr>';
+
+	echo '<strong>Raw Data</strong> (<span id="raw-data-toggle" style="color:#21759B;cursor:pointer">show</span>)';
+
+	echo '<div id="raw-api-data" class="hidden">';
+
+	echo '<pre>';
+	print_r( $raw_data );
+	echo '</pre>';
+
+	echo '</div>';
 }

@@ -37,7 +37,7 @@
 
 	$(document).ready( function() {
 		// Toggle Raw Data display on Staff posts
-		if ( $('body').hasClass('post-type-guide') || $('body').hasClass('post-type-staff') ) {
+		if ( $('body').hasClass('post-type-database') || $('body').hasClass('post-type-guide') || $('body').hasClass('post-type-staff') ) {
 			rawData.init();
 		}
 	});
