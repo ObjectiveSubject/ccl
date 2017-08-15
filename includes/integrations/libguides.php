@@ -34,14 +34,14 @@ function get_token() {
 	$token              = get_transient( 'libguides_token' );
 
 	// Get Client ID (constant will override option page setting)
-	if ( defined( LIBGUIDES_CLIENT_ID ) ) {
+	if ( defined( 'LIBGUIDES_CLIENT_ID' ) ) {
 		$client_id = LIBGUIDES_CLIENT_ID;
 	} elseif ( array_key_exists( 'client_id', $libguides_settings ) ) {
 		$client_id = $libguides_settings['client_id'];
 	}
 
 	// Get Client Secret (constant will override option page setting)
-	if ( defined( LIBGUIDES_CLIENT_SECRET ) ) {
+	if ( defined( 'LIBGUIDES_CLIENT_SECRET' ) ) {
 		$client_secret = LIBGUIDES_CLIENT_SECRET;
 	} elseif ( array_key_exists( 'client_secret', $libguides_settings ) ) {
 		$client_secret = $libguides_settings['client_secret'];
@@ -95,7 +95,7 @@ function get_libguide_id() {
 	$libguides_settings = get_option( 'libguides-api-v1_1-settings' );
 
 	// Constant will override option page setting
-	if ( defined( LIBGUIDES_SITE_ID ) ) {
+	if ( defined( 'LIBGUIDES_SITE_ID' ) ) {
 		$site_id = LIBGUIDES_SITE_ID;
 	} elseif ( array_key_exists( 'site_id', $libguides_settings ) ) {
 		$site_id = $libguides_settings['site_id'];
@@ -115,7 +115,7 @@ function get_libguide_key() {
 	$libguides_settings = get_option( 'libguides-api-v1_1-settings' );
 
 	// Constant will override option page setting
-	if ( defined( LIBGUIDES_SITE_KEY ) ) {
+	if ( defined( 'LIBGUIDES_SITE_KEY' ) ) {
 		$site_key = LIBGUIDES_SITE_KEY;
 	} elseif ( array_key_exists( 'site_id', $libguides_settings ) ) {
 		$site_key = $libguides_settings['site_key'];

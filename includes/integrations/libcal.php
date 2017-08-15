@@ -35,14 +35,14 @@ function get_token() {
 
 
 	// Get Client ID (constant will override option page setting)
-	if ( LIBCAL_CLIENT_ID ) {
+	if ( defined( 'LIBCAL_CLIENT_ID' ) ) {
 		$client_id = LIBCAL_CLIENT_ID;
 	} elseif ( array_key_exists( 'client_id', $libcal_settings ) ) {
 		$client_id = $libcal_settings['client_id'];
 	}
 
 	// Get Client Secret (constant will override option page setting)
-	if ( LIBCAL_CLIENT_SECRET ) {
+	if ( defined( 'LIBCAL_CLIENT_SECRET' ) ) {
 		$client_secret = LIBCAL_CLIENT_SECRET;
 	} elseif ( array_key_exists( 'client_secret', $libcal_settings ) ) {
 		$client_secret = $libcal_settings['client_secret'];
