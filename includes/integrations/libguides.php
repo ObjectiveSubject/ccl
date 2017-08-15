@@ -30,18 +30,18 @@ function get_token() {
 
 	$client_id          = '';
 	$client_secret      = '';
-	$libguides_settings = get_option( 'libguides-api-v1_2-settings ' );
+	$libguides_settings = get_option( 'libguides-api-v1_2-settings' );
 	$token              = get_transient( 'libguides_token' );
 
 	// Get Client ID (constant will override option page setting)
-	if ( LIBGUIDES_CLIENT_ID ) {
+	if ( defined( LIBGUIDES_CLIENT_ID ) ) {
 		$client_id = LIBGUIDES_CLIENT_ID;
 	} elseif ( array_key_exists( 'client_id', $libguides_settings ) ) {
 		$client_id = $libguides_settings['client_id'];
 	}
 
 	// Get Client Secret (constant will override option page setting)
-	if ( LIBGUIDES_CLIENT_SECRET ) {
+	if ( defined( LIBGUIDES_CLIENT_SECRET ) ) {
 		$client_secret = LIBGUIDES_CLIENT_SECRET;
 	} elseif ( array_key_exists( 'client_secret', $libguides_settings ) ) {
 		$client_secret = $libguides_settings['client_secret'];
@@ -92,15 +92,13 @@ function get_token() {
 function get_libguide_id() {
 
 	$site_id = '';
-	$libguides_settings = get_option( 'libguides-api-v1_1-settings ');
-
-	if ( array_key_exists( 'site_id', $libguides_settings ) ) {
-		$site_id = $libguides_settings['site_id'];
-	}
+	$libguides_settings = get_option( 'libguides-api-v1_1-settings' );
 
 	// Constant will override option page setting
-	if ( LIBGUIDES_SITE_ID ) {
+	if ( defined( LIBGUIDES_SITE_ID ) ) {
 		$site_id = LIBGUIDES_SITE_ID;
+	} elseif ( array_key_exists( 'site_id', $libguides_settings ) ) {
+		$site_id = $libguides_settings['site_id'];
 	}
 
 	return $site_id;
@@ -114,15 +112,13 @@ function get_libguide_id() {
 function get_libguide_key() {
 
 	$site_key = '';
-	$libguides_settings = get_option( 'libguides-api-v1_1-settings ');
-
-	if ( array_key_exists( 'site_id', $libguides_settings ) ) {
-		$site_key = $libguides_settings['site_key'];
-	}
+	$libguides_settings = get_option( 'libguides-api-v1_1-settings' );
 
 	// Constant will override option page setting
-	if ( LIBGUIDES_SITE_KEY ) {
+	if ( defined( LIBGUIDES_SITE_KEY ) ) {
 		$site_key = LIBGUIDES_SITE_KEY;
+	} elseif ( array_key_exists( 'site_id', $libguides_settings ) ) {
+		$site_key = $libguides_settings['site_key'];
 	}
 
 	return $site_key;
@@ -218,14 +214,14 @@ function get_all_staff() {
 	}
 
 	$params = array(
-		'site_id' => LIBGUIDES_SITE_ID,
-		'key'     => LIBGUIDES_SITE_KEY,
+		'site_id' => $site_id,
+		'key'     => $site_key,
 		'expand'  => 'profile,subjects'
 	);
 
 	// $query_string = urldecode_deep( http_build_query( $params ) ); // urldecode is necessary to prevent the comma from being encoded
 
-	$query_string = 'site_id=' . LIBGUIDES_SITE_ID . '&key=' . LIBGUIDES_SITE_KEY . '&expand[]=profile&expand[]=subjects';
+	$query_string = 'site_id=' . $site_id . '&key=' . $site_key . '&expand[]=profile&expand[]=subjects';
 
 	$request = wp_remote_get( 'http://lgapi-us.libapps.com/1.1/accounts/?' . $query_string );
 

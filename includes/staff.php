@@ -143,7 +143,6 @@ function retrieve_staff() {
 	if ( $staff == 'error' ) {
 		$response .= '<p>Error</p>';
 	} else {
-		$response .= '<p>Success!</p>';
 		$response .= '<ul>';
 		$response .= '<li><strong>Retrieved:</strong> ' . $staff['retrieved'] . ' staff</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $staff['added'] . '</li>';

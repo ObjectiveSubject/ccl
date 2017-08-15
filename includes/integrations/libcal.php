@@ -30,7 +30,7 @@ function get_token() {
 
 	$client_id          = '';
 	$client_secret      = '';
-	$libcal_settings = get_option( 'libcal-api-v1_1-settings ' );
+	$libcal_settings = get_option( 'libcal-api-v1_1-settings' );
 	$token              = get_transient( 'libcal_token' );
 
 
