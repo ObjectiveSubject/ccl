@@ -48,10 +48,9 @@ function load_search_results() {
 	$args   = array(
 		'post_type'           => array( 'post', 'guide', 'staff', 'database', 'room', 'book', 'reference' ), // book/reference don't exist yet
 		'post_status'         => 'publish',
-		'no_found_rows'       => true,
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
-		'posts_per_page'      => 15 // probably need to figure out how to do a limited number from each type
+		'posts_per_page'      => 7 // probably need to figure out how to do a limited number from each type
 	);
 	$search = new \WP_Query( $args );
 
@@ -59,8 +58,7 @@ function load_search_results() {
 
 	// Add query details to array
 	$search_results['query'] = $query;
-	$search_results['count'] = $search->post_count; // this is not returning total (just paged total)
-
+	$search_results['count'] = $search->found_posts;
 	if ( $search->have_posts() ) {
 
 		// Loop through returned posts and push into the array
