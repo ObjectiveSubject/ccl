@@ -217,6 +217,10 @@ function add_database( $database ) {
 	// $args['post_status'] = 'draft'; // default is draft
 	$args['post_type']    = 'database';
 
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		$args['post_status'] = 'publish'; // automatically publish posts on servers with debug enabled
+	}
+
 	/*
 	 * Create the Database and grab post id (for post meta insertion)
 	 */
@@ -285,7 +289,7 @@ function render_database_data_metabox() {
 
 	echo '<div id="raw-api-data" class="hidden">';
 
-	echo '<pre>';
+	echo '<div style="white-space:pre-wrap;font-family:monospace;">';
 	print_r( $raw_data );
 	echo '</pre>';
 

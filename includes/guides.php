@@ -216,6 +216,10 @@ function add_guide( $guide ) {
 	// $args['post_status'] = 'draft'; // default is draft
 	$args['post_type']    = 'guide';
 
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		$args['post_status'] = 'publish'; // automatically publish posts on servers with debug enabled
+	}
+
 	/*
 	 * Create/update the Guide and grab post id (for post meta insertion)
 	 */
@@ -318,7 +322,7 @@ function render_guide_data_metabox() {
 	echo '<p><em>Currently crossed with expand: <code>owner</code>. Can also cross with: <code>group</code>, <code>pages</code>, 
 		  <code>pages.boxes</code>, <code>subjects</code>, <code>tags</code>, <code>metadata</code>.</em></p>';
 
-	echo '<pre>';
+	echo '<div style="white-space:pre-wrap;font-family:monospace;">';
 	print_r( $raw_data );
 	echo '</pre>';
 

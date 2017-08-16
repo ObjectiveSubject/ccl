@@ -225,6 +225,10 @@ function add_staff_member( $member ) {
 	// $args['post_status'] = 'draft'; // default is draft
 	$args['post_type'] = 'staff';
 
+	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+		$args['post_status'] = 'publish'; // automatically publish posts on servers with debug enabled
+	}
+
 	/*
 	 * Create the Staff Member
 	 */
@@ -286,9 +290,9 @@ function render_staff_data_metabox() {
 
 	echo '<div id="raw-api-data" class="hidden">';
 
-	echo '<p><em>Currently crossed with expand: <code>profile</code>. Can also cross with: <code>subjects</code>.</p>';
+	echo '<p><em>Currently crossed with expand: <code>profile</code>. Can also cross with: <code>subjects</code>.</em></p>';
 
-	echo '<pre>';
+	echo '<div style="white-space:pre-wrap;font-family:monospace;">';
 	print_r( $raw_data );
 	echo '</pre>';
 
