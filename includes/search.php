@@ -33,6 +33,8 @@ function scripts( $debug = false ) {
 	);
 
 	wp_enqueue_script( 'search' );
+
+	wp_localize_script( 'search', 'searchAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
 
 /**
