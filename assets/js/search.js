@@ -47,7 +47,7 @@
 			query : query.val()
 		};
 
-		$.post(ajaxurl, data, function (response) {
+		$.post(searchAjax.ajaxurl, data, function (response) {
 			var results = $.parseJSON(response),
 				count = results.count,
 				query = results.query,
