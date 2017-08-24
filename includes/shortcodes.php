@@ -11,26 +11,28 @@ function setup() {
 		return __NAMESPACE__ . "\\$function";
 	};
 
-	// NOTE: Uncomment to activate shortcode
-	// add_shortcode( 'example_shortcode', $n( 'example_shortcode' ) );
+	add_shortcode( 'scheduler', $n( 'schedule_appointment' ) );
 }
 
 
-
  /**
-  * Create an example shortcode
+  * Create a scheduler shortcode to display the Libcal MyScheduler widget for booking appointments
   *
   * @param $attributes array List of attributes from the given shortcode
   *
   * @return mixed HTML output for the shortcode
   */
- function example_shortcode( $attributes, $content = null ) {
+ function schedule_appointment( $attributes ) {
+
  	$data = shortcode_atts( array(
- 		'class' => 'h2',
- 		'text'	=> 'Hello World',
+ 		'text' => "Schedule Appointment",
+ 		'height' => 450,
+ 		'width'	=> 500,
  	), $attributes );
 
- 	$html = '<div class="' . $data['class'] . '">' . $data['text'] . '</div>';
+ 	$html = \CCL\Integrations\LibCal\schedule_widget( false, $data );
+
+ 	// $html = "<b>FARTSTICKS</b>";
 
  	return $html;
  }

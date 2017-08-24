@@ -249,16 +249,34 @@ function reserve_space( $payload ) {
  * @todo add args if any are needed from shortcode, etc.
  * @param $args
  */
-function schedule_widget( $args ) {
+function schedule_widget( $echo = true, $options = array() ) {
+
+	$defaults = array(
+		'text' => "Schedule Appointment",
+		'height' => 450,
+		'width'	=> 500,
+	);
+
+	$options = array_merge( $defaults, $options );
+
+	ob_start();
 	?>
 
 	<script src="//api3.libcal.com/js/myscheduler.min.js?002"></script>
 	<script>
-		jQuery(function(){
-			jQuery("#mySched23904").LibCalMySched({ iid: 333, uid: 0, gid: 0,  width: 500, height: 450 });
+		jQuery(function () {
+			jQuery("#mySched23904").LibCalMySched({iid: 333, uid: 0, gid: 0, width: <?php echo esc_js( $options['width'] ); ?>, height: <?php echo esc_js( $options['height'] ); ?>});
 		});
 	</script>
-	<button id="mySched23904" class="libcal-scheduler" href="#">Schedule Appointment</button>
+	<button id="mySched23904" class="libcal-scheduler" href="#"><?php echo esc_html( $options['text'] ); ?></button>
 
 	<?php
+	$html = ob_get_contents();
+	ob_get_clean();
+
+	if ( $echo ) {
+		echo $html;
+	} else {
+		return $html;
+	}
 }
