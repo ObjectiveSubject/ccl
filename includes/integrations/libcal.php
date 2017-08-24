@@ -240,3 +240,25 @@ function reserve_space( $payload ) {
 	}
 
 }
+
+/**
+ * Helper function for displaying LibCal's My Scheduler widget
+ *
+ * More info here: http://claremont.libcal.com/sched_widget.php
+ *
+ * @todo add args if any are needed from shortcode, etc.
+ * @param $args
+ */
+function schedule_widget( $args ) {
+	?>
+
+	<script src="//api3.libcal.com/js/myscheduler.min.js?002"></script>
+	<script>
+		jQuery(function(){
+			jQuery("#mySched23904").LibCalMySched({ iid: 333, uid: 0, gid: 0,  width: 500, height: 450 });
+		});
+	</script>
+	<button id="mySched23904" class="libcal-scheduler" href="#">Schedule Appointment</button>
+
+	<?php
+}
