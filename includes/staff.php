@@ -290,7 +290,7 @@ function render_staff_data_metabox() {
 
 	echo '<div id="raw-api-data" class="hidden">';
 
-	echo '<p><em>Currently crossed with expand: <code>profile</code>. Can also cross with: <code>subjects</code>.</em></p>';
+	echo '<p><em>Currently crossed with expand: <code>profile</code> and <code>subjects</code>. No other options.</em></p>';
 
 	echo '<div style="white-space:pre-wrap;font-family:monospace;">';
 	print_r( $raw_data );
