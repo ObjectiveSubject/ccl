@@ -12,7 +12,7 @@ namespace CCL\Helpers;
  *
  * @return string The url of the asset
  */
-function asset( $path ) {
+function get_asset( $path ) {
 	return get_template_directory_uri() . '/assets/' . $path;
 }
 
@@ -61,7 +61,7 @@ function get_thumbnail_url( $size = 'hero', $fallback = '', $post_id = 0 ) {
 		$image = $image[0];
 	} else {
 		if ( $fallback ) {
-			$image = asset( 'images/placeholder_' . $fallback . '.svg' );
+			$image = get_asset( 'images/placeholder_' . $fallback . '.svg' );
 		}
 	}
 
@@ -85,7 +85,7 @@ function open_graph_tags( $echo = true ) {
 		'description' => get_bloginfo( 'description' ),
 		'url'         => home_url( add_query_arg( array(), $wp->request ) ), // get current page url
 		'type'        => 'page',
-		'image'       => ( has_post_thumbnail() ) ? get_thumbnail_url( 'thumbnail' ) : asset( 'images/emblem.png' )
+		'image'       => ( has_post_thumbnail() ) ? get_thumbnail_url( 'thumbnail' ) : get_asset( 'images/emblem.png' )
 	);
 
 	// Contexts
