@@ -1,14 +1,13 @@
 <?php
 /**
- * The main template file
+ * Template for the "post" post type homepage when set in admin
  *
- * This is mostly a fall back, in case a query doesn't hit any other template.
- * For the root level homepage, see front-page.php (WordPress template hierarchy).
+ * For the root level homepage, see front-page.php (WordPress template hierarchy)
  */
 
 get_header(); ?>
 
-	<div class="site-content">
+	<div class="site-content ccl-u-pb-3">
 
 		<?php if ( have_posts() ) : ?>
 
