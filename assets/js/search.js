@@ -51,15 +51,10 @@
 			var results = $.parseJSON(response),
 				count = results.count,
 				query = results.query,
-				posts = results.posts,
-				resultsLink = $(".ccl-c-search__results-action");
+				posts = results.posts;
 
 			// Clear response area list items (update when Pattern Library view isn't necessary)
 			responseItems.remove();
-
-			// Build results count/link
-			resultsLink.html( "View all " + count + " results <i class=\"ccl-b-icon-arrow-right\" aria-hidden=\"true\"></i>" );
-			resultsLink.attr("href", "/?s=" + query);
 
 			var listItem = '<li class="ccl-c-search-item">' +
 				'<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + query + '">' +
@@ -90,11 +85,18 @@
 				responseArea.append(listItem);
 			});
 
-			// Append results to bottom again (might be better to just rebuild link here)
-			responseArea.append( $(".ccl-c-search__results-footer") );
+			// Build results count/link
+			listItem = '<li class="ccl-c-search__results-footer">' +
+				       '<a href="/?s=' + query + '" class="ccl-c-search__results-action">' +
+				       'View all ' + count + ' Results ' +
+				       '<i class="ccl-b-icon-arrow-right" aria-hidden="true"></i>' +
+				       '</a>' +
+			           '</li>';
+
+			responseArea.append(listItem);
 		});
 
-	}
+	};
 
      $(document).ready(function(){
 		// .each() will fail gracefully if no elements are found

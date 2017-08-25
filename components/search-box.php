@@ -49,10 +49,7 @@
                         </li>
                     
                     <?php $i++; } while( $i <= 6 ); ?>
-                    
-                    <li class="ccl-c-search__results-footer">
-                        <a href="#" class="ccl-c-search__results-action">View all 1,001 Results <i class="ccl-b-icon-arrow-right" aria-hidden="true"></i></a>
-                    </li>
+					
                 </ul>
             </div>
 
