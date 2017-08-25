@@ -17,6 +17,18 @@ function get_asset( $path ) {
 }
 
 /**
+ * For use with components instead of get_template_part()
+ *
+ * This allows variables to resolve. We don't really need get_template_part(), as we're not planning to use child themes
+ *
+ * @param $name string filename of the component
+ */
+function get_component( $name ) {
+	// @todo probably need to do some sort of error trapping here, to make sure file exists
+	include ( locate_template( 'components/' . $name . '.php' ) );
+}
+
+/**
  * Get post by slug
  *
  * @param string $slug The post's slug.
