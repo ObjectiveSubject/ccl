@@ -4,45 +4,45 @@
  */
 get_header(); ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
+	<div class="site-content ccl-u-pb-3">
+
+		<?php
+		if ( have_posts() ) : ?>
+
+			<header class="page-header">
+				<h1 class="page-title"><?php
+					printf( esc_html__( 'Search Results for: %s', '_s' ), '<span>' . get_search_query() . '</span>' );
+					?></h1>
+			</header>
 
 			<?php
-			if ( have_posts() ) : ?>
+			/* Start the Loop */
+			while ( have_posts() ) : the_post(); ?>
 
-				<header class="page-header">
-					<h1 class="page-title"><?php
-						printf( esc_html__( 'Search Results for: %s', '_s' ), '<span>' . get_search_query() . '</span>' );
-						?></h1>
-				</header>
+				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-				<?php
-				/* Start the Loop */
-				while ( have_posts() ) : the_post(); ?>
+					<header class="entry-header">
+						<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					</header>
 
-						<header class="entry-header">
-							<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+					<div class="entry-summary">
+						<?php the_excerpt(); ?>
+					</div>
 
-						</header>
+				</article>
 
-						<div class="entry-summary">
-							<?php the_excerpt(); ?>
-						</div>
+			<?php endwhile; ?>
 
-					</article>
-				<?php endwhile;
+			<?php the_posts_navigation(); ?>
 
-				the_posts_navigation();
+		<?php else : ?>
 
-			else :
+			<p>No results found.</p>
 
-				get_template_part( 'template-parts/content', 'none' );
-			endif; ?>
+		<?php endif; ?>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+	</div>
 
 <?php
 
