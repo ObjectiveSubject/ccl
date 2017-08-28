@@ -64,7 +64,7 @@
 				'<i class="ccl-b-icon-book" aria-hidden="true"></i>' +
 				'<span class="ccl-c-search-item__type-text">WorldCat</span>' +
 				'</span>' +
-				'<span class="ccl-c-search-item__title\">Search for ' + query + ' on WorldCat</span>' +
+				'<span class="ccl-c-search-item__title\">Search for &ldquo;' + query + '&rdquo; on WorldCat</span>' +
 				'</a>' +
 				'</li>';
 
