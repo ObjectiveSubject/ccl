@@ -40,7 +40,8 @@
 	SearchAutocomplete.prototype.fetchResults = function( query ) {
 
 		var responseArea = $('.ccl-c-search__list'),
-			responseItems = $('.ccl-c-search-item');
+			responseItems = $('.ccl-c-search-item'),
+			resultsLink = $(".ccl-c-search__results-footer");
 
 		var data = {
 			action: 'load_search_results', // this should probably be able to do people & assets too (maybe DBs)
@@ -51,11 +52,11 @@
 			var results = $.parseJSON(response),
 				count = results.count,
 				query = results.query,
-				posts = results.posts,
-				resultsLink = $(".ccl-c-search__results-action");
+				posts = results.posts;
 
 			// Clear response area list items (update when Pattern Library view isn't necessary)
 			responseItems.remove();
+			resultsLink.remove();
 
 			var listItem = '<li class="ccl-c-search-item">' +
 				'<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + query + '">' +
@@ -93,10 +94,6 @@
 				       '<i class="ccl-b-icon-arrow-right" aria-hidden="true"></i>' +
 				       '</a>' +
 			           '</li>';
-
-			if ( resultsLink.length ) {
-				resultsLink.remove();
-			}
 
 			responseArea.append(listItem);
 		});
