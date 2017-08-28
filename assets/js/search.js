@@ -70,22 +70,24 @@
 
 			responseArea.append(listItem);
 
-			// Build results list
-			posts.forEach(function(post) {
-				console.log(post);
+			if ( count > 0 ) {
+				// Build results list
+				posts.forEach(function (post) {
+					console.log(post);
 
-				listItem = '<li class="ccl-c-search-item">' +
-					'<a href="' + post["link"] + '">' +
-					'<span class=\"ccl-c-search-item__type\">' +
-					'<i class="ccl-b-icon-' + post["icon"] + '" aria-hidden="true"></i>' +
-					'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
-					'</span>' +
-					'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
-					'</a>' +
-					'</li>';
+					listItem = '<li class="ccl-c-search-item">' +
+						'<a href="' + post["link"] + '">' +
+						'<span class=\"ccl-c-search-item__type\">' +
+						'<i class="ccl-b-icon-' + post["icon"] + '" aria-hidden="true"></i>' +
+						'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
+						'</span>' +
+						'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
+						'</a>' +
+						'</li>';
 
-				responseArea.append(listItem);
-			});
+					responseArea.append(listItem);
+				});
+			}
 
 			// Build results count/link
 			listItem = '<li class="ccl-c-search__results-footer">' +
@@ -96,6 +98,7 @@
 			           '</li>';
 
 			responseArea.append(listItem);
+
 		});
 
 	};
