@@ -51,7 +51,8 @@
 			var results = $.parseJSON(response),
 				count = results.count,
 				query = results.query,
-				posts = results.posts;
+				posts = results.posts,
+				resultsLink = $(".ccl-c-search__results-action");
 
 			// Clear response area list items (update when Pattern Library view isn't necessary)
 			responseItems.remove();
@@ -92,6 +93,10 @@
 				       '<i class="ccl-b-icon-arrow-right" aria-hidden="true"></i>' +
 				       '</a>' +
 			           '</li>';
+
+			if ( resultsLink.length ) {
+				resultsLink.remove();
+			}
 
 			responseArea.append(listItem);
 		});
