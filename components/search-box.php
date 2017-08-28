@@ -32,24 +32,7 @@
 
             <div class="ccl-c-search__results">
                 <ul class="ccl-c-search__list">
-                    
-                    <?php $i = 0;
-                    $icons = array( 'book', 'book', 'clip', 'person', 'pointer-right', 'asterisk', 'question');
-                    $types = array( 'Book', 'Book', 'Research Guide', 'Librarian', 'Database', 'Journal', 'FAQ' );
-                    do { ?>
 
-                        <li class="ccl-c-search-item">
-                            <a href="#">
-                                <span class="ccl-c-search-item__type">
-                                    <i class="ccl-b-icon-<?php echo $icons[$i]; ?>" aria-hidden="true"></i>
-                                    <span class="ccl-c-search-item__type-text"><?php echo $types[$i]; ?></span>
-                                </span>
-                                <span class="ccl-c-search-item__title">Search Result Item <?php echo $i; ?></span>
-                            </a>
-                        </li>
-                    
-                    <?php $i++; } while( $i <= 6 ); ?>
-					
                 </ul>
             </div>
 
