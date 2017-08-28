@@ -4,8 +4,8 @@
 
         <div class="ccl-c-search">
 
-            <form class="ccl-c-search__bar">
-                <input type="text" id="ccl-search" class="ccl-b-input" placeholder="Start typing to search"/>
+            <form class="ccl-c-search__bar" name="catalogSearch" action="http://ccl.on.worldcat.org/external-search" target="_blank">
+                <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search"/>
                 <div class="ccl-c-dropdown">
                     <button class="ccl-c-dropdown__toggle ccl-b-btn">As: Keyword <i class="ccl-b-caret-down" aria-hidden="true"></i></button>
                     <ul class="ccl-c-dropdown__menu">

@@ -32,8 +32,12 @@
 					 }
 				 }, 600);
 			 })
-			 .keydown(function () {
-				 clearTimeout(timeout);
+			 .keydown(function (event) {
+			 	 if (event.which === 13 || event.keyCode === 13) {
+			 	 	document.catalogSearch.submit(); // direct search to WorldCat on return
+				 } else {
+					 clearTimeout(timeout);
+				 }
 			 });
 	 };
 
