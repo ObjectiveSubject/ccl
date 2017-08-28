@@ -3,7 +3,6 @@
  * The template for displaying the header.
  */
 ?>
-
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
@@ -14,14 +13,14 @@
 
 	<div id="page">
 
-		<?php get_template_part( 'components/user-nav' ); ?>
+		<?php \CCL\Helpers\get_component( 'user-nav' ); ?>
 
 		<header id="masthead" class="ccl-c-masthead ccl-u-mb-1" role="banner">
 			
 			<div class="ccl-l-container">
 				
 				<div class="site-title ccl-h2" style="font-family: Georgia,serif">
-					<a href="#">Claremont Colleges Library • VIT@L</a>
+					<a href="<?php echo get_home_url(); ?>">Claremont Colleges Library • VIT@L</a>
 				</div>
 
 				<hr/>
