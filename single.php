@@ -9,12 +9,41 @@ get_header(); ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
+			<?php
+			$thumb_url   = get_the_post_thumbnail_url( $post, 'full' );
+			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
+			$description = get_the_excerpt(); // Could use 'the_excerpt()' but this allows for override
+			?>
+
 			<article <?php post_class(); ?>>
 
-				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<div class="ccl-c-hero" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
+					<div class="ccl-c-hero__container">
 
-				<div class="entry-content">
-					<?php the_content(); ?>
+						<div class="ccl-c-hero__header">
+							<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
+						</div>
+
+						<div class="ccl-c-hero__content">
+
+							<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="ccl-l-container">
+
+					<div class="ccl-l-row">
+
+						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-8-md ccl-u-my-2">
+							<?php the_content(); ?>
+						</div>
+
+					</div>
+
 				</div>
 
 			</article>
