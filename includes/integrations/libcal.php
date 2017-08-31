@@ -268,7 +268,7 @@ function schedule_widget( $echo = true, $options = array() ) {
 			jQuery("#mySched23904").LibCalMySched({iid: 333, uid: 0, gid: 0, width: <?php echo esc_js( $options['width'] ); ?>, height: <?php echo esc_js( $options['height'] ); ?>});
 		});
 	</script>
-	<button id="mySched23904" class="libcal-scheduler" href="#"><?php echo esc_html( $options['text'] ); ?></button>
+	<button id="mySched23904" class="libcal-scheduler ccl-b-btn" href="#"><?php echo esc_html( $options['text'] ); ?></button>
 
 	<?php
 	$html = ob_get_contents();
