@@ -1,0 +1,13 @@
+.ccl-c-tab {
+    pointer-events: none;
+    .ccl-app-active & {
+        pointer-events: all;
+    }
+}
+
+.ccl-c-tab__content {
+    display: none;
+    &.ccl-is-active {
+        display: block;
+    }
+}

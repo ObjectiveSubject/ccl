@@ -1,9 +1,10 @@
 .ccl-c-search__bar {
     background: white;
     display: flex;
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding: $search-bar-padding 3rem;
+    // margin-left: -3rem;
+    // margin-right: -3rem;
+    // padding: $search-bar-padding 3rem;
+    padding: $search-bar-padding;
 
     & > * {
         margin-left: 0.25rem;
@@ -24,8 +25,10 @@
     color: white;
     margin-top: -$search-bar-padding;
     margin-bottom: -$search-bar-padding;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    // padding-left: 3rem;
+    // padding-right: 3rem;
+    padding-left: $search-bar-padding;
+    padding-right: $search-bar-padding;
     font-size: 1.8rem;
     line-height: 1;
     &:hover {

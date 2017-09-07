@@ -14,6 +14,26 @@ $color-room-active: $blue;
     }
 }
 
+.ccl-c-wayfinder__marquee {
+    display: none;
+    margin-top: 0;
+}
+
+.ccl-c-wayfinder__call-num,
+.ccl-c-wayfinder__level {
+    color: $blue;
+}
+
+.ccl-c-wayfinder__maps {
+    opacity: 0.2;
+    pointer-events: none;
+    transition: opacity $duration $easing;
+    .ccl-app-active & {
+        pointer-events: all;
+        opacity: 1;
+    }
+}
+
 .ccl-c-floor__room {
     transition: fill $duration $easing;
     fill: $color-room-inactive !important;
