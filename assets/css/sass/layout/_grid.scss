@@ -47,6 +47,9 @@
 .ccl-l-span-three-quarters {
     flex-basis: calc(75% - #{$gutter});
 }
+.ccl-l-span-full {
+    flex-basis: calc(100% - #{$gutter});
+}
 
 @include media($sm) {
     .ccl-l-span-quarter-sm {
@@ -63,6 +66,9 @@
     }
     .ccl-l-span-three-quarters-sm {
         flex-basis: calc(75% - #{$gutter});
+    }
+    .ccl-l-span-full-sm {
+        flex-basis: calc(100% - #{$gutter});
     }
 }
 
@@ -82,6 +88,9 @@
     .ccl-l-span-three-quarters-md {
         flex-basis: calc(75% - #{$gutter});
     }
+    .ccl-l-span-full-md {
+        flex-basis: calc(100% - #{$gutter});
+    }
 }
 
 @include media($lg) {
@@ -97,9 +106,10 @@
     .ccl-l-span-two-thirds-lg {
         flex-basis: calc(66.666% - #{$gutter});
     }
-    .ccl-l-span-three-quarters-lg {
-        flex-basis: calc(75% - #{$gutter});
+    .ccl-l-span-full-lg {
+        flex-basis: calc(100% - #{$gutter});
     }
+    
 }
 
 
@@ -153,6 +163,35 @@
         }
     }
 
+}
+
+
+// Lazy Columns
+// ---------------------------------- //
+.ccl-l-column--lazy,
+.ccl-l-column--lazy-sm,
+.ccl-l-column--lazy-md,
+.ccl-l-column--lazy-lg {
+    @extend .ccl-l-column;
+}
+.ccl-l-column--lazy { flex-grow: 0; }
+.ccl-l-column--lazy-sm {
+    @include media($sm) {
+        flex-grow: 0;
+        flex-basis: 0;
+    }
+}
+.ccl-l-column--lazy-md {
+    @include media($md) {
+        flex-grow: 0;
+        flex-basis: 0;
+    }
+}
+.ccl-l-column--lazy-lg {
+    @include media($lg) {
+        flex-grow: 0;
+        flex-basis: 0;
+    }
 }
 
 
