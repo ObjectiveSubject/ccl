@@ -52,7 +52,7 @@
 
 .ccl-c-hero__header {
     @include media($lg) {
-        flex-basis: calc( 33.333% - #{ $gutter } );
+        flex-basis: calc( 50% - #{ $gutter } );
     }
 }
 
