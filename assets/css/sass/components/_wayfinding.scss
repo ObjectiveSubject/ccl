@@ -1,0 +1,28 @@
+
+$color-room-inactive: desaturate( lighten($blue, 50%), 20% );
+$color-room-active: $blue;
+
+@keyframes pulse-room {
+    0% {
+        fill: $color-room-inactive;
+    }
+    50% {
+        fill: $color-room-active;
+    }
+    100% {
+        fill: $color-room-inactive;
+    }
+}
+
+.ccl-c-floor__room {
+    transition: fill $duration $easing;
+    fill: $color-room-inactive !important;
+
+    &:hover {
+        fill: $color-room-active !important;
+    }
+
+    &.ccl-is-active {
+        animation: pulse-room 1500ms infinite;
+    }
+}

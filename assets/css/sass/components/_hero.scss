@@ -5,9 +5,13 @@
     background-position: top center;
     background-repeat: no-repeat;
     color: white;
-    padding: 25vw 0 3rem;
+    padding: 6rem 0 3rem;
 
-    &:before {
+    &.ccl-has-image {
+        padding: 25vw 0 3rem;
+    }
+
+    &.ccl-has-image:before {
         content: "";
         display: block;
         position: absolute;
