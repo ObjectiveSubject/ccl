@@ -15,7 +15,7 @@ get_header(); ?>
 			$description = get_the_excerpt(); // Could use 'the_excerpt()' but this allows for override
 			?>
 
-			<article <?php post_class(); ?>>
+			<article <?php post_class('ccl-js-wayfinder'); ?>>
 
 				<div class="ccl-c-hero <?php echo $thumb_url ? 'ccl-has-image' : ''; ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
 					<div class="ccl-c-hero__container">
