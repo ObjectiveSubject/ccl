@@ -55,10 +55,10 @@ get_header(); ?>
 					<div class="ccl-l-row ccl-u-mt-2">
 						<div class="ccl-l-column--lazy-lg ccl-l-span-full" style="min-width: 120px; border-right:1px solid #ddd">
 							<ul class="ccl-u-clean-list ccl-js-tabs ccl-u-mt-1">
-								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-1" class="ccl-c-tab ccl-h4" data-target="#floor-1">Level 1</a></li>
-								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-2" class="ccl-c-tab ccl-h4" data-target="#floor-2">Level 2</a></li>
-								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-3" class="ccl-c-tab ccl-h4" data-target="#floor-3">Level 3</a></li>
 								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-4" class="ccl-c-tab ccl-h4" data-target="#floor-4">Level 4</a></li>
+								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-3" class="ccl-c-tab ccl-h4" data-target="#floor-3">Level 3</a></li>
+								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-2" class="ccl-c-tab ccl-h4" data-target="#floor-2">Level 2</a></li>
+								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-1" class="ccl-c-tab ccl-h4" data-target="#floor-1">Level 1</a></li>
 							</ul>	
 						</div>
 						<div class="ccl-c-wayfinder__maps ccl-l-column">
