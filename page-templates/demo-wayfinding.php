@@ -63,6 +63,15 @@ get_header(); ?>
 						<div class="ccl-l-column">
 							<div id="floor-1" class="">
 								<div><?php include( CCL_PATH . '/assets/images/level-1-flat.svg' ) ?></div>
+							</div>
+							<div id="floor-2" class="">
+								<div>floor image here...<?php //include( CCL_PATH . '/assets/images/level-2.svg' ) ?></div>
+							</div>
+							<div id="floor-3" class="">
+								<div>floor image here...<?php //include( CCL_PATH . '/assets/images/level-3.svg' ) ?></div>
+							</div>
+							<div id="floor-4" class="">
+								<div>floor image here...<?php //include( CCL_PATH . '/assets/images/level-4.svg' ) ?></div>
 							</div>	
 						</div>
 					</div>
