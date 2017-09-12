@@ -48,7 +48,7 @@ function load_search_results() {
 	$query = esc_attr( $query );
 
 	$args   = array(
-		'post_type'           => array( 'post', 'guide', 'staff', 'database', 'room', 'book', 'reference' ), // book/reference don't exist yet
+		'post_type'           => array( 'post', 'guide', 'staff', 'database', 'room', 'book', 'reference', 'page' ), // book/reference don't exist yet
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
@@ -87,6 +87,10 @@ function load_search_results() {
 				case 'journal':
 					$post_type_icon      = 'asterisk';
 					$post_type_nice_name = 'Journal';
+					break;
+				case 'page':
+					$post_type_icon      = 'clip';
+					$post_type_nice_name = 'Page';
 					break;
 				case 'staff':
 					$post_type_icon      = 'person';
