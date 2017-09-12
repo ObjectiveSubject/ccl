@@ -1,4 +1,4 @@
-<div class="ccl-u-px-3 ccl-u-py-6" style="background-color: #eee;">
+<div class="ccl-u-px-1 ccl-u-py-6" style="background-color: #eee;">
 
     <div class="ccl-l-container">
 

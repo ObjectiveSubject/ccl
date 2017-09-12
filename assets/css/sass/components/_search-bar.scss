@@ -35,7 +35,7 @@
         background-color: $blue;
     }
     &:last-child {
-        margin-right: -3rem;
+        margin-right: -1rem;
     }   
     
 }
@@ -43,9 +43,9 @@
 .ccl-c-search__results {
     background: white;
     border-top: 1px solid black;
-    margin-left: -3rem;
-    margin-right: -3rem;
-    padding: 0 3rem;
+    // margin-left: -3rem;
+    // margin-right: -3rem;
+    padding: 0 1rem;
 }
 
 .ccl-c-search__results-footer {
