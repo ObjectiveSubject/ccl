@@ -69,3 +69,5 @@ function accordion_fn( $attributes = false, $content = null ) {
 
 	return $html;
 }
+
+?>
