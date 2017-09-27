@@ -7,8 +7,10 @@
  */
 
 require_once CCL_INC . 'metaboxes/general.php';
+require_once CCL_INC . 'metaboxes/blocks.php';
 
 // Add General metabox first, so it always appears at top
 CCL\MetaBoxes\General\setup();
+CCL\MetaBoxes\Blocks\setup();
 
 // Add other metaboxes here
