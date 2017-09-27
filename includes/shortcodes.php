@@ -63,11 +63,9 @@ function accordion_fn( $attributes = false, $content = null ) {
 			<?php echo do_shortcode( shortcode_unautop( trim( $content ) ) ); ?>
 		</div>
 	</div>
-	<?
+	<?php
 	$html = ob_get_contents();
 	ob_get_clean();
 
 	return $html;
 }
-
-?>
