@@ -10,7 +10,7 @@ get_header(); ?>
 		<div class="ccl-l-container">
 
 			<style>
-				.ccl-l-column {
+				.site-content .ccl-l-column {
 					background: #ddd;
 					padding: 1.5em 0.5em;
 					margin-bottom: 1em;
