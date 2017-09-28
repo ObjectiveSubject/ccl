@@ -36,7 +36,8 @@ require_once CCL_INC . 'integrations/libguides.php';
 require_once CCL_INC . 'integrations/settings.php';
 
 // Include lib classes
-include( CCL_INC . 'libraries/extended-cpts/extended-cpts.php' );
+include( CCL_INC . 'libraries/extended-cpts.php' );
+include( CCL_INC . 'libraries/extended-taxos.php' );
 include( CCL_INC . 'libraries/cmb2/init.php' );
 include( CCL_INC . 'libraries/cmb2-attached-posts/cmb2-attached-posts-field.php' );
 include( CCL_INC . 'libraries/cmb2-post-search-field/cmb2_post_search_field.php' );
