@@ -2,16 +2,11 @@
 // Colors
 // ------------------------------------------- /
 
+// core brand colors
 $red: #CC0000;
 $blue: #126DB5;
 
-$color-map: (
-    'black' : black,
-    'white' : white,
-    'red'   : $red,
-    'blue'  : $blue,
-);
-
+// school colors
 $color-pomona: #006FB9;
 $color-cgu: #EE3A42;
 $color-cuc: #472782;
@@ -21,18 +16,32 @@ $color-harvey-mudd: #FDBD10;
 $color-pitzer: #F79F3D;
 $color-kgi: #00758F;
 
+// color map
+$color-map: (
+    'black' : black,
+    'white' : white,
+    'red'   : $red,
+    'blue'  : $blue,
+);
+
+// text
 $color-text-main: black;
 
+// links
 $color-link: $blue;
 $color-link-active: darken( $color-link, 20% );
 
+// code
 $color-code: black;
 
+// blockquote
 $color-blockquote: black;
 
+// selection
 $color-background-selection: lightblue;
 $color-selection-text: white;
 
+// social media
 $color-facebook: #3b5997;
 $color-twitter: #55abed;
 $color-youtube: #cd201f;

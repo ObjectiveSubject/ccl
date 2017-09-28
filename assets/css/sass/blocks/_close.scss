@@ -1,0 +1,18 @@
+.ccl-b-close {
+    float: right;
+    font-size: 1.5rem; //$close-font-size;
+    font-weight: 700; //$close-font-weight;
+    line-height: 1;
+    color: black; //$close-color;
+    opacity: .5;
+    &:hover,
+    &:focus {
+        color: black; //$close-color;
+        text-decoration: none;
+        opacity: .75;
+    }
+}
+
+button.ccl-b-close {
+    @extend .ccl-b-btn.ccl-is-naked;
+}

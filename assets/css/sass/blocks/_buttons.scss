@@ -96,6 +96,13 @@
             color: white;
         }
     }
+
+    &.ccl-is-naked {
+        padding: 0;
+        background: 0 0;
+        border: 0;
+        -webkit-appearance: none;
+    }
 }
 
 // Circular Button
