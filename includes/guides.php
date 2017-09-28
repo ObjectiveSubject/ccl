@@ -282,7 +282,7 @@ function render_guide_data_metabox() {
 
 	$content = $post->post_content;
 
-	echo '<h4>' . get_the_title( $post->ID ) . '</h4>';
+	echo '<h4><a href="' . get_the_permalink( $post->ID ) . '" target="_blank">' . get_the_title( $post->ID ) . '</a></h4>';
 
 	echo '<p>';
 
