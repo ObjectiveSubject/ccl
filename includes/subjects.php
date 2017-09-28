@@ -26,6 +26,18 @@ function setup() {
  */
 function register_subject_taxonomy() {
 
-	register_extended_taxonomy( 'subject', array( 'guide', 'staff' ) );
+	register_extended_taxonomy(
+		'subject', // taxonomy name
+		array(
+			// post types
+			'guide',
+			'staff'
+		),
+		array(
+			// parameters
+			'meta_box' => 'simple',
+		)
+
+	);
 
 }
