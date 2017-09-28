@@ -11,19 +11,17 @@
     var Tooltip = function(el){
         this.$el = $(el);
         this.content = this.$el.attr('title');
-        
-        
-        this.init();
-    };
-
-    Tooltip.prototype.init = function(){
-
         this.$tooltip = $('<div id="ccl-current-tooltip" class="ccl-c-tooltip ccl-is-top" role="tooltip">'+
                             '<div class="ccl-c-tooltip__arrow"></div>'+
                             '<div class="ccl-c-tooltip__inner">'+
                                 this.content +
                             '</div>'+
-                         '</div>');
+                          '</div>');
+        
+        this.init();
+    };
+
+    Tooltip.prototype.init = function(){
         
         var _this = this;
 

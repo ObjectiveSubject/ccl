@@ -13,6 +13,7 @@ function setup() {
 
 	add_shortcode( 'scheduler', $n( 'scheduler_fn' ) );
 	add_shortcode( 'accordion', $n( 'accordion_fn' ) );
+	add_shortcode( 'tooltip', $n( 'tooltip_fn' ) );
 }
 
 
@@ -26,7 +27,7 @@ function setup() {
 function scheduler_fn( $attributes ) {
 
 $data = shortcode_atts( array(
-	'text' => "Schedule Appointment",
+	'text' => 'Schedule Appointment',
 	'height' => 450,
 	'width'	=> 500,
 ), $attributes );
@@ -49,7 +50,7 @@ return $html;
 function accordion_fn( $attributes = false, $content = null ) {
 
 	$data = shortcode_atts( array(
-		'title' => "Title",
+		'title' => 'Title',
 	), $attributes );
 
 	$content = preg_replace( '#^<\/p>|^<br \/>|<p>$#', '', $content );
@@ -66,6 +67,30 @@ function accordion_fn( $attributes = false, $content = null ) {
 	<?php
 	$html = ob_get_contents();
 	ob_get_clean();
+
+	return $html;
+}
+
+
+
+/**
+* Create a tooltip
+*
+* @param $attributes array List of attributes from the given shortcode
+*
+* @return mixed HTML output for the shortcode
+*/
+function tooltip_fn( $attributes = false, $content = null ) {
+
+	$data = shortcode_atts( array(
+		'text' => '',
+	), $attributes );
+
+	if ( ! $data['text'] || ! $content ) {
+		return;
+	}
+
+	$html = '<span data-toggle="tooltip" title="' . $data['text'] . '">' . $content . '</span>';
 
 	return $html;
 }
