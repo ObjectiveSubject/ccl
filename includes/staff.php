@@ -94,7 +94,7 @@ function import_page_html() {
 				<p><strong>LibGuide API key and id have not been set</strong></p>
 			</div>
 		<?php endif; ?>
-		
+
 		<?php // Currently imported stats, api query for recently updated? ?>
 
 		<div id="staff-importer">
@@ -245,6 +245,7 @@ function add_staff_member( $member ) {
 	add_post_meta( $member_post_id, 'member_first_name', $member['first_name'], true ); // custom field ->
 	add_post_meta( $member_post_id, 'member_last_name', $member['last_name'], true ); // custom field ->
 	add_post_meta( $member_post_id, 'member_email', $member['email'], true ); // custom field ->
+	add_post_meta( $member_post_id, 'member_image', $member['profile']['image']['url'], true ); // custom field ->
 
 	// Raw data for development
 	add_post_meta( $member_post_id, 'member_raw_data', $member, true);
@@ -295,6 +296,12 @@ function render_staff_data_metabox() {
 	echo '<strong>Email:</strong> ' . get_post_meta( $post->ID, 'member_email', true ) . '<br>';
 
 	echo '</p>';
+
+	$image = get_post_meta( $post->ID, 'member_image', true );
+	if ( $image ) {
+		echo '<strong>Image URL:</strong> ' . $image . '<br>';
+		echo '<img src="' . $image . '" style="width:200px;"> <br>';
+	}
 
 	echo '<hr>';
 
