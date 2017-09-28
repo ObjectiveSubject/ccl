@@ -26,6 +26,7 @@ require_once CCL_INC . 'rooms.php';
 require_once CCL_INC . 'search.php';
 require_once CCL_INC . 'shortcodes.php';
 require_once CCL_INC . 'staff.php';
+require_once CCL_INC . 'subjects.php';
 require_once CCL_INC . 'taxonomies.php';
 require_once CCL_INC . 'template-tags.php';
 
@@ -51,5 +52,6 @@ CCL\Rooms\setup();
 CCL\Search\setup();
 CCL\Shortcodes\setup();
 CCL\Staff\setup();
+CCL\Subjects\setup();
 CCL\PostTypes\setup();
 CCL\Taxonomies\setup();
