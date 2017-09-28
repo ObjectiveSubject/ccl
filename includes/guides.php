@@ -77,6 +77,12 @@ function import_page_html() {
 
 		<p>Use this tool to import and update guides from libguide.</p>
 
+		<?php if ( ! \CCL\Integrations\LibGuides\get_libguide_key() || ! \CCL\Integrations\LibGuides\get_libguide_id() ) : ?>
+			<div class="error notice">
+				<p><strong>LibGuide API key and id have not been set</strong></p>
+			</div>
+		<?php endif; ?>
+
 		<?php // Currently imported stats, api query for recently updated? ?>
 
 		<div id="libguides-importer">
