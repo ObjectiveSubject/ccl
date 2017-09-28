@@ -176,7 +176,7 @@ function get_all_guides() {
 		'key'         => $site_key,
 		'status'      => 1, // only retrieve published guides
 		'guide_types' => '3,4', // 1) General, 2) Course, 3) Subject, 4) Topic, 5) Internal, 6) Template
-		'expand'      => 'owner' // need to know who created the guide
+		'expand'      => 'owner,subjects' // need to know who created the guide
 	);
 
 	$query_string = urldecode_deep( http_build_query( $params ) ); // urldecode is necessary to prevent the comma from being encoded

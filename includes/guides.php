@@ -233,10 +233,13 @@ function add_guide( $guide ) {
 	// Raw data for development
 	add_post_meta( $post_id, 'guide_raw_data', $guide, true);
 
-	// @todo use this for subject?
-	// Set category in XX taxonomy and create if it doesn't exist
-	// $category = $guide['category'];
-	// wp_set_object_terms( $post_id, $category, 'XX' );
+	// Add Subjects to custom taxonomy
+	if ( array_key_exists( 'subjects', $guide ) ) {
+		foreach ( $guide['subjects'] as $subject ) {
+			// Add subject name to subject taxonomy
+			wp_set_object_terms( $post_id, $subject['name'], 'subject' );
+		}
+	}
 
 	if ( $duplicate_check->have_posts() ) {
 		return "added";

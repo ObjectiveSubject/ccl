@@ -243,6 +243,14 @@ function add_staff_member( $member ) {
 	// Raw data for development
 	add_post_meta( $member_post_id, 'member_raw_data', $member, true);
 
+	// Add Subjects to custom taxonomy
+	if ( array_key_exists( 'subjects', $member ) ) {
+		foreach ( $member['subjects'] as $subject ) {
+			// Add subject name to subject taxonomy
+			wp_set_object_terms( $member_post_id, $subject['name'], 'subject' );
+		}
+	}
+
 	if ( $duplicate_check->have_posts() ) {
 		return "added";
 	} else {
