@@ -11,3 +11,16 @@ $modal-duration: 400ms;
 $modal-easing: ease-out;
 $modal-easing-enter: ease-out;
 $modal-easing-exit: ease-in;
+
+// tooltips
+$zindex-tooltip: 1070;
+$tooltip-margin: 0;
+$tooltip-opacity: 0.9;
+$tooltip-arrow-width: 5px;
+$tooltip-arrow-height: 5px;
+$tooltip-arrow-color: black;
+$tooltip-max-width: 200px;
+$tooltip-padding-y: 0.5rem;
+$tooltip-padding-x: 0.5rem;
+$tooltip-color: white;
+$tooltip-bg: black;

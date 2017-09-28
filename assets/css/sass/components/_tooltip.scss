@@ -1,0 +1,111 @@
+.ccl-c-tooltip {
+    position: absolute;
+    z-index: $zindex-tooltip;
+    display: block;
+    margin: $tooltip-margin;
+    // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
+    // So reset our font and text properties to avoid inheriting weird values.
+    @include reset-text();
+    font-size: rem(14);
+    font-weight: 500;
+    line-height: 1;
+    // Allow breaking very long words so they don't overflow the tooltip's bounds
+    word-wrap: break-word;
+    opacity: 0;
+    transition: opacity $duration $easing;
+  
+    &.ccl-is-shown { opacity: $tooltip-opacity; }
+  
+    .ccl-c-tooltip__arrow {
+      position: absolute;
+      display: block;
+      width: $tooltip-arrow-width;
+      height: $tooltip-arrow-height;
+    }
+  
+    &.ccl-is-top {
+      padding: $tooltip-arrow-width 0;
+      transform: translateX(-50%);
+      .ccl-c-tooltip__arrow {
+        bottom: 0;
+        left: 50%;
+        margin-left: $tooltip-arrow-width/2;
+      }
+  
+      .ccl-c-tooltip__arrow::before {
+        margin-left: -($tooltip-arrow-width - 2);
+        content: "";
+        border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+        border-top-color: $tooltip-arrow-color;
+      }
+    }
+    &.ccl-is-right {
+      padding: 0 $tooltip-arrow-width;
+      .ccl-c-tooltip__arrow {
+        left: 0;
+      }
+  
+      .ccl-c-tooltip__arrow::before {
+        margin-top: -($tooltip-arrow-width - 2);
+        content: "";
+        border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+        border-right-color: $tooltip-arrow-color;
+      }
+    }
+    &.ccl-is-bottom {
+      padding: $tooltip-arrow-width 0;
+      .ccl-c-tooltip__arrow {
+        top: 0;
+      }
+  
+      .ccl-c-tooltip__arrow::before {
+        margin-left: -($tooltip-arrow-width - 2);
+        content: "";
+        border-width: 0 $tooltip-arrow-width $tooltip-arrow-width;
+        border-bottom-color: $tooltip-arrow-color;
+      }
+    }
+    &.ccl-is-left {
+      padding: 0 $tooltip-arrow-width;
+      .ccl-c-tooltip__arrow {
+        right: 0;
+      }
+  
+      .ccl-c-tooltip__arrow::before {
+        right: 0;
+        margin-top: -($tooltip-arrow-width - 2);
+        content: "";
+        border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+        border-left-color: $tooltip-arrow-color;
+      }
+    }
+    // &.ccl-is-auto {
+    //   &[x-placement^="top"] {
+    //     @extend .bs-tooltip-top;
+    //   }
+    //   &[x-placement^="right"] {
+    //     @extend .bs-tooltip-right;
+    //   }
+    //   &[x-placement^="bottom"] {
+    //     @extend .bs-tooltip-bottom;
+    //   }
+    //   &[x-placement^="left"] {
+    //     @extend .bs-tooltip-left;
+    //   }
+    // }
+  
+    .ccl-c-tooltip__arrow::before {
+      position: absolute;
+      border-color: transparent;
+      border-style: solid;
+    }
+  }
+  
+  // Wrapper for the tooltip content
+  .ccl-c-tooltip__inner {
+    max-width: $tooltip-max-width;
+    padding: $tooltip-padding-y $tooltip-padding-x;
+    color: $tooltip-color;
+    text-align: center;
+    background-color: $tooltip-bg;
+  }

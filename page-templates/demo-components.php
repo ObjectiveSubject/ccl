@@ -34,6 +34,11 @@ get_header(); ?>
 			<?php get_template_part( 'components/modal' ); ?>
 		</div>
 
+		<div class="ccl-u-my-3 ccl-l-container">
+			<h2 class="ccl-u-mb-1">Tooltips</h2>
+			<?php get_template_part( 'components/tooltip' ); ?>
+		</div>
+
 		<div class="ccl-u-my-3">
 			<?php get_template_part( 'components/search-box' ); ?>
 		</div>

@@ -1,5 +1,7 @@
 /**
- * Reflow page elements
+ * Reflow page elements. 
+ * 
+ * Enables animations/transitions on elements added to the page after the DOM has loaded.
  */
 
 
