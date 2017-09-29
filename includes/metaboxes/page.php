@@ -29,7 +29,7 @@ function page_blocks() {
 		'title'        => __( 'Sidebar', 'cmb2' ),
 		'priority'     => 'high',
 		'object_types' => array( 'page' ),
-		'show_on'      => 'page-with-sidebar'
+		'show_on'      => array( 'page-with-sidebar' )
 	) );
 
 	$cmb->add_field( array(
