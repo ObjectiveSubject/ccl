@@ -12,7 +12,7 @@ get_header(); ?>
 			<?php
 			$thumb_url   = get_the_post_thumbnail_url( $post, 'full' );
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
-			$description = get_the_excerpt(); // Could use 'the_excerpt()' but this allows for override
+			$description = ( $post->post_excerpt ) ? get_the_excerpt() : ''; // Could use 'the_excerpt()' but this allows for override
 			$sidebar     = get_post_meta( get_the_ID(), 'page_sidebar_content', true ); // Could use 'the_excerpt()' but this allows for override
 			?>
 
