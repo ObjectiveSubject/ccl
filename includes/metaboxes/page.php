@@ -12,15 +12,13 @@ function setup() {
 	};
 
 	// NOTE: Uncomment to activate metabox
-	add_action( 'cmb2_init',  $n( 'page_blocks' ) );
+	add_action( 'cmb2_init',  $n( 'page_sidebar' ) );
 }
 
 /**
- * Custom Content Blocks metabox
- * See https://github.com/WebDevStudios/CMB2/wiki/Field-Types for
- * more information on creating metaboxes and field types.
+ * Add custom fields to page with sidebar template
  */
-function page_blocks() {
+function page_sidebar() {
 
 	$prefix = 'page_';
 
@@ -29,7 +27,7 @@ function page_blocks() {
 		'title'        => __( 'Sidebar', 'cmb2' ),
 		'priority'     => 'high',
 		'object_types' => array( 'page' ),
-		'show_on'      => array( 'page-with-sidebar' )
+		'show_on'      => array( 'key' => 'page-template', 'value' => 'page-templates/page-with-sidebar.php' )
 	) );
 
 	$cmb->add_field( array(
