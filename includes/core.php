@@ -16,8 +16,6 @@ function setup() {
 	add_action( 'after_setup_theme', $n( 'features' ) );
 	// add_action( 'pre_get_posts', $n( 'modify_queries' ) );
 	add_action( 'init', $n( 'add_menus' ) );
-	add_action( 'admin_enqueue_scripts', $n( 'admin_scripts' ) );
-
 
 	// Remove WordPress header cruft
 	remove_action( 'wp_head', 'feed_links_extra', 3 );
@@ -69,17 +67,6 @@ function scripts( $debug = false ) {
 		CCL_VERSION,
 		true
 	);
-}
-
-/**
- * Enqueue scripts for admin.
- *
- * @return void
- */
-function admin_scripts() {
-
-	wp_enqueue_script( 'admin', get_template_directory_uri() . '/assets/js/admin/general.js' );
-
 }
 
 /**

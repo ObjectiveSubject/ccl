@@ -16,6 +16,7 @@ define( 'CCL_ASSETS',       CCL_TEMPLATE_URL . '/assets/' );
 // Include compartmentalized functions
 require_once CCL_INC . 'core.php';
 
+require_once CCL_INC . 'admin.php';
 require_once CCL_INC . 'comments.php';
 require_once CCL_INC . 'databases.php';
 require_once CCL_INC . 'guides.php';
@@ -44,6 +45,7 @@ include( CCL_INC . 'libraries/cmb2-post-search-field/cmb2_post_search_field.php'
 
 // Run the setup functions
 CCL\Core\setup();
+CCL\Admin\setup();
 CCL\Comments\setup();
 CCL\Databases\setup();
 CCL\Guides\setup();
