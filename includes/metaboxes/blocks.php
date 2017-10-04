@@ -22,7 +22,7 @@ function setup() {
  */
 function content_blocks() {
 
-	$prefix = 'blocks_';
+	$prefix = 'block_';
 
 	$cmb = new_cmb2_box( array(
 		'id'           => $prefix . 'metabox',
@@ -47,41 +47,41 @@ function content_blocks() {
 
 	$cmb->add_group_field( $block_group_id, array(
 		'name'             => 'Block Type',
-		'id'               => $prefix . 'block_type',
+		'id'               => $prefix . 'type',
 		'type'             => 'select',
 		// 'show_option_none' => true,
 		'default'          => 'carousel',
 		'options'          => array(
+			'wysiwyg'  => __( 'WYSIWYG', 'cmb2' ),
 			'carousel' => __( 'Carousel', 'cmb2' ),
 			'banner'   => __( 'Banner', 'cmb2' ),
-			'wysiwyg'  => __( 'WYSIWYG', 'cmb2' ),
 		)
 	) );
 	
 	$cmb->add_group_field( $block_group_id, array(
-		'name'    => 'Carousel Title',
+		'name'    => 'Title',
 		// 'desc'    => 'field description (optional)',
 		// 'default' => 'standard value (optional)',
-		'id'      => $prefix . 'carousel_title',
+		'id'      => $prefix . 'title',
 		'type'    => 'text',
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
-		'name'    => 'Carousel Description',
+		'name'    => 'Description',
 		'desc'    => 'Provide short text or call-to-action links',
 		// 'default' => 'standard value (optional)',
-		'id'      => $prefix . 'carousel_desc',
+		'id'      => $prefix . 'description',
 		'type'    => 'wysiwyg',
 		'options' => array(
-			'editor_class' => $prefix . 'carousel_desc_wysiwyg',
-			'editor_css' => '<style> .' . $prefix . 'carousel_desc_wysiwyg { height: 200px; }</style>'
+			'editor_class' => $prefix . 'description_wysiwyg',
+			'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'
 		)
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
-		'name' => 'Carousel Items',
+		'name' => 'Items',
 		'desc' => '',
-		'id'   => $prefix . 'carousel_items',
+		'id'   => $prefix . 'items',
 		'type' => 'file_list',
 		'preview_size' => array( 150, 150 ), // Default: array( 50, 50 )
 		'query_args' => array( 'type' => 'image' ), // Only images attachment

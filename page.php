@@ -41,6 +41,78 @@ get_header(); ?>
 
 				</div>
 
+				<?php
+				$blocks = get_post_meta( get_the_ID(), 'block_group', true );
+
+				// The block check will almost always be true
+				// The extended check is to see if a single empty "WYSIWYG" block has been saved
+				if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]['block_type'] ) && '' != $blocks[0]['block_description'] ) : ?>
+
+					<!-- ### Blocks -->
+					<div class='ccl-l-container'>
+
+						<?php foreach ( $blocks as $block ) : ?>
+
+							<div class="block-<?php echo esc_attr( $block['block_type'] ); ?>">
+
+								<?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+
+									<h3 class="block-title">
+										<?php echo apply_filters( 'the_title', $block['block_title'] ); ?>
+									</h3>
+
+								<?php endif; ?>
+
+								<?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
+
+									<div class="block-description">
+										<?php echo apply_filters( 'the_content', $block['block_description'] ); ?>
+									</div>
+
+								<?php endif; ?>
+
+								<?php if ( isset( $block['block_items'] ) && $block['block_items'] ) : ?>
+
+									<?php if ( 'carousel' == $block['block_type'] ) : ?>
+
+										<div class="block-images">
+											<ul>
+											<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
+
+												<li><?php echo wp_get_attachment_image( $image_id, 'large' ); ?></li>
+
+											<?php endforeach; ?>
+
+											</ul>
+										</div>
+
+									<?php elseif ( 'banner' == $block['block_type'] ) : ?>
+
+										<div class="block-banner-image">
+											<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
+
+												<?php
+												echo wp_get_attachment_image( $image_id, 'banner' ); // banner size may not exist
+												break; // only get first image, break after
+												?>
+
+											<?php endforeach; ?>
+
+										</div>
+
+									<?php endif; ?>
+
+								<?php endif; ?>
+
+							</div>
+
+						<?php endforeach; ?>
+
+					</div>
+					<!-- End Blocks -->
+
+				<?php endif; ?>
+
 			</article>
 
 		<?php endwhile; ?>
