@@ -146,3 +146,15 @@ function truncate( $string = null, $cap = 40, $ellipses = true, $start = 0 ) {
 
 	return $new_string;
 }
+
+/* 
+ * Output a slug from a string
+ *
+ * $string (string) the string to convert
+ */
+function create_slug( $string ){
+	$slug = preg_replace( '/[!@#$%^&*]+/', '', $string ); 
+	$slug = preg_replace( '/[^A-Za-z0-9-]+/', '-', $slug );
+	$slug = strtolower( $slug );
+	return $slug;
+}
