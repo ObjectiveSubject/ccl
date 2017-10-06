@@ -83,7 +83,7 @@
 .ccl-c-hero__action {
     @extend .ccl-h4;
     @extend .ccl-u-display-block;
-    margin-top: -$leading;
+    margin-top: -$spacer;
 }
 
 .ccl-c-hero__title {
@@ -92,7 +92,7 @@
 
 .ccl-c-hero__menu {
     @extend .ccl-u-clean-list;
-    margin-top: $leading;
+    margin-top: $spacer;
     li {
         @extend .ccl-h3;
         margin-top: 0;

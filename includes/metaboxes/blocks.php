@@ -67,15 +67,28 @@ function content_blocks() {
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
-		'name'    => 'Description',
+		'name'    => 'Call to Action',
 		'desc'    => 'Provide short text or call-to-action links',
 		// 'default' => 'standard value (optional)',
-		'id'      => $prefix . 'description',
+		'id'      => $prefix . 'cta',
 		'type'    => 'wysiwyg',
 		'options' => array(
+			'media_buttons' => false,
 			'editor_class' => $prefix . 'description_wysiwyg',
 			'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'
 		)
+	) );
+
+	$cmb->add_group_field( $block_group_id, array(
+		'name'    => 'Description',
+		// 'desc'    => '',
+		// 'default' => 'standard value (optional)',
+		'id'      => $prefix . 'description',
+		'type'    => 'wysiwyg',
+		// 'options' => array(
+			// 'editor_class' => $prefix . 'description_wysiwyg',
+			// 'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'
+		// )
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(

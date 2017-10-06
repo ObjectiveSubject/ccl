@@ -33,7 +33,7 @@ $bar-width: 2px;
 
 .ccl-c-accordion {
     border-top: 1px solid;  
-    margin-top: $leading;
+    margin-top: $spacer;
     & + .ccl-c-accordion {
         margin-top: 0;
     }
@@ -91,5 +91,5 @@ $bar-width: 2px;
 .ccl-c-accordion__content {
     display: none;
     padding-left: $bar-length * 1.5;
-    padding-bottom: $leading;
+    padding-bottom: $spacer;
 }

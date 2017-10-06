@@ -46,69 +46,132 @@ get_header(); ?>
 
 				// The block check will almost always be true
 				// The extended check is to see if a single empty "WYSIWYG" block has been saved
-				if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]['block_type'] ) && '' != $blocks[0]['block_description'] ) : ?>
+				if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]['block_type'] && '' != $blocks[0]['block_description'] ) ) : ?>
 
 					<!-- ### Blocks -->
-					<div class='ccl-l-container'>
 
-						<?php foreach ( $blocks as $block ) : ?>
+					<?php foreach ( $blocks as $index => $block ) : ?>
 
-							<div class="block-<?php echo esc_attr( $block['block_type'] ); ?>">
+						<?php if ( 'carousel' == $block['block_type'] ) : ?>
+							
+							<div class="ccl-l-container">
 
-								<?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+								<div id="block-<?php echo $index; ?>" class="ccl-c-promo">
 
-									<h3 class="block-title">
-										<?php echo apply_filters( 'the_title', $block['block_title'] ); ?>
-									</h3>
+									<header class="ccl-c-promo__header">
 
-								<?php endif; ?>
+										<?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
 
-								<?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
+											<div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
 
-									<div class="block-description">
-										<?php echo apply_filters( 'the_content', $block['block_description'] ); ?>
+										<?php endif; ?>
+
+										<?php if ( isset( $block['block_cta'] ) && $block['block_cta'] ) : ?>
+
+											<div class="ccl-c-promo__cta">
+												<?php echo apply_filters( 'the_content', $block['block_cta'] ); ?>
+											</div>
+
+										<?php endif; ?>
+										
+										<div class="ccl-c-promo__action">
+											<button id="carousel-<?php echo $index; ?>-prev" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
+											<button id="carousel-<?php echo $index; ?>-next" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
+										</div>
+
+									</header>
+
+									<div class="ccl-c-promo__content">        
+
+										<?php if ( isset ( $block['block_items'] ) && $block['block_items'] ) : ?>
+
+											<div class="ccl-c-carousel js-promo-carousel" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
+
+												<?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
+
+													<article class="ccl-c-promo__description ccl-c-carousel__slide">
+														<div style="max-width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
+													</article>
+
+												<?php endif; ?>
+
+												<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
+													<article class="ccl-c-carousel__slide">
+														<div class="ccl-u-mb-nudge"><?php echo wp_get_attachment_image( $image_id ); ?></div>
+														<p class="ccl-h4 ccl-u-mt-0"><?php echo get_the_title( $image_id ); ?></p>
+														<p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo get_the_excerpt( $image_id ); ?></p>
+													</article>
+												<?php endforeach; ?>
+												
+											</div>
+
+										<?php endif; ?>
+
 									</div>
 
-								<?php endif; ?>
-
-								<?php if ( isset( $block['block_items'] ) && $block['block_items'] ) : ?>
-
-									<?php if ( 'carousel' == $block['block_type'] ) : ?>
-
-										<div class="block-images">
-											<ul>
-											<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
-
-												<li><?php echo wp_get_attachment_image( $image_id, 'large' ); ?></li>
-
-											<?php endforeach; ?>
-
-											</ul>
-										</div>
-
-									<?php elseif ( 'banner' == $block['block_type'] ) : ?>
-
-										<div class="block-banner-image">
-											<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
-
-												<?php
-												echo wp_get_attachment_image( $image_id, 'banner' ); // banner size may not exist
-												break; // only get first image, break after
-												?>
-
-											<?php endforeach; ?>
-
-										</div>
-
-									<?php endif; ?>
-
-								<?php endif; ?>
+								</div>
 
 							</div>
 
-						<?php endforeach; ?>
+						<?php elseif ( 'banner' == $block['block_type'] ) : ?>
 
-					</div>
+							<div class="ccl-c-banner">
+
+								<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
+
+									<?php
+									echo wp_get_attachment_image( $image_id, 'large' );
+									break; // only get first image, break after
+									?>
+
+								<?php endforeach; ?>
+	
+							</div>
+
+						<?php else : ?>
+
+							<div class="ccl-l-container">
+
+								<div id="block-<?php echo $index; ?>" class="ccl-c-promo">
+
+									<header class="ccl-c-promo__header">
+
+										<?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+
+											<div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
+
+										<?php endif; ?>
+
+										<?php if ( isset( $block['block_cta'] ) && $block['block_cta'] ) : ?>
+
+											<div class="ccl-c-promo__cta">
+												<?php echo apply_filters( 'the_content', $block['block_cta'] ); ?>
+											</div>
+
+										<?php endif; ?>
+
+									</header>
+
+									<div class="ccl-c-promo__content">        
+
+										<?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
+										
+											<div class="ccl-c-promo__description">
+												<?php echo apply_filters( 'the_content', $block['block_description'] ); ?>
+											</div>
+
+										<?php endif; ?>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						<?php endif; ?>
+
+					<?php endforeach; ?>
+					
 					<!-- End Blocks -->
 
 				<?php endif; ?>

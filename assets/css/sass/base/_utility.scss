@@ -17,12 +17,12 @@
 
 // Spacing
 // --------------------------------------- /
-.ccl-u-mt-nudge { margin-top: $leading/3 !important; }
-.ccl-u-mb-nudge { margin-bottom: $leading/3 !important; }
-.ccl-u-my-nudge { margin-top: $leading/3 !important; margin-bottom: $leading/3 !important; }
-.ccl-u-py-nudge { padding-top: $leading/3 !important; padding-bottom: $leading/3 !important; }
+.ccl-u-mt-nudge { margin-top: $spacer/3 !important; }
+.ccl-u-mb-nudge { margin-bottom: $spacer/3 !important; }
+.ccl-u-my-nudge { margin-top: $spacer/3 !important; margin-bottom: $spacer/3 !important; }
+.ccl-u-py-nudge { padding-top: $spacer/3 !important; padding-bottom: $spacer/3 !important; }
 @for $i from 0 through 6 {
-    $val: $leading * $i;
+    $val: $spacer * $i;
     .ccl-u-ma-#{$i} { margin: $val !important; }
     .ccl-u-mt-#{$i} { margin-top: $val !important; }
     .ccl-u-mr-#{$i} { margin-right: $val !important; }

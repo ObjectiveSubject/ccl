@@ -26,7 +26,7 @@ textarea {
 /* Headings
  * ------------------------------------------ */
  h1, .ccl-h1 {
-	margin-top: $leading;
+	margin-top: $spacer;
 	margin-bottom: 0;
 	font-family: $gotham-narrow-light;
 	font-weight: 300;
@@ -38,7 +38,7 @@ textarea {
 	}
  }
  h2, .ccl-h2 {
-	margin-top: $leading;
+	margin-top: $spacer;
 	margin-bottom: 0;
 	font-size: rem(24);
 	line-height: 1.25em;
@@ -50,7 +50,7 @@ textarea {
 	}
  }
  h3, .ccl-h3 {
-	margin-top: $leading;
+	margin-top: $spacer;
 	margin-bottom: 0;
 	font-size: rem(20);
 	line-height: 1.25em;
@@ -61,7 +61,7 @@ textarea {
 	}
  }
  h4, .ccl-h4 {
-	margin-top: $leading;
+	margin-top: $spacer;
 	margin-bottom: 0;
 	font-size: rem(18);
 	line-height: 1.2em;
@@ -72,7 +72,7 @@ textarea {
 	}
  }
  h5, .ccl-h5 {
-	margin-top: $leading;
+	margin-top: $spacer;
 	margin-bottom: 0;
 	font-family: $gotham-narrow-medium;
 	font-size: rem(14);
@@ -80,7 +80,7 @@ textarea {
 	font-weight: 500;
  }
  h6, .ccl-h6 {
-	margin-top: $leading;
+	margin-top: $spacer;
 	margin-bottom: 0;
 	font-family: $gotham-narrow-medium;
 	font-size: rem(12);
@@ -115,7 +115,7 @@ textarea {
  * ------------------------------------------ */
 
 p {
-	margin-top: $leading;
+	margin-top: $spacer;
     margin-bottom: 0;
 }
 
@@ -140,8 +140,8 @@ blockquote {
 	@extend .ccl-u-display-block;
 	position: relative;
 	font-family: $font-main;
-	margin: ($leading * 2) 0;
-	padding-top: $leading * 2;
+	margin: ($spacer * 2) 0;
+	padding-top: $spacer * 2;
 
 	p {
 		margin: 0;
@@ -150,14 +150,14 @@ blockquote {
 	cite {
 		@extend .ccl-h4;
 		display: block;
-		margin-top: $leading;
+		margin-top: $spacer;
 		font-style: normal;
 	}
 
 	:before {
 		content: "\201C";
 		position: absolute;
-		top: $leading;
+		top: $spacer;
 		left: 0;
 		font-size: 6rem;
 		font-family: georgia, serif;
@@ -165,7 +165,7 @@ blockquote {
 }
 
 address {
-	margin: $leading 0 0;
+	margin: $spacer 0 0;
 }
 
 pre {
@@ -204,7 +204,7 @@ hr {
 	background-color: lightgray;
 	border: 0;
 	height: 1px;
-	margin: $leading 0 0;
+	margin: $spacer 0 0;
 	width: 100%;
 }
 

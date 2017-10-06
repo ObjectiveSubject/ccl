@@ -2,7 +2,8 @@
 // ------------------------------------------- //
 .slick-track {
     @extend .ccl-u-clearfix;
-    margin: 0 -$gutter/2;
+    margin-left: -$gutter/2;
+    margin-right: -$gutter/2;
 }
 
 // CCL Carousel
@@ -26,7 +27,7 @@
 
 .ccl-c-carousel__paging {
     @extend .ccl-u-clean-list;
-    margin-top: $leading;
+    margin-top: $spacer;
 
     li {
         display: inline-block;

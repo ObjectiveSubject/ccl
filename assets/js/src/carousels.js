@@ -17,7 +17,8 @@
             dotsClass: 'ccl-c-carousel__paging',
             infinite: false,
             dots: true,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            variableWidth: true
         };
 
         this.init();

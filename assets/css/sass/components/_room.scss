@@ -34,7 +34,7 @@
 .ccl-c-room__link {
     @extend .ccl-u-display-block;
     @extend .ccl-h4;
-    margin-top: $leading/2;
+    margin-top: $spacer/2;
 }
 
 .ccl-c-room__meta {
@@ -54,7 +54,7 @@
 // Room Image
 // ------------------------------------- //
 .ccl-c-room__image {
-    margin: $leading 0;
+    margin: $spacer 0;
 
     @include media($sm) {
         width: 50%;
@@ -83,10 +83,10 @@
     flex-shrink: 1;
     flex-grow: 1;
     flex-wrap: wrap;
-    margin: $leading 0;
+    margin: $spacer 0;
     clear: both;
     @include media($lg) {
-        margin-left: $leading;
+        margin-left: $spacer;
         flex-wrap: nowrap;
     }
 }
@@ -171,7 +171,7 @@
     margin-top: 2rem;
     text-align: right;
     @include media($lg) {
-        margin-top: $leading/2;
+        margin-top: $spacer/2;
     }
 }
 

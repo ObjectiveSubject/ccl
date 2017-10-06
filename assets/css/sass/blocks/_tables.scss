@@ -4,7 +4,7 @@
 table {
     border-collapse: collapse;
     background-color: transparent;
-	margin: $leading 0 0;
+	margin: $spacer 0 0;
 }
 caption {
     @extend .ccl-u-text-left;

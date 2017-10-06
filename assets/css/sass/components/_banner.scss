@@ -1,0 +1,11 @@
+.ccl-c-banner {
+    width: 100%;
+    max-height: rem(500);
+    overflow: hidden;
+
+    & > * {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
