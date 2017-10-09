@@ -33,25 +33,25 @@
 
         if ( data.optionsSm ) {
             options.responsive.push({
-                breakpoint: 500, 
+                breakpoint: CCL.BREAKPOINT_SM, 
                 settings: data.optionsSm
             });
         }
         if ( data.optionsMd ) {
             options.responsive.push({
-                breakpoint: 768, 
+                breakpoint: CCL.BREAKPOINT_MD, 
                 settings: data.optionsMd
             });
         }
         if ( data.optionsLg ) {
             options.responsive.push({
-                breakpoint: 1000, 
+                breakpoint: CCL.BREAKPOINT_LG, 
                 settings: data.optionsLg
             });
         }
         if ( data.optionsXl ) {
             options.responsive.push({
-                breakpoint: 1500, 
+                breakpoint: CCL.BREAKPOINT_XL, 
                 settings: data.optionsXl
             });
         }

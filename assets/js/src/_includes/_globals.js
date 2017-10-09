@@ -10,5 +10,10 @@
         }
     
         CCL.DURATION = 300;
+
+        CCL.BREAKPOINT_SM = 500;
+        CCL.BREAKPOINT_MD = 768;
+        CCL.BREAKPOINT_LG = 1000;
+        CCL.BREAKPOINT_XL = 1500;
     
     })();
