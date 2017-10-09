@@ -54,6 +54,11 @@ get_header(); ?>
 
 						<?php if ( 'carousel' == $block['block_type'] ) : ?>
 							
+							<?php 
+							$has_block_items = ( isset ( $block['block_items'] ) && $block['block_items'] );
+							$block_item_count = ( $has_block_items && is_array( $block['block_items'] ) ) ? count( $block['block_items'] ) : 0;
+							$enable_carousel = $block_item_count > 3; ?>
+
 							<div class="ccl-l-container">
 
 								<div id="block-<?php echo $index; ?>" class="ccl-c-promo">
@@ -74,18 +79,24 @@ get_header(); ?>
 
 										<?php endif; ?>
 										
-										<div class="ccl-c-promo__action">
-											<button id="carousel-<?php echo $index; ?>-prev" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
-											<button id="carousel-<?php echo $index; ?>-next" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
-										</div>
+										<?php if ( $enable_carousel ) : ?>
+
+											<div class="ccl-c-promo__action">
+												<button id="carousel-<?php echo $index; ?>-prev" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
+												<button id="carousel-<?php echo $index; ?>-next" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
+											</div>
+
+										<?php endif; ?>
 
 									</header>
 
-									<div class="ccl-c-promo__content">        
+									<?php if ( $has_block_items ) : ?>
 
-										<?php if ( isset ( $block['block_items'] ) && $block['block_items'] ) : ?>
+										<?php $carousel_class = ( $enable_carousel ) ? 'js-promo-carousel' : 'ccl-is-static'; ?>
 
-											<div class="ccl-c-carousel js-promo-carousel" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
+										<div class="ccl-c-promo__content">
+
+											<div class="ccl-c-carousel <?php echo $carousel_class; ?>" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
 
 												<?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
 
@@ -96,18 +107,22 @@ get_header(); ?>
 												<?php endif; ?>
 
 												<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
+
+													<?php $image_size = ( $enable_carousel ) ? 'thumbnail' : 'medium'; ?>
+
 													<article class="ccl-c-carousel__slide">
-														<div class="ccl-u-mb-nudge"><?php echo wp_get_attachment_image( $image_id ); ?></div>
+														<div class="ccl-u-mb-nudge"><?php echo wp_get_attachment_image( $image_id, $image_size ); ?></div>
 														<p class="ccl-h4 ccl-u-mt-0"><?php echo get_the_title( $image_id ); ?></p>
 														<p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo get_the_excerpt( $image_id ); ?></p>
 													</article>
+
 												<?php endforeach; ?>
 												
 											</div>
 
-										<?php endif; ?>
+										</div>
 
-									</div>
+									<?php endif; ?>
 
 								</div>
 

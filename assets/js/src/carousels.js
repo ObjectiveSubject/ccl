@@ -68,7 +68,7 @@
     };
 
     $(document).ready(function(){
-        $('.ccl-c-carousel').each(function(){
+        $('.js-promo-carousel').each(function(){
             new Carousel(this);
         });
     });

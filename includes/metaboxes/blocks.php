@@ -53,8 +53,8 @@ function content_blocks() {
 		'default'          => 'carousel',
 		'options'          => array(
 			'wysiwyg'  => __( 'WYSIWYG', 'cmb2' ),
-			'carousel' => __( 'Carousel', 'cmb2' ),
-			'banner'   => __( 'Banner', 'cmb2' ),
+			'carousel' => __( 'Carousel/Feature Items', 'cmb2' ),
+			'banner'   => __( 'Banner Image(s)', 'cmb2' ),
 		)
 	) );
 	

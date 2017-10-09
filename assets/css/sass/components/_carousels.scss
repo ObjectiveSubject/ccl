@@ -10,7 +10,16 @@
 // ------------------------------------------- //
 .ccl-c-carousel {
     @extend .ccl-u-clearfix;
-    margin-right: -$gutter;
+
+    @include media($lg) {
+        margin-left: 0;
+        margin-right: -$gutter;
+    }
+
+    &.ccl-is-static {
+        display: flex;
+        margin: 0 $gutter / -2;
+    }
 }
 
 .ccl-c-carousel__slide {
@@ -18,6 +27,25 @@
     padding: 0 $gutter/2;
     transition: opacity 300ms ease-out;
     outline: 0;
+
+    .ccl-is-static & {
+        float: none;
+        
+        &:not(:first-child) {
+            display: none;
+        }
+
+        @include media($sm) {
+            &:nth-child(2) {
+                display: block;
+            }
+        }
+        @include media($md) {
+            &:nth-child(3) {
+                display: block;
+            }
+        }
+    }
 
     &.ccl-is-past {
         opacity: 0.05;
