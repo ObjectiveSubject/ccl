@@ -33,7 +33,7 @@
                                     $ii = 0;
                                     do { $radio_id = 'radio-' . $i . '-' . $ii; ?>
                                         <li>
-                                            <input class="ccl-b-input--radio" id="<?php echo $radio_id; ?>" name="<?php echo 'radio-' . $i; ?>" type="radio"/>
+                                            <input class="ccl-b-input" id="<?php echo $radio_id; ?>" name="<?php echo 'radio-' . $i; ?>" type="radio"/>
                                             <label for="<?php echo $radio_id; ?>" class="ccl-b-label">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</label>
                                         </li>
                                     <?php $ii++; } while ( $ii < 4 ); ?>

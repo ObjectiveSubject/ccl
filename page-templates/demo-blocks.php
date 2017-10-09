@@ -133,6 +133,36 @@ get_header(); ?>
 							<label class="ccl-b-label" for="textarea">Textarea</label>
 							<textarea id="textarea" class="ccl-b-input" rows="8" cols="48" placeholder="Enter your message here"></textarea>
 						</p>
+						<div class="ccl-l-row">
+							<div class="ccl-l-column">
+								<p>									
+									<input type="radio" class="ccl-b-input" id="radio_example_1" name="radio_example" value="1" />
+									<label class="ccl-b-label ccl-u-mr-2" for="radio_example_1">Radio 1</label>
+								</p>
+								<p>
+									<input type="radio" class="ccl-b-input" id="radio_example_2" name="radio_example" value="2" />
+									<label class="ccl-b-label ccl-u-mr-2" for="radio_example_2">Radio 2</label>
+								</p>
+								<p>
+									<input type="radio" class="ccl-b-input" id="radio_example_3" name="radio_example" value="3" />
+									<label class="ccl-b-label ccl-u-mr-2" for="radio_example_3">Radio 3</label>
+								</p>
+							</div>
+							<div class="ccl-l-column">
+								<p>
+									<input type="checkbox" class="ccl-b-input" id="checkbox_example_1" name="checkbox_example" value="1" />
+									<label class="ccl-b-label ccl-u-mr-2" for="checkbox_example_1">Checkbox 1</label>
+								</p>
+								<p>
+									<input type="checkbox" class="ccl-b-input" id="checkbox_example_2" name="checkbox_example" value="2" />
+									<label class="ccl-b-label ccl-u-mr-2" for="checkbox_example_2">Checkbox 2</label>
+								</p>
+								<p>
+									<input type="checkbox" class="ccl-b-input" id="checkbox_example_3" name="checkbox_example" value="3" />
+									<label class="ccl-b-label ccl-u-mr-2" for="checkbox_example_3">Checkbox 3</label>
+								</p>
+							</div>
+						</div>
 
 						<div class="ccl-l-row">
 							<div class="ccl-l-column">

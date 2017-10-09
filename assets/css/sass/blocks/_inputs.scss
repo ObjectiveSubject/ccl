@@ -1,23 +1,31 @@
+.ccl-b-input[type="radio"],
+.ccl-b-input[type="checkbox"] {
+    display: none;
+}
+
 .ccl-b-label {
     @extend .ccl-u-transition;
     display: block;
+    font-weight: bold;
 
-    .ccl-b-input--radio + & {
-        
-        $radio-size: 40px;
+    .ccl-b-input[type="radio"] + &,
+    .ccl-b-input[type="checkbox"] + & {
+        $radio-size: 24px;
+        $radio-size-big: 40px;
 
+        padding-left: $radio-size + $gutter;
         position: relative;        
         cursor: pointer;
         width: auto;
-        padding-left: $radio-size + $gutter;
-        @include media($sm) {
-            padding-left: $radio-size + ($gutter * 2);
-        }
 
         .ccl-c-quiz-card & {
             @extend .ccl-u-mb-1;
+            padding-left: $radio-size-big + $gutter;
+            @include media($sm) {
+                padding-left: $radio-size-big + ($gutter * 2);
+            }
             @include media($md) {
-                padding-left: $radio-size + ($gutter * 3);
+                padding-left: $radio-size-big + ($gutter * 3);
             }
         }
     
@@ -26,22 +34,21 @@
             display: block;
             position: absolute;
             top: 50%;
-            left: $gutter/2;
+            left: 0;
             width: $radio-size;
             height: $radio-size;
             border: 3px solid black;
-            border-radius: 50%;
             cursor: pointer;
             transform: translateY(-50%);
-            @include media($sm) {
-                left: $gutter;
-            }
             
             .ccl-c-quiz-card & {
+                width: $radio-size-big;
+                height: $radio-size-big;
                 border-color: white;
-                // @include media($md) {
-                //     left: $gutter * 1.5;
-                // }
+                left: $gutter/2;
+                @include media($sm) {
+                    left: $gutter;
+                }
             }
         }
         &:after {
@@ -49,22 +56,55 @@
             display: block;
             position: absolute;
             top: 50%;
-            left: $gutter + ($radio-size/4);
             background: black;
+            left: ($radio-size/4);
             width: $radio-size/2;
             height: $radio-size/2;
-            border-radius: 50%;
             transition: all 100ms ease-out;
             transform: translateY(-50%) scale(0);
+
             .ccl-c-quiz-card & {
+                left: $gutter + ($radio-size-big/4);
+                width: $radio-size-big/2;
+                height: $radio-size-big/2;
                 background: white;
             }
         }
     }
-    .ccl-b-input--radio:not(:checked) + &:hover:after {
+
+    .ccl-b-input[type="radio"] + & {
+        &:before {
+            border-radius: 50%;
+        }
+        &:after {
+            border-radius: 50%;
+        }
+    }
+    .ccl-b-input[type="checkbox"] + & {
+        &:before {
+            border-radius: 4px;
+        }
+        &:after {
+            border-radius: 2px;
+        }
+
+        .ccl-c-quiz-card & {
+            &:before {
+                border-radius: 12px;
+            }
+            &:after {
+                border-radius: 6px;
+            }
+        }
+    }
+    
+
+    .ccl-b-input[type="radio"]:not(:checked) + &:hover:after,
+    .ccl-b-input[type="checkbox"]:not(:checked) + &:hover:after {
         transform: translateY(-50%) scale(0.5);
     }
-    .ccl-b-input--radio:checked + &:after {
+    .ccl-b-input[type="radio"]:checked + &:after,
+    .ccl-b-input[type="checkbox"]:checked + &:after {
         transform: translateY(-50%) scale(1);
         background: black;
         .ccl-c-quiz-card & {
@@ -74,7 +114,14 @@
     
 }
 
-.ccl-b-input {
+.ccl-b-input[type="text"],
+.ccl-b-input[type="email"],
+.ccl-b-input[type="tel"],
+.ccl-b-input[type="url"],
+.ccl-b-input[type="search"],
+.ccl-b-input[type="number"],
+.ccl-b-input[type="password"],
+textarea.ccl-b-input {
     @extend .ccl-u-transition;
     display: block;
     width: 100%;
@@ -108,6 +155,3 @@
     }
 }
 
-.ccl-b-input--radio {
-    display: none;
-}
