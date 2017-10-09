@@ -164,6 +164,15 @@ get_header(); ?>
 							</div>
 						</div>
 
+						<p>
+							<select class="ccl-b-select">
+								<option>Select an Option</option>
+								<option>Option 1</option>
+								<option>Option 2</option>
+								<option>Option 3</option>
+							</select>
+						</p>
+
 						<div class="ccl-l-row">
 							<div class="ccl-l-column">
 								<p><input id="submit" value="Standard Button" type="button" class="ccl-b-btn"/></p>

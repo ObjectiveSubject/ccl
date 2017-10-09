@@ -125,11 +125,12 @@ textarea.ccl-b-input {
     @extend .ccl-u-transition;
     display: block;
     width: 100%;
-    color: $color-text-main;
+    line-height: 1;
+    color: inherit;
     border: 1px solid lightgray;
     border-radius: 0;
     box-sizing: border-box;
-    padding: 0.5em;
+    padding: 0.5rem;
     outline: 0;
     @include placeholder {
         color: lightgray;
@@ -155,3 +156,27 @@ textarea.ccl-b-input {
     }
 }
 
+.ccl-b-select {
+    -webkit-appearance: none;
+    line-height: 1 !important;
+    border: 1px solid lightgray;
+    border-radius: 0;
+    background: none;
+    padding: 0.6rem 2rem 0.6rem 0.5rem;
+    outline: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: inherit;
+
+    &.ccl-is-naked {
+        border: 0;
+        padding-left: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .ccl-c-user-nav__menu & {
+        @extend .ccl-h5;
+        margin: 0;
+    }
+}

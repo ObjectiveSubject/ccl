@@ -13,6 +13,7 @@
     
     @include media($md) {
         display: flex;
+        align-items: center;
     }
 }
 
@@ -24,14 +25,10 @@
         margin-right: 1em;
     }
 
-    &.ccl-pull-right {
+    &.ccl-is-right {
         @include media($md) {
-            align-self: flex-end;
             margin-left: 1em;
             margin-right: 0;
-            .ccl-c-user-nav__menu-item:not(.ccl-pull-right) + & {
-                margin-left: auto;
-            }
         }
     }
 

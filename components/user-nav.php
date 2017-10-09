@@ -8,27 +8,22 @@
                 Library Open 7am - 9pm Today
             </li>
             
-            <li class="ccl-c-user-nav__menu-item ccl-c-dropdown ccl-pull-right">
-                <a href="#dropdown-1" class="ccl-c-dropdown__toggle">
-                    Login <i class="ccl-b-caret-down" aria-hidden="true"></i>
-                </a>
-                <ul id="dropdown-1" class="ccl-c-dropdown__menu">
-                    <li class="ccl-c-dropdown__item">
-                        <a href="#">
-                            <i class="ccl-b-icon-person" aria-hidden="true"></i>
-                            My Account
-                        </a>
-                    </li>
-                    <li class="ccl-c-dropdown__item">
-                        <a href="#">
-                            Sign Up
-                        </a>
-                    </li>
-                </ul>
+            <li class="ccl-c-user-nav__menu-item ccl-is-right" style="margin-left: auto">
+                <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">Chat with a librarian</a>
             </li>
 
-            <li class="ccl-c-user-nav__menu-item ccl-pull-right">
-                <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">Chat with a librarian</a>
+            <li class="ccl-c-user-nav__menu-item ccl-is-right">
+                <select class="ccl-b-select ccl-is-naked js-school-select">
+                    <option value="default">Select your school</option>
+                    <option value="cgu">CGU</option>
+                    <option value="pomona">Pomona</option>
+                    <option value="cuc">CUC</option>
+                    <option value="scripps">Scripps</option>
+                    <option value="claremont-mckenna">Claremont McKenna</option>
+                    <option value="harvey-mudd">Harvey Mudd</option>
+                    <option value="pitzer">Pitzer</option>
+                    <option value="kgi">KGI</option>
+                </select>
             </li>
 
         </ul>
