@@ -1,0 +1,34 @@
+$color-alert: #fafafa;
+$color-alert-warning: lighten( orange, 5% );
+$color-alert-error: red;
+
+.ccl-c-alert {
+    position: relative;
+    padding: $spacer $gutter;
+    margin-bottom: 1px;
+    background-color: $color-alert;
+    color: $blue;
+    overflow: hidden;
+    font-size: rem(18);
+    line-height: 1;
+    border-left: $spacer solid;
+
+    &.ccl-is-warning {
+        color: $color-alert-warning;
+    }
+    &.ccl-is-error {
+        color: $color-alert-error;
+    }
+    &.ccl-is-muted {
+        color: rgba(black, 0.4);
+    }
+
+    & > * {
+        margin-top: 0;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+    }
+}
