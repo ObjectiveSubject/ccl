@@ -4,7 +4,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js" data-school="cuc">
+<html <?php language_attributes(); ?> class="no-js" data-school="">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>

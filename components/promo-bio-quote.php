@@ -2,7 +2,7 @@
 
     <header class="ccl-c-promo__header">
         <div class="ccl-c-promo__title">Bio/Quote Promo</div>
-        <p class="ccl-c-promo__action"><a href="#" class="ccl-h4 ccl-u-color-black ccl-u-color-hover-red">Contextual Action</a></p>
+        <p class="ccl-c-promo__action"><a href="#" class="ccl-h4">Contextual Action</a></p>
     </header>
 
     <div class="ccl-c-promo__content">        

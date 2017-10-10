@@ -92,7 +92,7 @@ textarea {
   * ------------------------------------------- */
 
  a {
-	@extend .ccl-u-transition;
+	@extend .ccl-u-transition-short;
  	color: $color-text-main;
  	text-decoration: none;
 

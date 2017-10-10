@@ -2,7 +2,7 @@
 
     <header class="ccl-c-promo__header">
         <div class="ccl-c-promo__title">Carousel Promo</div>
-        <p class="ccl-c-promo__action"><a href="#" class="ccl-h4 ccl-u-color-black ccl-u-color-hover-red">View All</a></p>
+        <p class="ccl-c-promo__action"><a href="#" class="ccl-h4">View All</a></p>
         <div class="ccl-c-promo__action">
             <button id="carousel-1-prev" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
             <button id="carousel-1-next" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>

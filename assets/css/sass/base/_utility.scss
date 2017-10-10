@@ -144,8 +144,11 @@ a.ccl-u-faded:focus {
 // Effects
 // ------------------------------------------ /
 .ccl-u-transition {
-	transition: all 300ms ease-out;
+	transition: all $duration $easing;
 }
-.ccl-u-transition-100 {
-	transition: all 100ms ease-out;
+.ccl-u-transition-short {
+	transition: all $duration-short $easing;
+}
+.ccl-u-transition-long {
+	transition: all $duration-long $easing;
 }

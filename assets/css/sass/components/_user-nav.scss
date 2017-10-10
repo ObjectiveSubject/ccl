@@ -1,5 +1,6 @@
 .ccl-c-user-nav {
-    background: black;
+    background-color: black;
+    @include school-style(background-color);
 
     .ccl-u-faded {
         opacity: 0.7;

@@ -19,9 +19,11 @@
 
     SchoolSelect.prototype.init = function(){
         
-        this.$select
-            .find( 'option[value="' + initSchool + '"]' )
-            .attr( 'selected', 'selected' );
+        if ( initSchool ) {
+            this.$select
+                .find( 'option[value="' + initSchool + '"]' )
+                .attr( 'selected', 'selected' );
+        }
 
         this.$select.change(function(event){
             $('html').attr( 'data-school', event.target.value );
@@ -29,11 +31,9 @@
     };
 
     $(document).ready(function(){
-        if ( initSchool ) {
-            $('[data-toggle="school"]').each(function(){
-                new SchoolSelect(this);
-            })
-        }
+        $('[data-toggle="school"]').each(function(){
+            new SchoolSelect(this);
+        });
     });
 
 })(this, jQuery);

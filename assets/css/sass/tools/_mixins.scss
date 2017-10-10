@@ -109,7 +109,17 @@
 
 // School styles
 // -------------------------------------- //
-@mixin school-style($prop) {
+@mixin school-style( $prop, $alpha: 1 ) {
+
+	$color-pomona: rgba( $color-pomona, $alpha );
+	$color-cgu: rgba( $color-cgu, $alpha );
+	$color-cuc: rgba( $color-cuc, $alpha );
+	$color-scripps: rgba( $color-scripps, $alpha );
+	$color-claremont-mckenna: rgba( $color-claremont-mckenna, $alpha );
+	$color-harvey-mudd: rgba( $color-harvey-mudd, $alpha );
+	$color-pitzer: rgba( $color-pitzer, $alpha );
+	$color-kgi: rgba( $color-kgi, $alpha );
+
 	[data-school="pomona"] & { #{$prop}: $color-pomona; }
 	[data-school="cgu"] & { #{$prop}: $color-cgu; }
 	[data-school="cuc"] & { #{$prop}: $color-cuc; }

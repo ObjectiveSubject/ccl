@@ -2,6 +2,7 @@
     background-color: $blue;
     color: white;
     padding: $gutter;
+    @include school-style(background-color);
 }
 
 .ccl-c-quiz-card__header {

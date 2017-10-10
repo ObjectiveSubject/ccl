@@ -3,10 +3,10 @@
 
 .ccl-b-btn {
     @extend .ccl-h4;
-	@extend .ccl-u-transition-100;
+	@extend .ccl-u-transition-short;
     appearance: none;
     background: none;
-    border: 1px solid black;
+    border: 1px solid;
     border-radius: 0;
     box-shadow: none;
     color: $color-text-main;
@@ -19,6 +19,8 @@
 	
 	&:hover {
         background-color: rgba(black, 0.1);
+        @include school-style( background-color, 0.1 );
+        @include school-style( color );
 	}
 
     &:focus {
@@ -76,7 +78,9 @@
         background: $color-text-main;
         color: white;
         &:hover, &:focus {
-            background: rgba($color-text-main, 0.75);
+            color: white;
+            background-color: rgba($color-text-main, 0.75);
+            @include school-style(background-color, 0.75);
         }
     }
 
@@ -108,7 +112,7 @@
 // Circular Button
 // ------------------------------------------ //
 .ccl-b-btn--circular {
-    @extend .ccl-u-transition-100;
+    @extend .ccl-u-transition-short;
     background: rgba(white, 0.5);
     border: 1px solid black;
     border-radius: 50%;
@@ -125,6 +129,7 @@
     &:hover {
         background: rgba( white, 0 );
         color: white;
+        border-color: transparent;
         &:before {
             transform: scale(1);
         }
@@ -145,11 +150,12 @@
         left: 0%;
         width: 100%;
         height: 100%;
-        background: black;
+        background-color: black;
         border-radius: 50%;
         z-index: -1;
         transform: scale(0);
         transition: all 100ms ease-out;
+        @include school-style(background-color);
     }
 
     [disabled],
@@ -159,6 +165,7 @@
         color: black;
         background: rgba(white, 0.5);
         cursor: default;
+        border-color: black;
         &:before {
             transform: scale(0);
         }

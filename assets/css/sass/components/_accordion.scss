@@ -82,8 +82,10 @@ $bar-width: 2px;
 
     &:hover {
         color: $blue;
+        @include school-style(color);
         &:before,&:after {
-            background: $blue;
+            background-color: $blue;
+            @include school-style(background-color);
         }
     }
 }

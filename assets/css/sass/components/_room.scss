@@ -116,6 +116,7 @@
     }
     [type="checkbox"]:checked + & {
         color: $blue;
+        @include school-style(color);
     }
     .ccl-is-full & {
         color: black !important;
@@ -152,7 +153,8 @@
         background: gray;
     }
     [type="checkbox"]:checked + &:before {
-        background: $blue;
+        background-color: $blue;
+        @include school-style(background-color);
     }
     .ccl-is-full &:before {
         background: black !important;
@@ -199,4 +201,5 @@
 .ccl-c-room__key--selected {
     @extend .ccl-c-room__key;
     color: $blue;
+    @include school-style(color);
 }

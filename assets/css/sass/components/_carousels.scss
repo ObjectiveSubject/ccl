@@ -62,7 +62,8 @@
         margin-right: 0.5rem;
 
         &.slick-active button {
-            background: black;
+            background-color: black;
+            @include school-style(background-color);
         }
         button:focus {
             box-shadow: $focus-box-shadow-sm;
@@ -79,8 +80,11 @@
         text-indent: -9999px;
         overflow: hidden;
         outline: 0;
+        @include school-style(border-color);
+
         &:hover {
-            background: black;
+            background-color: black;
+            @include school-style(background-color);
         }
     }
 }

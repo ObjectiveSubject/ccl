@@ -159,14 +159,23 @@ textarea.ccl-b-input {
 .ccl-b-select {
     -webkit-appearance: none;
     line-height: 1 !important;
-    border: 1px solid lightgray;
+    border: 1px solid;
     border-radius: 0;
-    background: none;
-    padding: 0.6rem 2rem 0.6rem 0.5rem;
+    background-color: transparent;
+    background-image: url(../images/caret-down-black@2x.png);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px auto;
+    padding: 0.6rem 30px 0.6rem 0.5rem;
     outline: 0;
     box-sizing: border-box;
     cursor: pointer;
     color: inherit;
+
+    &.ccl-is-inverse {
+        background-image: url(../images/caret-down-white@2x.png);
+        color: white;
+    }
 
     &.ccl-is-naked {
         border: 0;
