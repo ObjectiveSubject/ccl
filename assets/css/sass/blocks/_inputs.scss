@@ -158,7 +158,6 @@ textarea.ccl-b-input {
 
 .ccl-b-select {
     -webkit-appearance: none;
-    line-height: 1 !important;
     border: 1px solid;
     border-radius: 0;
     background-color: transparent;
@@ -187,5 +186,17 @@ textarea.ccl-b-input {
     .ccl-c-user-nav__menu & {
         @extend .ccl-h5;
         margin: 0;
+    }
+
+    .ccl-c-search__bar & {
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        margin: -1rem 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-right: 60px;
+        background-position: right 25px center;
+        border: 0;
     }
 }

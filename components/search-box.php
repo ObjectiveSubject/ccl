@@ -5,25 +5,28 @@
         <div class="ccl-c-search">
 
             <form class="ccl-c-search__bar" name="catalogSearch" action="http://ccl.on.worldcat.org/external-search" target="_blank">
-                <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search"/>
-                <div class="ccl-c-dropdown">
-                    <button class="ccl-c-dropdown__toggle ccl-b-btn">As: Keyword <i class="ccl-b-caret-down" aria-hidden="true"></i></button>
-                    <ul class="ccl-c-dropdown__menu">
-                        <li class="ccl-c-dropdown__item"><a href="#">All</a></li>
-                        <li class="ccl-c-dropdown__item"><a href="#">Title</a></li>
-                        <li class="ccl-c-dropdown__item"><a href="#">Keyword</a></li>
-                        <li class="ccl-c-dropdown__item"><a href="#">Author</a></li>
-                        <li class="ccl-c-dropdown__item"><a href="#">Subject</a></li>
-                    </ul>
+                <input type="text" id="ccl-search" class="ccl-c-search__bar-item ccl-b-input" name="queryString" placeholder="Start typing to search"/>
+
+                <div class="ccl-c-search__bar-item" style="min-width:200px">
+                    <strong class="ccl-u-faded">As: </strong>
+                    <select class="ccl-b-select" name="search_keyword">
+                        <option value="all">All</option>
+                        <option value="title">Title</option>
+                        <option value="keyword" selected="selected">Keyword</option>
+                        <option value="author">Author</option>
+                        <option value="subject">Subject</option>
+                    </select>
                 </div>
-                <div class="ccl-c-dropdown">
-                    <button class="ccl-c-dropdown__toggle ccl-b-btn">In: Databases <i class="ccl-b-caret-down" aria-hidden="true"></i></button>
-                    <ul class="ccl-c-dropdown__menu">
-                        <li class="ccl-c-dropdown__item"><a href="#">DB Name</a></li>
-                        <li class="ccl-c-dropdown__item"><a href="#">DB Name</a></li>
-                        <li class="ccl-c-dropdown__item"><a href="#">DB Name</a></li>
-                    </ul>
+                
+                <div class="ccl-c-search__bar-item" style="min-width:210px">
+                    <strong class="ccl-u-faded">In: </strong>
+                    <select class="ccl-b-select" name="search_db">
+                        <option value="db_name" selected="selected">DB Name</option>
+                        <option value="db_name">DB Name</option>
+                        <option value="db_name">DB Name</option>
+                    </select>
                 </div>
+            
                 <button type="submit" class="ccl-c-search__submit">
                     <i class="ccl-b-icon-search" aria-hidden="true"></i>
                     <span class="ccl-u-display-none">Search</span>

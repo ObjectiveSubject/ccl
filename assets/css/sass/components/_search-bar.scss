@@ -7,15 +7,20 @@
     padding: $search-bar-padding;
 
     & > * {
-        margin-left: 0.25rem;
-        margin-right: 0.25rem;
+        margin-left: 0.5rem;
+        // margin-right: 0.25rem;
         &:first-child {
             margin-left: 0;
         }
-        &:last-child {
-            margin-right: 0;
-        }
+        // &:last-child {
+        //     margin-right: 0;
+        // }
     }
+}
+
+.ccl-c-search__bar-item {
+    @extend .ccl-h3;
+    @extend .ccl-u-mt-0;
 }
 
 .ccl-c-search__submit {
@@ -36,6 +41,7 @@
     }
     &:last-child {
         margin-right: -1rem;
+        margin-left: 0;
     }   
     
 }
