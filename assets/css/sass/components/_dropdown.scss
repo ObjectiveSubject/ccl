@@ -28,7 +28,7 @@
     top: 100%;
     z-index: 10;
 
-    .ccl-c-dropdown__toggle:focus + & {
+    .ccl-is-active & {
         display: block;
     }
 
@@ -47,6 +47,7 @@
 .ccl-c-dropdown__item {
     @extend .ccl-u-mt-0;
     border-top: 1px solid black;
+    padding: 0.5em 0;
 
     &:first-child {
         border-top: 0;
@@ -66,6 +67,5 @@
 
     a {
         @extend .ccl-u-display-block;
-        padding: 0.5em 0;
     }
 }
