@@ -14,6 +14,7 @@
             
             <li class="ccl-c-user-nav__menu-item ccl-is-right">
                 <select class="ccl-b-select ccl-is-inverse" data-toggle="school">
+                    <option>Select School</option>
                     <option value="cgu">CGU</option>
                     <option value="claremont-mckenna">Claremont McKenna</option>
                     <option value="cuc">CUC</option>

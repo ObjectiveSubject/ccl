@@ -136,12 +136,13 @@ textarea.ccl-b-input {
         color: lightgray;
     }
 
-    &:hover {
+    &:hover, &:focus {
         color: $blue;
+        @include school-style(color);
     }
     &:focus {
         border-color: $blue;
-        color: $blue;
+        @include school-style(border-color);
     }
 
     .ccl-c-search__bar & {

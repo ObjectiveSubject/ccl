@@ -64,6 +64,7 @@
     &[disabled], &.ccl-is-disabled {
         cursor: default;
         opacity: 0.3;
+        pointer-events: none;
         &:hover, &:focus {
             color: $color-text-main;
             border-color: black;
@@ -95,6 +96,7 @@
     &.ccl-is-solid[disabled], 
     &.ccl-is-solid.ccl-is-disabled {
         background: rgba(black, 0.35);
+        pointer-events: none;
         &:hover, &:focus {
             border-color: transparent;
             color: white;
@@ -166,6 +168,7 @@
         background: rgba(white, 0.5);
         cursor: default;
         border-color: black;
+        pointer-events: none;
         &:before {
             transform: scale(0);
         }
