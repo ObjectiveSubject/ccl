@@ -97,15 +97,11 @@ textarea {
  	text-decoration: none;
 
  	&:hover,
- 	&:focus,
- 	&:active {
- 		color: $color-link;
+ 	&:focus {
+		color: $color-link;
+		@include school-style(color);
  	}
  	&:focus {
- 		outline: 0;
- 	}
- 	&:hover,
- 	&:active {
  		outline: 0;
  	}
  }

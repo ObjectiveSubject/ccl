@@ -106,3 +106,16 @@
 	white-space: normal;
 	line-break: auto;
 }
+
+// School styles
+// -------------------------------------- //
+@mixin school-style($prop) {
+	[data-school="pomona"] & { #{$prop}: $color-pomona; }
+	[data-school="cgu"] & { #{$prop}: $color-cgu; }
+	[data-school="cuc"] & { #{$prop}: $color-cuc; }
+	[data-school="scripps"] & { #{$prop}: $color-scripps; }
+	[data-school="claremont-mckenna"] & { #{$prop}: $color-claremont-mckenna; }
+	[data-school="harvey-mudd"] & { #{$prop}: $color-harvey-mudd; }
+	[data-school="pitzer"] & { #{$prop}: $color-pitzer; }
+	[data-school="kgi"] & { #{$prop}: $color-kgi; }
+}

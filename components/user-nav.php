@@ -12,20 +12,17 @@
                 <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">Chat with a librarian</a>
             </li>
             
-            <li class="ccl-c-user-nav__menu-item ccl-c-dropdown ccl-is-right">
-                <a href="#dropdown-school" class="ccl-c-dropdown__toggle" data-toggle="dropdown" data-target="#dropdown-school" aria-expanded="false" aria-haspopup="true">
-                    CUC <i class="ccl-b-caret-down" aria-hidden="true"></i>
-                </a>
-                <ul id="dropdown-school" class="ccl-c-dropdown__menu">
-                    <li class="ccl-c-dropdown__item"><a href="#">CGU</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Claremont McKenna</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">CUC</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Harvey Mudd</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">KGI</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Pitzer</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="#">Pomona</a></li>
-                    <li class="ccl-c-dropdown__item"><a href="http://google.com">Scripps</a></li>
-                </ul>
+            <li class="ccl-c-user-nav__menu-item ccl-is-right">
+                <select class="ccl-b-select" data-toggle="school">
+                    <option value="cgu">CGU</option>
+                    <option value="claremont McKenna">Claremont McKenna</option>
+                    <option value="cuc">CUC</option>
+                    <option value="harvey-mudd">Harvey Mudd</option>
+                    <option value="kgi">KGI</option>
+                    <option value="pitzer">Pitzer</option>
+                    <option value="pomona">Pomona</option>
+                    <option value="scripps">Scripps</option>
+                </select>
             </li>
 
         </ul>
