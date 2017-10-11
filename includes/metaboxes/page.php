@@ -11,8 +11,42 @@ function setup() {
 		return __NAMESPACE__ . "\\$function";
 	};
 
-	// NOTE: Uncomment to activate metabox
+	add_action( 'cmb2_init',  $n( 'page_related' ) );
 	add_action( 'cmb2_init',  $n( 'page_sidebar' ) );
+}
+
+/**
+ * Add custom fields to page with sidebar template
+ */
+function page_related() {
+
+	$prefix = 'page_';
+
+	$cmb = new_cmb2_box( array(
+		'id'           => $prefix . 'related_metabox',
+		'title'        => __( 'Related Pages', 'cmb2' ),
+		'desc'         => 'Selected related pages to display at the bottom of the page',
+		'priority'     => 'high',
+		'object_types' => array( 'page' )
+	) );
+
+	$cmb->add_field( array(
+		'id'          => 'ccl_related_posts',
+		'desc'    => 'Drag pages from the left column to the right column to attach them to this page.<br />You may rearrange the order of the pages in the right column by dragging and dropping.',
+		'type'    => 'custom_attached_posts',
+		'options' => array(
+			'show_thumbnails' => true, // Show thumbnails on the left
+			'filter_boxes'    => true, // Show a text box for filtering the results
+			'query_args'      => array(
+				'posts_per_page' => 250,
+				'post_type'      => 'page',
+				'orderby'        => 'title',
+				'order'          => 'ASC'
+			), // override the get_posts args
+		),
+		// 'repeatable'  => false, // use false if you want non-repeatable group
+	) );
+
 }
 
 /**
@@ -23,7 +57,7 @@ function page_sidebar() {
 	$prefix = 'page_';
 
 	$cmb = new_cmb2_box( array(
-		'id'           => $prefix . 'metabox',
+		'id'           => $prefix . 'sidebar_metabox',
 		'title'        => __( 'Sidebar', 'cmb2' ),
 		'priority'     => 'high',
 		'object_types' => array( 'page' ),
