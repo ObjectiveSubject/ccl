@@ -6,45 +6,41 @@ get_header(); ?>
 
 	<div class="site-content">
 
-	<div class="ccl-l-container">
+		<div class="ccl-l-container">
 
-				<div class="ccl-l-row ccl-u-mb-3">
-					<header class="page-header">
+			<header class="ccl-u-mb-3">
 
-						<h1 class="page-title"><?php
-							if ( have_posts() ) {
-								printf( esc_html__( 'Search Results for: %s', '_s' ), '<strong>' . get_search_query() . '</strong>' );
-							} else {
-								printf( esc_html__( 'No Results for: %s', '_s' ), '<strong>' . get_search_query() . '</strong>' );
-							}
-							?></h1>
-					
-					</header>
-				</div>
+				<h1><?php
+				if ( have_posts() ) {
+					printf( esc_html__( 'Search Results for: %s', '_s' ), '<strong>' . get_search_query() . '</strong>' );
+				} else {
+					printf( esc_html__( 'No Results for: %s', '_s' ), '<strong>' . get_search_query() . '</strong>' );
+				}
+				?></h1>
+			
+			</header>
 
-				<?php if ( have_posts() ) : ?>
+			<?php if ( have_posts() ) : ?>
 
-					<?php while ( have_posts() ) : the_post(); ?>
-						<div class="ccl-l-row ccl-u-mb-1">
-							<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<?php while ( have_posts() ) : the_post(); ?>
+					<div class="ccl-l-row ccl-u-mb-1">
+						<article id="post-<?php the_ID(); ?>" <?php post_class('ccl-l-column ccl-l-span-8-lg'); ?>>
 
-								<header class="entry-header">
-									<h2 class="entry-title"><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-								</header>
+							<header class="entry-header">
+								<h2 class="entry-title"><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+							</header>
 
-								<div class="entry-summary">
-									<?php the_excerpt(); ?>
-								</div>
+							<div class="entry-summary">
+								<?php the_excerpt(); ?>
+							</div>
 
-							</article>
-						</div>
-					<?php endwhile; ?>
-
-					<div class="ccl-l-row">
-						<?php the_posts_navigation(); ?>
+						</article>
 					</div>
+				<?php endwhile; ?>
 
-				<?php endif; ?>
+				<?php the_posts_navigation(); ?>
+
+			<?php endif; ?>
 
 		</div>
 	</div>
