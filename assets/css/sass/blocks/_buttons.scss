@@ -26,7 +26,7 @@
     &:focus {
 		outline: 0;
         box-shadow: $focus-box-shadow-lg;
-	}
+    }
 
     .ccl-c-search__bar &.ccl-c-dropdown__toggle {
         border-color: transparent;
@@ -83,6 +83,16 @@
             background-color: rgba($color-text-main, 0.75);
             @include school-style(background-color, 0.75);
         }
+
+        @each $key, $hex in $school-map {
+            [data-school="#{$key}"] & {
+                @if lightness($hex) < 50 {
+                    color: white;
+                } @else {
+                    color: black;
+                }
+            }
+        }
     }
 
     &.ccl-is-solid.ccl-is-inverse {
@@ -108,6 +118,38 @@
         background: 0 0;
         border: 0;
         -webkit-appearance: none;
+    }
+
+    &.ccl-is-brand-inverse {
+        
+        @each $key, $hex in $school-map {
+            [data-school="#{$key}"] & {
+                @if lightness($hex) < 50 {
+                    color: white;
+                } @else {
+                    color: black;
+                }
+            }
+        }
+
+        &.ccl-is-solid {
+            @each $key, $hex in $school-map {
+                [data-school="#{$key}"] & {
+                    @if lightness($hex) < 50 {
+                        background-color: white;
+                        color: $hex;
+                    } @else {
+                        background-color: black;
+                        color: $hex;
+                    }
+                }
+            }
+        }
+
+        &:hover, &:focus {
+            opacity: 0.5;
+        }
+
     }
 }
 

@@ -79,8 +79,20 @@
     	background-color: $color-value !important;
 	}
 }
+	
+.ccl-u-bg-school {
+	background-color: $blue;
+	color: white;
+	@include school-style(background-color);
+
+	a:hover, a:focus {
+		color: inherit;
+		opacity: 0.5;
+	}
+}
+
 .ccl-u-faded { 
-	opacity: 0.3;
+	opacity: 0.5;
 }
 a.ccl-u-faded:hover,
 a.ccl-u-faded:focus {

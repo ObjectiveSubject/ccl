@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-	<div class="site-content ccl-u-pb-3">
+	<div class="site-content">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 

@@ -31,7 +31,7 @@ function page_related() {
 	) );
 
 	$cmb->add_field( array(
-		'id'          => 'ccl_related_posts',
+		'id'      => 'ccl_related_posts',
 		'desc'    => 'Drag pages from the left column to the right column to attach them to this page.<br />You may rearrange the order of the pages in the right column by dragging and dropping.',
 		'type'    => 'custom_attached_posts',
 		'options' => array(

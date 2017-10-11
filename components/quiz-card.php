@@ -52,7 +52,7 @@
                         </header>
                         <div class="ccl-c-quiz-card__content">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-                            <p><input type="submit" class="ccl-b-btn ccl-is-inverse" value="Submit"/></p>
+                            <p><input type="submit" class="ccl-b-btn ccl-is-brand-inverse ccl-is-solid" value="Submit"/></p>
                         </div>
                     </div>
 

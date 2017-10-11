@@ -4,4 +4,6 @@
     background: black;
     color: white;
 
+    @include school-style(border-color);
+
 }
