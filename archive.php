@@ -1,16 +1,29 @@
 <?php
 /**
- * The main template file
- *
- * This is mostly a fall back, in case a query doesn't hit any other template.
- * For the root level homepage, see front-page.php (WordPress template hierarchy).
+ * Archive Template
  */
 
 get_header(); ?>
 
 	<div class="site-content">
 
-		<div class="ccl-l-container">
+        <header class="ccl-c-hero">
+            
+            <div class="ccl-c-hero__container">
+
+                <div class="ccl-c-hero__header">
+                    <h1 class="ccl-c-hero__title"><?php the_archive_title(); ?></h1>
+                </div>
+
+                <div class="ccl-c-hero__content">
+                    <div class="ccl-h4 ccl-u-mt-0"><?php echo the_archive_description(); ?></div>
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="ccl-l-container ccl-u-my-3">
 
 			<?php if ( have_posts() ) : ?>
 
