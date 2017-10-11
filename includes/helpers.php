@@ -54,6 +54,38 @@ function get_post_by_slug( $slug, $type = 'post' ) {
 }
 
 /**
+ * Get related posts
+ *
+ * Currently pulls manually selected related posts from the 'ccl_related_posts' meta field attached to the current post
+ *
+ * @return null|\WP_Query
+ */
+function get_ccl_related_posts() {
+	$post_id = get_the_ID(); //@todo this might need to be more flexible
+	$related_posts = get_post_meta( $post_id, 'ccl_related_posts', true);
+	$types = array( 'post', 'page' ); // @todo: maybe sort out how to loop through all?
+
+	$posts = '';
+
+	if ( $related_posts ) {
+		$posts = new \WP_Query( array(
+			'posts_per_page'      => 15,
+			'post_status'         => 'publish',
+			'post_type'           => $types,
+			'post__in'            => $related_posts,
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true
+		) );
+	}
+
+	if ( ! $posts ) {
+		return null;
+	}
+
+	return $posts;
+}
+
+/**
  * Retrieve the URL of the post thumbnail
  *
  * @todo add thumbnail asset

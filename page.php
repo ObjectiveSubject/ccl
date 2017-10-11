@@ -193,6 +193,37 @@ get_header(); ?>
 
 			</article>
 
+			<?php $related_posts = \CCL\Helpers\get_ccl_related_posts(); ?>
+
+			<?php if ( $related_posts && $related_posts->have_posts() ) : ?>
+				<div class="ccl-l-container">
+					<div class="ccl-c-related__title ccl-u-my-1">
+						<h2>Related</h2>
+					</div>
+
+					<div class="ccl-l-row">
+
+						<?php while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
+							<article class="ccl-c-related ccl-l-column ccl-l-span-4-md">
+
+								<?php if ( has_post_thumbnail() ) : ?>
+									<div class="ccl-u-mb-nudge">
+										<a href="<?php echo get_the_permalink(); ?>">
+											<?php echo get_the_post_thumbnail( get_the_ID(), 'small', array( 'class' => 'ccl-c-image' ) ); ?>
+										</a>
+									</div>
+								<?php endif; ?>
+
+								<p class="ccl-h4 ccl-u-mt-0"><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></p>
+								<p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo get_the_excerpt(); ?></p>
+							</article>
+
+						<?php endwhile; ?>
+					</div>
+				</div>
+
+			<?php endif; ?>
+
 		<?php endwhile; ?>
 
 	</div>
