@@ -1,26 +1,27 @@
 .ccl-c-search__bar {
     background: white;
     display: flex;
-    // margin-left: -3rem;
-    // margin-right: -3rem;
-    // padding: $search-bar-padding 3rem;
-    padding: $search-bar-padding;
+    flex-direction: column;
 
-    & > * {
-        margin-left: 0.5rem;
-        // margin-right: 0.25rem;
-        &:first-child {
-            margin-left: 0;
-        }
-        // &:last-child {
-        //     margin-right: 0;
-        // }
+    @include media($md) {
+        flex-direction: row;
+    }
+
+    & > *:not(:first-child) {
+        padding-left: $search-bar-padding;
     }
 }
 
-.ccl-c-search__bar-item {
+.ccl-c-search__bar-option {
     @extend .ccl-h3;
-    @extend .ccl-u-mt-0;
+    @extend .ccl-u-mt-0; 
+    flex-shrink: 0;
+    padding: $search-bar-padding 0;
+    border-top: 1px solid lightgray;
+    @include media($md){
+        border-top: 0;
+        border-left: 1px solid lightgray;
+    }
 }
 
 .ccl-c-search__submit {
@@ -28,19 +29,19 @@
     border: 0;
     background-color: black;
     color: white;
-    margin-top: -$search-bar-padding;
-    margin-bottom: -$search-bar-padding;
-    // padding-left: 3rem;
-    // padding-right: 3rem;
     padding-left: $search-bar-padding;
     padding-right: $search-bar-padding;
     font-size: 1.8rem;
     line-height: 1;
+
+    @include media($lg) {
+        min-width: 10rem;
+    }
+
     &:hover {
         background-color: $blue;
     }
     &:last-child {
-        margin-right: -1rem;
         margin-left: 0;
     }   
     
@@ -49,9 +50,7 @@
 .ccl-c-search__results {
     background: white;
     border-top: 1px solid black;
-    // margin-left: -3rem;
-    // margin-right: -3rem;
-    padding: 0 1rem;
+    padding: 0 $search-bar-padding;
 }
 
 .ccl-c-search__results-footer {
@@ -72,7 +71,7 @@
     @extend .ccl-h3;
     @extend .ccl-u-mt-0;
     border-bottom: 1px solid black;
-    padding: 0.5rem 0;
+    padding: $search-bar-padding / 2 0;
     min-height: rem(65);
 
     a {
@@ -89,11 +88,11 @@
     display: flex;
     align-items: center;
     width: rem(150);
-    opacity: 0.2;
+    opacity: 0.5;
 
     [class*="ccl-b-icon-"] {
         vertical-align: -0.1em;
-        margin-right: 0.5em;
+        margin-right: $search-bar-padding / 2;
     }
 
     .ccl-c-search-item a:hover & {

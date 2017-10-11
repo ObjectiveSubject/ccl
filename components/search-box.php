@@ -1,13 +1,13 @@
-<div class="ccl-u-px-1 ccl-u-py-6" style="background-color: #eee;">
+<div class="ccl-u-py-6" style="background-color: #eee;">
 
     <div class="ccl-l-container">
 
         <div class="ccl-c-search">
 
             <form class="ccl-c-search__bar" name="catalogSearch" action="http://ccl.on.worldcat.org/external-search" target="_blank">
-                <input type="text" id="ccl-search" class="ccl-c-search__bar-item ccl-b-input" name="queryString" placeholder="Start typing to search"/>
+                <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search"/>
 
-                <div class="ccl-c-search__bar-item" style="min-width:200px">
+                <div class="ccl-c-search__bar-option">
                     <strong class="ccl-u-faded">As: </strong>
                     <select class="ccl-b-select" name="search_keyword">
                         <option value="all">All</option>
@@ -18,7 +18,7 @@
                     </select>
                 </div>
                 
-                <div class="ccl-c-search__bar-item" style="min-width:210px">
+                <div class="ccl-c-search__bar-option">
                     <strong class="ccl-u-faded">In: </strong>
                     <select class="ccl-b-select" name="search_db">
                         <option value="db_name" selected="selected">DB Name</option>

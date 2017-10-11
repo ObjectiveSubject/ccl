@@ -122,6 +122,8 @@
     .ccl-b-input[type="checkbox"]:checked + &:after {
         transform: translateY(-50%) scale(1);
         background-color: black;
+        @include school-style(background-color);
+
         .ccl-c-quiz-card & {
             background-color: white;
             @each $key, $hex in $school-map {
@@ -166,16 +168,26 @@ textarea.ccl-b-input {
         border-color: $blue;
         @include school-style(border-color);
     }
+}
 
+.ccl-b-input[type="text"] {
+    
     .ccl-c-search__bar & {
         @extend .ccl-h3;
         @extend .ccl-u-mt-0;
         color: black;
         border: 0;
-        padding: 0;
+        padding: 1rem;
+        
         @include placeholder {
-            color: black;
+            color: gray;
         }
+        &:focus {
+            @include placeholder {
+                color: black;
+            }
+        }
+        
     }
+        
 }
-
