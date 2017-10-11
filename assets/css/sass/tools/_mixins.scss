@@ -111,21 +111,17 @@
 // -------------------------------------- //
 @mixin school-style( $prop, $alpha: 1 ) {
 
-	$color-pomona: rgba( $color-pomona, $alpha );
-	$color-cgu: rgba( $color-cgu, $alpha );
-	$color-cuc: rgba( $color-cuc, $alpha );
-	$color-scripps: rgba( $color-scripps, $alpha );
-	$color-claremont-mckenna: rgba( $color-claremont-mckenna, $alpha );
-	$color-harvey-mudd: rgba( $color-harvey-mudd, $alpha );
-	$color-pitzer: rgba( $color-pitzer, $alpha );
-	$color-kgi: rgba( $color-kgi, $alpha );
+	@each $key, $hex in $school-map {
 
-	[data-school="pomona"] & { #{$prop}: $color-pomona; }
-	[data-school="cgu"] & { #{$prop}: $color-cgu; }
-	[data-school="cuc"] & { #{$prop}: $color-cuc; }
-	[data-school="scripps"] & { #{$prop}: $color-scripps; }
-	[data-school="claremont-mckenna"] & { #{$prop}: $color-claremont-mckenna; }
-	[data-school="harvey-mudd"] & { #{$prop}: $color-harvey-mudd; }
-	[data-school="pitzer"] & { #{$prop}: $color-pitzer; }
-	[data-school="kgi"] & { #{$prop}: $color-kgi; }
+		[data-school="#{$key}"] & {
+			#{$prop}: rgba( $hex, $alpha );
+			saturation: saturation($hex);
+			lightness: lightness($hex);
+			@if $prop == background-color and lightness($hex) > 49 {
+				color: black;
+			}
+		}
+
+	}
+
 }

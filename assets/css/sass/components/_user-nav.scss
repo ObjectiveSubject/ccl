@@ -1,5 +1,6 @@
 .ccl-c-user-nav {
     background-color: black;
+    color: white;
     @include school-style(background-color);
 
     .ccl-u-faded {
@@ -10,7 +11,6 @@
 .ccl-c-user-nav__menu {
     @extend .ccl-u-clean-list;
     padding: 0.25em 0;
-    color: white;
     
     @include media($md) {
         display: flex;
@@ -34,9 +34,9 @@
     }
 
     & > a {
-        color: white;
+        color: inherit;
         &:hover, &:focus {
-            color: white;
+            color: inherit;
             opacity: 0.7;
         }
     }

@@ -24,12 +24,12 @@ get_header(); ?>
 				$content     = 'No front page has been set to pull content from (see <code>Settings &gt; Reading</code>).';
 
 			}
-
+			$hero_class = $thumb_url ? 'ccl-c-hero ccl-has-image' : 'ccl-c-hero';
 			?>
 
 			<article <?php post_class(); ?>>
 
-				<div class="ccl-c-hero" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
+				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
 					<div class="ccl-c-hero__container">
 
 						<div class="ccl-c-hero__header">

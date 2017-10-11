@@ -1,0 +1,52 @@
+.ccl-b-select {
+    -webkit-appearance: none;
+    border: 1px solid;
+    border-radius: 0;
+    background-color: transparent;
+    background-image: url(../images/caret-down-black@2x.png);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px auto;
+    padding: 0.6rem 30px 0.6rem 0.5rem;
+    outline: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: inherit;
+
+    &.ccl-is-naked {
+        border: 0;
+        padding-left: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    &.ccl-is-inverse {
+        background-image: url(../images/caret-down-white@2x.png);
+        color: white;
+    }
+
+    .ccl-c-user-nav__menu & {
+        @extend .ccl-h5;
+        margin: 0;
+        @each $key, $hex in $school-map {
+            @if ( lightness($hex) < 50 ) {
+                [data-school="#{$key}"] & {
+                    background-image: url(../images/caret-down-white@2x.png);
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .ccl-c-search__bar & {
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        margin: -1rem 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-right: 60px;
+        background-position: right 25px center;
+        border: 0;
+    }
+}

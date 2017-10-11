@@ -14,6 +14,8 @@ get_header(); ?>
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
 			$description = get_the_excerpt(); // Could use 'the_excerpt()' but this allows for override
 
+			$hero_class = $thumb_url ? 'ccl-c-hero ccl-has-image' : 'ccl-c-hero';
+
 			// Raw data (things we can import)
 			$raw_data = get_post_meta( get_the_ID(), 'guide_raw_data', true );
 
@@ -24,7 +26,7 @@ get_header(); ?>
 
 			<article <?php post_class(); ?>>
 
-				<div class="ccl-c-hero" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
+				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
 					<div class="ccl-c-hero__container">
 
 						<div class="ccl-c-hero__header">

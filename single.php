@@ -13,11 +13,12 @@ get_header(); ?>
 			$thumb_url   = get_the_post_thumbnail_url( $post, 'full' );
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
 			$description = get_the_excerpt(); // Could use 'the_excerpt()' but this allows for override
+			$hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image': 'ccl-c-hero';
 			?>
 
 			<article <?php post_class(); ?>>
 
-				<div class="ccl-c-hero" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
+				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
 					<div class="ccl-c-hero__container">
 
 						<div class="ccl-c-hero__header">

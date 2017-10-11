@@ -8,13 +8,25 @@ $blue: #126DB5;
 
 // school colors
 $color-pomona: #006FB9 !default;
-$color-cgu: #EE3A42 !default;
+$color-cgu: #af1e27 !default;
 $color-cuc: #472782 !default;
 $color-scripps: #4A857F !default;
 $color-claremont-mckenna: #860A2D !default;
 $color-harvey-mudd: #FDBD10 !default;
 $color-pitzer: #F79F3D !default;
 $color-kgi: #00758F !default;
+
+// school map
+$school-map: (
+    'cgu':               $color-cgu,
+    'claremont-mckenna': $color-claremont-mckenna,
+    'cuc':               $color-cuc,
+    'harvey-mudd':       $color-harvey-mudd,
+    'kgi':               $color-kgi,
+    'pitzer':            $color-pitzer,
+    'pomona':            $color-pomona,
+    'scripps':           $color-scripps,
+);
 
 // color map
 $color-map: (

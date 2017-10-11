@@ -1,4 +1,4 @@
-<div class="ccl-c-hero" style="background-image:url(http://unsplash.it/1500/750/)">
+<div class="ccl-c-hero ccl-has-image" style="background-image:url(http://unsplash.it/1500/750/)">
     <div class="ccl-c-hero__container">
         
         <div class="ccl-c-hero__header">

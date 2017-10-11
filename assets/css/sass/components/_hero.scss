@@ -6,9 +6,11 @@
     background-repeat: no-repeat;
     color: white;
     padding: 6rem 0 3rem;
+    @include school-style(background-color);
 
     &.ccl-has-image {
         padding: 25vw 0 3rem;
+        color: white;
     }
 
     &.ccl-has-image:before {
