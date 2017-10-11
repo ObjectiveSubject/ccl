@@ -1,4 +1,4 @@
-<nav class="ccl-c-user-nav">
+<nav class="ccl-c-user-nav js-is-sticky" data-sticky='{ "offset": <?php echo is_admin_bar_showing() ? '32' : '0'; ?> }'>
 
     <div class="ccl-l-container">
         

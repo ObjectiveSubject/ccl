@@ -3,9 +3,18 @@
     color: white;
     @include school-style(background-color);
 
+    &.ccl-is-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
     .ccl-u-faded {
         opacity: 0.7;
     }
+    
 }
 
 .ccl-c-user-nav__menu {
