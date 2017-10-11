@@ -4,11 +4,21 @@
     @include school-style(background-color);
 
     &.ccl-is-fixed {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
+        @include media($md){
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;   
+        }
+        .admin-bar & {
+            @include media($md){
+                top: 46px;
+            }
+            @include media(786px){
+                top: 32px;
+            }
+        }
     }
 
     .ccl-u-faded {

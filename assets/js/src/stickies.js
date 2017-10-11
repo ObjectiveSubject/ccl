@@ -36,13 +36,9 @@
         // on scroll
         function _onScroll() {
             
-            var scrollTop = $window.scrollTop(),
-                adjustedScrollTop = scrollTop + options.offset;
+            var scrollTop = $window.scrollTop() + options.offset;
     
-            if ( adjustedScrollTop >= offset.top ) {
-                if ( options.offset ) {
-                    $el.css( {top: options.offset + 'px'} );
-                }
+            if ( scrollTop >= offset.top ) {
                 $el.addClass( className.isFixed );
             } else {
                 $el.removeClass( className.isFixed );
