@@ -26,8 +26,9 @@
     }
 
     a {
-        color: white;
+        color: inherit;
         &:hover, &:focus {
+            color: inherit;
             opacity: 0.5;
         }
     }
