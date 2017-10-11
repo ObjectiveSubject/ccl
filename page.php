@@ -206,7 +206,7 @@ get_header(); ?>
 						<div class="ccl-l-row ccl-u-mt-1">
 
 							<?php while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
-								<article class="ccl-c-related__post ccl-l-column ccl-l-span-4-md">
+								<article class="ccl-c-related__post ccl-l-column ccl-l-span-4-md ccl-u-mb-1">
 
 									<?php if ( has_post_thumbnail() ) : ?>
 										<div class="ccl-u-mb-nudge">
