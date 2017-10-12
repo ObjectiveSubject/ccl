@@ -11,13 +11,31 @@ function setup() {
 		return __NAMESPACE__ . "\\$function";
 	};
 
-	add_shortcode( 'scheduler', $n( 'scheduler_fn' ) );
 	add_shortcode( 'accordion', $n( 'accordion_fn' ) );
-	add_shortcode( 'tooltip', $n( 'tooltip_fn' ) );
+	add_shortcode( 'calendar_widget', $n( 'calendar_fn' ) );
 	add_shortcode( 'modal', $n( 'modal_fn' ) );
 	add_shortcode( 'modal_toggle', $n( 'modal_toggle_fn' ) );
+	add_shortcode( 'scheduler', $n( 'scheduler_fn' ) );
+	add_shortcode( 'tooltip', $n( 'tooltip_fn' ) );
 }
 
+/**
+ * Create a scheduler shortcode to display the Libcal MyScheduler widget for booking appointments
+ *
+ * @param $attributes array List of attributes from the given shortcode
+ *
+ * @return mixed HTML output for the shortcode
+ */
+function calendar_fn( $attributes ) {
+
+	$data = shortcode_atts( array(
+		'months' => 3,
+	), $attributes );
+
+	$html = \CCL\Integrations\LibCal\calendar_widget( false, $data );
+
+	return $html;
+}
 
 /**
 * Create a scheduler shortcode to display the Libcal MyScheduler widget for booking appointments
@@ -35,8 +53,6 @@ $data = shortcode_atts( array(
 ), $attributes );
 
 $html = \CCL\Integrations\LibCal\schedule_widget( false, $data );
-
-// $html = "<b>FARTSTICKS</b>";
 
 return $html;
 }

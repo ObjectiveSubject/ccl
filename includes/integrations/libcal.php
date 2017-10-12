@@ -242,6 +242,64 @@ function reserve_space( $payload ) {
 }
 
 /**
+ * Helper function for displaying LibCal's Calendar widget
+ *
+ * More info here:
+ *
+ * @todo add args if any are needed from shortcode, etc.
+ * @todo rework default css
+ * @param $args
+ */
+function calendar_widget( $echo = true, $options = array() ) {
+
+	$defaults = array(
+		'months' => 3,
+	);
+
+	$options = array_merge( $defaults, $options );
+
+	ob_start();
+	?>
+	<script src="//api3.libcal.com/js/hours_month.js?002"></script>
+	<div id="s_lc_mhw_333_0"></div>
+	<script>
+		jQuery(document).ready(function($) {
+			var s_lc_mhw_333_0 = new $.LibCalHoursCal( $("#s_lc_mhw_333_0"), { iid: 333, lid: 0, months: <?php echo (int) $options['months']; ?>, systemTime: false });
+		});
+	</script>
+
+	<!-- Please note: The following styles are optional, feel free to modify! //-->
+	<style>
+		.s-lc-mhw-tb { width: 100%; border: 1px solid #ddd; border-collapse: collapse; border-spacing: 0; }
+		.s-lc-mhw-tb th, .s-lc-mhw-tb td { border: 1px solid #ddd; vertical-align: top; }
+		.s-lc-mhw-tb thead { background-color: #F5F5F5; }
+		.s-lc-mhw-header { text-align: center; }
+		.s-lc-mhw-header-date { text-align: center; display: inline-block; margin-top: 5px; font-size: 130%; }
+		.s-lc-mhw-days td { text-align: center; font-weight: bold; min-width: 14.28%; max-width: 14.28%; width: 14.28%;}
+		.s-lc-mhw-day-l { color: #555; text-align: right; padding: 2px; font-size: 11px; }
+		.s-lc-mhw-cells { height: 50px; }
+		.s-lc-mhw-fnc { color: #555; }
+		.s-lc-mhw-loc { font-size: 11px; padding: 2px; margin-bottom: 1px; color: #fff;  }
+		.s-lc-mhw-subloc { margin-left: 5px;}
+		.s-lc-mhw-footnote-cal { font-size: 86%;}
+		.loc_4816 { background-color: #000000; }
+		.loc_4926 { background-color: #333333; }
+		.loc_4925 { background-color: #666666; }
+		.loc_4927 { background-color: #999999; }
+	</style>
+
+	<?php
+	$html = ob_get_contents();
+	ob_get_clean();
+
+	if ( $echo ) {
+		echo $html;
+	} else {
+		return $html;
+	}
+}
+
+/**
  * Helper function for displaying LibCal's My Scheduler widget
  *
  * More info here: http://claremont.libcal.com/sched_widget.php
