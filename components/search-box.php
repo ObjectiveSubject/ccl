@@ -8,7 +8,7 @@
                 <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search"/>
 
                 <div class="ccl-c-search__bar-option">
-                    <strong class="ccl-u-faded">As: </strong>
+                    <strong class="ccl-u-faded">As:</strong>
                     <select class="ccl-b-select" name="search_keyword">
                         <option value="all">All</option>
                         <option value="title">Title</option>
@@ -19,7 +19,7 @@
                 </div>
                 
                 <div class="ccl-c-search__bar-option">
-                    <strong class="ccl-u-faded">In: </strong>
+                    <strong class="ccl-u-faded">In:</strong>
                     <select class="ccl-b-select" name="search_db">
                         <option value="db_name" selected="selected">DB Name</option>
                         <option value="db_name">DB Name</option>
