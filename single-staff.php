@@ -69,7 +69,7 @@ get_header(); ?>
 
 								<ul>
 									<?php foreach ( $subjects as $subject ) : ?>
-										<li><?php echo $subject->name; ?></li>
+										<li><a href="<?php echo esc_url( get_term_link( $subject ) ); ?>"><?php echo $subject->name; ?></a></li>
 									<?php endforeach; ?>
 								</ul>
 
