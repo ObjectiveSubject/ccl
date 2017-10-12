@@ -42,7 +42,12 @@ get_header(); ?>
 								</form>
 							</div>
 							<div class="ccl-l-column">
-								<h3 class="ccl-c-wayfinder__marquee">Item with call number "<span class="ccl-c-wayfinder__call-num">JC 177 B3 1895</span>"<br/>can be found on <span class="ccl-c-wayfinder__level">...</span></h3>
+								<div class="ccl-c-wayfinder__marquee">
+									<span class="ccl-h5">Location for call number &ldquo;<span class="ccl-c-wayfinder__call-num">&hellip;</span>&rdquo;</span><br/>
+									<span class="ccl-h3">Wing: <span class="ccl-c-wayfinder__wing">&hellip;</span></span><br/>
+									<span class="ccl-h3">Floor: <span class="ccl-c-wayfinder__floor">&hellip;</span></span><br/>
+									<span class="ccl-h3">Subject: <span class="ccl-c-wayfinder__subject">&hellip;</span></span>
+								</div>
 							</div>
 						</div>
 					

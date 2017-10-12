@@ -1,0 +1,202 @@
+{
+    "A" : {
+        "wing": "Honnold",
+        "floor": "3rd floor",
+        "subject": "General works"
+    },
+    "B" : {
+        "wing": "Honnold",
+        "floor": "3rd floor",
+        "subject": "Philosophy, Psychology, Religion"
+    },
+    "C" : {
+        "wing": "Honnold",
+        "floor": "3rd floor",
+        "subject": "History (Auxiliary)"
+    },
+    "D" : {
+        "wing": "Honnold",
+        "floor": "3rd floor",
+        "subject": "History (Except the Americas)"
+    },
+    "DS 326" : {
+        "wing": "Honnold",
+        "floor": "3rd floor",
+        "subject": "History (Except the Americas)"
+    },
+    "DS 327" : {
+        "wing": "Mudd",
+        "floor": "3rd floor, south",
+        "subject": "History (Except the Americas)"
+    },
+    "DX" : {
+        "wing": "Mudd",
+        "floor": "3rd floor, south",
+        "subject": "History (Except the Americas)"
+    },
+    "E" : {
+        "wing": "Honnold",
+        "floor": "4th floor",
+        "subject": "History (US, General)"
+    },
+    "F" : {
+        "wing": "Honnold",
+        "floor": "4th floor",
+        "subject": "History (Local US; the Americas)"
+    },
+    "G" : {
+        "wing": "Honnold",
+        "floor": "4th floor",
+        "subject": "Geography, Anthropology, Recreation"
+    },
+    "H" : {
+        "wing": "Honnold",
+        "floor": "4th floor",
+        "subject": "Social Sciences"
+    },
+    "HJ" : {
+        "wing": "Honnold",
+        "floor": "4th floor",
+        "subject": "Social Sciences"
+    },
+    "HM" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "subject": "Social Sciences"
+    },
+    "HX" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "subject": "Social Sciences"
+    },
+    "J" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "subject": "Political Sciences"
+    },
+    "K" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "subject": "Law"
+    },
+    "L" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "subject": "Education"
+    },
+    "M" : {
+        "wing": "Mudd",
+        "floor": "3rd floor, north",
+        "subject": "Music"
+    },
+    "N" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "subject": "Art"
+    },
+    "P" : {
+        "wing": "Multi-tier",
+        "floor": "Level 1",
+        "subject": "Literature"
+    },
+    "PL 4757" : {
+        "wing": "Multi-tier",
+        "floor": "Level 1",
+        "subject": "Literature"
+    },
+    "PL 4758" : {
+        "wing": "Multi-tier",
+        "floor": "Level 2",
+        "subject": "Literature"
+    },
+    "PQ 2253" : {
+        "wing": "Multi-tier",
+        "floor": "Level 2",
+        "subject": "Literature"
+    },
+    "PQ 2254" : {
+        "wing": "Multi-tier",
+        "floor": "Level 4",
+        "subject": "Literature"
+    },
+    "PQ 7999" : {
+        "wing": "Multi-tier",
+        "floor": "Level 4",
+        "subject": "Literature"
+    },
+    "PQ 8000" : {
+        "wing": "Multi-tier",
+        "floor": "Level 5",
+        "subject": "Literature"
+    },
+    "PR 5299" : {
+        "wing": "Multi-tier",
+        "floor": "Level 5",
+        "subject": "Literature"
+    },
+    "PR 5300" : {
+        "wing": "Multi-tier",
+        "floor": "Level 6",
+        "subject": "Literature"
+    },
+    "PS 3511.AV" : {
+        "wing": "Multi-tier",
+        "floor": "Level 6",
+        "subject": "Literature"
+    },
+    "PS 3511.B" : {
+        "wing": "Multi-tier",
+        "floor": "Level 7",
+        "subject": "Literature"
+    },
+    "PZ" : {
+        "wing": "Multi-tier",
+        "floor": "Level 7",
+        "subject": "Literature"
+    },
+    "Q" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Science"
+    },
+    "R" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Medicine"
+    },
+    "S" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Agriculture"
+    },
+    "T" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Technology & Engineering"
+    },
+    "U" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Military Science"
+    },
+    "V" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Naval Science"
+    },
+    "Z" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Bibliography & Library Science"
+    },
+    "REF A-V" : {
+        "wing": "Multi-tier",
+        "floor": "3rd Level",
+        "subject": "Reference works"
+    },
+    "REF Z" : {
+        "wing": "Honnold",
+        "floor": "1st floor",
+        "subject": "Bibliography & Library Science Reference"
+    }
+}

@@ -1,13 +1,13 @@
 
-$color-room-inactive: desaturate( lighten($blue, 50%), 20% );
-$color-room-active: $blue;
+$color-room-inactive: lightgray;
+$color-room-active: black;
 
 @keyframes pulse-room {
     0% {
         fill: $color-room-inactive;
     }
     50% {
-        fill: $color-room-active;
+        fill: inherit;
     }
     100% {
         fill: $color-room-inactive;
@@ -20,8 +20,10 @@ $color-room-active: $blue;
 }
 
 .ccl-c-wayfinder__call-num,
-.ccl-c-wayfinder__level {
-    color: $blue;
+.ccl-c-wayfinder__floor,
+.ccl-c-wayfinder__wing,
+.ccl-c-wayfinder__subject {
+    @include school-style(color);
 }
 
 .ccl-c-wayfinder__maps {
@@ -40,6 +42,7 @@ $color-room-active: $blue;
 
     &:hover {
         fill: $color-room-active !important;
+        @include school-style(fill);
     }
 
     &.ccl-is-active {

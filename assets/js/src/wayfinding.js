@@ -27,17 +27,34 @@
                 _this.$tabContents.filter(target).addClass('ccl-is-active');
             });
         });
-
-        console.log(this);
     };
 
     var Wayfinder = function(el){
         this.$el = $(el);
+        this.callNumbers = {};
         this.$input = this.$el.find('#call-num-search');
         this.$marquee = this.$el.find('.ccl-c-wayfinder__marquee');
         this.$callNum = this.$el.find('.ccl-c-wayfinder__call-num');
-        this.$level = this.$el.find('.ccl-c-wayfinder__level');
-        this.init();
+        this.$wing = this.$el.find('.ccl-c-wayfinder__wing');
+        this.$floor = this.$el.find('.ccl-c-wayfinder__floor');
+        this.$subject = this.$el.find('.ccl-c-wayfinder__subject');
+
+        var _this = this;
+
+        $.getJSON( CCL.assets + 'js/call-numbers.json' )
+            .done(function(data){
+                _this.callNumbers = data;
+                _this.init();
+            })
+            .fail(function(err){
+                console.log(err);
+                this.$marquee.prepend('<div class="ccl-h3 ccl-wayfinder-error">There was an error fetching call numbers.</div>');
+            })
+            .always(function(){
+                //
+            });
+
+        // this.init();
     };
 
     Wayfinder.prototype.init = function() {
@@ -68,7 +85,7 @@
 
                         _this.$marquee.hide();
                         _this.$callNum.text('');
-                        _this.$level.text('');
+                        _this.$floor.text('');
 
                     }
                 }, 600);
@@ -77,23 +94,54 @@
 
                 clearTimeout(timeout);
 
-                _this.$level.text('...');
+                _this.$floor.text('...');
                 _this.reset();
             });
 
     };
 
+    Wayfinder.prototype.getCallKey = function(callNum) {
+        var key,
+            callKeys = Object.keys(this.callNumbers);
+
+        if ( callKeys.length === 0 ){
+            return;
+        }
+
+        callKeys.forEach(function(k){
+          if ( callNum >= k ) {
+            key = k;
+          }
+        });
+
+        return key;
+    };
+
     Wayfinder.prototype.findRoom = function(query) {
+        
+        var callKey = this.getCallKey(query),
+            callData = {};
+
+        if ( ! callKey ) {
+            return;
+        }
+
         this.$el.addClass('ccl-app-active');
-        this.$level.text('Level 1');
-        this.$el.find('a[href="#floor-1"]').addClass('ccl-u-color-blue');
-        this.$el.find('#floor-1__room-1').addClass('ccl-is-active');
         $('html, body').animate({ scrollTop: $('.ccl-c-search').offset().top });
+        
+        callData = this.callNumbers[callKey];
+
+        this.$floor.text( callData.floor );
+        this.$wing.text( callData.wing );
+        this.$subject.text( callData.subject );
+        this.$el.find('a[href="#floor-1"]').addClass('ccl-is-active');
+        this.$el.find('#floor-1__room-1').addClass('ccl-is-active');
+        
     };
 
     Wayfinder.prototype.reset = function() {
         this.$el.removeClass('ccl-app-active');
-        this.$el.find('a[href*="#floor-"]').removeClass('ccl-u-color-blue');
+        this.$el.find('a[href*="#floor-"]').removeClass('ccl-is-active');
         this.$el.find('.ccl-c-floor__room').removeClass('ccl-is-active');
     };
 

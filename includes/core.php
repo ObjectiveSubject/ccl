@@ -67,6 +67,11 @@ function scripts( $debug = false ) {
 		CCL_VERSION,
 		true
 	);
+
+	wp_localize_script( 'main', 'CCL', array(
+		'site_url' => site_url('/'),
+		'assets' => CCL_ASSETS
+	) );
 }
 
 /**
