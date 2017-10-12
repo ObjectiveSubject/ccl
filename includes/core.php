@@ -104,10 +104,13 @@ function modify_queries( $query ) {
  * @param $query
  */
 function add_menus() {
-	// Register main footer
+	
 	register_nav_menus(
 		array(
-			'primary' => 'Primary',
+			'header_1' => 'Header 1',
+			'header_2' => 'Header 2',
+			'footer_1' => 'Footer 1'
 		)
 	);
+
 }

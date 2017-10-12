@@ -1,0 +1,14 @@
+.ccl-c-menu {
+    @extend .ccl-u-clean-list;
+    @extend .ccl-u-mt-1;
+}
+
+.menu-item {
+    @extend .ccl-u-mt-nudge;
+    .ccl-is-primary & {
+        @extend .ccl-h3;
+    }
+    .ccl-is-secondary & {
+        @extend .ccl-h4;
+    }
+}

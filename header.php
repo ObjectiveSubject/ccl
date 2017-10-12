@@ -26,27 +26,29 @@
 				<hr/>
 
 				<div class="ccl-l-row">
-					<div class="ccl-l-column">
-						<nav>
-							<ul class="ccl-u-clean-list ccl-u-mt-1">
-								<li class="ccl-h3 ccl-u-mt-nudge"><a href="#">About Us</a></li>
-								<li class="ccl-h3 ccl-u-mt-nudge"><a href="#">Using the Library</a></li>
-								<li class="ccl-h3 ccl-u-mt-nudge"><a href="#">Learning Spaces</a></li>
-								<li class="ccl-h3 ccl-u-mt-nudge"><a href="#">Collections</a></li>
-								<li class="ccl-h3 ccl-u-mt-nudge"><a href="#">Research Support</a></li>
-							</ul>
-						</nav>	
+					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
+						<?php if ( has_nav_menu( 'header_1' ) ) {
+							wp_nav_menu( array(
+								'theme_location' => 'header_1',
+								'menu_class' => 'ccl-c-menu ccl-is-primary',
+								'container' => 'nav',
+							) );
+						} else {
+							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a primary menu</a></div>';
+						} ?>
 					</div>
-					<div class="ccl-l-column">
-						<nav>
-							<ul class="ccl-u-clean-list ccl-u-mt-1">
-								<li class="ccl-h4 ccl-u-mt-nudge"><a href="#">Faculty Resources</a></li>
-								<li class="ccl-h4 ccl-u-mt-nudge"><a href="#">News & Events</a></li>
-								<li class="ccl-h4 ccl-u-mt-nudge"><a href="#">Chat with a Librarian</a></li>
-							</ul>
-						</nav>
+					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
+						<?php if ( has_nav_menu( 'header_2' ) ) {
+							wp_nav_menu( array(
+								'theme_location' => 'header_2',
+								'menu_class' => 'ccl-c-menu ccl-is-secondary',
+								'container' => 'nav',
+							) );
+						} else {
+							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary menu</a></div>';
+						} ?>
 					</div>
-					<div class="ccl-l-column">
+					<div class="ccl-l-column ccl-l-span-third-lg">
 						<ul class="ccl-u-clean-list ccl-u-mt-1">
 							<li>
 								<hr class="ccl-u-my-nudge"/>
