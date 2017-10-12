@@ -39,6 +39,11 @@
                     background-image: url(../images/caret-down-white@2x.png);
                     color: white;
                 }
+            } @else {
+                [data-school="#{$key}"] & {
+                    color: black;
+                    background-image: url(../images/caret-down-black@2x.png);
+                }
             }
         }
     }
@@ -50,8 +55,8 @@
         margin: -1rem 0;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        padding-right: 60px;
-        background-position: right 25px center;
+        padding-right: 40px;
+        background-position: right 15px center;
         border: 0;
     }
 }

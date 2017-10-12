@@ -19,26 +19,16 @@
 
     SchoolSelect.prototype.init = function(){
         
-        /* TODO: REMOVE FOR PRODUCTION
-         * get a random school if none exists
-         * --------------------------- */
-        if ( ! initSchool || '' === initSchool ) {
+        if ( initSchool ) {
 
-            var schools = ['pomona','cgu','cuc','scripps','claremont-mckenna','harvey-mudd','pitzer','kgi'],
-                key = Math.floor( Math.random() * schools.length );
-            
-            initSchool = schools[key];
-            $('html').attr( 'data-school', initSchool );
+            this.$select
+                .find( 'option[value="' + initSchool + '"]' )
+                .attr( 'selected', 'selected' );   
 
         }
-        /* --------------------------- */
-
-        this.$select
-            .find( 'option[value="' + initSchool + '"]' )
-            .attr( 'selected', 'selected' );
 
         this.$select.change(function(event){
-            $('html').attr( 'data-school', event.target.value );
+            $('html').attr(  'data-school', event.target.value );
         });
     };
 
