@@ -20,7 +20,9 @@
 			<div class="ccl-l-container">
 				
 				<div class="site-title ccl-h2" style="font-family: Georgia,serif">
-					<a href="<?php echo get_home_url(); ?>">Claremont Colleges Library • VIT@L</a>
+					<a href="<?php echo get_home_url(); ?>" class="ccl-b-logo ccl-is-horz">
+						<span class="ccl-u-display-none"><?php echo bloginfo( 'name' ); ?></span>
+					</a>
 				</div>
 
 				<hr/>
@@ -34,7 +36,7 @@
 								'container' => 'nav',
 							) );
 						} else {
-							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a primary menu</a></div>';
+							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a primary header menu</a></div>';
 						} ?>
 					</div>
 					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
@@ -45,7 +47,7 @@
 								'container' => 'nav',
 							) );
 						} else {
-							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary menu</a></div>';
+							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary header menu</a></div>';
 						} ?>
 					</div>
 					<div class="ccl-l-column ccl-l-span-third-lg">
