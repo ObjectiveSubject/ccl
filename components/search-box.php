@@ -4,12 +4,12 @@
 
         <div class="ccl-c-search">
 
-            <form class="ccl-c-search-bar" name="catalogSearch" action="http://ccl.on.worldcat.org/external-search" target="_blank">
+            <form class="ccl-c-search-bar" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
                 <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search"/>
 
                 <div class="ccl-c-search-bar__option">
                     <strong class="ccl-u-faded">As:</strong>
-                    <select class="ccl-b-select" name="search_keyword">
+                    <select class="ccl-b-select" name="index">
                         <option value="all">All</option>
                         <option value="title">Title</option>
                         <option value="keyword" selected="selected">Keyword</option>
@@ -20,10 +20,11 @@
                 
                 <div class="ccl-c-search-bar__option">
                     <strong class="ccl-u-faded">In:</strong>
-                    <select class="ccl-b-select" name="search_db">
-                        <option value="db_name" selected="selected">DB Name</option>
-                        <option value="db_name">DB Name</option>
-                        <option value="db_name">DB Name</option>
+                    <select class="ccl-b-select" name="database">
+                        <option value="all" selected="selected">All</option>
+                        <option value="Z-wcorg">WorldCat</option>
+                        <option value="Z-oais">OAlster</option>
+                        <option value="Bcnf">PapersFirst</option>
                     </select>
                 </div>
             
