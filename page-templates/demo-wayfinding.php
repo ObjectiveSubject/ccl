@@ -37,8 +37,12 @@ get_header(); ?>
 
 						<div class="ccl-l-row">
 							<div class="ccl-l-column">
-								<form class="ccl-c-search__bar">
-									<input id="call-num-search" name="call-num-search" type="text" class="ccl-b-input" placeholder="Enter a call number to begin"/>
+								<form id="call-number-search" class="ccl-c-search-bar">
+									<input id="call-num-input" name="call-number" type="text" class="ccl-b-input" placeholder="Enter a call number to begin"/>
+									<button id="call-num-submit" type="submit" class="ccl-c-search-bar__submit ccl-b-btn">
+										<i class="ccl-b-icon-search" aria-hidden="true"></i>
+										<span class="ccl-u-display-none">Search</span>
+									</button>
 								</form>
 							</div>
 							<div class="ccl-l-column">

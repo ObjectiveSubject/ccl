@@ -32,7 +32,8 @@
     var Wayfinder = function(el){
         this.$el = $(el);
         this.callNumbers = {};
-        this.$input = this.$el.find('#call-num-search');
+        this.$input = this.$el.find('#call-num-input');
+        this.$submit = this.$el.find('#call-num-submit');
         this.$marquee = this.$el.find('.ccl-c-wayfinder__marquee');
         this.$callNum = this.$el.find('.ccl-c-wayfinder__call-num');
         this.$wing = this.$el.find('.ccl-c-wayfinder__wing');
@@ -118,6 +119,8 @@
     };
 
     Wayfinder.prototype.findRoom = function(query) {
+
+        query = query.toUpperCase();
         
         var callKey = this.getCallKey(query),
             callData = {};

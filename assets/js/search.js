@@ -43,9 +43,9 @@
 
 	SearchAutocomplete.prototype.fetchResults = function( query ) {
 
-		var responseArea = $('.ccl-c-search__list'),
+		var responseArea = $('.ccl-c-search-results__list'),
 			responseItems = $('.ccl-c-search-item'),
-			resultsLink = $(".ccl-c-search__results-footer");
+			resultsLink = $(".ccl-c-search-results__footer");
 
 		var data = {
 			action: 'load_search_results', // this should probably be able to do people & assets too (maybe DBs)
@@ -94,8 +94,8 @@
 			}
 
 			// Build results count/link
-			listItem = '<li class="ccl-c-search__results-footer">' +
-				       '<a href="/?s=' + query + '" class="ccl-c-search__results-action">' +
+			listItem = '<li class="ccl-c-search-results__footer">' +
+				       '<a href="/?s=' + query + '" class="ccl-c-search-results__action">' +
 				       'View all ' + count + ' Results ' +
 				       '<i class="ccl-b-icon-arrow-right" aria-hidden="true"></i>' +
 				       '</a>' +
