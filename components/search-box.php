@@ -9,7 +9,7 @@
 
                 <div class="ccl-c-search-bar__option">
                     <strong class="ccl-u-faded">As:</strong>
-                    <select class="ccl-b-select" name="index" title="Index">
+                    <select class="ccl-b-select ccl-c-search-index" name="index" title="Index">
                         <option value="ti">Title</option>
                         <option value="kw" selected="selected">Keyword</option>
                         <option value="au">Author</option>

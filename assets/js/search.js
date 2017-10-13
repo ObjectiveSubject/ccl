@@ -34,11 +34,15 @@
 			 })
 			 .keydown(function (event) {
 			 	 if (event.which === 13 || event.keyCode === 13) {
-			 	 	document.catalogSearch.submit(); // direct search to WorldCat on return
+					 _this.wrapQuery();
 				 } else {
 					 clearTimeout(timeout);
 				 }
 			 });
+
+		 $('.ccl-c-search-bar').submit(function(event) {
+			 _this.wrapQuery();
+		 });
 	 };
 
 	SearchAutocomplete.prototype.fetchResults = function( query ) {
@@ -105,6 +109,20 @@
 
 		});
 
+	};
+
+	// If the user hits return or presses submit, the query will go directly to WorldCat. This function wraps
+	// the string in the specified index value (keyword, author, title, etc)
+	SearchAutocomplete.prototype.wrapQuery = function() {
+		event.preventDefault();
+
+		var searchIndex  = $('.ccl-c-search-index'),
+			query        = $('#ccl-search'),
+			wrappedQuery = searchIndex.val() + ':(' + query.val() + ')';
+		
+		query.val(wrappedQuery); // wrap the query in the two-letter code provided by the index dropdown
+
+		document.catalogSearch.submit(); // direct search to WorldCat on return
 	};
 
      $(document).ready(function(){
