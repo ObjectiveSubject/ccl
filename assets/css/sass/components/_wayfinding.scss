@@ -1,5 +1,5 @@
 
-$color-room-inactive: lightgray;
+$color-room-inactive: #eee;
 $color-room-active: black;
 
 @keyframes pulse-room {
@@ -7,10 +7,17 @@ $color-room-active: black;
         fill: $color-room-inactive;
     }
     50% {
-        fill: inherit;
+        fill: rgba($color-room-active, 0.3);
     }
     100% {
         fill: $color-room-inactive;
+    }
+}
+
+.ccl-c-wayfinder {
+    svg {
+        font-size: rem(24);
+        font-weight: bold;
     }
 }
 
@@ -42,10 +49,16 @@ $color-room-active: black;
 
     &:hover {
         fill: $color-room-active !important;
-        @include school-style(fill);
+        @include school-style(fill, 1, '!important');
     }
 
     &.ccl-is-active {
-        animation: pulse-room 1500ms infinite;
+        animation: pulse-room 1000ms ease infinite;
     }
+}
+
+.ccl-wayfinder__error {
+    @extend .ccl-h3;
+    margin-top: 0;
+    color: red;
 }

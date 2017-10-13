@@ -15,7 +15,7 @@ get_header(); ?>
 			$description = get_the_excerpt(); // Could use 'the_excerpt()' but this allows for override
 			?>
 
-			<article <?php post_class('ccl-js-wayfinder'); ?>>
+			<article <?php post_class(); ?>>
 
 				<div class="ccl-c-hero <?php echo $thumb_url ? 'ccl-has-image' : ''; ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
 					<div class="ccl-c-hero__container">
@@ -31,59 +31,67 @@ get_header(); ?>
 
 				</div>
 
-				<div class="ccl-c-search ccl-u-px-3 ccl-u-py-3" style="background-color: #eee;">
+				<div class="ccl-c-wayfinder ccl-js-wayfinder">
+
+					<div class="ccl-c-search ccl-u-px-3 ccl-u-py-3" style="background-color: #eee;">
+
+						<div class="ccl-l-container">
+
+							<div class="ccl-l-row">
+								<div class="ccl-l-column">
+									<form id="call-number-search" class="ccl-c-search-bar">
+										<input id="call-num-input" name="call-number" type="text" class="ccl-b-input" placeholder="Enter a call number to begin"/>
+										<button id="call-num-submit" type="submit" class="ccl-c-search-bar__submit ccl-b-btn ccl-is-solid" disabled>
+											<i class="ccl-b-icon-search" aria-hidden="true"></i>&nbsp;<span>Find</span>
+										</button>
+									</form>
+								</div>
+								<div class="ccl-l-column">
+									<div class="ccl-error-box"></div>
+									<div class="ccl-c-wayfinder__marquee">
+										<span class="ccl-h5">Location for call number &ldquo;<span class="ccl-c-wayfinder__call-num">&hellip;</span>&rdquo;</span><br/>
+										<span class="ccl-h3">Wing: <span class="ccl-c-wayfinder__wing">&hellip;</span></span><br/>
+										<span class="ccl-h3">Floor: <span class="ccl-c-wayfinder__floor">&hellip;</span></span><br/>
+										<span class="ccl-h3">Subject: <span class="ccl-c-wayfinder__subject">&hellip;</span></span>
+									</div>
+								</div>
+							</div>
+						
+						</div>
+
+					</div>
 
 					<div class="ccl-l-container">
 
-						<div class="ccl-l-row">
-							<div class="ccl-l-column">
-								<form id="call-number-search" class="ccl-c-search-bar">
-									<input id="call-num-input" name="call-number" type="text" class="ccl-b-input" placeholder="Enter a call number to begin"/>
-									<button id="call-num-submit" type="submit" class="ccl-c-search-bar__submit ccl-b-btn">
-										<i class="ccl-b-icon-search" aria-hidden="true"></i>
-										<span class="ccl-u-display-none">Search</span>
-									</button>
-								</form>
+						<div class="ccl-l-row ccl-u-my-2">
+							<div class="ccl-l-column--lazy-lg ccl-l-span-full" style="min-width: 120px; border-right:1px solid #ddd">
+								<ul class="ccl-u-clean-list ccl-js-tabs">
+									<li><a href="#floor-4" class="ccl-c-tab ccl-h4" data-target="#floor-4">Level 4</a></li>
+									<li><a href="#floor-3" class="ccl-c-tab ccl-h4" data-target="#floor-3">Level 3</a></li>
+									<li><a href="#floor-2" class="ccl-c-tab ccl-h4" data-target="#floor-2">Level 2</a></li>
+									<li><a href="#floor-1" class="ccl-c-tab ccl-h4 ccl-is-active" data-target="#floor-1">Level 1</a></li>
+								</ul>	
 							</div>
-							<div class="ccl-l-column">
-								<div class="ccl-c-wayfinder__marquee">
-									<span class="ccl-h5">Location for call number &ldquo;<span class="ccl-c-wayfinder__call-num">&hellip;</span>&rdquo;</span><br/>
-									<span class="ccl-h3">Wing: <span class="ccl-c-wayfinder__wing">&hellip;</span></span><br/>
-									<span class="ccl-h3">Floor: <span class="ccl-c-wayfinder__floor">&hellip;</span></span><br/>
-									<span class="ccl-h3">Subject: <span class="ccl-c-wayfinder__subject">&hellip;</span></span>
+							<div class="ccl-c-wayfinder__maps ccl-l-column">
+								<div id="floor-1" class="ccl-c-tab__content ccl-is-active">
+									<h3 class="ccl-u-text-center">Floor 1</h3>
+									<div><?php include( CCL_PATH . '/assets/images/floor-1.svg' ) ?></div>
 								</div>
+								<div id="floor-2" class="ccl-c-tab__content">
+									<h3 class="ccl-u-text-center">Floor 2</h3>
+									<div><?php include( CCL_PATH . '/assets/images/floor-2.svg' ) ?></div>
+								</div>
+								<div id="floor-3" class="ccl-c-tab__content">
+									<h3 class="ccl-u-text-center">Floor 3</h3>
+									<div><?php include( CCL_PATH . '/assets/images/floor-3.svg' ) ?></div>
+								</div>
+								<div id="floor-4" class="ccl-c-tab__content">
+									<h3 class="ccl-u-text-center">Floor 4</h3>
+									<div><?php include( CCL_PATH . '/assets/images/floor-4.svg' ) ?></div>
+								</div>	
 							</div>
 						</div>
-					
-					</div>
 
-				</div>
-
-				<div class="ccl-l-container">
-
-					<div class="ccl-l-row ccl-u-mt-2">
-						<div class="ccl-l-column--lazy-lg ccl-l-span-full" style="min-width: 120px; border-right:1px solid #ddd">
-							<ul class="ccl-u-clean-list ccl-js-tabs ccl-u-mt-1">
-								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-4" class="ccl-c-tab ccl-h4" data-target="#floor-4">Level 4</a></li>
-								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-3" class="ccl-c-tab ccl-h4" data-target="#floor-3">Level 3</a></li>
-								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-2" class="ccl-c-tab ccl-h4" data-target="#floor-2">Level 2</a></li>
-								<li class="ccl-u-mb-1 ccl-u-pb-1" style="border-bottom:1px solid #ddd"><a href="#floor-1" class="ccl-c-tab ccl-h4" data-target="#floor-1">Level 1</a></li>
-							</ul>	
-						</div>
-						<div class="ccl-c-wayfinder__maps ccl-l-column">
-							<div id="floor-1" class="ccl-c-tab__content ccl-is-active">
-								<div><?php include( CCL_PATH . '/assets/images/level-1-flat.svg' ) ?></div>
-							</div>
-							<div id="floor-2" class="ccl-c-tab__content">
-								<div><?php include( CCL_PATH . '/assets/images/level-2-flat.svg' ) ?></div>
-							</div>
-							<div id="floor-3" class="ccl-c-tab__content">
-								<div><?php include( CCL_PATH . '/assets/images/level-3-flat.svg' ) ?></div>
-							</div>
-							<div id="floor-4" class="ccl-c-tab__content">
-								<div><?php include( CCL_PATH . '/assets/images/level-4-flat.svg' ) ?></div>
-							</div>	
-						</div>
 					</div>
 
 				</div>

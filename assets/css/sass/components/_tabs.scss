@@ -1,5 +1,16 @@
 .ccl-c-tab {
+    @extend .ccl-h4;
+    @extend .ccl-u-mt-0;
+    display: block;
     pointer-events: none;
+    border-bottom: 1px solid #eee;
+    padding: $spacer 0 $spacer 0.5em;
+
+    &:hover, &.ccl-is-active {
+        @include school-style(color);
+        @include school-style(background-color, 0.1);
+    }
+
     .ccl-app-active & {
         pointer-events: all;
     }

@@ -28,25 +28,9 @@
 }
 
 .ccl-c-search-bar__submit {
-    border: 0;
-    background-color: black;
-    color: white;
-    padding-left: $search-bar-padding;
-    padding-right: $search-bar-padding;
-    font-size: 1.8rem;
-    line-height: 1;
-
-    @include media($lg) {
-        min-width: 10rem;
-    }
-
-    &:hover {
-        background-color: $blue;
-    }
     &:last-child {
         margin-left: 0;
-    }   
-    
+    }
 }
 
 // Search Results

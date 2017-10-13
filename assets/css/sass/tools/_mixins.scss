@@ -109,12 +109,12 @@
 
 // School styles
 // -------------------------------------- //
-@mixin school-style( $prop, $alpha: 1 ) {
+@mixin school-style( $prop, $alpha: 1, $important: '' ) {
 
 	@each $key, $hex in $school-map {
 
 		[data-school="#{$key}"] & {
-			#{$prop}: rgba( $hex, $alpha );
+			#{$prop}: rgba( $hex, $alpha ) #{$important};
 			@if $prop == background-color and lightness($hex) > 49 {
 				color: black;
 			}

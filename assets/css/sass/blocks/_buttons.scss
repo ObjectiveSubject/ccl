@@ -16,6 +16,7 @@
     padding: 0.8rem 1rem;
     text-align: center;
     text-shadow: none;
+    display: flex; // keeps multiple items from breaking to new lines
 	
 	&:hover {
         background-color: rgba(black, 0.1);
@@ -81,15 +82,13 @@
         &:hover, &:focus {
             color: white;
             background-color: rgba($color-text-main, 0.75);
-            @include school-style(background-color, 0.75);
+            @include school-style(background-color);
         }
 
         @each $key, $hex in $school-map {
             [data-school="#{$key}"] & {
                 @if lightness($hex) < 50 {
                     color: white;
-                } @else {
-                    color: black;
                 }
             }
         }

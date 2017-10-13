@@ -6,7 +6,8 @@
 
 ( function( window, $ ) {
 	'use strict';
-    var document = window.document;
+    var document = window.document,
+        tabs, wayfinder;
     
     var Tabs = function(el) {
 
@@ -22,16 +23,26 @@
             $tab.click(function(e){
                 e.preventDefault();
                 var target = $tab.data('target');
-                console.log(target, _this.$tabContents);
-                _this.$tabContents.removeClass('ccl-is-active');
-                _this.$tabContents.filter(target).addClass('ccl-is-active');
+                // _this.$tabContents.removeClass('ccl-is-active');
+                // _this.$tabContents.filter(target).addClass('ccl-is-active');
+                _this.setActive(target);
             });
         });
+
+        return this;
+    };
+
+    Tabs.prototype.setActive = function(target){
+        this.$tabs.removeClass('ccl-is-active');
+        this.$tabs.filter('[href="'+target+'"]').addClass('ccl-is-active');
+        this.$tabContents.removeClass('ccl-is-active');
+        this.$tabContents.filter(target).addClass('ccl-is-active');
     };
 
     var Wayfinder = function(el){
         this.$el = $(el);
         this.callNumbers = {};
+        this.$form = this.$el.find('#call-number-search');
         this.$input = this.$el.find('#call-num-input');
         this.$submit = this.$el.find('#call-num-submit');
         this.$marquee = this.$el.find('.ccl-c-wayfinder__marquee');
@@ -39,6 +50,11 @@
         this.$wing = this.$el.find('.ccl-c-wayfinder__wing');
         this.$floor = this.$el.find('.ccl-c-wayfinder__floor');
         this.$subject = this.$el.find('.ccl-c-wayfinder__subject');
+        this.error = {
+            get: '<div class="ccl-c-alert ccl-is-error ccl-wayfinder__error"><button type="button" class="ccl-b-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><i class="ccl-b-icon-alert" aria-hidden="true"></i> There was an error fetching call numbers.</div>',
+            find: '<div class="ccl-c-alert ccl-is-error ccl-wayfinder__error"><button type="button" class="ccl-b-close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><i class="ccl-b-icon-alert" aria-hidden="true"></i> Could not find that call number. Please try again.</div>'
+        };
+        this.$errorBox = $('.ccl-error-box');
 
         var _this = this;
 
@@ -49,55 +65,42 @@
             })
             .fail(function(err){
                 console.log(err);
-                this.$marquee.prepend('<div class="ccl-h3 ccl-wayfinder-error">There was an error fetching call numbers.</div>');
-            })
-            .always(function(){
-                //
+                this.$errorBox.append( this.error.get );
             });
 
-        // this.init();
+        return this;
     };
 
     Wayfinder.prototype.init = function() {
         
-        var _this = this,
-            timeout;
+        var _this = this;
+
+        this.$el.addClass('ccl-app-active');
 
         this.$input
             .keyup(function () {
                 var query = $(this).val();
                 
-                clearTimeout(timeout);
-                
-                _this.$callNum.text(query);
-
                 if ( query === "" ) {
-                    _this.$marquee.hide();                    
+                    _this.$submit.attr('disabled', true);
+                    _this.$marquee.hide();
+                    _this.reset();                
                 } else {
-                    _this.$marquee.show();
+                    _this.$submit.attr('disabled', false);
                 }
 
-                timeout = setTimeout(function () {
-                    if ( query !== "" ) {
-
-                        _this.findRoom( query );
-
-                    } else {
-
-                        _this.$marquee.hide();
-                        _this.$callNum.text('');
-                        _this.$floor.text('');
-
-                    }
-                }, 600);
-            })
-            .keydown(function (event) {
-
-                clearTimeout(timeout);
-
-                _this.$floor.text('...');
-                _this.reset();
             });
+
+        this.$form.submit(function(e){
+            e.preventDefault();
+
+            var query = _this.$input.val();
+
+            $('.ccl-wayfinder__error').remove();
+            _this.$marquee.show();
+            _this.$callNum.text(query);
+            _this.findRoom( query );
+        });
 
     };
 
@@ -123,13 +126,14 @@
         query = query.toUpperCase();
         
         var callKey = this.getCallKey(query),
-            callData = {};
+            callData = {},
+            room;
 
         if ( ! callKey ) {
+            this.throwFindError();
             return;
         }
 
-        this.$el.addClass('ccl-app-active');
         $('html, body').animate({ scrollTop: $('.ccl-c-search').offset().top });
         
         callData = this.callNumbers[callKey];
@@ -137,23 +141,43 @@
         this.$floor.text( callData.floor );
         this.$wing.text( callData.wing );
         this.$subject.text( callData.subject );
-        this.$el.find('a[href="#floor-1"]').addClass('ccl-is-active');
-        this.$el.find('#floor-1__room-1').addClass('ccl-is-active');
+
+        /* TODO:
+         * set ACTUAL room, not just the floor. still waiting on client 
+         * to provide data for which call numbers belong to which rooms
+         * ----------------------------------------------------------------- */
+
+        room = callData.floor_int;
+
+        /* ----------------------------------------------------------------- */
+
+        this.$el.find('a[href="#floor-'+room+'"]').addClass('ccl-is-active');
+        this.$el.find('#room-'+room+'-1').addClass('ccl-is-active');
+
+        tabs.setActive( '#floor-' + room );
         
     };
 
     Wayfinder.prototype.reset = function() {
-        this.$el.removeClass('ccl-app-active');
         this.$el.find('a[href*="#floor-"]').removeClass('ccl-is-active');
         this.$el.find('.ccl-c-floor__room').removeClass('ccl-is-active');
     };
 
+    Wayfinder.prototype.throwFindError = function(){
+        this.$el.find('a[href*="#floor-"]').removeClass('ccl-is-active');
+        this.$el.find('.ccl-c-floor__room').removeClass('ccl-is-active');
+        this.$floor.text( '' );
+        this.$wing.text( '' );
+        this.$subject.text( '' );
+        this.$errorBox.append( this.error.find );
+    };
+
     $(document).ready(function(){
         $('.ccl-js-tabs').each(function(){
-            new Tabs(this);
+            tabs = new Tabs(this);
         });
         $('.ccl-js-wayfinder').each(function(){
-            new Wayfinder(this);
+            wayfinder = new Wayfinder(this);
         });
     });
 
