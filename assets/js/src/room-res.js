@@ -16,16 +16,16 @@
 
         this.$el.submit(function(event){
             event.preventDefault();
-            console.log( 'form-submitted', _this.$el.serializeArray() );
+            _this.onSubmit();
         });
 
     };
 
-    // RoomResForm.prototype.onSubmit = function(){
+    RoomResForm.prototype.onSubmit = function(){
 
-    //     console.log('form submitted',  );
+        console.log( 'room form submitted » ', this.$el.serializeArray() );
 
-    // };
+    };
 
     $(document).ready(function(){
         $('.js-room-res-form').each(function(){
