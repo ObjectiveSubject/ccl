@@ -67,6 +67,7 @@
         float: none;
         width: auto;
         max-width: 190px;
+        margin-right: $spacer;
     }
 
     img {
@@ -86,7 +87,6 @@
     margin: $spacer 0;
     clear: both;
     @include media($lg) {
-        margin-left: $spacer;
         flex-wrap: nowrap;
     }
 }
@@ -105,6 +105,13 @@
 .ccl-c-room__slot-label {
     @extend .ccl-h5;
     @extend .ccl-u-mt-0;
+    // icon properties
+    font-family: 'ccl-ui' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    // ---
     display: block;
     height: 100%;
     cursor: pointer;
@@ -121,6 +128,7 @@
     .ccl-is-full & {
         color: black !important;
         cursor: default;
+        pointer-events: none;
     }
     
     &:before {
@@ -134,19 +142,16 @@
     }
 
     &:after {
-        content: "\271a";
+        content: $ccl-b-icon-close;
         position: absolute;
         top: 50%;
         left: 50%;
         color: white;
         opacity: 0.5;
         font-size: 1rem;
-        transform: translate3d(-50%,-50%,0);
+        transform: translate3d(-50%,-50%,0) rotate(45deg);
         transition: transform 100ms ease-out;
         line-height: 1;
-        @include media($md) {
-            font-size: 2rem;
-        }
     }
 
     [type="checkbox"]:not(:checked) + &:hover:before {
@@ -161,7 +166,10 @@
     }
     [type="checkbox"]:checked + &:after,
     .ccl-is-full &:after {
-        transform: translate3d(-50%,-50%,0) rotate(45deg);
+        transform: translate3d(-50%,-50%,0);
+    }
+    .ccl-is-full &:after {
+        content: $ccl-b-icon-clock;
     }
 
 }

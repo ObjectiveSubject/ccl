@@ -8,6 +8,12 @@
     padding: 6rem 0 3rem;
     @include school-style(background-color);
 
+    @include media($lg) {
+        display: flex;
+        height: 56.25vw;
+        max-height: rem(625);
+    }
+
     &.ccl-has-image {
         padding: 25vw 0 3rem;
         color: white;
@@ -23,6 +29,11 @@
         bottom: 0;
         z-index: 0;
         background: linear-gradient( to top, rgba(black, 0.9), rgba(black, 0.9) 20%, rgba(black, 0.1) );
+    }
+
+    &.ccl-is-short {
+        padding-top: 3rem;
+        max-height: rem(450);
     }
 
     a {
@@ -41,6 +52,8 @@
     @include media($lg) {
         padding: 0 $gutter/2;
         display: flex;
+        width: 100%;
+        align-items: flex-end;
     }
 }
 
