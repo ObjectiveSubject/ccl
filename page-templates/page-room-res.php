@@ -14,6 +14,13 @@ get_header(); ?>
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
 			$description = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
             $hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
+
+            // replace with get_terms()
+            $room_types  = array(
+                array( 'title' => 'Group Study Rooms', 'slug' => 'group-study' ), 
+                array( 'title' => 'Digital Studios', 'slug' => 'digital-studio' )
+            );
+
 			?>
 
 			<article <?php post_class(); ?>>
@@ -26,8 +33,13 @@ get_header(); ?>
 
 						<div class="ccl-c-hero__content">
                             <ul class="ccl-c-hero__menu">
-                                <li><a href="#room-type-1">Room Type 1</a></li>
-                                <li><a href="#room-type-2">Room Type 2</a></li>
+
+                                <?php foreach ( $room_types as $type ) : ?>
+
+                                    <li><a href="#<?php echo $type['slug']; ?>"><?php echo $type['title']; ?></a></li>
+
+                                <?php endforeach; ?>
+
                             </ul>
 						</div>
 
@@ -49,10 +61,9 @@ get_header(); ?>
 
                 <?php endif; ?>
 
-                <?php 
-                $room_types  = array(array( 'title' => 'Group Study Rooms', 'slug' => 'group-study' ), array( 'title' => 'Digital Studios', 'slug' => 'digital-studio' )); 
-                
-                foreach ( $room_types as $type ) : ?>
+                <?php foreach ( $room_types as $type ) : ?>
+
+                <div id="<?php echo $type['slug']; ?>">
 
                     <div class="ccl-c-hero ccl-is-short ccl-has-image" style="background-image:url(http://unsplash.it/1500x500)">
                         <div class="ccl-c-hero__container">
@@ -71,6 +82,7 @@ get_header(); ?>
 
                         <?php foreach ( $rooms as $room ) : ?>
 
+                            <!-- Room Promo -->
                             <div class="ccl-c-promo">
 
                                 <header class="ccl-c-promo__header">
@@ -98,13 +110,8 @@ get_header(); ?>
                                         <?php 
                                         $i = 0;
                                         do { ?>
-                                            <article class="ccl-c-carousel__slide">
-                                                <a href="#">
-                                                    <div class="ccl-u-mb-nudge"><img src="http://unsplash.it/500/350/"/></div>
-                                                    <p class="ccl-h4 ccl-u-mt-0">Carousel Item: Lorem Ipsum Dolor Eset</p>
-                                                    <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded">March 25, 7:00pm</p>
-                                                    <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded">Auditorium, Honnold/Mudd Library</p>
-                                                </a>
+                                            <article class="ccl-c-carousel__slide" style="max-width:350px">
+                                                <div class="ccl-u-mb-nudge"><img src="http://unsplash.it/500/350/"/></div>
                                             </article>
                                         <?php $i++; } while ( $i < 4 ); ?>
                                         
@@ -113,6 +120,7 @@ get_header(); ?>
                                 </div>
 
                             </div>
+
 
                             <!-- Room Map Modal -->
                             <div class="ccl-c-modal ccl-is-large" id="<?php echo $room['slug'] . '-map'; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $room['slug'] . '-map-label'; ?>" aria-hidden="true">
@@ -194,6 +202,8 @@ get_header(); ?>
                         <?php endforeach; ?>
 
                     </div>
+
+                </div>
 
                 <?php endforeach; ?>
 
