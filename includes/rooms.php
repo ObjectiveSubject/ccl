@@ -13,6 +13,8 @@ function setup() {
 
 	add_action( 'init', $n( 'register_rooms_post_type' ) );
 
+	add_action( 'init', $n( 'register_room_type_taxo' ) );
+
 	add_action( 'admin_enqueue_scripts', $n( 'load_admin_script' ), 20 );
 
 	add_action( 'admin_menu', $n( 'import_page' ) );
@@ -43,6 +45,16 @@ function register_rooms_post_type() {
 		'map_meta_cap' => true, // Allows created posts to be edited
 	) );
 
+}
+
+
+/**
+ * Register the room_type taxonomy and assign it to rooms.
+ *
+ * See https://github.com/johnbillion/extended-taxos for more info on using the extended-taxos library
+ */
+function register_room_type_taxo() {
+	register_extended_taxonomy( 'room_type', 'room' );
 }
 
 
