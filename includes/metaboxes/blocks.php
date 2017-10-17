@@ -46,16 +46,28 @@ function content_blocks() {
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
-		'name'             => 'Block Type',
-		'id'               => $prefix . 'type',
-		'type'             => 'select',
+		'name'                => 'Block Type',
+		'id'                  => $prefix . 'type',
+		'type'                => 'select',
 		// 'show_option_none' => true,
-		'default'          => 'carousel',
-		'options'          => array(
-			'wysiwyg'  => __( 'WYSIWYG', 'cmb2' ),
-			'carousel' => __( 'Carousel/Feature Items', 'cmb2' ),
-			'banner'   => __( 'Banner Image(s)', 'cmb2' ),
+		'default'             => 'carousel',
+		'options'             => array(
+			'wysiwyg'            => __( 'WYSIWYG', 'cmb2' ),
+			'carousel'           => __( 'Carousel/Feature Items', 'cmb2' ),
+			'feature_item'       => __( 'Single Featured Item', 'cmb2' ),
+			'banner'             => __( 'Banner Image(s)', 'cmb2' ),
 		)
+	) );
+
+	$cmb->add_group_field( $block_group_id, array(
+		'name'    => 'Layout',
+		'id'      => $prefix . 'layout',
+		'type'    => 'radio_inline',
+		'options' => array(
+			'image_left'  => __( 'Image Left', 'cmb2' ),
+			'image_right' => __( 'Image Right', 'cmb2' ),
+		),
+		'default' => 'image_right',
 	) );
 	
 	$cmb->add_group_field( $block_group_id, array(

@@ -14,15 +14,37 @@
         @extend .ccl-u-display-block;
     }
 }
+.ccl-c-promo--slim {
+    @extend .ccl-c-promo;
+    display: flex;
+    flex-direction: column;
+    @include media($lg) {
+        flex-direction: row;
+    }
+}
 
 .ccl-c-promo__header {
-    @extend .ccl-u-mb-1;
+    margin-bottom: $spacer;
     position: relative;
     z-index: 2;
     @include media($lg) {
         width: calc( 25% - #{$gutter} );
         float: left;
         margin: 0 $gutter/2;
+    }
+
+    .ccl-c-promo--slim & {
+        float: none;
+        width: auto;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+        @include media($lg) { 
+            margin-bottom: $spacer * 3;
+        } }
+    .ccl-c-promo--slim.ccl-is-image_left & {
+        order: 1;
+        margin-bottom: $spacer * 3;
     }
 }
 
@@ -47,13 +69,30 @@
 
 .ccl-c-promo__content {
     @extend .ccl-u-clearfix;
-    @extend .ccl-u-mb-3;
+    margin-bottom: $spacer * 3;
     position: relative;
     z-index: 1;
     @include media($lg) {
         width: calc( 75% - #{$gutter} );
         float: left;
         margin: 0 $gutter/2;
+    }
+
+    .ccl-c-promo--slim & {
+        float: none;
+        width: auto;
+        margin-bottom: $spacer;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: auto;
+        @include media($lg) {
+            max-width: 50%;
+            margin-bottom: $spacer * 3;
+        }
+    }
+    .ccl-c-promo--slim.ccl-is-image_right & {
+        margin-bottom: $spacer * 3;
+        order: 1;
     }
 }
 

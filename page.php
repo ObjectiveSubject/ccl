@@ -144,6 +144,47 @@ get_header(); ?>
 	
 							</div>
 
+						<?php elseif ( 'feature_item' == $block['block_type'] ) : ?>
+
+							<div class="ccl-l-container">
+
+								<div id="block-<?php echo $index; ?>" class="ccl-c-promo--slim <?php echo 'ccl-is-' . $block['block_layout']; ?>">
+
+									<header class="ccl-c-promo__header">
+
+										<?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+
+											<div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
+
+										<?php endif; ?>
+
+										<?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
+										
+											<div class="ccl-c-promo__description">
+												<?php echo apply_filters( 'the_content', $block['block_description'] ); ?>
+											</div>
+
+										<?php endif; ?>
+
+									</header>
+
+									<div class="ccl-c-promo__content">        
+
+										<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
+
+											<?php
+											echo wp_get_attachment_image( $image_id, 'large' );
+											break; // only get first image, break after
+											?>
+
+										<?php endforeach; ?>
+
+									</div>
+
+								</div>
+
+							</div>
+						
 						<?php else : ?>
 
 							<div class="ccl-l-container">
