@@ -2,51 +2,52 @@
 	'use strict';
 	var document = window.document;
 
-	var blockAdmin = {
-		init: function() {
-			console.log('wave');
+	var BlockAdmin = function(el) {
 
-			var blockTypeField = $('#block_type'),
-				blockType = blockTypeField.val();
-
-			blockAdmin.setBlockType( blockType );
-
-			blockTypeField.change( function() {
-				blockType = $(this).val();
-				blockAdmin.setBlockType( blockType );
-
-			});
-		},
-
-		setBlockType: function( blockType ) {
-
-			var carouselSelect 		= $('.cmb2-id-block-carousel-images');
-
-			if ('carousel' === blockType) {
-
-				carouselSelect.show();
-				
-				other.hide();
-
-			} else if ('other' === blockType) {
-
-				other.show();
-
-				carouselSelect.hide();
-
-			} else {
-				
-				carouselSelect.hide();
-				
-			}
-
-		}
+		this.$el = $(el);
+		this.$blockTypeToggle = this.$el.find('.ccl-block-type-toggle select');
+		this.$toggledFields = this.$el.find('.ccl-toggled-field');
+		
+		this.init();
 
 	};
 
+	BlockAdmin.prototype.init = function() {
+
+		var blockType = this.$blockTypeToggle.val();
+
+		this.setBlockType( blockType );
+
+		var _this = this;
+
+		this.$blockTypeToggle.change( function() {
+			blockType = _this.$blockTypeToggle.val();
+			_this.setBlockType( blockType );
+		} );
+	},
+
+	BlockAdmin.prototype.setBlockType = function( blockType ) {
+
+		this.$toggledFields.filter( '.show-on-' + blockType ).show();
+		this.$toggledFields.filter( function(){
+			return ( ! $(this).hasClass('show-on-' + blockType) );
+		} ).hide();
+
+	}
+
 	$(document).ready( function() {
 		if ($('body').hasClass('post-type-page')) {
-			blockAdmin.init();
+
+			// intialize existing rows
+			$('#block_group_repeat > .cmb-repeatable-grouping').each(function(){
+				new BlockAdmin(this);
+			});
+
+			// intialize new row when it is added
+			$('.cmb-repeatable-group').on('cmb2_add_row', function(e, $el){
+				new BlockAdmin( $el[0] );
+			});
+
 		}
 	});
 

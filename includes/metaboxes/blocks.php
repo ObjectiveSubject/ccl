@@ -56,7 +56,8 @@ function content_blocks() {
 			'carousel'           => __( 'Carousel/Feature Items', 'cmb2' ),
 			'feature_item'       => __( 'Single Featured Item', 'cmb2' ),
 			'banner'             => __( 'Banner Image(s)', 'cmb2' ),
-		)
+		),
+		'classes' => 'ccl-block-type-toggle'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
@@ -68,6 +69,7 @@ function content_blocks() {
 			'image_right' => __( 'Image Right', 'cmb2' ),
 		),
 		'default' => 'image_right',
+		'classes' => 'ccl-toggled-field show-on-feature_item'
 	) );
 	
 	$cmb->add_group_field( $block_group_id, array(
@@ -76,6 +78,7 @@ function content_blocks() {
 		// 'default' => 'standard value (optional)',
 		'id'      => $prefix . 'title',
 		'type'    => 'text',
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-carousel'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
@@ -88,7 +91,8 @@ function content_blocks() {
 			'media_buttons' => false,
 			'editor_class' => $prefix . 'description_wysiwyg',
 			'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'
-		)
+		),
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-carousel'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
@@ -97,6 +101,7 @@ function content_blocks() {
 		// 'default' => 'standard value (optional)',
 		'id'      => $prefix . 'description',
 		'type'    => 'wysiwyg',
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-carousel show-on-feature_item'
 		// 'options' => array(
 			// 'editor_class' => $prefix . 'description_wysiwyg',
 			// 'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'
