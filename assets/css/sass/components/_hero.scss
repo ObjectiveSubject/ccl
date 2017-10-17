@@ -10,13 +10,14 @@
 
     @include media($lg) {
         display: flex;
-        height: 56.25vw;
-        max-height: rem(625);
     }
 
     &.ccl-has-image {
-        padding: 25vw 0 3rem;
         color: white;
+        @include media($lg) {
+            height: 56.25vw;
+            max-height: rem(625);
+        }
     }
 
     &.ccl-has-image:before {
@@ -33,7 +34,9 @@
 
     &.ccl-is-short {
         padding-top: 3rem;
-        max-height: rem(450);
+        &.ccl-has-image {
+            max-height: rem(450);
+        }        
     }
 
     a {
