@@ -168,6 +168,7 @@
     .ccl-is-full &:after {
         transform: translate3d(-50%,-50%,0);
     }
+    [type="checkbox"]:checked + &:after,
     .ccl-is-full &:after {
         content: $ccl-b-icon-clock;
     }
