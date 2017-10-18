@@ -12,6 +12,9 @@ define( 'CCL_TEMPLATE_URL', get_template_directory_uri() );
 define( 'CCL_PATH',         dirname( __FILE__ ) . '/' );
 define( 'CCL_INC',          CCL_PATH . 'includes/' );
 define( 'CCL_ASSETS',       CCL_TEMPLATE_URL . '/assets/' );
+if ( ! defined( 'DAY_IN_SECONDS' ) ) {
+    define( 'DAY_IN_SECONDS', 24 * 60 * 60 );
+}
 
 // Include compartmentalized functions
 require_once CCL_INC . 'core.php';

@@ -88,19 +88,22 @@ $room-slot-box-bg-active: black;
     flex-basis: 0;
     flex-shrink: 1;
     flex-grow: 1;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin: $spacer 0;
     clear: both;
-    @include media($lg) {
-        flex-wrap: nowrap;
-    }
+    overflow: auto;
+    padding-bottom: 2rem;
+    // @include media($lg) {
+    //     flex-wrap: nowrap;
+    // }
 }
 
 .ccl-c-room__slot {
     flex-basis: 0;
     flex-grow: 1;
     flex-shrink: 1;
-    padding: 0 1px;
+    padding: 0 1px 2px 1px;
+    min-width: 4rem;
 
     [type="checkbox"] {
         @extend .ccl-u-display-none;
@@ -151,7 +154,6 @@ $room-slot-box-bg-active: black;
         position: absolute;
         top: 50%;
         left: 50%;
-        opacity: 0.5;
         font-size: 1rem;
         color: black;
         transform: translate3d(-50%,-50%,0) rotate(45deg);
@@ -184,6 +186,7 @@ $room-slot-box-bg-active: black;
     }
     .ccl-is-occupied &:after {
         transform: translate3d(-50%,-50%,0) rotate(0);
+        color: gray;
         @if ( lightness($room-slot-box-bg) < 50 ) {
             color: white;
         }

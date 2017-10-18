@@ -18,7 +18,7 @@ get_header(); ?>
             // replace with get_terms()
             $room_types  = array(
                 array( 'title' => 'Group Study Rooms', 'slug' => 'group-study' ), 
-                array( 'title' => 'Digital Studios', 'slug' => 'digital-studio' )
+                array( 'title' => 'Multimedia Rooms', 'slug' => 'multimedia' )
             );
 
 			?>
@@ -73,10 +73,19 @@ get_header(); ?>
                         </div>
                     </div>
 
-                    <?php $rooms = array( 
-                        array( 'title' => 'Room 1', 'slug' => $type['slug'] . '-room-1', 'description' => 'Alibus dit adiore ma dolorem ad maion excepudae es magnatemquis qui nullit andistem num nonsed moluptatio. Et qui reperum alibeaquas susam, oditateniet pa venimag nistrum, enihit de cus re omnihic totaque cum fugiant eatist aut qui sunt aut dia esti blanducid ute plit ut endusae.' ), 
-                        array( 'title' => 'Room 2', 'slug' => $type['slug'] . 'room-2', 'description' => 'Alibus dit adiore ma dolorem ad maion excepudae es magnatemquis qui nullit andistem num nonsed moluptatio. Et qui reperum alibeaquas susam, oditateniet pa venimag nistrum, enihit de cus re omnihic totaque cum fugiant eatist aut qui sunt aut dia esti blanducid ute plit ut endusae.' ) 
-                    ); ?>
+                    <?php 
+                    if ( $type['slug'] == 'group-study' ) {
+                        $rooms = array( 
+                            array( 'ID' => 1, 'title' => 'Group Study 1', 'resource_id' => '9148', 'slug' => 'group-study-1', 'capacity' => '6', 'has_projector' => false, 'description' => 'Alibus dit adiore ma dolorem ad maion excepudae es magnatemquis qui nullit andistem num nonsed moluptatio. Et qui reperum alibeaquas susam, oditateniet pa venimag nistrum, enihit de cus re omnihic totaque cum fugiant eatist aut qui sunt aut dia esti blanducid ute plit ut endusae.' ), 
+                            array( 'ID' => 2, 'title' => 'Group Study 2', 'resource_id' => '9149', 'slug' => 'group-study-2', 'capacity' => '4', 'has_projector' => false, 'description' => 'Alibus dit adiore ma dolorem ad maion excepudae es magnatemquis qui nullit andistem num nonsed moluptatio. Et qui reperum alibeaquas susam, oditateniet pa venimag nistrum, enihit de cus re omnihic totaque cum fugiant eatist aut qui sunt aut dia esti blanducid ute plit ut endusae.' ), 
+                            array( 'ID' => 3, 'title' => 'Group Study 3', 'resource_id' => '9150', 'slug' => 'group-study-3', 'capacity' => '4', 'has_projector' => false, 'description' => 'Alibus dit adiore ma dolorem ad maion excepudae es magnatemquis qui nullit andistem num nonsed moluptatio. Et qui reperum alibeaquas susam, oditateniet pa venimag nistrum, enihit de cus re omnihic totaque cum fugiant eatist aut qui sunt aut dia esti blanducid ute plit ut endusae.' ), 
+                            array( 'ID' => 4, 'title' => 'Group Study 4', 'resource_id' => '9151', 'slug' => 'group-study-4', 'capacity' => '6', 'has_projector' => false, 'description' => 'Alibus dit adiore ma dolorem ad maion excepudae es magnatemquis qui nullit andistem num nonsed moluptatio. Et qui reperum alibeaquas susam, oditateniet pa venimag nistrum, enihit de cus re omnihic totaque cum fugiant eatist aut qui sunt aut dia esti blanducid ute plit ut endusae.' ), 
+                        );
+                    } elseif ( $type['slug'] == 'multimedia' ) {
+                        $rooms = array( 
+                            array( 'ID' => 5, 'title' => 'Media Viewing Room', 'resource_id' => '9152', 'slug' => 'media-viewing-room', 'capacity' => '4', 'has_projector' => true, 'description' => 'Alibus dit adiore ma dolorem ad maion excepudae es magnatemquis qui nullit andistem num nonsed moluptatio. Et qui reperum alibeaquas susam, oditateniet pa venimag nistrum, enihit de cus re omnihic totaque cum fugiant eatist aut qui sunt aut dia esti blanducid ute plit ut endusae.' ), 
+                        );
+                    }?>
                     
                     <div class="ccl-l-container">
 
@@ -88,20 +97,20 @@ get_header(); ?>
                                 <header class="ccl-c-promo__header">
                                     <div class="ccl-c-promo__title"><?php echo $room['title']; ?></div>
                                     <p class="ccl-c-promo__action">
-                                        <span class="ccl-h4 ccl-u-mt-0 ccl-u-faded">Accommodates: 6</span><br/>
-                                        <span class="ccl-h4 ccl-u-mt-0 ccl-u-faded">Projector: Yes</span>
-                                        <a href="#" class="ccl-h4 ccl-u-mt-0" data-toggle="modal" data-target="#<?php echo $room['slug'] . '-map'; ?>">Show on Map</a>
-                                        <a href="#" class="ccl-h4 ccl-u-mt-0" data-toggle="modal" data-target="#<?php echo $room['slug'] . '-reserve'; ?>">Book Room</a>
+                                        <span class="ccl-h4 ccl-u-mt-0 ccl-u-faded">Accommodates: <?php echo $room['capacity']; ?></span><br/>
+                                        <span class="ccl-h4 ccl-u-mt-0 ccl-u-faded">Projector: <?php echo $room['has_projector'] ? 'Yes' : 'No'; ?></span>
+                                        <a href="#" class="ccl-h4 ccl-u-mt-0" data-toggle="modal" data-target="#<?php echo 'room-' . $room['ID'] . '-map'; ?>">Show on Map</a>
+                                        <a href="#" class="ccl-h4 ccl-u-mt-0" data-toggle="modal" data-target="#<?php echo 'room-' . $room['ID'] . '-reserve'; ?>">Book Room</a>
                                     </p>
                                     <div class="ccl-c-promo__action">
-                                        <button id="<?php echo $room['slug'] . '-prev'; ?>" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
-                                        <button id="<?php echo $room['slug'] . '-next'; ?>" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
+                                        <button id="<?php echo 'room-' . $room['ID'] . '-prev'; ?>" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
+                                        <button id="<?php echo 'room-' . $room['ID'] . '-next'; ?>" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
                                     </div>
                                 </header>
 
                                 <div class="ccl-c-promo__content">        
 
-                                    <div class="ccl-c-carousel js-promo-carousel" data-slick='{ "slidesToShow": 2, "prevArrow": "#<?php echo $room['slug'] . '-prev'; ?>", "nextArrow": "#<?php echo $room['slug'] . '-next'; ?>" }'>
+                                    <div class="ccl-c-carousel js-promo-carousel" data-slick='{ "slidesToShow": 2, "prevArrow": "#<?php echo 'room-' . $room['ID'] . '-prev'; ?>", "nextArrow": "#<?php echo 'room-' . $room['ID'] . '-next'; ?>" }'>
 
                                         <article class="ccl-c-promo__description ccl-c-carousel__slide">
                                             <div style="max-width:300px"><?php echo apply_filters( 'the_content', $room['description'] ); ?></div>
@@ -123,20 +132,20 @@ get_header(); ?>
 
 
                             <!-- Room Map Modal -->
-                            <div class="ccl-c-modal ccl-is-large" id="<?php echo $room['slug'] . '-map'; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $room['slug'] . '-map-label'; ?>" aria-hidden="true">
+                            <div class="ccl-c-modal ccl-is-large" id="<?php echo 'room-' . $room['ID'] . '-map'; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo 'room-' . $room['ID'] . '-map-label'; ?>" aria-hidden="true">
                                 <div class="ccl-c-modal__dialog" role="document">
 
                                     <div class="ccl-c-modal__content">
 
                                         <div class="ccl-c-modal__header">
-                                            <h5 class="ccl-c-modal__title" id="<?php echo $room['slug'] . '-map-label'; ?>"><?php echo $room['title']. ' Map'; ?></h5>
+                                            <h5 class="ccl-c-modal__title" id="<?php echo 'room-' . $room['ID'] . '-map-label'; ?>"><?php echo $room['title']. ' Map'; ?></h5>
                                             <button type="button" class="ccl-b-close" data-toggle="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
 
                                         <div class="ccl-c-modal__body">
-                                            <img src="http://unsplash.it/966/400/" alt="room map" width="966" height="400" />
+                                            <img src="http://unsplash.it/966/400/" alt="<?php echo $room['title'] . ' map'; ?>" width="966" height="400" />
                                         </div>
 
                                         <div class="ccl-c-modal__footer">
@@ -150,38 +159,66 @@ get_header(); ?>
 
                             
                             <!-- Room Reservation Modal -->
-                            <div class="ccl-c-modal ccl-is-large" id="<?php echo $room['slug'] . '-reserve'; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $room['slug'] . '-reserve-label'; ?>" aria-hidden="true">
+                            <div class="ccl-c-modal ccl-is-large" id="<?php echo 'room-' . $room['ID'] . '-reserve'; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo 'room-' . $room['ID'] . '-reserve-label'; ?>" aria-hidden="true">
                                 <div class="ccl-c-modal__dialog" role="document">
 
-                                    <form id="<?php echo $room['slug'] . '-form'; ?>" action="#" class="ccl-c-modal__content js-room-res-form">
+                                    <form id="<?php echo 'room' . $room['resource_id'] . '-form'; ?>" action="#" class="ccl-c-modal__content js-room-res-form" data-resource-id="<?php echo $room['resource_id']; ?>">
 
                                         <div class="ccl-c-modal__header">
-                                            <h5 class="ccl-c-modal__title" id="<?php echo $room['slug'] . '-reserve-label'; ?>"><?php echo 'Reserve ' . $room['title']; ?></h5>
+                                            <h5 class="ccl-c-modal__title" id="<?php echo 'room-' . $room['ID'] . '-reserve-label'; ?>"><?php echo 'Reserve ' . $room['title']; ?></h5>
                                             <button type="button" class="ccl-b-close" data-toggle="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
 
-                                        <div class="ccl-c-modal__body">
+                                        <div class="js-room-res-form-body ccl-c-modal__body">
 
-                                            <p><strong>Select available time slots (max: 2).</strong></p>
+                                            <div class="ccl-l-row">
+                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                    <label class="ccl-b-label">
+                                                        <?php _e( 'First Name', 'ccl' ); ?>
+                                                        <input type="text" class="ccl-b-input" name="fname" required/>
+                                                    </label>
+                                                </div>
+                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                    <label class="ccl-b-label">
+                                                        <?php _e( 'Last Name', 'ccl' ); ?>
+                                                        <input type="text" class="ccl-b-input" name="lname" required/>
+                                                    </label>
+                                                </div>
+                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                    <label class="ccl-b-label">
+                                                        <?php _e( 'Email Address', 'ccl' ); ?>
+                                                        <input type="email" class="ccl-b-input" name="email" required/>
+                                                    </label>
+                                                </div>
+                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                    <label class="ccl-b-label">
+                                                        <?php _e( 'When', 'ccl' ); ?>
+                                                        <select class="ccl-b-select ccl-u-display-block js-room-date-select" name="<?php echo 'room' . $room['resource_id'] . '-date-select'; ?>" required style="width:100%">
+                                                            <option value="<?php echo date( 'Y-m-d', time() ); ?>">Today</option>
+                                                            <option value="<?php echo date( 'Y-m-d', time() + DAY_IN_SECONDS ); ?>">Tomorrow</option>
+                                                            
+                                                            <?php 
+                                                            // start at 2 because we already defined 2 options above
+                                                            $i = 2; do { ?>
+                                                            
+                                                                <?php 
+                                                                $time = time() + DAY_IN_SECONDS * $i;
+                                                                $date_value = date( 'Y-m-d', $time );
+                                                                $date_readable = date( 'l, M j, Y', $time ); ?>
+                                                                <option value="<?php echo $date_value; ?>"><?php echo $date_readable; ?></option>
+                                                            
+                                                            <?php $i++; } while ( $i < 9 ); ?>
 
-                                            <div class="ccl-c-room__schedule">
-                                                <?php $i = 8 * 60; do {
-                                                    $hours = floor( $i / 60 );
-                                                    $ampm = ( $hours >= 12 ) ? 'p' : 'a';
-                                                    $hours = ( $hours > 12 ) ? $hours - 12 : $hours;
-                                                    ?>
-                                                    <div class="ccl-c-room__slot">
-                                                        <input type="checkbox" id="<?php echo $room['slug'] . '-slot-' . $i; ?>" name="<?php echo $room['slug'] . '-slot-' . $i; ?>" />
-                                                        <label class="ccl-c-room__slot-label" for="<?php echo $room['slug'] . '-slot-' . $i; ?>">
-                                                            <?php echo $hours . $ampm; ?>
-                                                        </label>
-                                                    </div>
-                                                <?php $i += 60; } while( $i <= 1020 ); ?>
+                                                        </select>
+                                                    </label>
+                                                </div>
                                             </div>
 
-                                            <ul class="ccl-c-room__legend ccl-u-mt-2">
+                                            <p class="ccl-h4"><strong>Select available time slots. <span class="ccl-u-faded">(max: 2 hours)</span></strong></p>
+
+                                            <ul class="ccl-c-room__legend">
                                                 <li class="ccl-c-room__key ccl-is-available">
                                                     <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
                                                     <span>Available</span>
@@ -195,6 +232,33 @@ get_header(); ?>
                                                     <span>Selected</span>
                                                 </li>
                                             </ul>
+
+                                            <div class="ccl-c-room__schedule js-room-schedule">
+                                                <?php 
+
+                                                /* -------------------------------------------------------
+                                                 * Realized it's better to generate this markup in the JS. 
+                                                 * Open/Close times for rooms vary by day. 
+                                                 * Should make a request to spaces API to get data for
+                                                 * operating hours.
+                                                 * ------------------------------------------------------- */
+
+                                                // $start = date()
+                                                // $i = 8 * 60; do {
+                                                //     $hours = $i / 60;
+                                                //     $ampm = ( $hours >= 12 ) ? 'p' : 'a';
+                                                //     $hour = ( $hours > 12 ) ? floor($hours - 12) : floor($hours);
+                                                //     $minute = ( $hours - $hour ) * 60;
+                                                    ?>
+                                                    <!-- <div class="ccl-c-room__slot">
+                                                        <input type="checkbox" id="<?php //echo $room['slug'] . '-slot-' . $i; ?>" name="<?php //echo $room['slug'] . '-slot-' . $i; ?>" />
+                                                        <label class="ccl-c-room__slot-label" for="<?php //echo $room['slug'] . '-slot-' . $i; ?>">
+                                                            <?php //echo $hour . ':' . $minute . $ampm; ?>
+                                                        </label>
+                                                    </div> -->
+
+                                                <?php // $i += 30; } while( $i <= 1020 ); ?>
+                                            </div>
 
                                         </div>
 
