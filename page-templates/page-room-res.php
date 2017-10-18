@@ -182,9 +182,18 @@ get_header(); ?>
                                             </div>
 
                                             <ul class="ccl-c-room__legend ccl-u-mt-2">
-                                                <li class="ccl-c-room__key--available">Available</li>
-                                                <li class="ccl-c-room__key--occupied">Occupied</li>
-                                                <li class="ccl-c-room__key--selected">Selected</li>
+                                                <li class="ccl-c-room__key ccl-is-available">
+                                                    <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
+                                                    <span>Available</span>
+                                                </li>
+                                                <li class="ccl-c-room__key ccl-is-occupied">
+                                                    <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
+                                                    <span>Occupied</span>
+                                                </li>
+                                                <li class="ccl-c-room__key ccl-is-selected">
+                                                    <i class="ccl-b-icon ccl-b-icon-clock" aria-hidden="true"></i>
+                                                    <span>Selected</span>
+                                                </li>
                                             </ul>
 
                                         </div>

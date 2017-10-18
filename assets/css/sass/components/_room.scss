@@ -1,3 +1,8 @@
+$room-slot-color: gray;
+$room-slot-color-active: black;
+$room-slot-box-bg: #eee;
+$room-slot-box-bg-active: black;
+
 .ccl-c-room {
     @extend .ccl-u-clearfix;
     border-top: 1px solid black;
@@ -115,20 +120,20 @@
     display: block;
     height: 100%;
     cursor: pointer;
-    color: gray;
+    color: $room-slot-color;
     position: relative;
 
     &:hover {
-        color: black;
+        color: $room-slot-color-active;
     }
     [type="checkbox"]:checked + & {
-        color: $blue;
+        color: $room-slot-color-active;
         @include school-style(color);
     }
     .ccl-is-full & {
-        color: black !important;
         cursor: default;
         pointer-events: none;
+        text-decoration: line-through;
     }
     
     &:before {
@@ -136,7 +141,7 @@
         display: block;
         height: 100%;
         min-height: rem(56);
-        background: lightgray;
+        background: $room-slot-box-bg;
         transition: all 200ms ease-out;
         margin-bottom: 5px;
     }
@@ -146,31 +151,42 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        color: white;
         opacity: 0.5;
         font-size: 1rem;
+        color: black;
         transform: translate3d(-50%,-50%,0) rotate(45deg);
         transition: transform 100ms ease-out;
         line-height: 1;
     }
 
     [type="checkbox"]:not(:checked) + &:hover:before {
-        background: gray;
+        background: darken( $room-slot-box-bg, 10% );
     }
     [type="checkbox"]:checked + &:before {
-        background-color: $blue;
+        background-color: $room-slot-box-bg-active;
         @include school-style(background-color);
     }
     .ccl-is-full &:before {
-        background: black !important;
+        $line1: $room-slot-box-bg;
+        $line2: lighten($room-slot-box-bg, 10%);
+        background: repeating-linear-gradient(135deg, $line1 0, $line1 5px, $line2 5px, $line2 10px);
     }
-    [type="checkbox"]:checked + &:after,
-    .ccl-is-full &:after {
+    [type="checkbox"]:checked + &:after {
+        content: $ccl-b-icon-clock;
         transform: translate3d(-50%,-50%,0);
     }
-    [type="checkbox"]:checked + &:after,
+    [type="checkbox"]:checked + &:after {
+        @if ( lightness($room-slot-box-bg-active) > 50 ) {
+            color: black;
+        } @else {
+            color: white;
+        }
+    }
     .ccl-is-full &:after {
-        content: $ccl-b-icon-clock;
+        transform: translate3d(-50%,-50%,0) rotate(0);
+        @if ( lightness($room-slot-box-bg) < 50 ) {
+            color: white;
+        }
     }
 
 }
@@ -180,7 +196,6 @@
 .ccl-c-room__legend {
     @extend .ccl-u-clean-list;
     margin-top: 2rem;
-    text-align: right;
     @include media($lg) {
         margin-top: $spacer/2;
     }
@@ -188,27 +203,32 @@
 
 .ccl-c-room__key {
     @extend .ccl-h5;
-    margin: 0 0 0 1em;
+    margin: 0 1em 0 0;
     display: inline-block;
 
-    &:before {
-        content: "";
+    .ccl-b-icon {
         display: inline-block;
-        border: 5px solid;
-        vertical-align: baseline;
-        margin-right: 0.25rem;
+        font-size: 0.8em;
     }
-}
-.ccl-c-room__key--available {
-    @extend .ccl-c-room__key;
-    color: gray;
-}
-.ccl-c-room__key--occupied {
-    @extend .ccl-c-room__key;
-    color: black;
-}
-.ccl-c-room__key--selected {
-    @extend .ccl-c-room__key;
-    color: $blue;
-    @include school-style(color);
+
+    &.ccl-is-available {
+        @extend .ccl-c-room__key;
+        .ccl-b-icon {
+            transform: rotate(45deg);
+            margin-right: 3px;
+        }
+    }
+
+    &.ccl-is-occupied {
+        @extend .ccl-c-room__key;
+        color: gray;
+        span {
+            text-decoration: line-through;
+        }
+    }
+    &.ccl-is-selected {
+        @extend .ccl-c-room__key;
+        color: $room-slot-box-bg-active;
+        @include school-style(color);
+    }
 }
