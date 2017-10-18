@@ -30,7 +30,7 @@
     @include media($lg) {
         width: calc( 25% - #{$gutter} );
         float: left;
-        margin: 0 $gutter/2;
+        margin: 0 $gutter/2 $spacer;
     }
 
     .ccl-c-promo--slim & {
@@ -75,7 +75,7 @@
     @include media($lg) {
         width: calc( 75% - #{$gutter} );
         float: left;
-        margin: 0 $gutter/2;
+        margin: 0 ($gutter / 2) ($spacer * 3);
     }
 
     .ccl-c-promo--slim & {
