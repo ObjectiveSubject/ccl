@@ -13,7 +13,7 @@
     cursor: pointer;
     color: inherit;
 
-    &:hover {
+    &:hover, &:focus {
         color: $blue;
         @include school-style(color);
     }
