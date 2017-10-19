@@ -19,7 +19,7 @@
         this.dateYmd = this.$dateSelect.val();
         this.$roomSchedule = this.$el.find('.js-room-schedule');
         this.$roomSlotInputs = null;
-        this.selectedSlots = [];
+        this.selectedSlotInputs = [];
         this.maxSlots = 4;
         this.slotMinutes = 30;
         this.timeZone = '-700';
@@ -58,17 +58,12 @@
         // construct HTML for each time slot
         for ( var i = 0; i < slotCount; i++ ) {
             
-            var slotDateTime = new Date( openTimeUnix + ( i * 30 * 60 * 1000 ) ),
-                ampm = ( slotDateTime.getHours() >= 12 ) ? 'p' : 'a',
-                hours = ( slotDateTime.getHours().toString().length < 2 ) ? '0' + slotDateTime.getHours().toString() : slotDateTime.getHours().toString(),
-                hour12Format = ( slotDateTime.getHours() > 12 ) ? slotDateTime.getHours() - 12 : slotDateTime.getHours(),
-                minutes = ( slotDateTime.getMinutes().toString().length < 2 ) ? '0' + slotDateTime.getMinutes().toString() : slotDateTime.getMinutes().toString(),
-                seconds = ( slotDateTime.getSeconds().toString().length < 2 ) ? '0' + slotDateTime.getSeconds().toString() : slotDateTime.getSeconds().toString();
+            var slotDateTime = new Date( openTimeUnix + ( i * 30 * 60 * 1000 ) );
             
             html.push( this.makeTimeSlot({
                 id: 'slot-' + this.roomId + '-' + i,
-                value: this.dateYmd + 'T' + hours + ':' + minutes + ':' + seconds + this.timeZone,
-                timeString: hour12Format + ':' + minutes + ampm
+                value: this.formatDateString( slotDateTime ),
+                timeString: this.formatDateString( slotDateTime, 'readable' )
             }) );
 
         }
@@ -104,6 +99,8 @@
             return;
         }
 
+        var bookings = [];
+
         /* TODO:
          * Make a request here to get bookings for this room.
          * ------------------------------------------------ */
@@ -125,7 +122,7 @@
         //     });
         
         // For now just setting up dummy data
-        var bookings = [
+        bookings = [
             {
                 "booking_id": "abc123",
                 "eid": this.roomId,
@@ -186,6 +183,37 @@
 
     };
 
+    RoomResForm.prototype.setSelectableSlots = function(){
+
+        // if ( this.selectedSlotInputs.length === 0 ) {
+            
+        //     this.$roomSlotInputs.parent('.ccl-c-room__slot').removeClass('ccl-is-disabled');
+        //     return;
+
+        // } else {
+
+        //     var firstSlotInput = this.selectedSlotInputs[0],
+        //         firstSlotIndex = this.$roomSlotInputs.index(firstSlotInput),
+        //         firstSlot = this.$roomSlotInputs.eq(firstSlotIndex).parent('.ccl-c-room__slot'),
+        //         lastSlotInput,
+        //         foundOccupiedSlot = false;
+
+        //     for ( var i = 1; i <= this.maxSlots; i++ ) {
+        //         if ( this.$roomSlotInputs.eq( firstSlotIndex + i ).parent('.ccl-c-room__slot').hasClass('ccl-is-occupied') ) {
+        //             foundOccupiedSlot = true;
+        //         } else {
+        //             lastSlotInput = this.$roomSlotInputs.eq( firstSlotIndex + i );
+        //         }
+        //     }
+
+        //     var selectableSlots = firstSlot.nextUntil( lastSlotInput.parent('.ccl-c-room__slot') );
+
+        //     console.log( selectableSlots );
+
+        // }
+
+    };
+
     RoomResForm.prototype.initEventHandlers = function(){
 
         var _this = this;
@@ -217,45 +245,60 @@
 
         // if input checked, add it to selected set
         if ( $(input).prop('checked') ) {
-            this.selectedSlots.push(input);
+            this.selectedSlotInputs.push(input);
+            $(input).parent('.ccl-c-room__slot').addClass('ccl-is-checked');
 
         // if unchecked, remove it from the selected set
         } else {
-            var inputIndex = this.selectedSlots.indexOf(input);
+            var inputIndex = this.selectedSlotInputs.indexOf(input);
             if ( inputIndex > -1 ) {
-                this.selectedSlots.splice( inputIndex, 1 );
+                this.selectedSlotInputs.splice( inputIndex, 1 );
             }
+            $(input).parent('.ccl-c-room__slot').removeClass('ccl-is-checked');
         }
 
         // keep selected set to max: 2
-        if ( this.selectedSlots.length > this.maxSlots ) {
-            var shiftedInput = this.selectedSlots.shift();
+        if ( this.selectedSlotInputs.length > this.maxSlots ) {
+            var shiftedInput = this.selectedSlotInputs.shift();
             $(shiftedInput).prop('checked', false);
         }
 
         // sort selected set
-        this.selectedSlots = this.selectedSlots.sort(function(a,b){
+        this.selectedSlotInputs = this.selectedSlotInputs.sort(function(a,b){
             return a.value > b.value;
         });
 
-        console.log( 'onSlotChange » ', this.selectedSlots );
+        this.setSelectableSlots();
 
     };
 
-    RoomResForm.prototype.formatDateString = function(dateObj){
+    RoomResForm.prototype.formatDateString = function(dateObj, readable){
 
-        var hours = ( dateObj.getHours().toString().length < 2 ) ? '0' + dateObj.getHours().toString() : dateObj.getHours().toString(),
-            minutes = ( dateObj.getMinutes().toString().length < 2 ) ? '0' + dateObj.getMinutes().toString() : dateObj.getMinutes().toString(),
-            seconds = ( dateObj.getSeconds().toString().length < 2 ) ? '0' + dateObj.getSeconds().toString() : dateObj.getSeconds().toString();
+        var minutes = ( dateObj.getMinutes().toString().length < 2 ) ? '0' + dateObj.getMinutes().toString() : dateObj.getMinutes().toString();
+            
+        if ( readable ) {
 
-        return this.dateYmd + 'T' + hours + ':' + minutes + ':' + seconds + this.timeZone;
+            var ampm = ( dateObj.getHours() >= 12 ) ? 'p' : 'a',
+                hour12Format = ( dateObj.getHours() > 12 ) ? dateObj.getHours() - 12 : dateObj.getHours();
+
+            return hour12Format + ':' + minutes + ampm;
+
+        } else {
+
+            var hours = ( dateObj.getHours().toString().length < 2 ) ? '0' + dateObj.getHours().toString() : dateObj.getHours().toString(),
+                seconds = ( dateObj.getSeconds().toString().length < 2 ) ? '0' + dateObj.getSeconds().toString() : dateObj.getSeconds().toString();
+
+            return this.dateYmd + 'T' + hours + ':' + minutes + ':' + seconds + this.timeZone;
+
+        }
+
     };
 
     RoomResForm.prototype.onSubmit = function(){
 
         var payload = {
             "iid":333,
-            "start": this.selectedSlots[0].value,
+            "start": this.selectedSlotInputs[0].value,
             "fname": this.$el[0].fname.value,
             "lname": this.$el[0].lname.value,
             "email": this.$el[0].email.value,
