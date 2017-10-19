@@ -126,9 +126,9 @@ $room-slot-box-bg-active: black;
     color: $room-slot-color;
     position: relative;
 
-    &:hover {
-        color: $room-slot-color-active;
-    }
+    // &:hover {
+    //     color: $room-slot-color-active;
+    // }
     [type="checkbox"]:checked + & {
         color: $room-slot-color-active;
         @include school-style(color);
@@ -163,7 +163,15 @@ $room-slot-box-bg-active: black;
 
     [type="checkbox"]:not(:checked) + & {
         &:hover:before {
-            background: darken( $room-slot-box-bg, 10% );
+            background-color: rgba($room-slot-box-bg-active, 0.5);
+            @include school-style(background-color, 0.5);
+        }
+        &:hover:after {
+            @if ( lightness($room-slot-box-bg-active) > 50 ) {
+                color: black;
+            } @else {
+                color: white;
+            }
         }
     }
 
@@ -175,6 +183,20 @@ $room-slot-box-bg-active: black;
         &:after {
             content: $ccl-b-icon-clock;
             transform: translate3d(-50%,-50%,0);
+            @if ( lightness($room-slot-box-bg-active) > 50 ) {
+                color: black;
+            } @else {
+                color: white;
+            }
+        }
+    }
+
+    .ccl-is-active & {
+        &:before {
+            background-color: rgba($room-slot-box-bg-active, 0.5);
+            @include school-style(background-color, 0.5);
+        }
+        &:after {
             @if ( lightness($room-slot-box-bg-active) > 50 ) {
                 color: black;
             } @else {
