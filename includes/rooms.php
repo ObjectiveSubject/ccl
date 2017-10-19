@@ -90,9 +90,6 @@ function import_page_html() {
 
 		<p>Use this tool to import and update rooms from room.</p>
 
-		<p><em>Not working</em> &mdash; the <code>process_rooms()</code> function needs to deal with
-		the case of rooms coming from a group of spaces</p>
-
 		<?php // Currently imported stats, api query for recently updated? ?>
 
 		<div id="rooms-importer">
@@ -164,23 +161,24 @@ function retrieve_rooms() {
  */
 function process_rooms() {
 
-	// get_space_category
-	// loop through rooms provided by category
-	// use get_space_item with unique id to get individual rooms
+	$rooms = \CCL\Integrations\LibCal\get_space_category( 2314 );
 
-	// $rooms = \CCL\Integrations\LibCal\get_all_rooms();
+	// @todo check if this is a Rooms array or an error object
+	// @todo sort out a cleaner way to do the following me (object/array nesting mess)
+	$rooms = array( $rooms[0] );
+	$rooms = $rooms[0]->items;
 
+	// set up the results
 	$results               = array();
 	$results['retrieved']  = count( $rooms );
 	$results['added']      = 0;
 	$results['updated']    = 0;
 
-	// @todo check if this is a Rooms array or an error object
-
-	// Events are stored as an indexed array under Event
+	// Rooms are stored in an array related to their room's space id
 	foreach ( $rooms as $room ) {
 		$add_room = add_room( $room );
 
+		// sort out proper responses here
 		if ( 'added' == $add_room ) {
 			$results['added'] = $results['added'] + 1;
 		} elseif ( 'updated' == $add_room ) {
@@ -201,7 +199,6 @@ function process_rooms() {
  * @return string added|updated
  */
 function add_room( $room ) {
-
 	// quick and dirty way to convert multi-dimensional object to array
 	$room = json_decode( json_encode( $room ), true );
 
@@ -219,9 +216,12 @@ function add_room( $room ) {
 		),
 	) );
 
+	// use get_space_item with unique id to get individual rooms
+	// @todo get more meta info from a room
+
 	/*
-		 * Construct arguments to use for wp_insert_post()
-		 */
+	 * Construct arguments to use for wp_insert_post()
+	 */
 	$args = array();
 
 	if ( $duplicate_check->have_posts() ) {
@@ -232,7 +232,7 @@ function add_room( $room ) {
 	}
 
 	$args['post_title']   = $room['name']; // post_title
-	$args['post_content'] = $room['description']; // post_content
+	$args['post_content'] = ! empty( $room['description'] ) ? $room['description'] : ''; // post_content
 	// $args['post_status'] = 'draft'; // default is draft
 	$args['post_type']    = 'room';
 
