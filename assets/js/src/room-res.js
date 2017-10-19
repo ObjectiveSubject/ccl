@@ -66,7 +66,7 @@
                 seconds = ( slotDateTime.getSeconds().toString().length < 2 ) ? '0' + slotDateTime.getSeconds().toString() : slotDateTime.getSeconds().toString();
             
             html.push( this.makeTimeSlot({
-                id: this.resourceId + '-slot-' + i,
+                id: 'slot-' + this.resourceId + '-' + i,
                 value: this.dateYmd + 'T' + hours + ':' + minutes + ':' + seconds + this.timeZone,
                 timeString: hour12Format + ':' + minutes + ampm
             }) );
