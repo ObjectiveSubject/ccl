@@ -243,6 +243,9 @@ function add_room( $room ) {
 
 	// Insert data into custom fields
 	add_post_meta( $post_id, 'room_id', $room['id'], true);
+	add_post_meta( $post_id, 'room_description', $room['description'], true);
+	add_post_meta( $post_id, 'room_image', $room['image'], true);
+	add_post_meta( $post_id, 'room_capacity', $room['capacity'], true);
 
 	// Raw data for development
 	add_post_meta( $post_id, 'room_raw_data', $room, true);
@@ -289,6 +292,9 @@ function render_room_data_metabox() {
 	echo '<p>';
 
 	echo '<strong>Room ID:</strong> ' . get_post_meta( $post->ID, 'room_id', true ) . '<br>';
+	echo '<strong>Room Description:</strong> ' . get_post_meta( $post->ID, 'room_description', true ) . '<br>';
+	echo '<strong>Room Image:</strong> ' . get_post_meta( $post->ID, 'room_image', true ) . '<br>';
+	echo '<strong>Room Capacity:</strong> ' . get_post_meta( $post->ID, 'room_capacity', true ) . '<br>';
 
 	echo '</p>';
 
