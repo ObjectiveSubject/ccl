@@ -161,34 +161,40 @@ $room-slot-box-bg-active: black;
         line-height: 1;
     }
 
-    [type="checkbox"]:not(:checked) + &:hover:before {
-        background: darken( $room-slot-box-bg, 10% );
-    }
-    [type="checkbox"]:checked + &:before {
-        background-color: $room-slot-box-bg-active;
-        @include school-style(background-color);
-    }
-    .ccl-is-occupied &:before {
-        $line1: $room-slot-box-bg;
-        $line2: lighten($room-slot-box-bg, 10%);
-        background: repeating-linear-gradient(135deg, $line1 0, $line1 5px, $line2 5px, $line2 10px);
-    }
-    [type="checkbox"]:checked + &:after {
-        content: $ccl-b-icon-clock;
-        transform: translate3d(-50%,-50%,0);
-    }
-    [type="checkbox"]:checked + &:after {
-        @if ( lightness($room-slot-box-bg-active) > 50 ) {
-            color: black;
-        } @else {
-            color: white;
+    [type="checkbox"]:not(:checked) + & {
+        &:hover:before {
+            background: darken( $room-slot-box-bg, 10% );
         }
     }
-    .ccl-is-occupied &:after {
-        transform: translate3d(-50%,-50%,0) rotate(0);
-        color: gray;
-        @if ( lightness($room-slot-box-bg) < 50 ) {
-            color: white;
+
+    [type="checkbox"]:checked + & {
+        &:before {
+            background-color: $room-slot-box-bg-active;
+            @include school-style(background-color);
+        }
+        &:after {
+            content: $ccl-b-icon-clock;
+            transform: translate3d(-50%,-50%,0);
+            @if ( lightness($room-slot-box-bg-active) > 50 ) {
+                color: black;
+            } @else {
+                color: white;
+            }
+        }
+    }
+    
+    .ccl-is-occupied & {
+        &:before {
+            $line1: $room-slot-box-bg;
+            $line2: lighten($room-slot-box-bg, 10%);
+            background: repeating-linear-gradient(135deg, $line1 0, $line1 5px, $line2 5px, $line2 10px);
+        }
+        &:after {
+            transform: translate3d(-50%,-50%,0) rotate(0);
+            color: gray;
+            @if ( lightness($room-slot-box-bg) < 50 ) {
+                color: white;
+            }
         }
     }
 
