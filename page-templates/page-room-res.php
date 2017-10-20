@@ -58,6 +58,20 @@ get_header(); ?>
 
                 <?php endif; ?>
 
+				<?php if ( empty( $room_types) ) : ?>
+						<div class="ccl-l-container">
+
+							<div class="ccl-l-row">
+								<div class="ccl-c-entry-content ccl-l-column ccl-l-span-8-md ccl-u-my-2">
+
+									<div class="ccl-c-alert ccl-is-error">No room types have been created</div>
+
+								</div>
+							</div>
+
+						</div>
+				<?php endif; ?>
+
                 <?php foreach ( $room_types as $type ) : ?>
 
                 <div id="<?php echo $type->slug; ?>">
