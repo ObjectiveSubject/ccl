@@ -104,7 +104,6 @@
 
     &.ccl-is-solid[disabled], 
     &.ccl-is-solid.ccl-is-disabled {
-        background: rgba(black, 0.35);
         pointer-events: none;
         &:hover, &:focus {
             border-color: transparent;

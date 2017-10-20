@@ -191,100 +191,108 @@ get_header(); ?>
                                             </button>
                                         </div>
 
-                                        <div class="js-room-res-form-body ccl-c-modal__body">
+                                        <div class="ccl-c-modal__body">
 
-                                            <div class="ccl-l-row">
-                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
-                                                    <label class="ccl-b-label">
-                                                        <?php _e( 'First Name', 'ccl' ); ?>
-                                                        <input type="text" class="ccl-b-input" name="fname" required/>
-                                                    </label>
-                                                </div>
-                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
-                                                    <label class="ccl-b-label">
-                                                        <?php _e( 'Last Name', 'ccl' ); ?>
-                                                        <input type="text" class="ccl-b-input" name="lname" required/>
-                                                    </label>
-                                                </div>
-                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
-                                                    <label class="ccl-b-label">
-                                                        <?php _e( 'Email Address', 'ccl' ); ?>
-                                                        <input type="email" class="ccl-b-input" name="email" required/>
-                                                    </label>
-                                                </div>
-                                                <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
-                                                    <label class="ccl-b-label">
-                                                        <?php _e( 'When', 'ccl' ); ?>
-                                                        <select class="ccl-b-select ccl-u-display-block js-room-date-select" name="<?php echo 'room' . $room_id . '-date-select'; ?>" required style="width:100%">
-                                                            <?php 
-                                                            $i = 0; do { ?>
-                                                            
+                                            <div class="js-room-res-form-content">
+
+                                                <div class="ccl-l-row">
+                                                    <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                        <label class="ccl-b-label">
+                                                            <?php _e( 'First Name', 'ccl' ); ?>
+                                                            <input type="text" class="ccl-b-input" name="fname" required/>
+                                                        </label>
+                                                    </div>
+                                                    <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                        <label class="ccl-b-label">
+                                                            <?php _e( 'Last Name', 'ccl' ); ?>
+                                                            <input type="text" class="ccl-b-input" name="lname" required/>
+                                                        </label>
+                                                    </div>
+                                                    <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                        <label class="ccl-b-label">
+                                                            <?php _e( 'Email Address', 'ccl' ); ?>
+                                                            <input type="email" class="ccl-b-input" name="email" required/>
+                                                        </label>
+                                                    </div>
+                                                    <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                        <label class="ccl-b-label">
+                                                            <?php _e( 'When', 'ccl' ); ?>
+                                                            <select class="ccl-b-select ccl-u-display-block js-room-date-select" name="<?php echo 'room' . $room_id . '-date-select'; ?>" required style="width:100%">
                                                                 <?php 
-                                                                $time = time() + DAY_IN_SECONDS * $i;
-                                                                $date_value = date( 'Y-m-d', $time );
-                                                                switch($i) {
-                                                                    case 0:
-                                                                        $date_readable = 'Today, ' . date( 'M j, Y', $time );
-                                                                        break;
-                                                                    case 1:
-                                                                        $date_readable = 'Tomorrow, ' . date( 'M j, Y', $time );
-                                                                        break;
-                                                                    default:
-                                                                        $date_readable = date( 'l, M j, Y', $time );
-                                                                        break;
-                                                                }
-                                                                ?>
-                                                                <option value="<?php echo $date_value; ?>"><?php echo $date_readable; ?></option>
-                                                            
-                                                            <?php $i++; } while ( $i < 9 ); ?>
+                                                                $i = 0; do { ?>
+                                                                
+                                                                    <?php 
+                                                                    $time = time() + DAY_IN_SECONDS * $i;
+                                                                    $date_value = date( 'Y-m-d', $time );
+                                                                    switch($i) {
+                                                                        case 0:
+                                                                            $date_readable = 'Today, ' . date( 'M j, Y', $time );
+                                                                            break;
+                                                                        case 1:
+                                                                            $date_readable = 'Tomorrow, ' . date( 'M j, Y', $time );
+                                                                            break;
+                                                                        default:
+                                                                            $date_readable = date( 'l, M j, Y', $time );
+                                                                            break;
+                                                                    }
+                                                                    ?>
+                                                                    <option value="<?php echo $date_value; ?>"><?php echo $date_readable; ?></option>
+                                                                
+                                                                <?php $i++; } while ( $i < 9 ); ?>
 
-                                                        </select>
-                                                    </label>
+                                                            </select>
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="ccl-l-row">
+                                                <div class="ccl-l-row">
 
-                                                <div class="ccl-l-column ccl-l-span-half-md">
-                                                    <p class="ccl-h4">
-                                                        <?php _e( 'Select available time slots.', 'ccl' ); ?>
-                                                        <span class="ccl-u-faded">(max: <span class="js-max-time"></span>)</span>
-                                                    </p>
+                                                    <div class="ccl-l-column ccl-l-span-half-md">
+                                                        <p class="ccl-h4">
+                                                            <?php _e( 'Select available time slots.', 'ccl' ); ?>
+                                                            <span class="ccl-u-faded">(max: <span class="js-max-time"></span>)</span>
+                                                        </p>
+                                                    </div>
+                                                    
+                                                    <div class="ccl-l-column ccl-l-span-half-md">
+                                                        <p class="ccl-h4 ccl-u-color-school">
+                                                            <span class="ccl-u-faded">Selected Time:</span>
+                                                            <span class="js-current-duration">None</span>
+                                                        </p>
+                                                    </div>
+                                                    
                                                 </div>
+
+                                                <div class="ccl-c-room__schedule js-room-schedule">
+                                                    <!-- room schedule populated here via JS -->
+                                                </div>
+
+                                                <ul class="ccl-c-room__legend">
+                                                    <li class="ccl-c-room__key ccl-is-available">
+                                                        <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
+                                                        <span><?php _e( 'Available', 'ccl' ); ?></span>
+                                                    </li>
+                                                    <li class="ccl-c-room__key ccl-is-occupied">
+                                                        <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
+                                                        <span><?php _e( 'Occupied', 'ccl' ); ?></span>
+                                                    </li>
+                                                    <li class="ccl-c-room__key ccl-is-selected">
+                                                        <i class="ccl-b-icon ccl-b-icon-clock" aria-hidden="true"></i>
+                                                        <span><?php _e( 'Selected', 'ccl' ); ?></span>
+                                                    </li>
+                                                </ul>
                                                 
-                                                <div class="ccl-l-column ccl-l-span-half-md">
-                                                    <p class="ccl-h4 ccl-u-color-school">
-                                                        <span class="ccl-u-faded">Selected Time:</span>
-                                                        <span class="js-current-duration">None</span>
-                                                    </p>
-                                                </div>
-                                                
                                             </div>
 
-                                            <div class="ccl-c-room__schedule js-room-schedule">
-                                                <!-- room schedule populated here via JS -->
+                                            <div class="js-room-res-form-response">
+                                                <!-- content populate via JS on form submit -->
                                             </div>
-
-                                            <ul class="ccl-c-room__legend">
-                                                <li class="ccl-c-room__key ccl-is-available">
-                                                    <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
-                                                    <span><?php _e( 'Available', 'ccl' ); ?></span>
-                                                </li>
-                                                <li class="ccl-c-room__key ccl-is-occupied">
-                                                    <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
-                                                    <span><?php _e( 'Occupied', 'ccl' ); ?></span>
-                                                </li>
-                                                <li class="ccl-c-room__key ccl-is-selected">
-                                                    <i class="ccl-b-icon ccl-b-icon-clock" aria-hidden="true"></i>
-                                                    <span><?php _e( 'Selected', 'ccl' ); ?></span>
-                                                </li>
-                                            </ul>
 
                                         </div>
 
                                         <div class="ccl-c-modal__footer">
-                                            <button type="button" class="ccl-b-btn" data-toggle="modal"><?php _e( 'Cancel', 'ccl' ); ?></button>
-                                            <button type="submit" class="ccl-b-btn ccl-is-solid" ><?php _e( 'Submit', 'ccl' ); ?></button>
+                                            <button type="button" class="ccl-b-btn js-room-res-form-cancel" data-toggle="modal"><?php _e( 'Cancel', 'ccl' ); ?></button>
+                                            <button type="submit" class="ccl-b-btn ccl-is-solid js-room-res-form-submit" ><?php _e( 'Submit', 'ccl' ); ?></button>
                                         </div>
 
                                     </form>

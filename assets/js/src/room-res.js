@@ -13,7 +13,10 @@
         var now = new Date();
         
         this.$el = $(el);
-        this.$formBody = this.$el.find('.js-room-res-form-body');
+        this.$formContent = this.$el.find('.js-room-res-form-content').css({position:'relative'});
+        this.$formResponse = this.$el.find('.js-room-res-form-response').css({position: 'absolute', top: '1rem', left: '1rem', opacity: 0});
+        this.$formCancel = this.$el.find('.js-room-res-form-cancel');
+        this.$formSubmit = this.$el.find('.js-room-res-form-submit');
         this.roomId= this.$el.data('resource-id');
         this.$dateSelect = this.$el.find('.js-room-date-select');
         this.dateYmd = this.$dateSelect.val();
@@ -36,8 +39,6 @@
     };
 
     RoomResForm.prototype.init = function(){
-
-        console.log(this);
 
         this.setMaxTimeText();
 
@@ -440,6 +441,11 @@
 
     RoomResForm.prototype.onSubmit = function(){
 
+        var _this = this;
+
+        /* TODO:
+         * Populate "bookings" array with correct data
+         * ------------------------------------------ */
         var payload = {
             "iid":333,
             "start": this.selectedSlotInputs[0].value,
@@ -458,6 +464,10 @@
 
         console.log( 'onSubmit » ', payload );
 
+        this.$el.addClass('ccl-is-loading');
+        this.$formCancel.prop('disabled',true);
+        this.$formSubmit.text('Sending...').prop('disabled',true);
+
         /* TODO:
          * Make a POST request here to reserve space.
          * ------------------------------------------ */
@@ -472,7 +482,7 @@
         //         console.log(error);
         //     })
         //     .always(function(){
-        //         //
+        //         this.$el.removeClass('ccl-is-loading');
         //     });
 
         // for now, just invoking the handler manually with dummy data
@@ -486,7 +496,33 @@
         handleSubmitResponse(successfulResponse);
 
         function handleSubmitResponse(response) {
-        
+
+            var responseHTML;
+
+            if ( response.booking_id ) {
+                responseHTML =  ['<p class="ccl-h2 ccl-u-mt-0">Success!</p>',
+                                '<p class="ccl-h4">Your booking ID is <span class="ccl-u-color-school">' + response.booking_id + '</span></p>',
+                                '<p class="ccl-h4">Please check your email to confirm your booking.</p>'];
+            } else {
+                responseHTML =  ['<p class="ccl-h3 ccl-u-mt-0">Sorry, but we couldn\'t process your reservation.</p>','<p class="ccl-h4">Errors:</p>'];
+                $(response.errors).each(function(i, error){
+                    responseHTML.push('<p class="ccl-c-alert ccl-is-error">' + error + '</p>');
+                });
+                responseHTML.push('<p class="ccl-h4">Please talk to your nearest librarian for help.</p>');
+            }
+
+            _this.$formCancel.prop('disabled',false).text('Close');
+            _this.$formSubmit.remove();
+            _this.$formContent.animate({opacity: 0}, CCL.DURATION);
+            _this.$formResponse
+                .delay(CCL.DURATION)
+                .animate({opacity: 1}, CCL.DURATION)
+                .html(responseHTML);
+            _this.$formContent
+                .delay(CCL.DURATION)
+                .animate({height: _this.$formResponse.height() + 'px' }, CCL.DURATION)
+                .css({zIndex: '-1'});
+
         }
 
     };
