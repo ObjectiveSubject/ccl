@@ -39,15 +39,17 @@
 
         console.log(this);
 
-        this.setMaxTime();
+        this.setMaxTimeText();
 
         this.makeSchedule();
         
-        this.initEventHandlers();
+        this.initDateEvents();
+
+        this.initFormEvents();
 
     };
 
-    RoomResForm.prototype.makeSchedule = function(){
+    RoomResForm.prototype.makeSchedule = function(day){
 
         var html = [],
             openTimeUnix = this.openTime.getTime(),
@@ -73,11 +75,17 @@
 
         }
 
+        this.selectedSlotInputs = [];
+
         this.$roomSchedule.html( html.join('') );
 
         this.$roomSlotInputs = this.$el.find('.ccl-c-room__slot [type="checkbox"]');
 
+        this.setCurrentDurationText();
+
         this.setOccupiedRooms();
+
+        this.initSlotEvents();
 
     };
 
@@ -205,8 +213,28 @@
 
     };
 
-    RoomResForm.prototype.initEventHandlers = function(){
+    RoomResForm.prototype.initFormEvents = function(){
 
+        var _this = this;
+
+        this.$el.submit(function(event){
+            event.preventDefault();
+            _this.onSubmit();
+        });
+
+    };
+
+    RoomResForm.prototype.initDateEvents = function(){
+
+        var _this = this;
+        
+        this.$dateSelect.change(function(){
+            _this.onDateChange();
+        });
+
+    };
+
+    RoomResForm.prototype.initSlotEvents = function(){
         var _this = this;
         
         if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
@@ -217,16 +245,6 @@
             });
             
         }
-
-        this.$dateSelect.change(function(){
-            _this.onDateChange();
-        });
-
-        this.$el.submit(function(event){
-            event.preventDefault();
-            _this.onSubmit();
-        });
-
     };
 
     RoomResForm.prototype.onDateChange = function() {
@@ -346,6 +364,8 @@
                 return a.value > b.value; 
             }),
             selectionLength = sortedSelection.length;
+
+        console.log('sortedSelection',sortedSelection, 'this.selectedSlotInputs', this.selectedSlotInputs);
         
         if ( selectionLength > 1 ) {
 
@@ -372,7 +392,7 @@
 
     };
 
-    RoomResForm.prototype.setMaxTime = function(){
+    RoomResForm.prototype.setMaxTimeText = function(){
         var maxMinutes = this.maxSlots * this.slotMinutes,
             maxText;
 
@@ -437,6 +457,37 @@
         };
 
         console.log( 'onSubmit » ', payload );
+
+        /* TODO:
+         * Make a POST request here to reserve space.
+         * ------------------------------------------ */
+        // $.post({
+        //         url: CCL.site_url + 'api/rooms/reserve',
+        //         data: payload
+        //     })
+        //     .done(function(response){
+        //         handleSubmitResponse(response);
+        //     })
+        //     .fail(function(error){
+        //         console.log(error);
+        //     })
+        //     .always(function(){
+        //         //
+        //     });
+
+        // for now, just invoking the handler manually with dummy data
+        var errorResponse = { 
+                "errors": [ "some error message" ] 
+            },
+            successfulResponse = {
+                "booking_id": "cs_L6v9gi8"
+            };
+
+        handleSubmitResponse(successfulResponse);
+
+        function handleSubmitResponse(response) {
+        
+        }
 
     };
 
