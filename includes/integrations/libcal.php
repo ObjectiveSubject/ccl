@@ -187,6 +187,39 @@ function get_space_item( $id ) {
 }
 
 /**
+ * Retrieve booking info related to a specific item (Room) in a Space
+ *
+ * @param int $id
+ *
+ * @return array|mixed|object|string
+ */
+function get_space_booking( $id ) {
+
+	$token = get_token();
+
+	$request = wp_remote_get( '	https://api2.libcal.com/1.1/space/booking/' . $id . '?details=1', array(
+		'headers' => array(
+			'Authorization' => 'Bearer '. $token
+		),
+		'body'   => array(),
+		'debug'  => true
+	) );
+
+	if ( is_wp_error ( $request ) ) {
+
+		return $request->get_error_message();
+
+	} else {
+		// check for API errors??
+
+		$results = json_decode( $request['body'] );
+
+		return $results;
+	}
+
+}
+
+/**
  * Book a space on LibCal
  *
  * Use a POST request, example payload:
