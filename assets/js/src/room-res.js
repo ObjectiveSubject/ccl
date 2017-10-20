@@ -205,46 +205,17 @@
 
     };
 
-    RoomResForm.prototype.setSelectableSlots = function(){
-
-        // if ( this.selectedSlotInputs.length === 0 ) {
-            
-        //     this.$roomSlotInputs.parent('.ccl-c-room__slot').removeClass('ccl-is-disabled');
-        //     return;
-
-        // } else {
-
-        //     var firstSlotInput = this.selectedSlotInputs[0],
-        //         firstSlotIndex = this.$roomSlotInputs.index(firstSlotInput),
-        //         firstSlot = this.$roomSlotInputs.eq(firstSlotIndex).parent('.ccl-c-room__slot'),
-        //         lastSlotInput,
-        //         foundOccupiedSlot = false;
-
-        //     for ( var i = 1; i <= this.maxSlots; i++ ) {
-        //         if ( this.$roomSlotInputs.eq( firstSlotIndex + i ).parent('.ccl-c-room__slot').hasClass('ccl-is-occupied') ) {
-        //             foundOccupiedSlot = true;
-        //         } else {
-        //             lastSlotInput = this.$roomSlotInputs.eq( firstSlotIndex + i );
-        //         }
-        //     }
-
-        //     var selectableSlots = firstSlot.nextUntil( lastSlotInput.parent('.ccl-c-room__slot') );
-
-        //     console.log( selectableSlots );
-
-        // }
-
-    };
-
     RoomResForm.prototype.initEventHandlers = function(){
 
         var _this = this;
         
         if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
+
             this.$roomSlotInputs.change(function(){
                 var input = this;
                 _this.onSlotChange(input);
             });
+            
         }
 
         this.$dateSelect.change(function(){
@@ -263,20 +234,20 @@
         this.makeSchedule();
     };
 
-    RoomResForm.prototype.onSlotChange = function(input){
+    RoomResForm.prototype.onSlotChange = function(changedInput){
 
         // if input checked, add it to selected set
-        if ( $(input).prop('checked') ) {
-            this.selectedSlotInputs.push(input);
-            $(input).parent('.ccl-c-room__slot').addClass('ccl-is-checked');
+        if ( $(changedInput).prop('checked') ) {
+            this.selectedSlotInputs.push(changedInput);
+            $(changedInput).parent('.ccl-c-room__slot').addClass('ccl-is-checked');
 
         // if unchecked, remove it from the selected set
         } else {
-            var inputIndex = this.selectedSlotInputs.indexOf(input);
+            var inputIndex = this.selectedSlotInputs.indexOf(changedInput);
             if ( inputIndex > -1 ) {
                 this.selectedSlotInputs.splice( inputIndex, 1 );
             }
-            $(input).parent('.ccl-c-room__slot').removeClass('ccl-is-checked');
+            $(changedInput).parent('.ccl-c-room__slot').removeClass('ccl-is-checked');
         }
 
         // limit number of selected slots
@@ -285,9 +256,35 @@
             this.clearSlot(shiftedInput);
         }
 
-        this.setCurrentDurationText();
+        // auto select slots in between the 2 outermost slots
+        // if ( this.selectedSlotInputs.length > 1 ) {
+        //     var selection = $.extend([],this.selectedSlotInputs),
+        //         sortedSelection = selection.sort(function(a,b){ 
+        //             return a.value > b.value; 
+        //         }),
+        //         firstEl = sortedSelection[0],
+        //         firstIndex = this.$roomSlotInputs.index(firstEl),
+        //         lastEl = sortedSelection[sortedSelection.length - 1],
+        //         lastIndex = this.$roomSlotInputs.index(lastEl),
+        //         changedInputIndex = this.$roomSlotInputs.index(changedInput),
+        //         upToIndex = Math.min( changedInputIndex, firstIndex + this.maxSlots );
 
-        // this.setSelectableSlots();
+        //     console.log('firstIndex', firstIndex, 'changedInputIndex', changedInputIndex, 'firstIndex + this.maxSlots', firstIndex + this.maxSlots );
+        //     console.log('upToIndex',upToIndex);
+
+        //     // loop through and activate slots, but only up to maxSlots
+        //     for ( var i = firstIndex + 1; i < upToIndex; i++ ) {
+        //         this.activateSlot( this.$roomSlotInputs.eq(i) );
+        //     }
+
+        //     // deselect changed input if its beyond the maxSlots range
+        //     if ( changedInputIndex >= firstIndex + this.maxSlots ) {
+        //         this.clearSlot( this.$roomSlotInputs.eq(changedInputIndex) );
+        //     }
+            
+        // }
+
+        this.setCurrentDurationText();
 
     };
 
@@ -313,15 +310,43 @@
         }
     };
 
+    RoomResForm.prototype.activateSlot = function(slot) {
+        // slot can be either the checkbox -OR- the checkbox's container
+
+        var slotIsCheckbox = $(slot).is('[type="checkbox"]'),
+            $container = slotIsCheckbox ? $(slot).parent('.ccl-c-room__slot') : $(slot);
+
+        // never set an occupied slot as active
+        if ( $container.hasClass('ccl-is-occupied') ) {
+            return;
+        }
+
+        if ( $(slot).is('[type="checkbox"]') ) {
+
+            // if it's the checkbox.
+         
+            $(slot).prop('checked',true);
+            $container.addClass('ccl-is-checked');
+            
+        } else {
+
+            // if it's the container
+
+            $container
+                .addClass('ccl-is-checked')
+                .find('[type="checkbox"]')
+                    .prop('checked',true);
+
+        }
+    };
+
     RoomResForm.prototype.setCurrentDurationText = function() {
-        var selection = jQuery.extend([],this.selectedSlotInputs),
+        var selection = $.extend([],this.selectedSlotInputs),
             sortedSelection = selection.sort(function(a,b){ 
                 return a.value > b.value; 
             }),
             selectionLength = sortedSelection.length;
         
-        console.log('sortedSelection', sortedSelection);
-
         if ( selectionLength > 1 ) {
 
             var time1Val = sortedSelection[0].value.slice(0,-4),
