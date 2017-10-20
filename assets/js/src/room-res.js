@@ -20,6 +20,7 @@
         this.$roomSchedule = this.$el.find('.js-room-schedule');
         this.$roomSlotInputs = null;
         this.selectedSlotInputs = [];
+        this.lastSelectedSlot = false;
         this.maxSlots = 4;
         this.slotMinutes = 30;
         this.timeZone = '-700';
@@ -95,9 +96,12 @@
 
     RoomResForm.prototype.setOccupiedRooms = function(){
 
+        // if form doesnt have slot inputs, return;
         if ( ! this.$roomSlotInputs || ! this.$roomSlotInputs.length ) {
             return;
         }
+
+        // Get booking data
 
         var bookings = [];
 
@@ -153,7 +157,12 @@
 
         var _this = this;
 
-        bookings.forEach(function(booking){
+        // loop through booking data
+
+        $(bookings).each(function(i, booking){
+
+            // setup data concerning booking time/duration
+
             var fromDate = new Date( booking.fromDate.slice(0,-4) ),
                 toDate = new Date( booking.toDate.slice(0,-4) ),
                 duration = toDate.getTime() - fromDate.getTime(),
@@ -161,8 +170,10 @@
                 slots = durationMinutes / _this.slotMinutes,
                 slotDateStrArray = [], addMilliseconds, slotTime, slotDate, slotDateString;
                 
-            for ( var i = 0; i < slots; i++ ) {
-                addMilliseconds = i * _this.slotMinutes * 60 * 1000;
+            // populate slotDateStrArray with date strings that match time slot input values
+
+            for ( var j = 0; j < slots; j++ ) {
+                addMilliseconds = j * _this.slotMinutes * 60 * 1000;
                 slotTime = fromDate.getTime() + addMilliseconds;
                 slotDate = new Date(slotTime);
                 slotDateString = _this.formatDateString(slotDate);
@@ -170,10 +181,17 @@
                 slotDateStrArray.push(slotDateString);
             }
 
+            // loop through array of date strings
+
             $(slotDateStrArray).each(function(j,slotDateStr){
+                // find time slot input that matches date string,
+                // disabled it, and add occupied class to parent element
                 _this.$roomSlotInputs.filter(function(){
                     var input = this;
-                    return $(input).val() == slotDateStr;
+                    if ( $(input).val() == slotDateStr ) {
+                        $(input).prop('disabled',true);
+                        return true;
+                    }
                 })
                 .parent('.ccl-c-room__slot')
                 .addClass('ccl-is-occupied');
@@ -257,19 +275,36 @@
             $(input).parent('.ccl-c-room__slot').removeClass('ccl-is-checked');
         }
 
-        // keep selected set to max: 2
+        // limit number of selected slots
         if ( this.selectedSlotInputs.length > this.maxSlots ) {
             var shiftedInput = this.selectedSlotInputs.shift();
-            $(shiftedInput).prop('checked', false);
+            this.clearSlot(shiftedInput);
         }
 
-        // sort selected set
-        this.selectedSlotInputs = this.selectedSlotInputs.sort(function(a,b){
-            return a.value > b.value;
-        });
+        // this.setSelectableSlots();
 
-        this.setSelectableSlots();
+    };
 
+    RoomResForm.prototype.clearSlot = function(slot) {
+        // slot can be either the checkbox -OR- the checkbox's container
+
+        // if it's the checkbox.
+        if ( $(slot).is('[type="checkbox"]') ) {
+         
+            $(slot)
+                .prop('checked',false)
+                .parent('.ccl-c-room__slot')
+                    .removeClass('ccl-is-checked');
+            
+        // if it's the container
+        } else {
+
+            $(slot)
+                .removeClass('ccl-is-checked')
+                .find('[type="checkbox"]')
+                    .prop('checked',false);
+
+        }
     };
 
     RoomResForm.prototype.formatDateString = function(dateObj, readable){
