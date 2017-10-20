@@ -8,6 +8,115 @@
 	'use strict';
     var document = window.document;
 
+    // TODO: Remove
+    var dummyAvailabilityData = [
+        {
+            "id": 9148,
+            "name": "Group Study 1",
+            "description": "",
+            "image": "",
+            "capacity": "6",
+            "availability": [
+                {
+                    "from": "2017-10-20T08:00:00-07:00",
+                    "to": "2017-10-20T08:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T08:30:00-07:00",
+                    "to": "2017-10-20T09:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T09:00:00-07:00",
+                    "to": "2017-10-20T09:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T09:30:00-07:00",
+                    "to": "2017-10-20T10:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T12:00:00-07:00",
+                    "to": "2017-10-20T12:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T12:30:00-07:00",
+                    "to": "2017-10-20T13:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T13:00:00-07:00",
+                    "to": "2017-10-20T13:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T13:30:00-07:00",
+                    "to": "2017-10-20T14:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T14:00:00-07:00",
+                    "to": "2017-10-20T14:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T14:30:00-07:00",
+                    "to": "2017-10-20T15:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T15:00:00-07:00",
+                    "to": "2017-10-20T15:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T15:30:00-07:00",
+                    "to": "2017-10-20T16:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T16:00:00-07:00",
+                    "to": "2017-10-20T16:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T16:30:00-07:00",
+                    "to": "2017-10-20T17:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T17:00:00-07:00",
+                    "to": "2017-10-20T17:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T17:30:00-07:00",
+                    "to": "2017-10-20T18:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T18:00:00-07:00",
+                    "to": "2017-10-20T18:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T18:30:00-07:00",
+                    "to": "2017-10-20T19:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T19:00:00-07:00",
+                    "to": "2017-10-20T19:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T19:30:00-07:00",
+                    "to": "2017-10-20T20:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T20:00:00-07:00",
+                    "to": "2017-10-20T20:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T20:30:00-07:00",
+                    "to": "2017-10-20T21:00:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T21:00:00-07:00",
+                    "to": "2017-10-20T21:30:00-07:00"
+                },
+                {
+                    "from": "2017-10-20T21:30:00-07:00",
+                    "to": "2017-10-20T22:00:00-07:00"
+                }
+            ]
+        }
+    ];
+
     var RoomResForm = function(el){
 
         var now = new Date();
@@ -40,41 +149,110 @@
 
     RoomResForm.prototype.init = function(){
 
+        var _this = this,
+            todayYmd= new Date().toISOString().split('T')[0];
+
+        this.$el.addClass('ccl-is-loading');
+
         this.setMaxTimeText();
 
-        this.makeSchedule();
-        
-        this.initDateEvents();
+        this.getRoomAvailability(todayYmd)
+            .done(function(data){
+                
+                // TODO: Remove
+                // use dummy text
+                data = dummyAvailabilityData;
+                
+                _this.makeSchedule(data);
 
+            })
+            .fail(function(err){
+                console.log(err);
+            })
+            .always(function(){
+                _this.$el.removeClass('ccl-is-loading');
+            });
+
+        this.initDateEvents();
+        
         this.initFormEvents();
+    };
+
+    RoomResForm.prototype.getRoomAvailability = function(Ymd){
+
+        /* TODO:
+         * Make a GET request here for space availability.
+         * https://claremont.libcal.com/admin_api.php?version=1.1&endpoint=space_get
+         * ------------------------------------------ */
+        return $.get({
+            // url: CCL.site_url + 'api/rooms/availability/9148',
+            url: '#',
+            data: {
+                'availability': Ymd // e.g. '2017-10-19'
+            }
+        });
 
     };
 
-    RoomResForm.prototype.makeSchedule = function(day){
+    RoomResForm.prototype.makeSchedule = function(dayData){
 
-        var html = [],
-            openTimeUnix = this.openTime.getTime(),
-            closeTimeUnix = this.closeTime.getTime(),
-            duration = closeTimeUnix - openTimeUnix, // returns milliseconds
-            slotCount;
+        // get object for first room in array. we're only calling data for one room at a time.
+        dayData = dayData[0];
 
-        // get duration in minutes
-        duration = duration / 1000 / 60;
-        // get slot count based on predefined slotMinutes
-        slotCount = Math.floor( duration / this.slotMinutes );
-
+        var _this = this,
+            html = [],
+            availability = dayData.availability,
+            oldToTime;
+            
         // construct HTML for each time slot
-        for ( var i = 0; i < slotCount; i++ ) {
+        $(dayData.availability).each(function(i,item){
+
+            var newFromTime = item.from,
+                slotDateTime = new Date( item.from );
+
+            // compare this item and the previous item to look for gaps in time.
+            // gaps indicated a reserved block of time
+            if ( oldToTime && oldToTime != newFromTime  ) {
+
+                var newFromTimeUnix = new Date(newFromTime).getTime(),
+                    oldToTimeUnix = new Date(oldToTime).getTime(),
+                    difference = newFromTimeUnix - oldToTimeUnix,
+                    slots;
+
+                // console.log('item',item,'slots',difference/);
+
+                // get difference in minutes
+                difference = difference / 1000 / 60;
+                slots = difference / _this.slotMinutes;
+
+                // build slots for occupied (unselectable) time
+                for ( var j = 0; j < slots; j++ ) {
+
+                    var addMilliseconds = j * _this.slotMinutes * 60 * 1000,
+                        newUnix = oldToTimeUnix + addMilliseconds;
+
+                    html.push( _this.makeTimeSlot({
+                        id: 'slot-' + _this.roomId + '-' + i + '-' + j,
+                        disabled: 'disabled',
+                        class: 'ccl-is-occupied',
+                        value: _this.formatDateString( new Date(newUnix) ),
+                        timeString: _this.formatDateString( new Date(newUnix), 'readable' )
+                    }) );
+                }
+
+            }
             
-            var slotDateTime = new Date( openTimeUnix + ( i * 30 * 60 * 1000 ) );
-            
-            html.push( this.makeTimeSlot({
-                id: 'slot-' + this.roomId + '-' + i,
-                value: this.formatDateString( slotDateTime ),
-                timeString: this.formatDateString( slotDateTime, 'readable' )
+            // build selectable time slots
+            html.push( _this.makeTimeSlot({
+                id: 'slot-' + _this.roomId + '-' + i,
+                value: _this.formatDateString( slotDateTime ),
+                timeString: _this.formatDateString( slotDateTime, 'readable' )
             }) );
 
-        }
+            // update variable to the current item's "to" value.
+            oldToTime = item.to;
+        
+        });
 
         this.selectedSlotInputs = [];
 
@@ -84,7 +262,7 @@
 
         this.setCurrentDurationText();
 
-        this.setOccupiedRooms();
+        // this.setOccupiedRooms();
 
         this.initSlotEvents();
 
@@ -96,122 +274,24 @@
             return '';
         }
 
+        var defaults = {
+            class: '',
+            id: '',
+            disabled: '',
+            value: '',
+            timeString: ''
+        };
+        vars = $.extend(defaults, vars);
+
         var template = '' +
-            '<div class="ccl-c-room__slot">' +
-                '<input type="checkbox" id="'+vars.id+'" name="'+vars.id+'" value="'+vars.value+'" />' +
-                '<label class="ccl-c-room__slot-label" for="'+vars.id+'">' +
+            '<div class="ccl-c-room__slot ' + vars.class + '">' +
+                '<input type="checkbox" id="' + vars.id + '" name="' + vars.id + '" value="' + vars.value + '" ' + vars.disabled + '/>' +
+                '<label class="ccl-c-room__slot-label" for="' + vars.id + '">' +
                     vars.timeString +
                 '</label>' +
             '</div>';
 
         return template;
-    };
-
-    RoomResForm.prototype.setOccupiedRooms = function(){
-
-        // if form doesnt have slot inputs, return;
-        if ( ! this.$roomSlotInputs || ! this.$roomSlotInputs.length ) {
-            return;
-        }
-
-        // Get booking data
-
-        var bookings = [];
-
-        /* TODO:
-         * Make a request here to get bookings for this room.
-         * ------------------------------------------------ */
-        // $.get({
-        //         url: CCL.site_url + 'api/rooms/bookings',
-        //         data: {
-        //             eid: this.roomId,
-        //             limit:50,
-        //         }
-        //     })
-        //     .done(function(data){
-        //         bookings = data;
-        //     })
-        //     .fail(function(error){
-        //         console.log(error);
-        //     })
-        //     .always(function(){
-        //         //
-        //     });
-        
-        // For now just setting up dummy data
-        bookings = [
-            {
-                "booking_id": "abc123",
-                "eid": this.roomId,
-                "cid": 37,
-                "lid": 12,
-                "fromDate": this.dateYmd + "T12:00:00" + this.timeZone,
-                "toDate": this.dateYmd + "T13:00:00" + this.timeZone,
-                "firstName": "John",
-                "lastName": "Patron",
-                "email": "john.patron@somewhere.com",
-                "status": "Confirmed",
-                "q43": "Chocolate"
-            },
-            {
-                "booking_id": "abc123",
-                "eid": this.roomId,
-                "cid": 37,
-                "lid": 12,
-                "fromDate": this.dateYmd + "T14:00:00" + this.timeZone,
-                "toDate": this.dateYmd + "T16:00:00" + this.timeZone,
-                "firstName": "Jane",
-                "lastName": "Patron",
-                "email": "jane.patron@somewhere.com",
-                "status": "Confirmed",
-                "q43": "Chocolate"
-            },
-        ];
-
-        var _this = this;
-
-        // loop through booking data
-
-        $(bookings).each(function(i, booking){
-
-            // setup data concerning booking time/duration
-
-            var fromDate = new Date( booking.fromDate.slice(0,-4) ),
-                toDate = new Date( booking.toDate.slice(0,-4) ),
-                duration = toDate.getTime() - fromDate.getTime(),
-                durationMinutes = Math.floor( duration / 1000 / 60 ),
-                slots = durationMinutes / _this.slotMinutes,
-                slotDateStrArray = [], addMilliseconds, slotTime, slotDate, slotDateString;
-                
-            // populate slotDateStrArray with date strings that match time slot input values
-
-            for ( var j = 0; j < slots; j++ ) {
-                addMilliseconds = j * _this.slotMinutes * 60 * 1000;
-                slotTime = fromDate.getTime() + addMilliseconds;
-                slotDate = new Date(slotTime);
-                slotDateString = _this.formatDateString(slotDate);
-
-                slotDateStrArray.push(slotDateString);
-            }
-
-            // loop through array of date strings
-
-            $(slotDateStrArray).each(function(j,slotDateStr){
-                // find time slot input that matches date string,
-                // disabled it, and add occupied class to parent element
-                _this.$roomSlotInputs.filter(function(){
-                    var input = this;
-                    if ( $(input).val() == slotDateStr ) {
-                        $(input).prop('disabled',true);
-                        return true;
-                    }
-                })
-                .parent('.ccl-c-room__slot')
-                .addClass('ccl-is-occupied');
-            });
-            
-        });
-
     };
 
     RoomResForm.prototype.initFormEvents = function(){
@@ -249,8 +329,30 @@
     };
 
     RoomResForm.prototype.onDateChange = function() {
+
+        var _this = this;
+        
         this.dateYmd = this.$dateSelect.val();
-        this.makeSchedule();
+        
+        this.$el.removeClass('ccl-is-loading');
+
+        this.getRoomAvailability(this.dateYmd)
+            .done(function(data){
+                
+                // TODO: Remove
+                // use dummy text
+                data = dummyAvailabilityData;
+                
+                _this.makeSchedule(data);
+
+            })
+            .fail(function(err){
+                console.log(err);
+            })
+            .always(function(){
+                _this.$el.removeClass('ccl-is-loading');
+            });
+        
     };
 
     RoomResForm.prototype.onSlotChange = function(changedInput){
@@ -365,8 +467,6 @@
                 return a.value > b.value; 
             }),
             selectionLength = sortedSelection.length;
-
-        console.log('sortedSelection',sortedSelection, 'this.selectedSlotInputs', this.selectedSlotInputs);
         
         if ( selectionLength > 1 ) {
 
