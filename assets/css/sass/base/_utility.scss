@@ -79,10 +79,12 @@
     	background-color: $color-value !important;
 	}
 }
+
+.ccl-u-color-school {
+	@include school-style(color);
+}
 	
 .ccl-u-bg-school {
-	background-color: $blue;
-	color: white;
 	@include school-style(background-color);
 
 	a:hover, a:focus {

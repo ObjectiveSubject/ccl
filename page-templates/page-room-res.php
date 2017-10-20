@@ -243,10 +243,27 @@ get_header(); ?>
                                                 </div>
                                             </div>
 
-                                            <p class="ccl-h4">
-                                                <?php _e( 'Select available time slots.', 'ccl' ); ?>
-                                                <span class="ccl-u-faded"><?php _e( '(max: 2 hours)', 'ccl' ); ?></span>
-                                            </p>
+                                            <div class="ccl-l-row">
+
+                                                <div class="ccl-l-column ccl-l-span-half-md">
+                                                    <p class="ccl-h4">
+                                                        <?php _e( 'Select available time slots.', 'ccl' ); ?>
+                                                        <span class="ccl-u-faded">(max: <span class="js-max-time"></span>)</span>
+                                                    </p>
+                                                </div>
+                                                
+                                                <div class="ccl-l-column ccl-l-span-half-md">
+                                                    <p class="ccl-h4 ccl-u-color-school">
+                                                        <span class="ccl-u-faded">Selected Time:</span>
+                                                        <span class="js-current-duration">None</span>
+                                                    </p>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="ccl-c-room__schedule js-room-schedule">
+                                                <!-- room schedule populated here via JS -->
+                                            </div>
 
                                             <ul class="ccl-c-room__legend">
                                                 <li class="ccl-c-room__key ccl-is-available">
@@ -262,10 +279,6 @@ get_header(); ?>
                                                     <span><?php _e( 'Selected', 'ccl' ); ?></span>
                                                 </li>
                                             </ul>
-
-                                            <div class="ccl-c-room__schedule js-room-schedule">
-                                                <!-- room schedule populated here via JS -->
-                                            </div>
 
                                         </div>
 

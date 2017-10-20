@@ -18,10 +18,12 @@
         this.$dateSelect = this.$el.find('.js-room-date-select');
         this.dateYmd = this.$dateSelect.val();
         this.$roomSchedule = this.$el.find('.js-room-schedule');
+        this.$currentDurationText = this.$el.find('.js-current-duration');
         this.$roomSlotInputs = null;
         this.selectedSlotInputs = [];
         this.lastSelectedSlot = false;
         this.maxSlots = 4;
+        this.$maxTime = this.$el.find('.js-max-time');
         this.slotMinutes = 30;
         this.timeZone = '-700';
         this.openTime = new Date( now.getFullYear(), now.getMonth(), now.getDate(), 8 ); // 8am today
@@ -36,6 +38,8 @@
     RoomResForm.prototype.init = function(){
 
         console.log(this);
+
+        this.setMaxTime();
 
         this.makeSchedule();
         
@@ -281,6 +285,8 @@
             this.clearSlot(shiftedInput);
         }
 
+        this.setCurrentDurationText();
+
         // this.setSelectableSlots();
 
     };
@@ -305,6 +311,64 @@
                     .prop('checked',false);
 
         }
+    };
+
+    RoomResForm.prototype.setCurrentDurationText = function() {
+        var selection = jQuery.extend([],this.selectedSlotInputs),
+            sortedSelection = selection.sort(function(a,b){ 
+                return a.value > b.value; 
+            }),
+            selectionLength = sortedSelection.length;
+        
+        console.log('sortedSelection', sortedSelection);
+
+        if ( selectionLength > 1 ) {
+
+            var time1Val = sortedSelection[0].value.slice(0,-4),
+                readableTime1 = this.formatDateString( new Date(time1Val), 'readable' );
+
+            var time2Val = sortedSelection[sortedSelection.length - 1].value.slice(0,-4),
+                time2T = new Date(time2Val).getTime() + ( this.slotMinutes * 60 * 1000 ),
+                readableTime2 = this.formatDateString( new Date(time2T), 'readable' );
+                
+            this.$currentDurationText.text( readableTime1 + ' to ' + readableTime2 );
+
+        } else if ( selectionLength > 0 ) {
+
+            var timeVal = sortedSelection[0].value.slice(0,-4),
+                readableTime = this.formatDateString( new Date(timeVal), 'readable' );
+            this.$currentDurationText.text( readableTime + ' to ?' );
+
+        } else {
+
+            this.$currentDurationText.text('None');
+
+        }
+
+    };
+
+    RoomResForm.prototype.setMaxTime = function(){
+        var maxMinutes = this.maxSlots * this.slotMinutes,
+            maxText;
+
+        switch(maxMinutes) {
+            case 240:
+                maxText = maxMinutes / 60 + ' hours';
+                break;
+            case 180:
+                maxText = maxMinutes / 60 + ' hours';
+                break;
+            case 120:
+                maxText = maxMinutes / 60 + ' hours';
+                break;
+            case 60:
+                maxText = maxMinutes / 60 + ' hours';
+                break;
+            default:
+                maxText = maxMinutes + 'mins';
+        }
+
+        this.$maxTime.text( maxText );
     };
 
     RoomResForm.prototype.formatDateString = function(dateObj, readable){
