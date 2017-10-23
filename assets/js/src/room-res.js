@@ -569,31 +569,30 @@
         this.$formSubmit.text('Sending...').prop('disabled',true);
 
         /* TODO:
-         * Make a POST request here to reserve space.
+         * Make a request here to reserve space.
+         * I know the LibCal API request should be POST,
+         * but should our internal admin-ajax request be GET?
          * ------------------------------------------ */
-        // $.post({
-        //         url: CCL.site_url + 'api/rooms/reserve',
-        //         data: payload
-        //     })
-        //     .done(function(response){
-        //         handleSubmitResponse(response);
-        //     })
-        //     .fail(function(error){
-        //         console.log(error);
-        //     })
-        //     .always(function(){
-        //         this.$el.removeClass('ccl-is-loading');
-        //     });
+        $.get({
+                // url: CCL.site_url + 'api/rooms/reserve',
+                url: '#',
+                data: payload
+            })
+            .done(function(response){
 
-        // for now, just invoking the handler manually with dummy data
-        var errorResponse = { 
-                "errors": [ "some error message" ] 
-            },
-            successfulResponse = {
-                "booking_id": "cs_L6v9gi8"
-            };
+                // for now, just invoking the handler manually with dummy data
+                var errorResponse = { "errors": [ "some error message" ]  },
+                    successfulResponse = { "booking_id": "cs_L6v9gi8" };
+                
+                handleSubmitResponse(successfulResponse);
 
-        handleSubmitResponse(successfulResponse);
+            })
+            .fail(function(error){
+                console.log(error);
+            })
+            .always(function(){
+                _this.$el.removeClass('ccl-is-loading');
+            });
 
         function handleSubmitResponse(response) {
 
