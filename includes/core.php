@@ -70,7 +70,9 @@ function scripts( $debug = false ) {
 
 	wp_localize_script( 'main', 'CCL', array(
 		'site_url' => site_url('/'),
-		'assets' => CCL_ASSETS
+		'assets' => CCL_ASSETS,
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'nonce'    => wp_create_nonce( 'ccl_nonce' )
 	) );
 }
 

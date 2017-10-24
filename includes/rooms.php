@@ -22,6 +22,9 @@ function setup() {
 	add_action( 'wp_ajax_retrieve_rooms', __NAMESPACE__ . '\\retrieve_rooms' );
 	// add_action( 'wp_ajax_nopriv_retrieve_rooms', __NAMESPACE__ . '\\retrieve_rooms' );
 
+	add_action( 'wp_ajax_request_booking', __NAMESPACE__ . '\\request_booking' );
+	add_action( 'wp_ajax_nopriv_request_booking', __NAMESPACE__ . '\\request_booking' );
+
 	add_action( 'add_meta_boxes_room', $n('add_room_meta_box' ) );
 }
 
@@ -235,7 +238,7 @@ function add_room( $room ) {
 	$args['post_content'] = ! empty( $room['description'] ) ? $room['description'] : ''; // post_content
 	// $args['post_status'] = 'draft'; // default is draft
 	$args['post_type']    = 'room';
-
+	
 	/*
 	 * Create the Room and grab post id (for post meta insertion)
 	 */
@@ -316,3 +319,31 @@ function render_room_data_metabox() {
 
 	echo '</div>';
 }
+
+/**
+ * AJAX function to request a space booking
+ */
+function request_booking() {
+
+	check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+
+	// should payload be checked here or reserve_space()?
+	$payload = $_POST['payload'];
+
+	// try to reserve space
+	$reserve_space = \CCL\Integrations\LibCal\reserve_space( $payload );
+
+	// check for API errors??
+	// Don't know if we need to check codes or just return the body error string
+	$response_code = $reserve_space['response']['code'];
+
+	$response = $reserve_space['body'];
+
+	// $response = json_decode( $response );
+	// $response = json_encode( $response );
+
+	wp_die( $response );
+}
+
+// @todo get hours function or create post meta
+// @todo get bookings

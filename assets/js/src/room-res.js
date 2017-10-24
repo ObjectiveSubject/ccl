@@ -568,24 +568,21 @@
         this.$formCancel.prop('disabled',true);
         this.$formSubmit.text('Sending...').prop('disabled',true);
 
-        /* TODO:
-         * Make a request here to reserve space.
-         * I know the LibCal API request should be POST,
-         * but should our internal admin-ajax request be GET?
-         * ------------------------------------------ */
-        $.get({
-                // url: CCL.site_url + 'api/rooms/reserve',
-                url: '#',
-                data: payload
+        var data = {
+            action: 'request_booking',
+            ccl_nonce: CCL.nonce,
+            payload: payload
+        };
+
+        /* ------------------------------------
+         * Make a request here to reserve space
+         * ------------------------------------ */
+        $.post({
+                url: CCL.ajax_url,
+                data: data
             })
             .done(function(response){
-
-                // for now, just invoking the handler manually with dummy data
-                var errorResponse = { "errors": [ "some error message" ]  },
-                    successfulResponse = { "booking_id": "cs_L6v9gi8" };
-                
-                handleSubmitResponse(successfulResponse);
-
+                handleSubmitResponse(response);
             })
             .fail(function(error){
                 console.log(error);
@@ -596,15 +593,16 @@
 
         function handleSubmitResponse(response) {
 
-            var responseHTML;
+            var responseHTML,
+                responseObject = JSON.parse(response);
 
-            if ( response.booking_id ) {
+            if ( responseObject.booking_id ) {
                 responseHTML =  ['<p class="ccl-h2 ccl-u-mt-0">Success!</p>',
-                                '<p class="ccl-h4">Your booking ID is <span class="ccl-u-color-school">' + response.booking_id + '</span></p>',
+                                '<p class="ccl-h4">Your booking ID is <span class="ccl-u-color-school">' + responseObject.booking_id + '</span></p>',
                                 '<p class="ccl-h4">Please check your email to confirm your booking.</p>'];
             } else {
                 responseHTML =  ['<p class="ccl-h3 ccl-u-mt-0">Sorry, but we couldn\'t process your reservation.</p>','<p class="ccl-h4">Errors:</p>'];
-                $(response.errors).each(function(i, error){
+                $(responseObject.errors).each(function(i, error){
                     responseHTML.push('<p class="ccl-c-alert ccl-is-error">' + error + '</p>');
                 });
                 responseHTML.push('<p class="ccl-h4">Please talk to your nearest librarian for help.</p>');

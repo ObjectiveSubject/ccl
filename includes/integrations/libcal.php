@@ -239,16 +239,17 @@ function get_space_booking( $id ) {
  *		)
  * );
  *
- * @param $payload
+ * @param $payload array Payload from AJAX function
  *
  * @return array|string|\WP_Error
  */
 function reserve_space( $payload ) {
 
-	$token = get_token();
-
 	// verify/error check payload before request
 	// (check for valid JSON and all fields, maybe a claremont email address too)
+	$payload = json_encode( $payload ); 	// JSON encode for submission
+
+	$token = get_token();
 
 	$request = wp_remote_post( '	https://api2.libcal.com/1.1/space/reserve', array(
 		'headers' => array(
@@ -264,10 +265,9 @@ function reserve_space( $payload ) {
 		return $request->get_error_message();
 
 	} else {
-		// check for API errors??
 
-		// $results = json_decode( $request );
 		$results = $request;
+		// $results = json_decode( $request );
 
 		return $results;
 	}
