@@ -43,7 +43,7 @@ function register_rooms_post_type() {
 		'supports'        => array( 'title' ), // content, editor, thumbnail would allow content to be edited
 		'capability_type' => 'post',
 		'capabilities' => array(
-			'create_posts' => false, // Remove support for "Add New" (can also change to a role, rather than false)
+			'create_posts' => 'do_not_allow', // Remove support for "Add New" (can also change to a role, rather than false)
 		),
 		'map_meta_cap' => true, // Allows created posts to be edited
 	) );
@@ -238,7 +238,7 @@ function add_room( $room ) {
 	$args['post_content'] = ! empty( $room['description'] ) ? $room['description'] : ''; // post_content
 	// $args['post_status'] = 'draft'; // default is draft
 	$args['post_type']    = 'room';
-	
+
 	/*
 	 * Create the Room and grab post id (for post meta insertion)
 	 */
