@@ -127,7 +127,7 @@ function get_all_space_locations() {
  *
  * @return array|mixed|object|string
  */
-function get_space_category( $id = 2314) {
+function get_space_category( $id = 2314 ) {
 
 	$token = get_token();
 
@@ -180,6 +180,43 @@ function get_space_item( $id ) {
 		// check for API errors??
 
 		$results = json_decode( $request['body'] );
+
+		return $results;
+	}
+
+}
+
+/**
+ * Retrieve space bookings
+ *
+ * Can use various parameters to return up to a maximum of 100 space bookings
+ *
+ * @return array|mixed|object|string
+ */
+function get_bookings() {
+
+	$token = get_token();
+
+	// eid (space id), lid (location id), date (YYYY-MM-DD)
+	$parameters = '?limit=100&cid=2314'; // max 100 returned, default spaces category
+
+	$request = wp_remote_get( '	https://api2.libcal.com/1.1/space/bookings' . $parameters , array(
+		'headers' => array(
+			'Authorization' => 'Bearer '. $token
+		),
+		'body'   => array(),
+		'debug'  => true
+	) );
+
+	if ( is_wp_error ( $request ) ) {
+
+		return $request->get_error_message();
+
+	} else {
+		// check for API errors??
+
+		$results = json_decode( $request['body'] );
+		//$results = $request;
 
 		return $results;
 	}
