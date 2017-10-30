@@ -156,7 +156,7 @@
 
         this.setMaxTimeText();
 
-        this.getRoomAvailability(todayYmd)
+        this.getSpaceAvailability(todayYmd)
             .done(function(data){
                 
                 // TODO: Remove
@@ -178,7 +178,7 @@
         this.initFormEvents();
     };
 
-    RoomResForm.prototype.getRoomAvailability = function(Ymd){
+    RoomResForm.prototype.getSpaceAvailability = function(Ymd){
 
         /* TODO:
          * Make a GET request here for space availability.
@@ -336,7 +336,7 @@
         
         this.$el.removeClass('ccl-is-loading');
 
-        this.getRoomAvailability(this.dateYmd)
+        this.getSpaceAvailability(this.dateYmd)
             .done(function(data){
                 
                 // TODO: Remove

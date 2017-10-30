@@ -58,6 +58,8 @@ get_header(); ?>
 
                 <?php endif; ?>
 
+                <pre><?php var_dump( http_build_query( array() ) ); ?></pre>
+
 				<?php if ( empty( $room_types) ) : ?>
 						<div class="ccl-l-container">
 

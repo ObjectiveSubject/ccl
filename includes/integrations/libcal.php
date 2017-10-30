@@ -156,15 +156,19 @@ function get_space_category( $id = 2314 ) {
 /**
  * Retrieve info related to a specific item (Room) in a Space
  *
- * @param int $id
+ * @param int $id: ID of space
+ * @param array $params: array of parameters. Can specify availability for specific day(s). e.g. --> array( 'availability' => '2017-10-30' ).
  *
  * @return array|mixed|object|string
  */
-function get_space_item( $id ) {
+function get_space_item( $id, $params = array() ) {
 
 	$token = get_token();
 
-	$request = wp_remote_get( '	https://api2.libcal.com/1.1/space/item/' . $id . '?details=1', array(
+	// turn array/object into query string
+	$params = http_build_query( $params );
+
+	$request = wp_remote_get( 'https://api2.libcal.com/1.1/space/item/' . $id . '?' . $params, array(
 		'headers' => array(
 			'Authorization' => 'Bearer '. $token
 		),
