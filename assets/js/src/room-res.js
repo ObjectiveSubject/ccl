@@ -622,30 +622,27 @@
     };
 
     RoomResForm.prototype.setCurrentDurationText = function() {
+
         var selection = $.extend([],this.selectedSlotInputs),
             sortedSelection = selection.sort(function(a,b){ 
                 return a.value > b.value; 
             }),
             selectionLength = sortedSelection.length;
         
-        if ( selectionLength > 1 ) {
+        if ( selectionLength > 0 ) {
 
             var time1Val = sortedSelection[0].value.slice(0,-4),
                 readableTime1 = this.formatDateString( new Date(time1Val), 'readable' );
 
-            var time2Val = sortedSelection[sortedSelection.length - 1].value.slice(0,-4),
+            var time2Val = ( selectionLength >= 2 ) ? sortedSelection[sortedSelection.length - 1].value.slice(0,-4) : time1Val,
                 time2T = new Date(time2Val).getTime() + ( this.slotMinutes * 60 * 1000 ),
                 readableTime2 = this.formatDateString( new Date(time2T), 'readable' );
-                
+
             this.$currentDurationText.text( readableTime1 + ' to ' + readableTime2 );
 
-        } else if ( selectionLength > 0 ) {
-
-            var timeVal = sortedSelection[0].value.slice(0,-4),
-                readableTime = this.formatDateString( new Date(timeVal), 'readable' );
-            this.$currentDurationText.text( readableTime + ' to ?' );
-
-        } else {
+        }
+        
+        else {
 
             this.$currentDurationText.text('None');
 
@@ -783,29 +780,6 @@
         }
 
     };
-
-    // Private Functions
-    // ------------------------------------------------------- //
-
-    function _sortObjectArray( array, key, order ) {
-        if ( ! array || ! key ) {
-            return;
-        }
-        if ( ! order ) {
-            order = 'ASC';
-        }
-        if ( order === 'ASC' ) {
-            return array.sort( function(a,b){ 
-                return a[key] > b[key]; 
-            });
-        } else if ( order === 'DESC' ) {
-            return array.sort( function(a,b){ 
-                return a[key] < b[key]; 
-            });
-        } else {
-            return array;
-        }
-    }
 
     // ------------------------------------------------------- //
 
