@@ -232,12 +232,12 @@ get_header(); ?>
                                                     <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
                                                         <label class="ccl-b-label">
                                                             <?php _e( 'Reservation Nickname (optional)', 'ccl' ); ?>
-                                                            <input type="email" class="ccl-b-input" name="email" placeholder="e.g. 'History Study Group'"/>
+                                                            <input type="text" class="ccl-b-input" name="nickname" placeholder="e.g. 'History Study Group'"/>
                                                         </label>
                                                     </div>
                                                     <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
                                                         <label class="ccl-b-label">
-                                                            <?php _e( 'When', 'ccl' ); ?>
+                                                            <?php _e( 'Date', 'ccl' ); ?>
                                                             <select class="ccl-b-select ccl-u-display-block js-room-date-select" name="<?php echo 'room' . $room_id . '-date-select'; ?>" required style="width:100%">
                                                                 <?php 
                                                                 $i = 0; do { ?>
@@ -266,25 +266,15 @@ get_header(); ?>
                                                     </div>
                                                 </div>
 
-                                                <div class="ccl-l-row">
-
-                                                    <div class="ccl-l-column ccl-l-span-half-md">
-                                                        <p class="ccl-h4">
-                                                            <?php _e( 'Select available time slots.', 'ccl' ); ?>
-                                                            <span class="ccl-u-faded">(max: <span class="js-max-time"></span>)</span>
-                                                        </p>
-                                                    </div>
+                                                <p class="ccl-h4 ccl-u-mt-0">
+                                                    <span class="ccl-u-color-school js-current-duration">Please select available time slots</span>
+                                                    <a href="#" class="ccl-c-room__slot-reset js-reset-selection">&times; Reset</a>
+                                                </p>
+                                                
+                                                <p class="ccl-h5 ccl-u-mt-0">
+                                                    <span class="ccl-u-faded">Max: <span class="js-max-time"></span></span>
+                                                </p>
                                                     
-                                                    <div class="ccl-l-column ccl-l-span-half-md">
-                                                        <p class="ccl-h4 ccl-u-color-school">
-                                                            <span class="ccl-u-faded">Selected Time:</span>
-                                                            <span class="js-current-duration">None</span>
-                                                            <a href="#" class="ccl-c-room__slot-reset js-reset-selection">&times; Reset</a>
-                                                        </p>
-                                                    </div>
-                                                    
-                                                </div>
-
                                                 <div class="ccl-c-room__schedule js-room-schedule">
                                                     <!-- room schedule populated here via JS -->
                                                 </div>

@@ -18,116 +18,116 @@
             "capacity": "6",
             "availability": [
                 {
-                    "from": "2017-10-20T08:00:00-07:00",
-                    "to": "2017-10-20T08:30:00-07:00"
+                    "from": "2017-11-01T08:00:00-07:00",
+                    "to": "2017-11-01T08:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T08:30:00-07:00",
-                    "to": "2017-10-20T09:00:00-07:00"
+                    "from": "2017-11-01T08:30:00-07:00",
+                    "to": "2017-11-01T09:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T09:00:00-07:00",
-                    "to": "2017-10-20T09:30:00-07:00"
+                    "from": "2017-11-01T09:00:00-07:00",
+                    "to": "2017-11-01T09:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T09:30:00-07:00",
-                    "to": "2017-10-20T10:00:00-07:00"
+                    "from": "2017-11-01T09:30:00-07:00",
+                    "to": "2017-11-01T10:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T10:00:00-07:00",
-                    "to": "2017-10-20T10:30:00-07:00"
+                    "from": "2017-11-01T10:00:00-07:00",
+                    "to": "2017-11-01T10:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T10:30:00-07:00",
-                    "to": "2017-10-20T11:00:00-07:00"
-                },
-                // {
-                //     "from": "2017-10-20T11:00:00-07:00",
-                //     "to": "2017-10-20T11:30:00-07:00"
-                // },
-                {
-                    "from": "2017-10-20T11:30:00-07:00",
-                    "to": "2017-10-20T12:00:00-07:00"
+                    "from": "2017-11-01T10:30:00-07:00",
+                    "to": "2017-11-01T11:00:00-07:00"
                 },
                 // {
-                //     "from": "2017-10-20T12:00:00-07:00",
-                //     "to": "2017-10-20T12:30:00-07:00"
+                //     "from": "2017-11-01T11:00:00-07:00",
+                //     "to": "2017-11-01T11:30:00-07:00"
                 // },
                 {
-                    "from": "2017-10-20T12:30:00-07:00",
-                    "to": "2017-10-20T13:00:00-07:00"
-                },
-                {
-                    "from": "2017-10-20T13:00:00-07:00",
-                    "to": "2017-10-20T13:30:00-07:00"
+                    "from": "2017-11-01T11:30:00-07:00",
+                    "to": "2017-11-01T12:00:00-07:00"
                 },
                 // {
-                //     "from": "2017-10-20T13:30:00-07:00",
-                //     "to": "2017-10-20T14:00:00-07:00"
+                //     "from": "2017-11-01T12:00:00-07:00",
+                //     "to": "2017-11-01T12:30:00-07:00"
+                // },
+                {
+                    "from": "2017-11-01T12:30:00-07:00",
+                    "to": "2017-11-01T13:00:00-07:00"
+                },
+                {
+                    "from": "2017-11-01T13:00:00-07:00",
+                    "to": "2017-11-01T13:30:00-07:00"
+                },
+                // {
+                //     "from": "2017-11-01T13:30:00-07:00",
+                //     "to": "2017-11-01T14:00:00-07:00"
                 // },
                 // {
-                //     "from": "2017-10-20T14:00:00-07:00",
-                //     "to": "2017-10-20T14:30:00-07:00"
+                //     "from": "2017-11-01T14:00:00-07:00",
+                //     "to": "2017-11-01T14:30:00-07:00"
                 // },
                 {
-                    "from": "2017-10-20T14:30:00-07:00",
-                    "to": "2017-10-20T15:00:00-07:00"
+                    "from": "2017-11-01T14:30:00-07:00",
+                    "to": "2017-11-01T15:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T15:00:00-07:00",
-                    "to": "2017-10-20T15:30:00-07:00"
+                    "from": "2017-11-01T15:00:00-07:00",
+                    "to": "2017-11-01T15:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T15:30:00-07:00",
-                    "to": "2017-10-20T16:00:00-07:00"
+                    "from": "2017-11-01T15:30:00-07:00",
+                    "to": "2017-11-01T16:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T16:00:00-07:00",
-                    "to": "2017-10-20T16:30:00-07:00"
+                    "from": "2017-11-01T16:00:00-07:00",
+                    "to": "2017-11-01T16:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T16:30:00-07:00",
-                    "to": "2017-10-20T17:00:00-07:00"
+                    "from": "2017-11-01T16:30:00-07:00",
+                    "to": "2017-11-01T17:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T17:00:00-07:00",
-                    "to": "2017-10-20T17:30:00-07:00"
+                    "from": "2017-11-01T17:00:00-07:00",
+                    "to": "2017-11-01T17:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T17:30:00-07:00",
-                    "to": "2017-10-20T18:00:00-07:00"
+                    "from": "2017-11-01T17:30:00-07:00",
+                    "to": "2017-11-01T18:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T18:00:00-07:00",
-                    "to": "2017-10-20T18:30:00-07:00"
+                    "from": "2017-11-01T18:00:00-07:00",
+                    "to": "2017-11-01T18:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T18:30:00-07:00",
-                    "to": "2017-10-20T19:00:00-07:00"
+                    "from": "2017-11-01T18:30:00-07:00",
+                    "to": "2017-11-01T19:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T19:00:00-07:00",
-                    "to": "2017-10-20T19:30:00-07:00"
+                    "from": "2017-11-01T19:00:00-07:00",
+                    "to": "2017-11-01T19:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T19:30:00-07:00",
-                    "to": "2017-10-20T20:00:00-07:00"
+                    "from": "2017-11-01T19:30:00-07:00",
+                    "to": "2017-11-01T20:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T20:00:00-07:00",
-                    "to": "2017-10-20T20:30:00-07:00"
+                    "from": "2017-11-01T20:00:00-07:00",
+                    "to": "2017-11-01T20:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T20:30:00-07:00",
-                    "to": "2017-10-20T21:00:00-07:00"
+                    "from": "2017-11-01T20:30:00-07:00",
+                    "to": "2017-11-01T21:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T21:00:00-07:00",
-                    "to": "2017-10-20T21:30:00-07:00"
+                    "from": "2017-11-01T21:00:00-07:00",
+                    "to": "2017-11-01T21:30:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T21:30:00-07:00",
-                    "to": "2017-10-20T22:00:00-07:00"
+                    "from": "2017-11-01T21:30:00-07:00",
+                    "to": "2017-11-01T22:00:00-07:00"
                 }
             ]
         }
@@ -147,6 +147,7 @@
         this.dateYmd = this.$dateSelect.val();
         this.$roomSchedule = this.$el.find('.js-room-schedule');
         this.$currentDurationText = this.$el.find('.js-current-duration');
+        this.$formNotification = $('<p class="ccl-c-alert"></p>');
         this.$resetSelectionBtn = this.$el.find('.js-reset-selection'); 
         this.$roomSlotInputs = null;
         this.selectedSlotInputs = [];
@@ -250,7 +251,7 @@
                         id: 'slot-' + _this.roomId + '-' + i + '-' + j,
                         disabled: 'disabled',
                         class: 'ccl-is-occupied',
-                        value: _this.formatDateString( new Date(newUnix) ),
+                        from: _this.formatDateString( new Date(newUnix) ),
                         timeString: _this.formatDateString( new Date(newUnix), 'readable' )
                     }) );
                 }
@@ -260,7 +261,8 @@
             // build selectable time slots
             html.push( _this.makeTimeSlot({
                 id: 'slot-' + _this.roomId + '-' + i,
-                value: _this.formatDateString( slotDateTime ),
+                from: item.from,
+                to: item.to,
                 timeString: _this.formatDateString( slotDateTime, 'readable' )
             }) );
 
@@ -293,14 +295,15 @@
             class: '',
             id: '',
             disabled: '',
-            value: '',
+            from: '',
+            to: '',
             timeString: ''
         };
         vars = $.extend(defaults, vars);
 
         var template = '' +
             '<div class="ccl-c-room__slot ' + vars.class + '">' +
-                '<input type="checkbox" id="' + vars.id + '" name="' + vars.id + '" value="' + vars.value + '" ' + vars.disabled + '/>' +
+                '<input type="checkbox" id="' + vars.id + '" name="' + vars.id + '" value="' + vars.from + '" data-to="' + vars.to + '" ' + vars.disabled + '/>' +
                 '<label class="ccl-c-room__slot-label" for="' + vars.id + '">' +
                     vars.timeString +
                 '</label>' +
@@ -686,20 +689,20 @@
         
         if ( selectionLength > 0 ) {
 
-            var time1Val = sortedSelection[0].value.slice(0,-4),
+            var time1Val = sortedSelection[0].value,
                 readableTime1 = this.formatDateString( new Date(time1Val), 'readable' );
 
-            var time2Val = ( selectionLength >= 2 ) ? sortedSelection[sortedSelection.length - 1].value.slice(0,-4) : time1Val,
+            var time2Val = ( selectionLength >= 2 ) ? sortedSelection[sortedSelection.length - 1].value : time1Val,
                 time2T = new Date(time2Val).getTime() + ( this.slotMinutes * 60 * 1000 ),
                 readableTime2 = this.formatDateString( new Date(time2T), 'readable' );
 
-            this.$currentDurationText.text( readableTime1 + ' to ' + readableTime2 );
+            this.$currentDurationText.text( 'From ' + readableTime1 + ' to ' + readableTime2 );
 
         }
         
         else {
 
-            this.$currentDurationText.text('None');
+            this.$currentDurationText.text('Please select available time slots');
 
         }
 
@@ -751,30 +754,45 @@
 
     };
 
-    RoomResForm.prototype.onSubmit = function(){
+    RoomResForm.prototype.onSubmit = function(event){
 
-        var _this = this;
+        if ( ! this.selectedSlotInputs.length ) {
+            
+            this.$formNotification
+                .css('display','none')
+                .addClass('ccl-is-error')
+                .text('Please select a time for your reservation')
+                .appendTo(this.$formContent)
+                .slideDown(CCL.DURATION);            
 
-        /* TODO:
-         * Populate "bookings" array with correct data
-         * ------------------------------------------ */
-        var payload = {
-            "iid":333,
-            "start": this.selectedSlotInputs[0].value,
-            "fname": this.$el[0].fname.value,
-            "lname": this.$el[0].lname.value,
-            "email": this.$el[0].email.value,
-            "nickname": this.$el[0].nickname.value,
-            "bookings":[
-                { 
-                    "id": this.roomId,
-                    // using 3pm as end time for now
-                    "to": this.dateYmd + "T15:00:00" + this.timeZone
-                }
-            ]
-        };
+            return;
+        } 
+        else {
+            this.$formNotification.remove();
+        }
 
-        console.log( 'onSubmit » ', payload );
+        var _this = this,
+            sortedSelection = $.extend([], this.selectedSlotInputs).sort(function(a,b){
+                return a.value > b.value;
+            }),
+            start = sortedSelection[0].value,
+            end = ( sortedSelection.length > 1 ) ? $( sortedSelection[ sortedSelection.length - 1 ] ).data('to') : $( sortedSelection[0] ).data('to'),
+            payload = {
+                "iid":333,
+                "start": start,
+                "fname": this.$el[0].fname.value,
+                "lname": this.$el[0].lname.value,
+                "email": this.$el[0].email.value,
+                "nickname": this.$el[0].nickname.value,
+                "bookings":[
+                    { 
+                        "id": this.roomId,
+                        "to": end
+                    }
+                ]
+            };
+
+        console.log( 'on Submit » ', payload );
 
         this.$el.addClass('ccl-is-loading');
         this.$formCancel.prop('disabled',true);
@@ -794,7 +812,7 @@
                 data: data
             })
             .done(function(response){
-                handleSubmitResponse(response);
+                _handleSubmitResponse(response);
             })
             .fail(function(error){
                 console.log(error);
@@ -803,7 +821,7 @@
                 _this.$el.removeClass('ccl-is-loading');
             });
 
-        function handleSubmitResponse(response) {
+        function _handleSubmitResponse(response) {
 
             var responseHTML,
                 responseObject = JSON.parse(response);
