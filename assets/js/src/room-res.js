@@ -147,6 +147,7 @@
         this.dateYmd = this.$dateSelect.val();
         this.$roomSchedule = this.$el.find('.js-room-schedule');
         this.$currentDurationText = this.$el.find('.js-current-duration');
+        this.$resetSelectionBtn = this.$el.find('.js-reset-selection'); 
         this.$roomSlotInputs = null;
         this.selectedSlotInputs = [];
         this.lastSelectedSlot = false;
@@ -312,6 +313,16 @@
 
         var _this = this;
 
+        this.$resetSelectionBtn.click(function(event){
+            event.preventDefault();
+            $(_this.selectedSlotInputs).each(function(i,input){
+                $(input)
+                    .prop('checked',false)
+                    .change();
+            });
+            $('.ccl-c-room__slot').removeClass('ccl-is-disabled');
+        });
+
         this.$el.submit(function(event){
             event.preventDefault();
             _this.onSubmit();
@@ -371,6 +382,7 @@
             })
             .always(function(){
                 _this.$el.removeClass('ccl-is-loading');
+                _this.$resetSelectionBtn.hide();
             });
         
     };
@@ -429,7 +441,7 @@
         /* -------------------------------------------------------------
          * if 1 input selected, selecting 2nd slot
          * ------------------------------------------------------------- */
-        else if ( _this.selectedSlotInputs.length === 1 ) {
+        if ( _this.selectedSlotInputs.length === 1 ) {
 
             if ( $(clickedInput).parent('.ccl-c-room__slot').hasClass('ccl-is-disabled') ) {
                 event.preventDefault();
@@ -442,7 +454,7 @@
         /* -------------------------------------------------------------
          * if 2 or more slots already selected
          * ------------------------------------------------------------- */
-        else {
+        if ( _this.selectedSlotInputs.length >= 2 ) {
 
             // if the clicked input is not part of current selection
             // clear all selected inputs
@@ -488,7 +500,6 @@
     RoomResForm.prototype.onSlotChange = function(changedInput){
         
         // if input checked, add it to selected set
-
         if ( $(changedInput).prop('checked') ) {
 
             this.selectedSlotInputs.push(changedInput);
@@ -497,7 +508,6 @@
         } 
         
         // if input unchecked, remove it from the selected set
-        
         else { 
 
             var changedInputIndex = this.selectedSlotInputs.indexOf(changedInput);
@@ -509,7 +519,14 @@
 
         }
 
-        // highlight slots between two ends
+        // toggle reset button
+        if ( this.selectedSlotInputs.length > 0 ) {
+            this.$resetSelectionBtn.show();
+        } else {
+            this.$resetSelectionBtn.hide();
+        }
+
+        // if highlight slots between two ends
         if ( this.selectedSlotInputs.length === 2 ) {
 
             var _this = this;

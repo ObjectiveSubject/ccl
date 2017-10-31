@@ -209,6 +209,20 @@
 
 }
 
+.ccl-c-room__slot-reset {
+    display: none;
+    color: red;
+    font-size: rem(12);
+    border: 1px solid;
+    padding: 0.2em 0.3em 0.1em;
+    vertical-align: 0.1em;
+    margin-left: 1em;
+    &:hover {
+        background-color: rgba(red, 0.1);
+        color: red !important;
+    }
+}
+
 
 // Room Legend
 // -------------------------------------- //

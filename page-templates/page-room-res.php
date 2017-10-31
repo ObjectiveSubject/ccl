@@ -279,6 +279,7 @@ get_header(); ?>
                                                         <p class="ccl-h4 ccl-u-color-school">
                                                             <span class="ccl-u-faded">Selected Time:</span>
                                                             <span class="js-current-duration">None</span>
+                                                            <a href="#" class="ccl-c-room__slot-reset js-reset-selection">&times; Reset</a>
                                                         </p>
                                                     </div>
                                                     
