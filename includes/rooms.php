@@ -25,6 +25,12 @@ function setup() {
 	add_action( 'wp_ajax_request_booking', __NAMESPACE__ . '\\request_booking' );
 	add_action( 'wp_ajax_nopriv_request_booking', __NAMESPACE__ . '\\request_booking' );
 
+	add_action( 'wp_ajax_get_bookings', __NAMESPACE__ . '\\get_bookings' );
+	add_action( 'wp_ajax_nopriv_get_bookings', __NAMESPACE__ . '\\get_bookings' );
+
+	add_action( 'wp_ajax_get_room_info', __NAMESPACE__ . '\\get_space_item' );
+	add_action( 'wp_ajax_nopriv_get_room_info', __NAMESPACE__ . '\\get_space_item' );
+
 	add_action( 'add_meta_boxes_room', $n('add_room_meta_box' ) );
 }
 
@@ -345,5 +351,39 @@ function request_booking() {
 	wp_die( $response );
 }
 
-// @todo get hours function or create post meta
-// @todo get bookings
+/**
+ * AJAX function to retrieve bookings for a given day
+ */
+function get_bookings() {
+	check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+
+	$date = $_POST['availability'];
+	$room_id = $_POST['room'];
+
+	// get bookings for room
+	$bookings = \CCL\Integrations\LibCal\get_bookings( $room_id, $date );
+
+
+	// $response = json_decode( $bookings['body'] );
+	$response = $bookings['body'];
+
+	wp_die( $response );
+}
+
+/**
+ * AJAX function to retrieve info about a space
+ */
+function get_space_item() {
+	check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+
+	$room_id                = $_POST['room'];
+	$params['availability'] = $_POST['availability'];
+
+	// get info for a room
+	$info = \CCL\Integrations\LibCal\get_space_item( $room_id, $params );
+
+	// $response = json_decode( $info['body'] );
+	$response = $info['body'];
+
+	wp_die( $response );
+}

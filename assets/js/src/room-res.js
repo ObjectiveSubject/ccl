@@ -176,7 +176,7 @@
 
         this.getSpaceAvailability(todayYmd)
             .done(function(data){
-                
+                console.log(data);
                 // TODO: Remove
                 // use dummy text
                 data = dummyAvailabilityData;
@@ -199,16 +199,19 @@
     RoomResForm.prototype.getSpaceAvailability = function(Ymd){
 
         /* TODO:
-         * Make a GET request here for space availability.
-         * https://claremont.libcal.com/admin_api.php?version=1.1&endpoint=space_get
+         * Get correct room id
          * ------------------------------------------ */
-        return $.get({
-            // url: CCL.site_url + 'api/rooms/availability/9148',
-            url: '#',
-            data: {
-                'availability': Ymd // e.g. '2017-10-19'
-            }
-        });
+		var data = {
+			action: 'get_room_info',
+			ccl_nonce: CCL.nonce,
+			availability: Ymd, // e.g. '2017-10-19'
+			room: 9148 // room_id (space)
+		};
+
+        return $.post({
+			url: CCL.ajax_url,
+			data: data
+		});
 
     };
 

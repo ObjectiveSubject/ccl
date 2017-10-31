@@ -176,6 +176,8 @@ function get_space_item( $id, $params = array() ) {
 		'debug'  => true
 	) );
 
+	// error_log( "Room ID: " . $id . " Parameters: " . $params );
+
 	if ( is_wp_error ( $request ) ) {
 
 		return $request->get_error_message();
@@ -183,7 +185,8 @@ function get_space_item( $id, $params = array() ) {
 	} else {
 		// check for API errors??
 
-		$results = json_decode( $request['body'] );
+		// $results = json_decode( $request['body'] );
+		$results = $request;
 
 		return $results;
 	}
@@ -195,14 +198,19 @@ function get_space_item( $id, $params = array() ) {
  *
  * Can use various parameters to return up to a maximum of 100 space bookings
  *
+ * @todo rework this to use params array like get_space_item?
+ *
+ * @param $room_id integer id value for the space
+ * @param $date    string  date in the from YYYY-mm-dd
+ *
  * @return array|mixed|object|string
  */
-function get_bookings() {
+function get_bookings( $room_id, $date ) {
 
 	$token = get_token();
 
 	// eid (space id), lid (location id), date (YYYY-MM-DD)
-	$parameters = '?limit=100&cid=2314'; // max 100 returned, default spaces category
+	$parameters = '?limit=100&cid=2314&eid=' . $room_id . '&date=' . $date ; // max 100 returned, default spaces category
 
 	$request = wp_remote_get( '	https://api2.libcal.com/1.1/space/bookings' . $parameters , array(
 		'headers' => array(
@@ -219,8 +227,8 @@ function get_bookings() {
 	} else {
 		// check for API errors??
 
-		$results = json_decode( $request['body'] );
-		//$results = $request;
+		// $results = json_decode( $request['body'] );
+		$results = $request;
 
 		return $results;
 	}
