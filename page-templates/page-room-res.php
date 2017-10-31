@@ -58,7 +58,6 @@ get_header(); ?>
 
                 <?php endif; ?>
 
-                <pre><?php var_dump( http_build_query( array() ) ); ?></pre>
 
 				<?php if ( empty( $room_types) ) : ?>
 						<div class="ccl-l-container">
@@ -212,13 +211,13 @@ get_header(); ?>
                                             <div class="js-room-res-form-content">
 
                                                 <div class="ccl-l-row">
-                                                    <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                    <div class="ccl-l-column ccl-l-span-quarter-md ccl-u-mb-1">
                                                         <label class="ccl-b-label">
                                                             <?php _e( 'First Name', 'ccl' ); ?>
                                                             <input type="text" class="ccl-b-input" name="fname" required/>
                                                         </label>
                                                     </div>
-                                                    <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                    <div class="ccl-l-column ccl-l-span-quarter-md ccl-u-mb-1">
                                                         <label class="ccl-b-label">
                                                             <?php _e( 'Last Name', 'ccl' ); ?>
                                                             <input type="text" class="ccl-b-input" name="lname" required/>
@@ -228,6 +227,12 @@ get_header(); ?>
                                                         <label class="ccl-b-label">
                                                             <?php _e( 'Email Address', 'ccl' ); ?>
                                                             <input type="email" class="ccl-b-input" name="email" required/>
+                                                        </label>
+                                                    </div>
+                                                    <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">
+                                                        <label class="ccl-b-label">
+                                                            <?php _e( 'Reservation Nickname (optional)', 'ccl' ); ?>
+                                                            <input type="email" class="ccl-b-input" name="email" placeholder="e.g. 'History Study Group'"/>
                                                         </label>
                                                     </div>
                                                     <div class="ccl-l-column ccl-l-span-half-md ccl-u-mb-1">

@@ -34,9 +34,25 @@
                     "to": "2017-10-20T10:00:00-07:00"
                 },
                 {
-                    "from": "2017-10-20T12:00:00-07:00",
-                    "to": "2017-10-20T12:30:00-07:00"
+                    "from": "2017-10-20T10:00:00-07:00",
+                    "to": "2017-10-20T10:30:00-07:00"
                 },
+                {
+                    "from": "2017-10-20T10:30:00-07:00",
+                    "to": "2017-10-20T11:00:00-07:00"
+                },
+                // {
+                //     "from": "2017-10-20T11:00:00-07:00",
+                //     "to": "2017-10-20T11:30:00-07:00"
+                // },
+                {
+                    "from": "2017-10-20T11:30:00-07:00",
+                    "to": "2017-10-20T12:00:00-07:00"
+                },
+                // {
+                //     "from": "2017-10-20T12:00:00-07:00",
+                //     "to": "2017-10-20T12:30:00-07:00"
+                // },
                 {
                     "from": "2017-10-20T12:30:00-07:00",
                     "to": "2017-10-20T13:00:00-07:00"
@@ -45,14 +61,14 @@
                     "from": "2017-10-20T13:00:00-07:00",
                     "to": "2017-10-20T13:30:00-07:00"
                 },
-                {
-                    "from": "2017-10-20T13:30:00-07:00",
-                    "to": "2017-10-20T14:00:00-07:00"
-                },
-                {
-                    "from": "2017-10-20T14:00:00-07:00",
-                    "to": "2017-10-20T14:30:00-07:00"
-                },
+                // {
+                //     "from": "2017-10-20T13:30:00-07:00",
+                //     "to": "2017-10-20T14:00:00-07:00"
+                // },
+                // {
+                //     "from": "2017-10-20T14:00:00-07:00",
+                //     "to": "2017-10-20T14:30:00-07:00"
+                // },
                 {
                     "from": "2017-10-20T14:30:00-07:00",
                     "to": "2017-10-20T15:00:00-07:00"
@@ -219,8 +235,6 @@
                     difference = newFromTimeUnix - oldToTimeUnix,
                     slots;
 
-                // console.log('item',item,'slots',difference/);
-
                 // get difference in minutes
                 difference = difference / 1000 / 60;
                 slots = difference / _this.slotMinutes;
@@ -320,6 +334,12 @@
         
         if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
 
+            // click event fires BEFORE change event
+            this.$roomSlotInputs.click(function(event){
+                var input = this;
+                _this.onSlotClick(input, event);
+            });
+            
             this.$roomSlotInputs.change(function(){
                 var input = this;
                 _this.onSlotChange(input);
@@ -355,62 +375,160 @@
         
     };
 
-    RoomResForm.prototype.onSlotChange = function(changedInput){
+    RoomResForm.prototype.onSlotClick = function(clickedInput, event){
+        
+        var _this = this,
+            clickInputIndex = _this.$roomSlotInputs.index(clickedInput),
+            minIndex = clickInputIndex - _this.maxSlots,
+            maxIndex = clickInputIndex + _this.maxSlots;
 
+        // disables slots that are outside of max selectable area
+        function _isolateSelectableSlots() {
+
+            // occupied slots will affect what nearby slots can be selected
+            // Loop through any occupied slots, if they exist
+            $('.ccl-c-room__slot.ccl-is-occupied').each(function(i,slot){
+
+                // get occupied slot's input, find it's index amoung all slot inputs
+                var slotInput = $(slot).find('[type="checkbox"]'),
+                    occupiedIndex = _this.$roomSlotInputs.index(slotInput);
+
+                // if occupied slot falls in the selectable area
+                if ( minIndex < occupiedIndex && occupiedIndex < maxIndex ) {
+
+                    // if occupied slot is BEFORE clicked slot, set it as the min
+                    if ( occupiedIndex < clickInputIndex ) {
+                        minIndex = occupiedIndex;
+                    }
+                    // if occupied slot is AFTER clicked slot, set it as the max
+                    if ( occupiedIndex > clickInputIndex ) {
+                        maxIndex = occupiedIndex;
+                    }
+
+                }
+            });
+
+            // loop through slots, disable ones that fall outside of min/max indexes
+            _this.$roomSlotInputs.each(function(i,input){
+                if ( i <= minIndex || i >= maxIndex ) {
+                    $(input).parent('.ccl-c-room__slot').addClass('ccl-is-disabled');
+                }
+            });
+
+        }
+
+        /* -------------------------------------------------------------
+         * if no inputs yet selected, this is the first
+         * ------------------------------------------------------------- */
+        if ( _this.selectedSlotInputs.length === 0 ) {
+
+            _isolateSelectableSlots();
+            
+        }
+
+        /* -------------------------------------------------------------
+         * if 1 input selected, selecting 2nd slot
+         * ------------------------------------------------------------- */
+        else if ( _this.selectedSlotInputs.length === 1 ) {
+
+            if ( $(clickedInput).parent('.ccl-c-room__slot').hasClass('ccl-is-disabled') ) {
+                event.preventDefault();
+            } else {
+                $('.ccl-c-room__slot').removeClass('ccl-is-disabled');
+            }
+
+        }
+
+        /* -------------------------------------------------------------
+         * if 2 or more slots already selected
+         * ------------------------------------------------------------- */
+        else {
+
+            // if the clicked input is not part of current selection
+            // clear all selected inputs
+            if ( _this.selectedSlotInputs.indexOf( clickedInput ) < 0 ) {
+            
+                _this.clearAllSlots();
+                _this.selectedSlotInputs = [];
+
+            } 
+            
+            // if clicked input is one of the currently selected inputs
+            // keep that one selected and deselect the rest
+            else {
+
+                // prevent change event from firing
+                event.preventDefault();
+
+                // get the input index from among selected inputs
+                var selectedSlotIndex = _this.selectedSlotInputs.indexOf( clickedInput ),
+                    selectedInputs = $.extend( [], _this.selectedSlotInputs );
+                
+                // clear all inputs EXCEPT the clicked one
+                selectedInputs.forEach(function(input,i){
+                    if ( selectedSlotIndex != i ) {
+                        _this.clearSlot(input);
+                    }
+                });
+                
+                // // set selected inputs to just this one
+                // _this.selectedSlotInputs = [ _this.selectedSlotInputs[selectedSlotIndex] ];
+
+                // update the current duration text
+                _this.setCurrentDurationText();
+
+            }
+
+            _isolateSelectableSlots();
+
+        }
+        
+    };
+
+    RoomResForm.prototype.onSlotChange = function(changedInput){
+        
         // if input checked, add it to selected set
+
         if ( $(changedInput).prop('checked') ) {
+
             this.selectedSlotInputs.push(changedInput);
             $(changedInput).parent('.ccl-c-room__slot').addClass('ccl-is-checked');
+   
+        } 
+        
+        // if input unchecked, remove it from the selected set
+        
+        else { 
 
-        // if unchecked, remove it from the selected set
-        } else {
-            var inputIndex = this.selectedSlotInputs.indexOf(changedInput);
-            if ( inputIndex > -1 ) {
-                this.selectedSlotInputs.splice( inputIndex, 1 );
+            var changedInputIndex = this.selectedSlotInputs.indexOf(changedInput);
+
+            if ( changedInputIndex > -1 ) {
+                this.selectedSlotInputs.splice( changedInputIndex, 1 );
             }
             $(changedInput).parent('.ccl-c-room__slot').removeClass('ccl-is-checked');
+
         }
 
-        // limit number of selected slots
-        if ( this.selectedSlotInputs.length > this.maxSlots ) {
-            var shiftedInput = this.selectedSlotInputs.shift();
-            this.clearSlot(shiftedInput);
+        // highlight slots between two ends
+        if ( this.selectedSlotInputs.length === 2 ) {
+
+            var _this = this;
+
+            _this.$el.find('.ccl-is-checked').first().nextUntil('.ccl-is-checked').each(function(i,slot){
+                var slotInput = $(slot).find('input[type="checkbox"]');
+                _this.selectedSlotInputs.push(slotInput[0]);
+                _this.activateSlot(slot);
+            });
         }
-
-        // auto select slots in between the 2 outermost slots
-        // if ( this.selectedSlotInputs.length > 1 ) {
-        //     var selection = $.extend([],this.selectedSlotInputs),
-        //         sortedSelection = selection.sort(function(a,b){ 
-        //             return a.value > b.value; 
-        //         }),
-        //         firstEl = sortedSelection[0],
-        //         firstIndex = this.$roomSlotInputs.index(firstEl),
-        //         lastEl = sortedSelection[sortedSelection.length - 1],
-        //         lastIndex = this.$roomSlotInputs.index(lastEl),
-        //         changedInputIndex = this.$roomSlotInputs.index(changedInput),
-        //         upToIndex = Math.min( changedInputIndex, firstIndex + this.maxSlots );
-
-        //     console.log('firstIndex', firstIndex, 'changedInputIndex', changedInputIndex, 'firstIndex + this.maxSlots', firstIndex + this.maxSlots );
-        //     console.log('upToIndex',upToIndex);
-
-        //     // loop through and activate slots, but only up to maxSlots
-        //     for ( var i = firstIndex + 1; i < upToIndex; i++ ) {
-        //         this.activateSlot( this.$roomSlotInputs.eq(i) );
-        //     }
-
-        //     // deselect changed input if its beyond the maxSlots range
-        //     if ( changedInputIndex >= firstIndex + this.maxSlots ) {
-        //         this.clearSlot( this.$roomSlotInputs.eq(changedInputIndex) );
-        //     }
-            
-        // }
 
         this.setCurrentDurationText();
 
     };
 
     RoomResForm.prototype.clearSlot = function(slot) {
-        // slot can be either the checkbox -OR- the checkbox's container
+        // slot can be either the checkbox input -OR- the checkbox's container
+
+        var inputIndex;
 
         // if it's the checkbox.
         if ( $(slot).is('[type="checkbox"]') ) {
@@ -419,16 +537,41 @@
                 .prop('checked',false)
                 .parent('.ccl-c-room__slot')
                     .removeClass('ccl-is-checked');
+
+            // get index of the input from selected set
+            inputIndex = this.selectedSlotInputs.indexOf(slot);
             
         // if it's the container
         } else {
 
-            $(slot)
-                .removeClass('ccl-is-checked')
-                .find('[type="checkbox"]')
-                    .prop('checked',false);
+            var $input = $(slot).find('[type="checkbox"]');
+
+            $(slot).removeClass('ccl-is-checked');
+            $input.prop('checked',false);
+
+            // get index of the input from selected set
+            inputIndex = this.selectedSlotInputs.indexOf( $input[0] );
 
         }
+
+        // remove input from selected set
+        this.selectedSlotInputs.splice( inputIndex, 1 );
+
+    };
+
+    RoomResForm.prototype.clearAllSlots = function() {
+
+        var _this = this;
+        
+        // Extend the selected inputs array to a new variable.
+        // The selected inputs array changes with every clearSlot() call
+        // so, best to loop through an unchanging array.
+        var selectedInputs = $.extend( [], _this.selectedSlotInputs );
+
+        $(selectedInputs).each(function(i,input){
+            _this.clearSlot(input);
+        });
+
     };
 
     RoomResForm.prototype.activateSlot = function(slot) {
@@ -552,7 +695,7 @@
             "fname": this.$el[0].fname.value,
             "lname": this.$el[0].lname.value,
             "email": this.$el[0].email.value,
-            "nickname":"Test Room Reservation",
+            "nickname": this.$el[0].nickname.value,
             "bookings":[
                 { 
                     "id": this.roomId,
@@ -624,7 +767,28 @@
 
     };
 
+    // Private Functions
+    // ------------------------------------------------------- //
 
+    function _sortObjectArray( array, key, order ) {
+        if ( ! array || ! key ) {
+            return;
+        }
+        if ( ! order ) {
+            order = 'ASC';
+        }
+        if ( order === 'ASC' ) {
+            return array.sort( function(a,b){ 
+                return a[key] > b[key]; 
+            });
+        } else if ( order === 'DESC' ) {
+            return array.sort( function(a,b){ 
+                return a[key] < b[key]; 
+            });
+        } else {
+            return array;
+        }
+    }
 
     // ------------------------------------------------------- //
 

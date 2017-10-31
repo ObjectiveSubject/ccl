@@ -89,9 +89,6 @@
     clear: both;
     overflow: auto;
     padding-bottom: 2rem;
-    // @include media($lg) {
-    //     flex-wrap: nowrap;
-    // }
 }
 
 .ccl-c-room__slot {
@@ -122,9 +119,6 @@
     color: gray;
     position: relative;
 
-    // &:hover {
-    //     color: black;
-    // }
     [type="checkbox"]:checked + & {
         color: black;
         @include school-style(color);
@@ -133,6 +127,9 @@
         cursor: not-allowed;
         text-decoration: line-through;
         color: #ddd;
+    }
+    .ccl-is-disabled & {
+        cursor: not-allowed;
     }
     
     &:before {
@@ -187,25 +184,21 @@
         }
     }
 
-    // .ccl-is-active & {
-    //     &:before {
-    //         background-color: rgba(black, 0.5);
-    //         @include school-style(background-color, 0.5);
-    //     }
-    //     &:after {
-    //         @if ( lightness(black) > 50 ) {
-    //             color: black;
-    //         } @else {
-    //             color: white;
-    //         }
-    //     }
-    // }
+    .ccl-is-disabled & {
+        &:before {
+            background: #eee !important;
+        }
+        &:after {
+            display: none;
+        }
+    }
     
     .ccl-is-occupied & {
         &:before {
             background: #fafafa !important;
         }
         &:after {
+            display: block !important;
             transform: translate3d(-50%,-50%,0) rotate(0);
             color: gray !important;
             @if ( lightness(#eee) < 50 ) {
