@@ -320,7 +320,7 @@
                     .prop('checked',false)
                     .change();
             });
-            $('.ccl-c-room__slot').removeClass('ccl-is-disabled');
+            $('.ccl-c-room__slot').removeClass('ccl-is-disabled ccl-has-potential');
         });
 
         this.$el.submit(function(event){
@@ -340,27 +340,8 @@
 
     };
 
-    RoomResForm.prototype.initSlotEvents = function(){
-        var _this = this;
-        
-        if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
-
-            // click event fires BEFORE change event
-            this.$roomSlotInputs.click(function(event){
-                var input = this;
-                _this.onSlotClick(input, event);
-            });
-            
-            this.$roomSlotInputs.change(function(){
-                var input = this;
-                _this.onSlotChange(input);
-            });
-            
-        }
-    };
-
     RoomResForm.prototype.onDateChange = function() {
-
+        
         var _this = this;
         
         this.dateYmd = this.$dateSelect.val();
@@ -385,6 +366,80 @@
                 _this.$resetSelectionBtn.hide();
             });
         
+    };
+        
+    RoomResForm.prototype.initSlotEvents = function(){
+        var _this = this;
+        
+        if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
+
+            this.$el.find('.ccl-c-room__slot').hover(function(){
+                // console.log('test in', this);
+                _this.onSlotMouseIn(this);
+            }, function(){
+                // console.log('test out', this);
+                _this.onSlotMouseOut(this);
+            });
+
+            // click event fires BEFORE change event
+            this.$roomSlotInputs.click(function(event){
+                var input = this;
+                _this.onSlotClick(input, event);
+            });
+            
+            this.$roomSlotInputs.change(function(){
+                var input = this;
+                _this.onSlotChange(input);
+            });
+            
+        }
+    };
+
+    RoomResForm.prototype.onSlotMouseIn = function(hoveredSlot) {
+
+        // if you're not selecting your 2nd slot, return
+        if ( this.selectedSlotInputs.length !== 1 ) {
+            return;
+        }
+
+        var hoveredInput = $(hoveredSlot).find('[type="checkbox"]');
+
+        var hoveredInputIndex = this.$roomSlotInputs.index(hoveredInput),
+            selectedInputIndex = this.$roomSlotInputs.index( this.selectedSlotInputs[0] ),
+            inputIndexSet = [hoveredInputIndex, selectedInputIndex].sort();
+
+        // if you're hovering the already selected slot, return
+        if ( inputIndexSet[0] === inputIndexSet[1] ) {
+            return;
+        }
+
+        // if the first or last input indexes are beyond boundaries, return
+        if ( inputIndexSet[0] <= selectedInputIndex - this.maxSlots || inputIndexSet[1] >= selectedInputIndex + this.maxSlots ) {
+            return;
+        }
+
+        // get first/last slot elements
+        var $firstSlot = this.$roomSlotInputs.eq(inputIndexSet[0]).parent('.ccl-c-room__slot'),
+            $lastSlot = this.$roomSlotInputs.eq(inputIndexSet[1]).parent('.ccl-c-room__slot');
+
+        // select slots in between first and last
+        $firstSlot.nextUntil($lastSlot).each(function(){
+            var $this = $(this);
+            if ( ! $this.hasClass('ccl-is-disabled') ) {
+                $this.addClass('ccl-has-potential');
+            }
+        });
+
+    };
+
+    RoomResForm.prototype.onSlotMouseOut = function(hoveredInput) {
+
+        if ( this.selectedSlotInputs.length !== 1 ) {
+            return;
+        }
+
+        $('.ccl-c-room__slot').removeClass('ccl-has-potential');
+
     };
 
     RoomResForm.prototype.onSlotClick = function(clickedInput, event){
@@ -553,7 +608,7 @@
             $(slot)
                 .prop('checked',false)
                 .parent('.ccl-c-room__slot')
-                    .removeClass('ccl-is-checked');
+                    .removeClass('ccl-is-checked ccl-has-potential');
 
             // get index of the input from selected set
             inputIndex = this.selectedSlotInputs.indexOf(slot);
@@ -563,7 +618,7 @@
 
             var $input = $(slot).find('[type="checkbox"]');
 
-            $(slot).removeClass('ccl-is-checked');
+            $(slot).removeClass('ccl-is-checked ccl-has-potential');
             $input.prop('checked',false);
 
             // get index of the input from selected set

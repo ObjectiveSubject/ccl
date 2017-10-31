@@ -139,7 +139,6 @@
         min-height: rem(56);
         background: #eee;
         transition: all 200ms ease-out;
-        margin-bottom: 5px;
     }
 
     &:after {
@@ -154,17 +153,17 @@
         line-height: 1;
     }
 
-    [type="checkbox"]:not(:checked) + & {
-        &:hover:before {
-            background-color: rgba(black, 0.5);
-            @include school-style(background-color, 0.5);
-        }
-        &:hover:after {
-            @if ( lightness(black) > 50 ) {
-                color: black;
-            } @else {
-                color: white;
-            }
+    [type="checkbox"]:not(:checked) + &:hover:before,
+    .ccl-has-potential &:before {
+        background-color: rgba(black, 0.5);
+        @include school-style(background-color, 0.5);
+    }
+    [type="checkbox"]:not(:checked) + &:hover:after,
+    .ccl-has-potential &:after {
+        @if ( lightness(black) > 50 ) {
+            color: black;
+        } @else {
+            color: white;
         }
     }
 
