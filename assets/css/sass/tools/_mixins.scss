@@ -115,8 +115,12 @@
 
 		[data-school="#{$key}"] & {
 			#{$prop}: rgba( $hex, $alpha ) #{$important};
-			@if $prop == background-color and lightness($hex) > 49 {
-				color: black;
+			@if $prop == background-color {
+				@if lightness($hex) > 49 {
+					color: black;
+				} @else {
+					color: white;
+				}
 			}
 		}
 
