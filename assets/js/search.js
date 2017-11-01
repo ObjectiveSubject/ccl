@@ -16,10 +16,13 @@
      var SearchAutocomplete = function(elem){
 		
 		this.$el = $(elem);
+		this.$form = this.$el.find('form');
 		this.$input = $(elem).find('#ccl-search');
-		this.$responseArea = this.$el.find('.ccl-c-search-results__list'),
-		this.$responseItems = this.$el.find('.ccl-c-search-item'),
+		this.$responseArea = this.$el.find('.ccl-c-search-results__list');
+		this.$responseItems = this.$el.find('.ccl-c-search-item');
 		this.$resultsLink = this.$el.find('.ccl-c-search-results__footer');
+		this.$searchIndex = this.$el.find('.ccl-c-search-index');
+		this.$worldCatLink = null;
 
         this.init();
      };
@@ -28,26 +31,21 @@
 		var _this = this,
 			timeout;
 
-		_this.$input
+		this.$input
 			.keyup(function (event) {
 
+				// if key is forbidden, return
 				if ( forbiddenKeys.indexOf( event.keyCode ) > -1 ) {
 					return;
 				}
 
-				console.log('keyup');
-
+				// get value of search input
 				var query = _this.$input.val();
 
-				if ( query !== '' && (event.which === 13 || event.keyCode === 13) ) {
-					_this.wrapQuery();
-					return;
-				}
-
+				// set a timeout function to update results once 600ms passes
 				timeout = setTimeout(function () {
 
 					if ( query !== "" && query.length > 1 ) {
-						console.log('fetchResults');
 					 	_this.fetchResults( query );
 					}
 					else {
@@ -59,18 +57,21 @@
 			})
 			.keydown(function (event) {
 
+				// if key is forbidden, return
 				if ( forbiddenKeys.indexOf( event.keyCode ) > -1 ) {
 					return;
 				}
-
-				console.log('keydown');
-				 
+				// stop the timeout function
 				clearTimeout(timeout);
 
 			});
 
-		$('.ccl-c-search-bar').submit(function() {
-			_this.wrapQuery();
+		this.$searchIndex.change(function(){
+			_this.onSearchIndexChange();
+		});
+
+		this.$form.submit(function(event) {
+			event.preventDefault();
 		});
 	};
 
@@ -81,19 +82,22 @@
 				action: 'load_search_results', // this should probably be able to do people & assets too (maybe DBs)
 				query : query
 			};
-		
+
 		$.post(searchAjax.ajaxurl, data, function (response) {
 			var results = $.parseJSON(response),
 				count = results.count,
 				query = results.query,
 				posts = results.posts;
 
+			// wrap query
+			var queryString = _this.$searchIndex.val() + ':(' + query + ')';
+
 			// Clear response area list items (update when Pattern Library view isn't necessary)
 			_this.$responseArea.html('');
 			_this.$resultsLink.remove();
 
 			// Create list item for Worldcat search.
-			var listItem =  '<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + query + '" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank">' +
+			var listItem =  '<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + queryString + '" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank">' +
 								'<span class="ccl-c-search-item__type">' +
 									'<i class="ccl-b-icon-book" aria-hidden="true"></i>' +
 									'<span class="ccl-c-search-item__type-text">WorldCat</span>' +
@@ -112,7 +116,7 @@
 			if ( count > 0 ) {
 				// Build results list
 				posts.forEach(function (post) {
-					console.log(post);
+					// console.log(post);
 
 					var cta,
 						target;
@@ -160,18 +164,30 @@
 
 	};
 
+	SearchAutocomplete.prototype.onSearchIndexChange = function() {
+
+		var query = this.$input.val();
+
+		if ( ! query.length ) {
+			return;
+		}
+
+		this.fetchResults( query );
+	};
+
 	// If the user hits return or presses submit, the query will go directly to WorldCat. This function wraps
 	// the string in the specified index value (keyword, author, title, etc)
 	SearchAutocomplete.prototype.wrapQuery = function() {
-		event.preventDefault();
+		// event.preventDefault();
 
-		var searchIndex  = $('.ccl-c-search-index'),
-			query        = $('#ccl-search'),
-			wrappedQuery = searchIndex.val() + ':(' + query.val() + ')';
+		var wrappedQuery = this.$searchIndex.val() + ':(' + this.$input.val() + ')';
 		
-		query.val(wrappedQuery); // wrap the query in the two-letter code provided by the index dropdown
+		this.$input.val(wrappedQuery); // wrap the query in the two-letter code provided by the index dropdown
 
-		document.catalogSearch.submit(); // direct search to WorldCat on return
+		/* TODO:
+		 * FIX: Currently document.catalogSearch.submit() this is not a function ...
+		 * ---------------------------------------- */
+		// document.catalogSearch.submit(); // direct search to WorldCat on return
 	};
 
      $(document).ready(function(){
