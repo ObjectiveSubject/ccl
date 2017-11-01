@@ -160,14 +160,14 @@ textarea.ccl-b-input {
         color: lightgray;
     }
 
-    &:hover, &:focus {
-        color: $blue;
-        @include school-style(color);
-    }
-    &:focus {
-        border-color: $blue;
-        @include school-style(border-color);
-    }
+    // &:hover, &:focus {
+    //     color: $blue;
+    //     @include school-style(color);
+    // }
+    // &:focus {
+    //     border-color: $blue;
+    //     @include school-style(border-color);
+    // }
 }
 
 .ccl-b-input[type="text"] {
