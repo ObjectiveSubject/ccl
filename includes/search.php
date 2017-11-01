@@ -71,34 +71,42 @@ function load_search_results() {
 				case 'book':
 					$post_type_icon      = 'book';
 					$post_type_nice_name = 'Book';
+					$post_link = get_the_permalink();
 					break;
 				case 'database':
 					$post_type_icon      = 'pointer-right';
 					$post_type_nice_name = 'Database';
+					$post_link = get_post_meta( get_the_ID(), 'database_friendly_url', true );
 					break;
 				case 'faq':
 					$post_type_icon      = 'pointer-question';
 					$post_type_nice_name = 'FAQ';
+					$post_link = get_the_permalink();
 					break;
 				case 'guide':
 					$post_type_icon      = 'clip';
 					$post_type_nice_name = 'Research Guide';
+					$post_link = get_post_meta( get_the_ID(), 'guide_friendly_url', true );
 					break;
 				case 'journal':
 					$post_type_icon      = 'asterisk';
 					$post_type_nice_name = 'Journal';
+					$post_link = get_the_permalink();
 					break;
 				case 'page':
 					$post_type_icon      = 'clip';
 					$post_type_nice_name = 'Page';
+					$post_link = get_the_permalink();
 					break;
 				case 'staff':
 					$post_type_icon      = 'person';
 					$post_type_nice_name = 'Librarian';
+					$post_link = get_post_meta( get_the_ID(), 'member_friendly_url', true );
 					break;
 				default:
 					$post_type_icon      = 'clip'; // do we have a default icon?
 					$post_type_nice_name = 'Post';
+					$post_link = get_the_permalink();
 					break;
 			}
 
@@ -106,7 +114,7 @@ function load_search_results() {
 				'type'  => $post_type_nice_name,
 				'icon'  => $post_type_icon,
 				'title' => get_the_title(),
-				'link'  => get_the_permalink()
+				'link'  => $post_link
 			);
 
 			$search_results['posts'][] = $post;

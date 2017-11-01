@@ -246,6 +246,7 @@ function add_staff_member( $member ) {
 	add_post_meta( $member_post_id, 'member_last_name', $member['last_name'], true ); // custom field ->
 	add_post_meta( $member_post_id, 'member_email', $member['email'], true ); // custom field ->
 	add_post_meta( $member_post_id, 'member_image', $member['profile']['image']['url'], true ); // custom field ->
+	add_post_meta( $member_post_id, 'member_friendly_url', $member['profile']['url'], true ); // custom field ->
 
 	// Raw data for development
 	add_post_meta( $member_post_id, 'member_raw_data', $member, true);
@@ -294,6 +295,7 @@ function render_staff_data_metabox() {
 	echo '<strong>First Name:</strong> ' . get_post_meta( $post->ID, 'member_first_name', true ) . '<br>';
 	echo '<strong>Last Name:</strong> ' . get_post_meta( $post->ID, 'member_last_name', true ) . '<br>';
 	echo '<strong>Email:</strong> ' . get_post_meta( $post->ID, 'member_email', true ) . '<br>';
+	echo '<strong>Profile URL:</strong> ' . get_post_meta( $post->ID, 'member_friendly_url', true ) . '<br>';
 
 	echo '</p>';
 

@@ -122,8 +122,12 @@
 						target;
 
 					switch( post["type"] ) {
+						case 'Book':
+						case 'FAQ':
+						case 'Research Guide':
+						case 'Journal':
 						case 'Database':
-							cta = 'View on Worldcat';
+							cta = 'View';
 							target = '_blank';
 							break;
 						case 'Librarian':

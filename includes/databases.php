@@ -232,6 +232,9 @@ function add_database( $database ) {
 	// Raw data for development
 	add_post_meta( $post_id, 'database_raw_data', $database, true);
 
+	// Database friendly URL
+	add_post_meta( $post_id, 'database_friendly_url', $database['url'], true);
+
 	// @todo use this for subject?
 	// Set category in XX taxonomy and create if it doesn't exist
 	// $category = $database['category'];
@@ -275,6 +278,12 @@ function render_database_data_metabox() {
 
 	echo '<strong>Database ID:</strong> ' . get_post_meta( $post->ID, 'database_id', true ) . '<br>';
 
+	echo '</p>';
+
+	echo '<p>';
+	
+		echo '<strong>Database URL:</strong> ' . get_post_meta( $post->ID, 'database_friendly_url', true ) . '<br>';
+	
 	echo '</p>';
 
 	if ( $content ) {
