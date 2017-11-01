@@ -142,7 +142,7 @@
         this.$formResponse = this.$el.find('.js-room-res-form-response').css({position: 'absolute', top: '1rem', left: '1rem', opacity: 0});
         this.$formCancel = this.$el.find('.js-room-res-form-cancel');
         this.$formSubmit = this.$el.find('.js-room-res-form-submit');
-        this.roomId= this.$el.data('resource-id');
+        this.roomId = this.$el.data('resource-id');
         this.$dateSelect = this.$el.find('.js-room-date-select');
         this.dateYmd = this.$dateSelect.val();
         this.$roomSchedule = this.$el.find('.js-room-schedule');
@@ -151,15 +151,10 @@
         this.$resetSelectionBtn = this.$el.find('.js-reset-selection'); 
         this.$roomSlotInputs = null;
         this.selectedSlotInputs = [];
-        this.lastSelectedSlot = false;
         this.maxSlots = 4;
         this.$maxTime = this.$el.find('.js-max-time');
         this.slotMinutes = 30;
         this.timeZone = '-700';
-        this.openTime = new Date( now.getFullYear(), now.getMonth(), now.getDate(), 8 ); // 8am today
-        this.closeTime = new Date( now.getFullYear(), now.getMonth(), now.getDate(), 17 ); // 5pm today;
-
-        var _this = this;
 
         this.init();
 
@@ -174,15 +169,9 @@
 
         this.setMaxTimeText();
 
-        this.getSpaceAvailability(todayYmd)
+        this.getSpaceAvailability()
             .done(function(data){
-                console.log(data);
-                // TODO: Remove
-                // use dummy text
-                data = dummyAvailabilityData;
-                
                 _this.makeSchedule(data);
-
             })
             .fail(function(err){
                 console.log(err);
@@ -198,14 +187,11 @@
 
     RoomResForm.prototype.getSpaceAvailability = function(Ymd){
 
-        /* TODO:
-         * Get correct room id
-         * ------------------------------------------ */
 		var data = {
 			action: 'get_room_info',
 			ccl_nonce: CCL.nonce,
-			availability: Ymd, // e.g. '2017-10-19'
-			room: 9148 // room_id (space)
+			availability: Ymd || '', // e.g. '2017-10-19'. empty string will get availability for current day
+			room: this.roomId // room_id (space)
 		};
 
         return $.post({
@@ -218,7 +204,8 @@
     RoomResForm.prototype.makeSchedule = function(dayData){
 
         // get object for first room in array. we're only calling data for one room at a time.
-        dayData = dayData[0];
+        // check data type as well. If it's a string, parse to JSON.
+        dayData = ( typeof dayData === 'string' ) ? JSON.parse( dayData )[0] : dayData[0];
 
         var _this = this,
             html = [],
@@ -355,14 +342,8 @@
         this.$el.removeClass('ccl-is-loading');
 
         this.getSpaceAvailability(this.dateYmd)
-            .done(function(data){
-                
-                // TODO: Remove
-                // use dummy text
-                data = dummyAvailabilityData;
-                
+            .done(function(data){                
                 _this.makeSchedule(data);
-
             })
             .fail(function(err){
                 console.log(err);
@@ -380,10 +361,8 @@
         if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
 
             this.$el.find('.ccl-c-room__slot').hover(function(){
-                // console.log('test in', this);
                 _this.onSlotMouseIn(this);
             }, function(){
-                // console.log('test out', this);
                 _this.onSlotMouseOut(this);
             });
 
@@ -795,7 +774,7 @@
                 ]
             };
 
-        console.log( 'on Submit » ', payload );
+        // console.log( 'on Submit » ', payload );
 
         this.$el.addClass('ccl-is-loading');
         this.$formCancel.prop('disabled',true);
