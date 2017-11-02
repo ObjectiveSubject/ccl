@@ -39,7 +39,7 @@
 		var body = $('body');
 
 		// Toggle Raw Data display on Staff posts
-		if ( body.hasClass('post-type-database') || body.hasClass('post-type-guide') || body.hasClass('post-type-staff' ) || body.hasClass('post-type-room') ) {
+		if ( body.hasClass('post-type-database') || body.hasClass('post-type-faq') || body.hasClass('post-type-guide') || body.hasClass('post-type-staff' ) || body.hasClass('post-type-room') ) {
 			rawData.init();
 		}
 	});

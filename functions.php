@@ -22,6 +22,7 @@ require_once CCL_INC . 'core.php';
 require_once CCL_INC . 'admin.php';
 require_once CCL_INC . 'comments.php';
 require_once CCL_INC . 'databases.php';
+require_once CCL_INC . 'faqs.php';
 require_once CCL_INC . 'guides.php';
 require_once CCL_INC . 'helpers.php';
 require_once CCL_INC . 'metaboxes.php';
@@ -35,6 +36,7 @@ require_once CCL_INC . 'taxonomies.php';
 require_once CCL_INC . 'template-tags.php';
 
 // Include integrations
+require_once CCL_INC . 'integrations/libanswers.php';
 require_once CCL_INC . 'integrations/libcal.php';
 require_once CCL_INC . 'integrations/libguides.php';
 require_once CCL_INC . 'integrations/settings.php';
@@ -52,6 +54,7 @@ CCL\Core\setup();
 CCL\Admin\setup();
 CCL\Comments\setup();
 CCL\Databases\setup();
+CCL\Faqs\setup();
 CCL\Guides\setup();
 CCL\Integrations\Settings\setup();
 CCL\Rooms\setup();
