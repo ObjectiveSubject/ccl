@@ -157,7 +157,7 @@ textarea.ccl-b-input {
     padding: 0.75rem 0.5rem;
     outline: 0;
     @include placeholder {
-        color: lightgray;
+        color: $gray;
     }
 
     // &:hover, &:focus {
@@ -180,7 +180,7 @@ textarea.ccl-b-input {
         padding: 1rem;
         
         @include placeholder {
-            color: gray;
+            color: $gray;
         }
         &:focus {
             @include placeholder {

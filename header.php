@@ -63,7 +63,7 @@
 							<li>
 								<hr class="ccl-u-my-nudge"/>
 								<span class="ccl-h5">
-									<span style="color: red">
+									<span class="ccl-u-color-red">
 										<i class="ccl-b-icon-alert" aria-hidden="true"></i> Notice:
 									</span>
 									Relevent notice message

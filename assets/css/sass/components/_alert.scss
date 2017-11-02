@@ -1,16 +1,18 @@
-$color-alert: #fafafa;
-$color-alert-warning: lighten( orange, 5% );
-$color-alert-error: red;
+$color-alert: #fff;
+$color-alert-warning: #b46100;
+$color-alert-error: $red;
+$color-alert-muted: $gray;
 
 .ccl-c-alert {
     position: relative;
     padding: 1.3rem $gutter;
     margin-bottom: 1px;
     background-color: $color-alert;
-    color: $blue;
+    color: black;
     overflow: hidden;
     font-size: rem(18);
     line-height: 1;
+    border: 1px solid;
     border-left: $spacer solid;
 
     &.ccl-is-warning {
@@ -20,7 +22,7 @@ $color-alert-error: red;
         color: $color-alert-error;
     }
     &.ccl-is-muted {
-        color: rgba(black, 0.4);
+        color: $color-alert-muted;
     }
 
     & > * {

@@ -116,7 +116,7 @@
     display: block;
     height: 100%;
     cursor: pointer;
-    color: gray;
+    color: $gray;
     position: relative;
 
     [type="checkbox"]:checked + & {
@@ -199,7 +199,7 @@
         &:after {
             display: block !important;
             transform: translate3d(-50%,-50%,0) rotate(0);
-            color: gray !important;
+            color: $gray !important;
             @if ( lightness(#eee) < 50 ) {
                 color: white !important;
             }
@@ -253,7 +253,7 @@
 
     &.ccl-is-occupied {
         @extend .ccl-c-room__key;
-        color: gray;
+        color: $gray;
         span {
             text-decoration: line-through;
         }

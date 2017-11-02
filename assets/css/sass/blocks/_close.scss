@@ -4,14 +4,12 @@
     font-weight: 700; //$close-font-weight;
     line-height: 1;
     color: black; //$close-color;
-    opacity: .5;
     outline: 0;
 
     &:hover,
     &:focus {
         color: black; //$close-color;
         text-decoration: none;
-        opacity: .75;
     }
 
     .ccl-c-alert & {
