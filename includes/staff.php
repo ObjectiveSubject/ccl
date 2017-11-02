@@ -258,10 +258,12 @@ function add_staff_member( $member ) {
 
 	// Add Subjects to custom taxonomy
 	if ( array_key_exists( 'subjects', $member ) ) {
+		$subjects_array = array();
 		foreach ( $member['subjects'] as $subject ) {
-			// Add subject name to subject taxonomy
-			wp_set_object_terms( $member_post_id, $subject['name'], 'subject' );
+			$subjects_array[] = $subject['name'];
 		}
+		// Add subject name to subject taxonomy
+		wp_set_object_terms( $member_post_id, $subjects_array, 'subject' );
 	}
 
 	if ( $duplicate_check->have_posts() ) {
