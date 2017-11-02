@@ -47,6 +47,8 @@ get_header(); ?>
 
 				</div>
 
+				<?php get_template_part( 'partials/blocks' ); ?>
+
 			</article>
 
 			<?php $related_posts = \CCL\Helpers\get_ccl_related_posts(); ?>
