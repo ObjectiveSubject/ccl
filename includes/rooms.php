@@ -376,8 +376,15 @@ function get_bookings() {
 function get_space_item() {
 	check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 
-	$room_id                = $_POST['room'];
-	$params['availability'] = $_POST['availability'];
+	$room_id   = $_POST['room'];
+	$first_day = $_POST['availability'];
+
+	$date = new \DateTime( $first_day );
+	$date->modify( '+1 day' );
+
+	$second_day = $date->format('Y-m-d' );
+
+	$params['availability'] = $first_day . ',' . $second_day;
 
 	// get info for a room
 	$info = \CCL\Integrations\LibCal\get_space_item( $room_id, $params );

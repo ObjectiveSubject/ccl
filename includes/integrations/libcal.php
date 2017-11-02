@@ -131,7 +131,7 @@ function get_space_category( $id = 2314 ) {
 
 	$token = get_token();
 
-	$request = wp_remote_get( '	https://api2.libcal.com/1.1/space/category/' . $id . '?details=1', array(
+	$request = wp_remote_get( 'https://api2.libcal.com/1.1/space/category/' . (int) $id . '?details=1', array(
 		'headers' => array(
 			'Authorization' => 'Bearer '. $token
 		),
@@ -168,7 +168,7 @@ function get_space_item( $id, $params = array() ) {
 	// turn array/object into query string
 	$params = http_build_query( $params );
 
-	$request = wp_remote_get( 'https://api2.libcal.com/1.1/space/item/' . $id . '?' . $params, array(
+	$request = wp_remote_get( 'https://api2.libcal.com/1.1/space/item/' . (int) $id . '?' . $params, array(
 		'headers' => array(
 			'Authorization' => 'Bearer '. $token
 		),
@@ -210,7 +210,7 @@ function get_bookings( $room_id, $date ) {
 	$token = get_token();
 
 	// eid (space id), lid (location id), date (YYYY-MM-DD)
-	$parameters = '?limit=100&cid=2314&eid=' . $room_id . '&date=' . $date ; // max 100 returned, default spaces category
+	$parameters = '?limit=100&cid=2314&eid=' . (int) $room_id . '&date=' . $date; // max 100 returned, default spaces category
 
 	$request = wp_remote_get( '	https://api2.libcal.com/1.1/space/bookings' . $parameters , array(
 		'headers' => array(
@@ -294,7 +294,7 @@ function get_space_booking( $id ) {
  */
 function reserve_space( $payload ) {
 
-	// verify/error check payload before request
+	// @todo verify/error check payload before request
 	// (check for valid JSON and all fields, maybe a claremont email address too)
 	$payload = json_encode( $payload ); 	// JSON encode for submission
 
