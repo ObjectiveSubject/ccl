@@ -2,11 +2,15 @@
     border-top: 1px solid rgba(black,0.6);
     padding-top: $spacer;
     margin-top: $spacer;
-    @include media($md) {
-        display: flex;
-    }
+    margin-bottom: $spacer * 3;
     @include media($lg) {
         margin-top: $spacer * 2;
+    }
+
+    .ccl-c-promo & {
+        border-top: 0;
+        padding-top: 0;
+        margin-top: 0;
     }
 }
 
@@ -14,6 +18,7 @@
     flex: 45%;
     display: flex;
     flex-direction: column;
+    margin-bottom: $spacer;
 }
 
 .ccl-c-profile-card__title {
@@ -21,32 +26,23 @@
     @include media($md) {
         margin-top: 0;
     }
+
+    .ccl-c-promo & {
+        @extend .ccl-h3;
+        @include media($md) {
+            margin-top: 0;
+        }
+    }
 }
 
 .ccl-c-profile-card__list {
     @extend .ccl-u-clean-list;
     margin-top: $spacer;
     font-weight: bold;
-
-    &:last-child {
-        margin-top: auto;
-    }
 }
 
 .ccl-c-profile-card__avatar {
+    @extend .ccl-b-media--1x1;
+    background-size: cover;
     border-radius: 50%;
-    overflow: hidden;
-    width: auto;
-    height: auto;
-    max-height: rem(400);
-    max-width: rem(400);
-    flex-grow: 0;
-
-    @include media($md) {
-        margin-left: $gutter;
-    }
-
-    img {
-        @extend .ccl-u-display-block;
-    }
 }

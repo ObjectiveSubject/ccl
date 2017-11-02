@@ -131,7 +131,7 @@ get_header(); ?>
 
 						<?php elseif ( 'banner' == $block['block_type'] ) : ?>
 
-							<div class="ccl-c-banner">
+							<div id="block-<?php echo $index; ?>" class="ccl-c-banner">
 
 								<?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
 
@@ -184,6 +184,97 @@ get_header(); ?>
 								</div>
 
 							</div>
+
+						<?php elseif ( 'staff' == $block['block_type'] ) : ?>
+
+							<?php $staff_id = $block['block_staff_member']; ?>
+							
+							<?php if ( $staff_id ) : ?>
+
+								<?php 
+								$subjects = get_the_terms( $staff_id, 'subject' );
+								$member_image = get_post_meta( $staff_id, 'member_image', true );
+								$name = get_the_title( $staff_id );
+								$first_name = explode( ' ', $name )[0];
+								$profile_url = get_post_meta( $staff_id, 'member_friendly_url', true ); ?>
+
+								<div class="ccl-l-container">
+
+									<div id="block-<?php echo $index; ?>" class="ccl-c-promo">
+									
+										<header class="ccl-c-promo__header">
+
+											<?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+
+												<div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
+
+											<?php endif; ?>
+
+											<?php if ( isset( $block['block_cta'] ) && $block['block_cta'] ) : ?>
+
+												<div class="ccl-c-promo__cta">
+													<?php echo apply_filters( 'the_content', $block['block_cta'] ); ?>
+												</div>
+
+											<?php endif; ?>
+											
+										</header>
+
+										<div class="ccl-c-promo__content">
+
+											<div class="ccl-c-profile-card">
+
+												<div class="ccl-l-row">
+
+													<div class="ccl-l-column ccl-l-span-half-md">
+
+														<div class="ccl-c-profile-card__header">
+															<div class="ccl-c-profile-card__title"><?php echo $name; ?></div>
+															
+															<?php if ( ! empty( $subjects ) ) : ?>  
+															
+																<div class="ccl-c-profile-card__list">
+
+																	<?php
+																	$subject_list = array(); 
+																	foreach( $subjects as $subject ) {
+																		$subject_list[] = $subject->name;
+																	}
+																	echo '<span class="ccl-u-faded">' . implode( ', ', $subject_list ) . '</span>'; ?>
+
+																</div>
+															
+															<?php endif; ?>
+															
+															<ul class="ccl-c-profile-card__list">
+																<?php if ( $profile_url ) : ?>
+																	<li><a href="<?php echo esc_url( $profile_url ); ?>" target="_blank">Contact <?php echo $first_name; ?></a></li>
+																<?php endif; ?>
+																<li><a href="#">Make an appointment with <?php echo $first_name; ?></a></li>
+															</ul>
+														</div>
+
+													</div>
+
+													<div class="ccl-l-column ccl-l-span-half-md">
+
+														<?php if ( $member_image ) : ?>
+															<div class="ccl-c-profile-card__avatar" role="presentation" style="background-image:url(<?php echo $member_image; ?>)"></div>
+														<?php endif; ?>
+
+													</div>
+
+												</div>
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							<?php endif; ?>
 						
 						<?php else : ?>
 
@@ -259,7 +350,7 @@ get_header(); ?>
 
 									<p class="ccl-h4 ccl-u-mt-0"><a href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></p>
 									<p class="ccl-h5 ccl-u-faded ccl-u-mb-1"><?php echo get_the_excerpt(); ?></p>
-									<p><a href="<?php echo get_the_permalink(); ?>" class="ccl-b-btn ccl-is-brand-inverse ccl-is-small">Learn more</a></p>
+									<p><a href="<?php echo get_the_permalink(); ?>" class="ccl-b-btn ccl-is-brand-inverse ccl-is-small" aria-label="<?php echo 'Learn more about ' . get_the_title(); ?>">Learn more</a></p>
 								</article>
 
 							<?php endwhile; ?>

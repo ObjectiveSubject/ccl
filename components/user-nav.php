@@ -36,7 +36,7 @@
             <div class="ccl-c-modal__content">
 
                 <div class="ccl-c-modal__header">
-                    <h5 class="ccl-c-modal__title" id="label-librarian-chat">Chat with a Librarian</h5>
+                    <div class="ccl-c-modal__title ccl-h5" id="label-librarian-chat">Chat with a Librarian</div>
                     <button type="button" class="ccl-b-close" data-toggle="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

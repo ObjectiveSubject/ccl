@@ -9,10 +9,6 @@
         padding-top: $spacer * 2;
         margin-top: $spacer * 2;
     }
-
-    a {
-        @extend .ccl-u-display-block;
-    }
 }
 .ccl-c-promo--slim {
     @extend .ccl-c-promo;
@@ -45,6 +41,10 @@
     .ccl-c-promo--slim.ccl-is-image_left & {
         order: 1;
         margin-bottom: $spacer * 3;
+    }
+
+    a {
+        display: block;
     }
 }
 
