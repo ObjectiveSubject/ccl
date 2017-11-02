@@ -99,14 +99,14 @@
 			// Create list item for Worldcat search.
 			var listItem =  '<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + queryString + '" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank">' +
 								'<span class="ccl-c-search-item__type">' +
-									'<i class="ccl-b-icon-book" aria-hidden="true"></i>' +
+									'<i class="ccl-b-icon book" aria-hidden="true"></i>' +
 									'<span class="ccl-c-search-item__type-text">WorldCat</span>' +
 								'</span>' +
 								'<span class="ccl-c-search-item__title\">' +
 									'Search for &ldquo;' + query + '&rdquo; on WorldCat' +
 								'</span>' +
 								'<span class="ccl-c-search-item__cta">' +
-									'<span class="ccl-u-color-school">Search <i class="ccl-b-icon-arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
+									'<span class="ccl-u-color-school">Search <i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
 								'</span>' +
 							'</a>';
 
@@ -141,12 +141,12 @@
 
 					listItem =  '<a href="' + post["link"] + '" class="ccl-c-search-item" role="listitem" target="' + target + '">' +
 									'<span class=\"ccl-c-search-item__type\">' +
-										'<i class="ccl-b-icon-' + post["icon"] + '" aria-hidden="true"></i>' +
+										'<i class="ccl-b-icon ' + post["icon"] + '" aria-hidden="true"></i>' +
 										'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
 									'</span>' +
 									'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
 									'<span class="ccl-c-search-item__cta">' +
-										'<span>' + cta + ' <i class="ccl-b-icon-arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
+										'<span>' + cta + ' <i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
 									'</span>' +
 								'</a>';
 
@@ -158,7 +158,7 @@
 			listItem = '<div class="ccl-c-search-results__footer">' +
 							'<a href="/?s=' + query + '" class="ccl-c-search-results__action">' +
 								'View all ' + count + ' Results ' +
-								'<i class="ccl-b-icon-arrow-right" aria-hidden="true"></i>' +
+								'<i class="ccl-b-icon arrow-right" aria-hidden="true"></i>' +
 							'</a>' +
 			           '</div>';
 
