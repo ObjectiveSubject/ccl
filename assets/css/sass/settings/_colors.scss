@@ -42,8 +42,8 @@ $color-map: (
 $color-text-main: black;
 
 // links
-$color-link: $blue;
-$color-link-active: darken( $color-link, 20% );
+$color-link: inherit;
+$color-link-active: $color-link;
 
 // code
 $color-code: black;

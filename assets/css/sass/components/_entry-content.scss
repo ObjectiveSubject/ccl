@@ -1,8 +1,9 @@
 .ccl-c-entry-content {
     a {
+        border-bottom: 1px solid;
         color: $color-link;
         &:hover, &:focus, &:active {
-            color: $color-link-active;
+            @include school-style(color);
         }
     }
 }
