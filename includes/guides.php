@@ -241,10 +241,12 @@ function add_guide( $guide ) {
 
 	// Add Subjects to custom taxonomy
 	if ( array_key_exists( 'subjects', $guide ) ) {
+		$subjects_array = array();
 		foreach ( $guide['subjects'] as $subject ) {
-			// Add subject name to subject taxonomy
-			wp_set_object_terms( $post_id, $subject['name'], 'subject' );
+			$subjects_array[] = $subject['name'];
 		}
+		// Add subject name to subject taxonomy
+		wp_set_object_terms( $post_id, $subject['name'], 'subject' );
 	}
 
 	if ( $duplicate_check->have_posts() ) {
