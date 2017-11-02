@@ -13,6 +13,7 @@ function setup() {
 
 	add_shortcode( 'accordion', $n( 'accordion_fn' ) );
 	add_shortcode( 'calendar_widget', $n( 'calendar_fn' ) );
+	add_shortcode( 'icon', $n( 'icon_fn' ) );
 	add_shortcode( 'modal', $n( 'modal_fn' ) );
 	add_shortcode( 'modal_toggle', $n( 'modal_toggle_fn' ) );
 	add_shortcode( 'scheduler', $n( 'scheduler_fn' ) );
@@ -210,6 +211,28 @@ function modal_toggle_fn( $attributes = false ) {
 	<?php
 	$html = ob_get_contents();
 	ob_get_clean();
+
+	return $html;
+}
+
+/**
+ * Create an icon to display with a link
+ *
+ * @param $attributes array List of attributes from the given shortcode
+ *
+ * @return mixed HTML output for the shortcode
+ */
+function icon_fn( $attributes = false, $content = null ) {
+
+	$data = shortcode_atts( array(
+		'type' => '',
+	), $attributes );
+
+	if ( ! $data['type'] ) {
+		return null;
+	}
+
+	$html = '<span class="ccl-c-icon type-' . esc_attr( $data['type'] ) . '">' . $content . '</span>';
 
 	return $html;
 }
