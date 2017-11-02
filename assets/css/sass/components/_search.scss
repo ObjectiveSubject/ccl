@@ -89,7 +89,7 @@
     width: rem(150);
     opacity: 0.5;
 
-    [class*="ccl-b-icon-"] {
+    .ccl-b-icon {
         vertical-align: -0.1em;
         margin-right: $search-bar-padding / 2;
     }

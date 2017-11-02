@@ -281,15 +281,15 @@ get_header(); ?>
 
                                                 <ul class="ccl-c-room__legend">
                                                     <li class="ccl-c-room__key ccl-is-available">
-                                                        <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
+                                                        <i class="ccl-b-icon close" aria-hidden="true"></i>
                                                         <span><?php _e( 'Available', 'ccl' ); ?></span>
                                                     </li>
                                                     <li class="ccl-c-room__key ccl-is-occupied">
-                                                        <i class="ccl-b-icon ccl-b-icon-close" aria-hidden="true"></i>
+                                                        <i class="ccl-b-icon close" aria-hidden="true"></i>
                                                         <span><?php _e( 'Occupied', 'ccl' ); ?></span>
                                                     </li>
                                                     <li class="ccl-c-room__key ccl-is-selected">
-                                                        <i class="ccl-b-icon ccl-b-icon-clock" aria-hidden="true"></i>
+                                                        <i class="ccl-b-icon clock" aria-hidden="true"></i>
                                                         <span><?php _e( 'Selected', 'ccl' ); ?></span>
                                                     </li>
                                                 </ul>

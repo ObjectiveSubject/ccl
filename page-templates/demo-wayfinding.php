@@ -42,7 +42,7 @@ get_header(); ?>
 									<form id="call-number-search" class="ccl-c-search-bar">
 										<input id="call-num-input" name="call-number" type="text" class="ccl-b-input" placeholder="Enter a call number to begin"/>
 										<button id="call-num-submit" type="submit" class="ccl-c-search-bar__submit ccl-b-btn ccl-is-solid" disabled>
-											<i class="ccl-b-icon-search" aria-hidden="true"></i>&nbsp;<span>Find</span>
+											<i class="ccl-b-icon search" aria-hidden="true"></i>&nbsp;<span>Find</span>
 										</button>
 									</form>
 								</div>

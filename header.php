@@ -54,17 +54,17 @@
 						<ul class="ccl-u-clean-list ccl-u-mt-1">
 							<li>
 								<hr class="ccl-u-my-nudge"/>
-								<span class="ccl-h5"><i class="ccl-b-icon-clock" aria-hidden="true"></i> Today’s hours 7:30am - 9pm</span>
+								<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today’s hours 7:30am - 9pm</span>
 							</li>
 							<li>
 								<hr class="ccl-u-my-nudge"/>
-								<span class="ccl-h5"><i class="ccl-b-icon-calendar" aria-hidden="true"></i> Relevent Calendar Item</span>
+								<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i> Relevent Calendar Item</span>
 							</li>
 							<li>
 								<hr class="ccl-u-my-nudge"/>
 								<span class="ccl-h5">
 									<span class="ccl-u-color-red">
-										<i class="ccl-b-icon-alert" aria-hidden="true"></i> Notice:
+										<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
 									</span>
 									Relevent notice message
 								</span>
