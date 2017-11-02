@@ -331,7 +331,7 @@ function render_room_data_metabox() {
  */
 function request_booking() {
 
-	check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+	// check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 
 	// should payload be checked here or reserve_space()?
 	$payload = $_POST['payload'];
@@ -355,7 +355,7 @@ function request_booking() {
  * AJAX function to retrieve bookings for a given day
  */
 function get_bookings() {
-	check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+	// check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 
 	$date = $_POST['availability'];
 	$room_id = $_POST['room'];
@@ -374,7 +374,7 @@ function get_bookings() {
  * AJAX function to retrieve info about a space
  */
 function get_space_item() {
-	check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+	// check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 
 	$room_id   = $_POST['room'];
 	$first_day = $_POST['availability'];
