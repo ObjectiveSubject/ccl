@@ -1,0 +1,16 @@
+.ccl-b-more-toggle {
+    font-size: inherit;
+    box-shadow: none !important;
+    background-color: transparent !important;
+
+    &:focus {
+        // display: none;
+        & ~ .ccl-b-more-toggled {
+            display: block;
+        }
+    }
+}
+
+.ccl-b-more-toggled {
+    display: none;
+}

@@ -187,16 +187,26 @@ if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]
                                         <div class="ccl-c-profile-card__header">
                                             <div class="ccl-c-profile-card__title"><?php echo $name; ?></div>
                                             
-                                            <?php if ( ! empty( $subjects ) ) : ?>  
+                                            <?php if ( ! empty( $subjects ) ) : 
+                                                
+                                                $subjects_count = count( $subjects );
+                                                $max = 6;
+                                                $remaining = $subjects_count - $max; ?>  
                                             
-                                                <div class="ccl-c-profile-card__list">
+                                                <div class="ccl-c-profile-card__list" role="list">
 
-                                                    <?php
-                                                    $subject_list = array(); 
-                                                    foreach( $subjects as $subject ) {
-                                                        $subject_list[] = $subject->name;
-                                                    }
-                                                    echo '<span class="ccl-u-faded">' . implode( ', ', $subject_list ) . '</span>'; ?>
+                                                    <?php foreach( $subjects as $index => $subject ) {
+                                                        
+                                                        if ( $index === $max ) {
+                                                            echo '<button class="ccl-b-btn ccl-is-naked ccl-b-more-toggle" role="listitem">+' . $remaining . ' more</button>';
+                                                        }
+                                                        if ( $index < $max ) {
+                                                            echo '<div class="ccl-u-faded" role="listitem">' . $subject->name . '</div>';
+                                                        } else {
+                                                            echo '<div class="ccl-u-faded ccl-b-more-toggled" role="listitem">' . $subject->name . '</div>';
+                                                        }
+                                                        
+                                                    } ?>
 
                                                 </div>
                                             
@@ -214,9 +224,11 @@ if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]
 
                                     <div class="ccl-l-column ccl-l-span-half-md">
 
-                                        <?php if ( $member_image ) : ?>
-                                            <div class="ccl-c-profile-card__avatar" role="presentation" style="background-image:url(<?php echo $member_image; ?>)"></div>
-                                        <?php endif; ?>
+                                        <?php if ( ! $member_image ) {
+                                            $member_image = CCL_TEMPLATE_URL . "/assets/images/person.svg";
+                                        } ?>
+
+                                        <div class="ccl-c-profile-card__avatar" role="presentation" style="background-image:url(<?php echo $member_image; ?>)"></div>
 
                                     </div>
 
