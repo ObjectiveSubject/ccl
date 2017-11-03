@@ -4,9 +4,15 @@
 
 // Media queries
 // ------------------------------------- //
-@mixin media($size, $minmax: min) {
-	@media screen and (#{$minmax}-width: $size) {
-		@content;
+@mixin media($size, $minmax: min, $size2: '', $minmax2: max) {
+	@if ( $size2 != '' ) {
+		@media screen and ( #{$minmax}-width: $size ) and ( #{$minmax2}-width: $size2 ) {
+			@content;
+		}
+	} @else {
+		@media screen and (#{$minmax}-width: $size) {
+			@content;
+		}
 	}
 }
 

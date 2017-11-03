@@ -15,6 +15,9 @@
             padding-left: $gutter;
             padding-right: $gutter;
         }
+        @include media($md, min, $lg - 1, max) {
+            margin-bottom: 6rem;
+        }
     }
 }
 
