@@ -4,10 +4,7 @@
 }
 
 .ccl-b-label {
-    @extend .ccl-u-transition;
-    display: block;
-    font-weight: bold;
-
+    
     .ccl-b-input[type="radio"] + &,
     .ccl-b-input[type="checkbox"] + & {
         $radio-size: 24px;
@@ -136,58 +133,4 @@
         }
     }
     
-}
-
-.ccl-b-input[type="text"],
-.ccl-b-input[type="email"],
-.ccl-b-input[type="tel"],
-.ccl-b-input[type="url"],
-.ccl-b-input[type="search"],
-.ccl-b-input[type="number"],
-.ccl-b-input[type="password"],
-textarea.ccl-b-input {
-    @extend .ccl-u-transition;
-    display: block;
-    width: 100%;
-    line-height: 1;
-    color: inherit;
-    border: 1px solid lightgray;
-    border-radius: 0;
-    box-sizing: border-box;
-    padding: 0.75rem 0.5rem;
-    outline: 0;
-    @include placeholder {
-        color: $gray;
-    }
-
-    // &:hover, &:focus {
-    //     color: $blue;
-    //     @include school-style(color);
-    // }
-    // &:focus {
-    //     border-color: $blue;
-    //     @include school-style(border-color);
-    // }
-}
-
-.ccl-b-input[type="text"] {
-    
-    .ccl-c-search-bar & {
-        @extend .ccl-h3;
-        @extend .ccl-u-mt-0;
-        color: black;
-        border: 0;
-        padding: 1rem;
-        
-        @include placeholder {
-            color: $gray;
-        }
-        &:focus {
-            @include placeholder {
-                color: black;
-            }
-        }
-        
-    }
-        
 }
