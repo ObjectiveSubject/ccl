@@ -9,17 +9,25 @@ get_header(); ?>
 
         <header class="ccl-c-hero">
             
-            <div class="ccl-c-hero__container">
+            <div class="ccl-l-container">
 
-                <div class="ccl-c-hero__header">
-                    <h1 class="ccl-c-hero__title"><?php the_archive_title(); ?></h1>
-                </div>
+				<div class="ccl-l-row">
 
-                <div class="ccl-c-hero__content">
-                    <div class="ccl-h4 ccl-u-mt-0"><?php echo the_archive_description(); ?></div>
-                </div>
+					<div class="ccl-l-column ccl-l-span-third-lg">
+						<div class="ccl-c-hero__header">
+							<h1 class="ccl-c-hero__title"><?php the_archive_title(); ?></h1>
+						</div>
+					</div>
 
-            </div>
+					<div class="ccl-l-column ccl-l-span-two-thirds-lg">
+						<div class="ccl-c-hero__content">
+							<div class="ccl-h4 ccl-u-mt-0"><?php echo the_archive_description(); ?></div>
+						</div>
+					</div>
+					
+				</div>
+
+			</div>
 
         </header>
 

@@ -2,14 +2,18 @@
 // Search bar
 
 .ccl-c-search {
+    position: relative;
     background: white;
     color: black;
     box-shadow: 0 1px 5px 0px rgba(black, 0.2);
 
-    .ccl-c-masthead-search & {
+    .ccl-c-hero & {
         @include media( #{$md - 1}, max) {
-            border-top: 1px solid black;
             box-shadow: none;
+            margin-left: -$gutter;
+            margin-right: -$gutter;
+            padding-left: $gutter;
+            padding-right: $gutter;
         }
     }
 }
@@ -18,6 +22,12 @@
     display: flex;
     flex-wrap: wrap;
     position: relative;
+
+    .ccl-c-hero & {
+        @include media( #{$md - 1}, max) {
+            border-top: 1px solid black;
+        }
+    }
 
     &:after {
         content: "Searching...";
@@ -82,6 +92,12 @@
 .ccl-c-search-results {
     @include media($md) {
         padding: 0 $search-bar-padding;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        width: 100%;
+        box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.2);
     }
 }
 

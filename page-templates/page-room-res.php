@@ -23,24 +23,34 @@ get_header(); ?>
 			<article <?php post_class(); ?>>
 
 				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
-					<div class="ccl-c-hero__container">
-						<div class="ccl-c-hero__header">
-							<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
-						</div>
+                    
+                    <div class="ccl-l-container">
 
-						<div class="ccl-c-hero__content">
-                            <ul class="ccl-c-hero__menu">
+                        <div class="ccl-l-row">
 
-                                <?php foreach ( $room_types as $type ) : ?>
+                            <div class="ccl-l-column ccl-l-span-third-lg">
+                                <div class="ccl-c-hero__header">
+                                    <h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
+                                </div>
+                            </div>
 
-                                    <li><a href="#<?php echo $type->slug; ?>"><?php echo $type->name; ?></a></li>
+                            <div class="ccl-l-column ccl-l-span-two-thirds-lg">
+                                <div class="ccl-c-hero__content">
+                                    <ul class="ccl-c-hero__menu">
 
-                                <?php endforeach; ?>
+                                        <?php foreach ( $room_types as $type ) : ?>
 
-                            </ul>
-						</div>
+                                            <li><a href="#<?php echo $type->slug; ?>"><?php echo $type->name; ?></a></li>
 
-					</div>
+                                        <?php endforeach; ?>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
 
 				</div>
 
@@ -84,7 +94,7 @@ get_header(); ?>
                      */ ?>
 
                     <div class="ccl-c-hero ccl-is-short" style="margin-top:1px">
-                        <div class="ccl-c-hero__container">
+                        <div class="ccl-l-container">
                             <div class="ccl-c-hero__header">
                                 <h1 class="ccl-c-hero__title"><?php echo $type->name; ?></h1>
                             </div>

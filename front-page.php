@@ -11,7 +11,7 @@ get_header(); ?>
 
 			if ( 'page' == get_option( 'show_on_front' ) ) {
 
-				$thumb_url   = get_the_post_thumbnail_url( $post, 'full' );
+				$thumb_url   = get_the_post_thumbnail_url( $post, 'large' );
 				$title       = get_the_title(); // write conditional for front-page being set
 				$description = get_the_excerpt();
 				$content	 = get_the_content();
@@ -24,18 +24,19 @@ get_header(); ?>
 				$content     = 'No front page has been set to pull content from (see <code>Settings &gt; Reading</code>).';
 
 			}
-			$hero_class = $thumb_url ? 'ccl-c-hero ccl-has-image' : 'ccl-c-hero';
+			$hero_class = $thumb_url ? 'ccl-c-hero ccl-has-search ccl-has-image' : 'ccl-c-hero ccl-has-search';
 			?>
 
 			<article <?php post_class(); ?>>
 
-				<div class="ccl-c-masthead-search">
+				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
+
 					<div class="ccl-l-container">
 						<?php \CCL\Helpers\get_component( 'search-box' ); ?>
 					</div>
-				</div>
 
-				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
+					<div class="ccl-c-hero__thumb ccl-b-media--16x9" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)" role="presentaion"></div>
+
 					<div class="ccl-l-container">
 
 						<div class="ccl-l-row">
