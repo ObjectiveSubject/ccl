@@ -36,8 +36,12 @@ $border-color-select: rgba(black, 0.6);
     }
 
     .ccl-c-user-nav__menu & {
-        @extend .ccl-h5;
-        margin: 0;
+        font-family: $gotham-narrow-medium;
+        font-size: rem(14);
+        line-height: 1.3em;
+        font-weight: 500;
+        padding-top: 0.2em;
+        padding-bottom: 0.1em;
         background-image: url(../images/caret-down-white@2x.png);
         color: white;
         border-color: white;

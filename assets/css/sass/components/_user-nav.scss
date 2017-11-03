@@ -35,9 +35,11 @@
 }
 
 .ccl-c-user-nav__menu-item {
-    @extend .ccl-h5;
-    @extend .ccl-u-mt-0;
-    padding: 0.5em 0;
+    font-family: $gotham-narrow-medium;
+	font-size: rem(14);
+	line-height: 1.3em;
+	font-weight: 500;
+    padding: 0.25em 0;
     @include media($md) {
         margin-right: 1em;
     }
