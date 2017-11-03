@@ -10,8 +10,14 @@
 ( function( window, $ ) {
  	'use strict';
 	var document = window.document,
-		TAB = 9, SHIFT = 16, CTRL = 17, ALT = 18, CAPS = 20, ESC = 27, LCMD = 91, RCMD = 92, LARR = 37, UARR = 38, RARR = 39, DARR = 40,
-		forbiddenKeys = [TAB, SHIFT, CTRL, ALT, CAPS, ESC, LCMD, RCMD, LARR, UARR, RARR, DARR];
+		ENTER = 13, TAB = 9, SHIFT = 16, CTRL = 17, ALT = 18, CAPS = 20, ESC = 27, LCMD = 91, RCMD = 92, LARR = 37, UARR = 38, RARR = 39, DARR = 40,
+		forbiddenKeys = [ENTER, TAB, SHIFT, CTRL, ALT, CAPS, ESC, LCMD, RCMD, LARR, UARR, RARR, DARR],
+		indexNames = {
+			ti: 'Title',
+			kw: 'Keyword',
+			au: 'Author',
+			su: 'Subject'
+		};
 		
      var SearchAutocomplete = function(elem){
 		
@@ -34,6 +40,9 @@
 		this.$input
 			.keyup(function (event) {
 
+				// clear any previous set timeout
+				clearTimeout(timeout);
+
 				// if key is forbidden, return
 				if ( forbiddenKeys.indexOf( event.keyCode ) > -1 ) {
 					return;
@@ -45,24 +54,14 @@
 				// set a timeout function to update results once 600ms passes
 				timeout = setTimeout(function () {
 
-					if ( query !== "" && query.length > 1 ) {
+					if ( query.length > 1 ) {
 					 	_this.fetchResults( query );
 					}
 					else {
 						_this.$responseArea.html('');
 					}
 
-				}, 600);
-
-			})
-			.keydown(function (event) {
-
-				// if key is forbidden, return
-				if ( forbiddenKeys.indexOf( event.keyCode ) > -1 ) {
-					return;
-				}
-				// stop the timeout function
-				clearTimeout(timeout);
+				}, 1000);
 
 			});
 
@@ -71,11 +70,24 @@
 		});
 
 		this.$form.submit(function(event) {
+
+			console.log('submit');
+
 			event.preventDefault();
+
+			var query = _this.$input.val();
+
+			clearTimeout(timeout);
+
+			if ( query.length > 1 ) {
+				_this.fetchResults( query );
+		   }
 		});
 	};
 
 	SearchAutocomplete.prototype.fetchResults = function( query ) {
+
+		console.log('fetchResults');
 
 		var _this = this,
 			data = {
@@ -83,89 +95,119 @@
 				query : query
 			};
 
-		$.post(searchAjax.ajaxurl, data, function (response) {
-			var results = $.parseJSON(response),
-				count = results.count,
-				query = results.query,
-				posts = results.posts;
+		_this.$el.addClass('ccl-is-loading');
 
-			// wrap query
-			var queryString = _this.$searchIndex.val() + ':(' + query + ')';
+		$.post(searchAjax.ajaxurl, data)
+			.done(function (response) {
 
-			// Clear response area list items (update when Pattern Library view isn't necessary)
-			_this.$responseArea.html('');
-			_this.$resultsLink.remove();
+				_this.fetchResultsDONE(response);
 
-			// Create list item for Worldcat search.
-			var listItem =  '<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + queryString + '" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank">' +
-								'<span class="ccl-c-search-item__type">' +
-									'<i class="ccl-b-icon book" aria-hidden="true"></i>' +
-									'<span class="ccl-c-search-item__type-text">WorldCat</span>' +
-								'</span>' +
+			})
+			.always(function(){
+
+				_this.$el.removeClass('ccl-is-loading');
+
+			});
+
+	};
+
+	SearchAutocomplete.prototype.fetchResultsDONE = function( response ) {
+		
+		var _this = this,
+			results = $.parseJSON(response),
+			count = results.count,
+			query = results.query,
+			posts = results.posts,
+			searchIndex = _this.$searchIndex.val(),
+			searchIndexNicename = indexNames[searchIndex];
+
+		// wrap query
+		var queryString = searchIndex + ':(' + query + ')';
+
+		// Clear response area list items (update when Pattern Library view isn't necessary)
+		_this.$responseArea.html('');
+		_this.$resultsLink.remove();
+
+		// Create list item for Worldcat search.
+		var listItem =  '<a href="https://ccl.on.worldcat.org/external-search?sortKey=library&queryString=' + queryString + '" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank">' +
+							'<span class="ccl-c-search-item__type">' +
+								'<i class="ccl-b-icon book" aria-hidden="true"></i>' +
+								'<span class="ccl-c-search-item__type-text">WorldCat</span>' +
+							'</span>' +
+							'<span class="ccl-c-search-item__title\">' +
+								'Search by ' + searchIndexNicename + ' for &ldquo;' + query + '&rdquo; on WorldCat ' +
+								'<i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i>' +
+							'</span>' +
+							'<span class="ccl-c-search-item__cta">' +
+								'<i class="ccl-b-icon search" aria-hidden="true" style="vertical-align:middle"></i>' +
+							'</span>' +
+						'</a>';
+
+		_this.$responseArea.append(listItem);
+
+		// Create list items for each post in results
+		if ( count > 0 ) {
+
+			// Create a separator between worldcat and other results
+			var separator = '<span class="ccl-c-search-item ccl-is-separator" role="presentation">' +
 								'<span class="ccl-c-search-item__title\">' +
-									'Search for &ldquo;' + query + '&rdquo; on WorldCat' +
+									'<i class="ccl-b-icon arrow-down" aria-hidden="true"></i>' +
+									' Other suggested resources for &ldquo;' + query + '&rdquo;' +
 								'</span>' +
+							'</span>';
+
+			_this.$responseArea.append(separator);
+
+
+			// Build results list
+			posts.forEach(function (post) {
+				// console.log(post);
+
+				var cta,
+					target;
+
+				switch( post["type"] ) {
+					case 'Book':
+					case 'FAQ':
+					case 'Research Guide':
+					case 'Journal':
+					case 'Database':
+						cta = 'View';
+						target = '_blank';
+						break;
+					case 'Librarian':
+						cta = 'Contact';
+						target = '_blank';
+						break;
+					default:
+						cta = 'View';
+						target = '_self';
+				}
+
+				listItem =  '<a href="' + post["link"] + '" class="ccl-c-search-item" role="listitem" target="' + target + '">' +
+								'<span class=\"ccl-c-search-item__type\">' +
+									'<i class="ccl-b-icon ' + post["icon"] + '" aria-hidden="true"></i>' +
+									'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
+								'</span>' +
+								'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
 								'<span class="ccl-c-search-item__cta">' +
-									'<span class="ccl-u-color-school">Search <i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
+									'<span>' + cta + ' <i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
 								'</span>' +
 							'</a>';
 
-			_this.$responseArea.append(listItem);
-
-			// Create list items for each post in results
-			if ( count > 0 ) {
-				// Build results list
-				posts.forEach(function (post) {
-					// console.log(post);
-
-					var cta,
-						target;
-
-					switch( post["type"] ) {
-						case 'Book':
-						case 'FAQ':
-						case 'Research Guide':
-						case 'Journal':
-						case 'Database':
-							cta = 'View';
-							target = '_blank';
-							break;
-						case 'Librarian':
-							cta = 'Contact';
-							target = '_blank';
-							break;
-						default:
-							cta = 'View';
-							target = '_self';
-					}
-
-					listItem =  '<a href="' + post["link"] + '" class="ccl-c-search-item" role="listitem" target="' + target + '">' +
-									'<span class=\"ccl-c-search-item__type\">' +
-										'<i class="ccl-b-icon ' + post["icon"] + '" aria-hidden="true"></i>' +
-										'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
-									'</span>' +
-									'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
-									'<span class="ccl-c-search-item__cta">' +
-										'<span>' + cta + ' <i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
-									'</span>' +
-								'</a>';
-
-					_this.$responseArea.append(listItem);
-				});
-			}
+				_this.$responseArea.append(listItem);
+			});
 
 			// Build results count/link
 			listItem = '<div class="ccl-c-search-results__footer">' +
-							'<a href="/?s=' + query + '" class="ccl-c-search-results__action">' +
-								'View all ' + count + ' Results ' +
-								'<i class="ccl-b-icon arrow-right" aria-hidden="true"></i>' +
-							'</a>' +
-			           '</div>';
+								'<a href="/?s=' + query + '" class="ccl-c-search-results__action">' +
+									'View all ' + count + ' Results ' +
+									'<i class="ccl-b-icon arrow-right" aria-hidden="true"></i>' +
+								'</a>' +
+						'</div>';
 
-			_this.$responseArea.append(listItem);
-
-		});
-
+		_this.$responseArea.append(listItem);
+		}
 	};
 
 	SearchAutocomplete.prototype.onSearchIndexChange = function() {

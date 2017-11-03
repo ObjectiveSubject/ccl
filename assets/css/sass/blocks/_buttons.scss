@@ -29,7 +29,7 @@
         box-shadow: $focus-box-shadow-lg;
     }
 
-    .ccl-c-search-bar &.ccl-c-dropdown__toggle {
+    .ccl-c-search-form &.ccl-c-dropdown__toggle {
         border-color: transparent;
         &:focus {
             border: 1px solid black;

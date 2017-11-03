@@ -39,9 +39,9 @@ get_header(); ?>
 
 							<div class="ccl-l-row">
 								<div class="ccl-l-column">
-									<form id="call-number-search" class="ccl-c-search-bar">
+									<form id="call-number-search" class="ccl-c-search-form">
 										<input id="call-num-input" name="call-number" type="text" class="ccl-b-input" placeholder="Enter a call number to begin"/>
-										<button id="call-num-submit" type="submit" class="ccl-c-search-bar__submit ccl-b-btn ccl-is-solid" disabled>
+										<button id="call-num-submit" type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid" disabled>
 											<i class="ccl-b-icon search" aria-hidden="true"></i>&nbsp;<span>Find</span>
 										</button>
 									</form>
