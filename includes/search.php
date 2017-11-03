@@ -48,7 +48,7 @@ function load_search_results() {
 	$query = esc_attr( $query );
 
 	$args   = array(
-		'post_type'           => array( 'post', 'guide', 'staff', 'database', 'room', 'faq', 'book', 'reference', 'page' ), // book/reference don't exist yet
+		'post_type'           => array( 'guide', 'database', 'staff', 'page', 'faq', 'post' ),
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
@@ -57,6 +57,7 @@ function load_search_results() {
 	$search = new \WP_Query( $args );
 
 	$search_results = array();
+	$posts = array();
 
 	// Add query details to array
 	$search_results['query'] = $query;
@@ -71,42 +72,42 @@ function load_search_results() {
 				case 'book':
 					$post_type_icon      = 'book';
 					$post_type_nice_name = 'Book';
-					$post_link = get_the_permalink();
+					$post_link           = get_the_permalink();
 					break;
 				case 'database':
 					$post_type_icon      = 'pointer-right';
 					$post_type_nice_name = 'Database';
-					$post_link = get_post_meta( get_the_ID(), 'database_friendly_url', true );
+					$post_link           = get_post_meta( get_the_ID(), 'database_friendly_url', true );
 					break;
 				case 'faq':
-					$post_type_icon      = 'pointer-question';
+					$post_type_icon      = 'question';
 					$post_type_nice_name = 'FAQ';
-					$post_link = get_the_permalink();
+					$post_link           = get_the_permalink();
 					break;
 				case 'guide':
 					$post_type_icon      = 'clip';
 					$post_type_nice_name = 'Research Guide';
-					$post_link = get_post_meta( get_the_ID(), 'guide_friendly_url', true );
+					$post_link           = get_post_meta( get_the_ID(), 'guide_friendly_url', true );
 					break;
 				case 'journal':
 					$post_type_icon      = 'asterisk';
 					$post_type_nice_name = 'Journal';
-					$post_link = get_the_permalink();
+					$post_link           = get_the_permalink();
 					break;
 				case 'page':
 					$post_type_icon      = 'clip';
 					$post_type_nice_name = 'Page';
-					$post_link = get_the_permalink();
+					$post_link           = get_the_permalink();
 					break;
 				case 'staff':
 					$post_type_icon      = 'person';
 					$post_type_nice_name = 'Librarian';
-					$post_link = get_post_meta( get_the_ID(), 'member_friendly_url', true );
+					$post_link           = get_post_meta( get_the_ID(), 'member_friendly_url', true );
 					break;
 				default:
 					$post_type_icon      = 'clip'; // do we have a default icon?
 					$post_type_nice_name = 'Post';
-					$post_link = get_the_permalink();
+					$post_link           = get_the_permalink();
 					break;
 			}
 
@@ -117,10 +118,29 @@ function load_search_results() {
 				'link'  => $post_link
 			);
 
-			$search_results['posts'][] = $post;
+			$posts[] = $post;
 
 		}
-		
+
+		// Sort order for the first set of results returned to live search
+		$sort_order = array(
+			'Research Guide',
+			'Database',
+			'Librarian',
+			'Page',
+			'FAQ',
+			'Post'
+		);
+
+		// sort $posts by ['type'] for given order
+		usort( $posts, function ( $a, $b ) use ( $sort_order ) {
+			$pos_a = array_search( $a['type'], $sort_order );
+			$pos_b = array_search( $b['type'], $sort_order );
+
+			return $pos_a - $pos_b;
+		} );
+
+		$search_results['posts'] = $posts;
 	}
 
 	// Encode array as JSON and return
