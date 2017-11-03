@@ -1,4 +1,4 @@
-$border-color-input: rgba(black, 0.2);
+$border-color-input: rgba(black, 0.6);
 
 .ccl-b-input[type="text"],
 .ccl-b-input[type="email"],
@@ -23,7 +23,7 @@ textarea.ccl-b-input {
     }
 
     &:hover, &:focus {
-        box-shadow: 0 0 0 2px $border-color-input;
+        outline: 1px dotted $border-color-input;
     }
 }
 
@@ -32,16 +32,24 @@ textarea.ccl-b-input {
     .ccl-c-search-bar & {
         @extend .ccl-h3;
         @extend .ccl-u-mt-0;
-        color: black;
+        // color: black;
         border: 0;
-        padding: 1rem;
+        padding: 1rem 0;
+        flex-basis: 100%;
+
+        @include media($md){
+            flex-basis: auto;
+            width: auto;
+            flex-grow: 1;
+            padding: 1rem;
+        }
         
         @include placeholder {
-            color: $gray;
+            color: black;
         }
         &:focus {
             @include placeholder {
-                color: black;
+                color: $gray;
             }
         }
         

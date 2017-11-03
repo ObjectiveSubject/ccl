@@ -5,7 +5,7 @@
         <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search"/>
 
         <div class="ccl-c-search-bar__option">
-            <strong class="ccl-u-faded">As:</strong>
+            <strong>As:</strong>
             <select class="ccl-b-select ccl-c-search-index" name="index" title="Index">
                 <option value="ti">Title</option>
                 <option value="kw" selected="selected">Keyword</option>
@@ -15,9 +15,9 @@
         </div>
         
         <div class="ccl-c-search-bar__option">
-            <strong class="ccl-u-faded">In:</strong>
+            <strong>In:</strong>
             <select class="ccl-b-select" name="database" title="Database">
-                <option value="all" selected="selected">All</option>
+                <option value="all" selected="selected">All Databases</option>
                 <option value="Z-wcorg">WorldCat</option>
                 <option value="Z-oais">OAlster</option>
                 <option value="Bcnf">PapersFirst</option>

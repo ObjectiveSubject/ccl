@@ -1,4 +1,4 @@
-$border-color-select: rgba(black, 0.2);
+$border-color-select: rgba(black, 0.6);
 
 .ccl-b-select {
     -webkit-appearance: none;
@@ -14,14 +14,13 @@ $border-color-select: rgba(black, 0.2);
     box-sizing: border-box;
     cursor: pointer;
     color: inherit;
-    transition: box-shadow $duration $easing;
 
     &:hover, &:focus {
         // color: $blue;
         // border-color: black;
         // @include school-style(color);
         // @include school-style(border-color);
-        box-shadow: 0 0 0 2px $border-color-select;
+        outline: 1px dotted $border-color-select;
     }
 
     &.ccl-is-naked {
@@ -44,7 +43,7 @@ $border-color-select: rgba(black, 0.2);
         border-color: white;
 
         &:hover, &:focus {
-            box-shadow: 0 0 0 2px white;
+            outline: 1px dotted white;
         }
         
         @each $key, $hex in $school-map {
@@ -55,7 +54,7 @@ $border-color-select: rgba(black, 0.2);
                     background-image: url(../images/caret-down-black@2x.png);
                     
                     &:hover, &:focus {
-                        box-shadow: 0 0 0 2px black;
+                        outline: 1px dotted black;
                     }
                 }
             }
@@ -63,7 +62,7 @@ $border-color-select: rgba(black, 0.2);
 
     }
 
-    .ccl-c-search-bar & {
+    .ccl-c-search-bar__option & {
         font-size: inherit;
         font-family: inherit;
         font-weight: inherit;
@@ -73,5 +72,6 @@ $border-color-select: rgba(black, 0.2);
         padding-right: 40px;
         background-position: right 15px center;
         border: 0;
+        flex-basis: 100%;
     }
 }

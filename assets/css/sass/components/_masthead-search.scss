@@ -1,0 +1,7 @@
+.ccl-c-masthead-search {
+
+    @include media($md) {
+        padding-top: 3 * $spacer;
+        @include school-style(background-color);
+    }
+}

@@ -4,9 +4,9 @@
         
         <ul class="ccl-c-user-nav__menu">
 
-            <li class="ccl-c-user-nav__menu-item">
+            <!-- <li class="ccl-c-user-nav__menu-item">
                 Library Open 7am - 9pm Today
-            </li>
+            </li> -->
 
             <li class="ccl-c-user-nav__menu-item ccl-is-right" style="margin-left: auto">
                 <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">Chat with a librarian</a>

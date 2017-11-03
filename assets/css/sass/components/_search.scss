@@ -3,32 +3,54 @@
 
 .ccl-c-search {
     background: white;
+    color: black;
     box-shadow: 0 1px 5px 0px rgba(black, 0.2);
+
+    .ccl-c-masthead-search & {
+        @include media( #{$md - 1}, max) {
+            border-top: 1px solid black;
+            box-shadow: none;
+        }
+    }
 }
 
 .ccl-c-search-bar {
     
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 
-    @include media($md) {
-        flex-direction: row;
-    }
-
-    & > *:not(:first-child) {
-        padding-left: $search-bar-padding;
+    @include media($lg) {
+        & > *:not(:first-child) {
+            padding-left: $search-bar-padding;
+        }
     } 
 }
 
 .ccl-c-search-bar__option {
     @extend .ccl-h4;
-    @extend .ccl-u-mt-0; 
+    @extend .ccl-u-mt-0;
+    display: flex;
+    align-items: center;
     flex-shrink: 0;
+    flex-basis: 100%;
     padding: $search-bar-padding 0;
-    border-top: 1px solid lightgray;
+    border-top: 1px solid $gray;
+
+    @include media( #{$md - 1}, max ) {
+        font-size: rem(14);
+    }
+    
+    @include media($sm){
+        flex-basis: 50%;
+        border-right: 1px solid $gray;
+        &:last-child {
+            border-right: 0;
+            padding-left: $search-bar-padding;
+        }
+    }
     @include media($md){
-        border-top: 0;
-        border-left: 1px solid lightgray;
+        flex-basis: auto;
+        border: 0;
     }
 }
 
@@ -41,7 +63,9 @@
 // Search Results
 
 .ccl-c-search-results {
-    padding: 0 $search-bar-padding;
+    @include media($md) {
+        padding: 0 $search-bar-padding;
+    }
 }
 
 .ccl-c-search-results__footer {
@@ -68,8 +92,13 @@
     padding: $search-bar-padding 0;
     min-height: rem(65);
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     line-height: 1;
+
+    & > *:not(:last-child) {
+        padding-right: $search-bar-padding;
+    }
 
     &.ccl-is-large {
         @extend .ccl-h3;
@@ -79,15 +108,30 @@
 
 }
 
+.ccl-c-search-item__title {
+    flex-basis: 100%;
+    margin-bottom: 0.5em;
+    @include media($lg) {
+        flex-basis: auto;
+        margin-bottom: 0;
+    }
+}
+
 .ccl-c-search-item__type {
-    @extend .ccl-h4;
-    @extend .ccl-u-mt-0;
     @extend .ccl-u-transition;
     display: flex;
     flex-shrink: 0;
+    order: 1;
     align-items: center;
-    width: rem(150);
+    flex-basis: rem(170);
     opacity: 0.5;
+
+    @include media( #{$md - 1}, max ) {
+        font-size: rem(14);
+    }
+    @include media($lg) {
+        order: 0;
+    }
 
     .ccl-b-icon {
         vertical-align: -0.1em;
@@ -102,8 +146,16 @@
 
 .ccl-c-search-item__cta {
     flex-shrink: 0;
+    order: 2;
     margin-left: auto;
     opacity: 0.5;
+
+    @include media( #{$md - 1}, max ) {
+        font-size: rem(14);
+    }
+    @include media($lg) {
+        order: 0;
+    }
     
     .ccl-is-large & {
         opacity: 1;

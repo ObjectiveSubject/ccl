@@ -30,11 +30,8 @@
 .ccl-c-user-nav__menu {
     @extend .ccl-u-clean-list;
     padding: 0.25em 0;
-    
-    @include media($md) {
-        display: flex;
-        align-items: center;
-    }
+    display: flex;
+    align-items: center;
 }
 
 .ccl-c-user-nav__menu-item {
@@ -46,10 +43,8 @@
     }
 
     &.ccl-is-right {
-        @include media($md) {
-            margin-left: 1em;
-            margin-right: 0;
-        }
+        margin-left: 1em;
+        margin-right: 0;
     }
 
     & > a {

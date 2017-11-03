@@ -102,7 +102,7 @@ textarea {
 		@include school-style(color);
  	}
  	&:focus {
- 		outline: 0;
+ 		outline: 1px dotted;
  	}
  }
 

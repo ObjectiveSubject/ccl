@@ -29,17 +29,29 @@ get_header(); ?>
 
 			<article <?php post_class(); ?>>
 
+				<div class="ccl-c-masthead-search">
+					<div class="ccl-l-container">
+						<?php \CCL\Helpers\get_component( 'search-box' ); ?>
+					</div>
+				</div>
+
 				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
-					<div class="ccl-c-hero__container">
+					<div class="ccl-l-container">
 
-						<div class="ccl-c-hero__header">
-							<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
-						</div>
+						<div class="ccl-l-row">
 
-						<div class="ccl-c-hero__content">
+							<div class="ccl-l-column ccl-l-span-third-lg">
+								<div class="ccl-c-hero__header">
+									<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
+								</div>
+							</div>
 
-							<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
-
+							<div class="ccl-l-column ccl-l-span-two-thirds-lg">
+								<div class="ccl-c-hero__content">
+									<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
+								</div>
+							</div>
+							
 						</div>
 
 					</div>
@@ -52,14 +64,6 @@ get_header(); ?>
 
 						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-8-md ccl-u-mt-2">
 							<?php echo apply_filters( 'the_content', $content ); ?>
-						</div>
-
-					</div>
-
-					<div class="ccl-l-row">
-
-						<div class="ccl-l-column ccl-u-my-2">
-							<?php \CCL\Helpers\get_component( 'search-box' ); ?>
 						</div>
 
 					</div>

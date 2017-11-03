@@ -25,7 +25,7 @@
 					</a>
 				</div>
 
-				<hr/>
+				<hr style="background:black"/>
 
 				<div class="ccl-l-row">
 					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
@@ -50,7 +50,7 @@
 							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary header menu</a></div>';
 						} ?>
 					</div>
-					<div class="ccl-l-column ccl-l-span-third-lg">
+					<div class="ccl-l-column ccl-l-span-third-lg ccl-u-display-block-lg">
 						<ul class="ccl-u-clean-list ccl-u-mt-1">
 							<li>
 								<hr class="ccl-u-my-nudge"/>

@@ -61,6 +61,7 @@
 	@extend .ccl-u-clearfix;
 	margin-left: auto;
 	margin-right: auto;
+	width: 100%;
 	max-width: $max-width;
 	padding: 0 $gutter;
 }

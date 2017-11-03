@@ -2,9 +2,9 @@
     position: relative;
     background-size: cover;
     background-color: black;
+    color: white;
     background-position: top center;
     background-repeat: no-repeat;
-    color: white;
     padding: 6rem 0 3rem;
     @include school-style(background-color);
 
@@ -48,40 +48,12 @@
     }
 }
 
-.ccl-c-hero__container {
-    @include ccl-l-container;
-    position: relative;
-    z-index: 1;
+.ccl-c-hero__content {
+
     @include media($lg) {
-        padding: 0 $gutter/2;
         display: flex;
-        width: 100%;
+        height: 100%;
         align-items: flex-end;
-    }
-}
-
-.ccl-c-hero__header,
-.ccl-c-hero__content {
-    @include media($lg) {
-        flex-shrink: 1;
-        flex-grow: 1;
-        margin: 0 $gutter/2;
-    }
-}
-
-.ccl-c-hero__header {
-    @include media($lg) {
-        flex-basis: calc( 50% - #{ $gutter } );
-    }
-}
-
-.ccl-c-hero__content {
-    
-    @include media($md) {
-        display: flex;
-    }
-    @include media($lg) {
-        flex-basis: calc( 66.666% - #{ $gutter } );
     }
 
     & > * {
