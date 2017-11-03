@@ -4,11 +4,69 @@
 }
 
 .menu-item {
-    @extend .ccl-u-mt-nudge;
-    .ccl-is-primary & {
-        @extend .ccl-h3;
+    position: relative;
+    font-weight: 500;
+    font-family: $gotham-narrow-medium;
+    line-height: 1;
+
+    .ccl-is-primary > & {
+        margin-top: $spacer/2;
+        & > a {
+            font-size: rem(20);
+            @include media($lg) {
+                font-size: rem(24);
+            }
+        }
     }
-    .ccl-is-secondary & {
-        @extend .ccl-h4;
+    .ccl-is-secondary > & {
+        margin-top: $spacer/2;
+        & > a {
+            font-size: rem(18);
+            @include media($lg) {
+                font-size: rem(20);
+            }
+        }
+    }
+
+    .sub-menu & {
+        margin-bottom: $spacer/2;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    a {
+        display: block;
+    }
+
+    &.menu-item-has-children > a:after {
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 4px solid $gray;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        transform: rotate(45deg);
+        transform-origin: 0 100%;
+        margin-left: 5px;
+    }
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    padding: $gutter;
+    list-style: none;
+    z-index: 1;
+    left: $gutter;
+    top: 100%;
+    background: white;
+    box-shadow: $box-shadow;
+    min-width: 200px;
+
+    .menu-item:hover > &, .menu-item:focus > & {
+        display: block;
     }
 }
