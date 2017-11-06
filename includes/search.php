@@ -48,7 +48,7 @@ function load_search_results() {
 	$query = esc_attr( $query );
 
 	$args   = array(
-		'post_type'           => array( 'guide', 'database', 'staff', 'page', 'faq', 'post' ),
+		'post_type'           => array( 'guide', 'staff', 'page', 'faq', 'database', 'post' ),
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
