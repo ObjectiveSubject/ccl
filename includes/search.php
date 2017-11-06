@@ -56,6 +56,17 @@ function load_search_results() {
 	);
 	$search = new \WP_Query( $args );
 
+	// Sort order for the first set of results returned to live search
+	// Uses the "nice name", rather than adding an unused slug to each of the parameters
+	$sort_order = array(
+		'Research Guide',
+		'Librarian',
+		'Page',
+		'FAQ',
+		'Database',
+		'Post'
+	);
+
 	$search_results = array();
 	$posts = array();
 
@@ -121,16 +132,6 @@ function load_search_results() {
 			$posts[] = $post;
 
 		}
-
-		// Sort order for the first set of results returned to live search
-		$sort_order = array(
-			'Research Guide',
-			'Librarian',
-			'Page',
-			'FAQ',
-			'Database',
-			'Post'
-		);
 
 		// sort $posts by ['type'] for given order
 		usort( $posts, function ( $a, $b ) use ( $sort_order ) {
