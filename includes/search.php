@@ -48,7 +48,7 @@ function load_search_results() {
 	$query = esc_attr( $query );
 
 	$args   = array(
-		'post_type'           => array( 'guide', 'staff', 'page', 'faq', 'database', 'post' ),
+		'post_type'           => array( 'guide', 'staff', 'page', 'faq', 'database', 'post' ), // see $sort_order below for results ordering
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
@@ -125,10 +125,10 @@ function load_search_results() {
 		// Sort order for the first set of results returned to live search
 		$sort_order = array(
 			'Research Guide',
-			'Database',
 			'Librarian',
 			'Page',
 			'FAQ',
+			'Database',
 			'Post'
 		);
 
