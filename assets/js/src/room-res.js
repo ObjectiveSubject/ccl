@@ -8,131 +8,6 @@
 	'use strict';
     var document = window.document;
 
-    // TODO: Remove
-    var dummyAvailabilityData = [
-        {
-            "id": 9148,
-            "name": "Group Study 1",
-            "description": "",
-            "image": "",
-            "capacity": "6",
-            "availability": [
-                {
-                    "from": "2017-11-01T08:00:00-07:00",
-                    "to": "2017-11-01T08:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T08:30:00-07:00",
-                    "to": "2017-11-01T09:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T09:00:00-07:00",
-                    "to": "2017-11-01T09:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T09:30:00-07:00",
-                    "to": "2017-11-01T10:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T10:00:00-07:00",
-                    "to": "2017-11-01T10:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T10:30:00-07:00",
-                    "to": "2017-11-01T11:00:00-07:00"
-                },
-                // {
-                //     "from": "2017-11-01T11:00:00-07:00",
-                //     "to": "2017-11-01T11:30:00-07:00"
-                // },
-                {
-                    "from": "2017-11-01T11:30:00-07:00",
-                    "to": "2017-11-01T12:00:00-07:00"
-                },
-                // {
-                //     "from": "2017-11-01T12:00:00-07:00",
-                //     "to": "2017-11-01T12:30:00-07:00"
-                // },
-                {
-                    "from": "2017-11-01T12:30:00-07:00",
-                    "to": "2017-11-01T13:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T13:00:00-07:00",
-                    "to": "2017-11-01T13:30:00-07:00"
-                },
-                // {
-                //     "from": "2017-11-01T13:30:00-07:00",
-                //     "to": "2017-11-01T14:00:00-07:00"
-                // },
-                // {
-                //     "from": "2017-11-01T14:00:00-07:00",
-                //     "to": "2017-11-01T14:30:00-07:00"
-                // },
-                {
-                    "from": "2017-11-01T14:30:00-07:00",
-                    "to": "2017-11-01T15:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T15:00:00-07:00",
-                    "to": "2017-11-01T15:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T15:30:00-07:00",
-                    "to": "2017-11-01T16:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T16:00:00-07:00",
-                    "to": "2017-11-01T16:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T16:30:00-07:00",
-                    "to": "2017-11-01T17:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T17:00:00-07:00",
-                    "to": "2017-11-01T17:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T17:30:00-07:00",
-                    "to": "2017-11-01T18:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T18:00:00-07:00",
-                    "to": "2017-11-01T18:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T18:30:00-07:00",
-                    "to": "2017-11-01T19:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T19:00:00-07:00",
-                    "to": "2017-11-01T19:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T19:30:00-07:00",
-                    "to": "2017-11-01T20:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T20:00:00-07:00",
-                    "to": "2017-11-01T20:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T20:30:00-07:00",
-                    "to": "2017-11-01T21:00:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T21:00:00-07:00",
-                    "to": "2017-11-01T21:30:00-07:00"
-                },
-                {
-                    "from": "2017-11-01T21:30:00-07:00",
-                    "to": "2017-11-01T22:00:00-07:00"
-                }
-            ]
-        }
-    ];
-
     var RoomResForm = function(el){
 
         var now = new Date();
@@ -154,7 +29,7 @@
         this.maxSlots = 4;
         this.$maxTime = this.$el.find('.js-max-time');
         this.slotMinutes = 30;
-        this.timeZone = '-700';
+        this.timeZone = '-800';
 
         this.init();
 
@@ -162,23 +37,11 @@
 
     RoomResForm.prototype.init = function(){
 
-        var _this = this,
-            todayYmd= new Date().toISOString().split('T')[0];
-
         this.$el.addClass('ccl-is-loading');
 
-        this.setMaxTimeText();
+        this.updateScheduleData();
 
-        this.getSpaceAvailability()
-            .done(function(data){
-                _this.makeSchedule(data);
-            })
-            .fail(function(err){
-                console.log(err);
-            })
-            .always(function(){
-                _this.$el.removeClass('ccl-is-loading');
-            });
+        this.setMaxTimeText();
 
         this.initDateEvents();
         
@@ -201,63 +64,111 @@
 
     };
 
-    RoomResForm.prototype.makeSchedule = function(dayData){
+    RoomResForm.prototype.getSpaceBookings = function(Ymd){
+        
+        var data = {
+            action: 'get_bookings',
+            ccl_nonce: CCL.nonce,
+            date: Ymd || '', // e.g. '2017-10-19'. empty string will get bookings for current day
+            room: this.roomId,
+            limit: 50
+        };
 
-        // get object for first room in array. we're only calling data for one room at a time.
-        // check data type as well. If it's a string, parse to JSON.
-        dayData = ( typeof dayData === 'string' ) ? JSON.parse( dayData )[0] : dayData[0];
+        return $.post({
+            url: CCL.ajax_url,
+            data: data
+        });
 
-        var _this = this,
-            html = [],
-            availability = dayData.availability,
-            oldToTime;
-            
-        // construct HTML for each time slot
-        $(dayData.availability).each(function(i,item){
+    };
 
-            var newFromTime = item.from,
-                slotDateTime = new Date( item.from );
+    RoomResForm.prototype.updateScheduleData = function() {
+        
+        var getSpacejqXHR = this.getSpaceAvailability(this.dateYmd);
+        var getBookingsjqXHR = this.getSpaceBookings(this.dateYmd);
+        var that = this;
 
-            // compare this item and the previous item to look for gaps in time.
-            // gaps indicated a reserved block of time
-            if ( oldToTime && oldToTime != newFromTime  ) {
+        $.when(getSpacejqXHR, getBookingsjqXHR)
+            .done(function(getSpace,getBookings){
 
-                var newFromTimeUnix = new Date(newFromTime).getTime(),
-                    oldToTimeUnix = new Date(oldToTime).getTime(),
-                    difference = newFromTimeUnix - oldToTimeUnix,
-                    slots;
+                var spaceData = getSpace[0],
+                    bookingsData = getBookings[0],
+                    spacejqXHR = getSpace[2],
+                    bookingsjqXHR = getBookings[2],
+                    timeSlotsArray;
 
-                // get difference in minutes
-                difference = difference / 1000 / 60;
-                slots = difference / _this.slotMinutes;
+                spaceData = ( typeof spaceData === 'string' ) ? JSON.parse( spaceData )[0] : spaceData[0];
+                bookingsData = ( typeof bookingsData === 'string' ) ? JSON.parse( bookingsData ) : bookingsData;
 
-                // build slots for occupied (unselectable) time
-                for ( var j = 0; j < slots; j++ ) {
+                // merge bookings with availability
+                if ( bookingsData.length ){
 
-                    var addMilliseconds = j * _this.slotMinutes * 60 * 1000,
-                        newUnix = oldToTimeUnix + addMilliseconds;
+                    bookingsData.forEach(function(booking,i){
 
-                    html.push( _this.makeTimeSlot({
-                        id: 'slot-' + _this.roomId + '-' + i + '-' + j,
-                        disabled: 'disabled',
-                        class: 'ccl-is-occupied',
-                        from: _this.formatDateString( new Date(newUnix) ),
-                        timeString: _this.formatDateString( new Date(newUnix), 'readable' )
-                    }) );
+                        // calculate number of slots based on booking duration
+                        var fromTime = new Date(booking.fromDate).getTime(),
+                            toTime = new Date(booking.toDate).getTime(),
+                            durationMinutes = (toTime - fromTime) / 1000 / 60,
+                            slotCount = durationMinutes / that.slotMinutes;
+
+                        spaceData.availability.push({
+                            "from": booking.fromDate,
+                            "to": booking.toDate,
+                            "slotCount": slotCount,
+                            "isBooked": true
+                        });
+                        
+                    });
+                    
+                    _sortByKey( spaceData.availability, 'from' );
+
                 }
 
+                // parse time slots and return the appropriate set
+                timeSlotsArray = that.parseSchedule(spaceData.availability);
+
+                if ( that.roomId == 9148 ) console.log('timeSlotsArray', timeSlotsArray);
+                
+                // build schedule HTML
+                that.buildSchedule(timeSlotsArray);
+
+                // Error handlers
+                spacejqXHR.fail(function(err){
+                    console.log(err);
+                });
+                bookingsjqXHR.fail(function(err){
+                    console.log(err);
+                });
+
+            })
+            .always(function(){
+                that.$el.removeClass('ccl-is-loading');
+                that.$resetSelectionBtn.hide();
+            });
+
+    };
+
+    RoomResForm.prototype.buildSchedule = function(timeSlotsArray){
+
+        var that = this,
+            html = [];
+            
+        // construct HTML for each time slot
+        timeSlotsArray.forEach(function(item, i){
+
+            var itemClass = '';
+
+            if ( item.isBooked && item.hasOwnProperty('slotCount') ) {
+                itemClass = 'ccl-is-occupied ccl-duration-' + item.slotCount;
             }
             
             // build selectable time slots
-            html.push( _this.makeTimeSlot({
-                id: 'slot-' + _this.roomId + '-' + i,
+            html.push( that.buildTimeSlot({
+                id: 'slot-' + that.roomId + '-' + i,
                 from: item.from,
                 to: item.to,
-                timeString: _this.formatDateString( slotDateTime, 'readable' )
+                timeString: that.formatDateString( new Date( item.from ), 'readable' ),
+                class: itemClass
             }) );
-
-            // update variable to the current item's "to" value.
-            oldToTime = item.to;
         
         });
 
@@ -269,13 +180,11 @@
 
         this.setCurrentDurationText();
 
-        // this.setOccupiedRooms();
-
         this.initSlotEvents();
 
     };
 
-    RoomResForm.prototype.makeTimeSlot = function(vars){
+    RoomResForm.prototype.buildTimeSlot = function(vars){
         
         if ( ! vars || typeof vars !== 'object' ) {
             return '';
@@ -302,13 +211,45 @@
         return template;
     };
 
+    RoomResForm.prototype.parseSchedule = function(scheduleArray){
+        // returns the appropriate schedule for a given array of time slots
+        
+        var to = null,
+            startEndIndexes = [], 
+            start, end;
+
+        // loop through array and pick out time gaps
+        scheduleArray.forEach(function(item,i){
+            if ( to && to !== item.from ) {
+                startEndIndexes.push(i);
+            }
+            to = item.to;
+        });
+
+        // depending on number of gaps found, determine start and end indexes
+        if ( startEndIndexes.length >= 2 ) {
+            start = startEndIndexes[0];
+            end = startEndIndexes[1];
+        } else {
+            start = 0;
+            if ( startEndIndexes.length === 1 ) {
+                end = startEndIndexes[0];
+            } else {
+                end = scheduleArray.length;
+            }
+        }
+        
+        // returned sliced portion of original schedule
+        return scheduleArray.slice(start,end);
+    };
+
     RoomResForm.prototype.initFormEvents = function(){
 
-        var _this = this;
+        var that = this;
 
         this.$resetSelectionBtn.click(function(event){
             event.preventDefault();
-            $(_this.selectedSlotInputs).each(function(i,input){
+            $(that.selectedSlotInputs).each(function(i,input){
                 $(input)
                     .prop('checked',false)
                     .change();
@@ -318,63 +259,51 @@
 
         this.$el.submit(function(event){
             event.preventDefault();
-            _this.onSubmit();
+            that.onSubmit();
         });
 
     };
 
     RoomResForm.prototype.initDateEvents = function(){
 
-        var _this = this;
+        var that = this;
         
         this.$dateSelect.change(function(){
-            _this.onDateChange();
+            that.onDateChange();
         });
 
     };
 
     RoomResForm.prototype.onDateChange = function() {
         
-        var _this = this;
-        
         this.dateYmd = this.$dateSelect.val();
         
-        this.$el.removeClass('ccl-is-loading');
+        this.$el.addClass('ccl-is-loading');
 
-        this.getSpaceAvailability(this.dateYmd)
-            .done(function(data){                
-                _this.makeSchedule(data);
-            })
-            .fail(function(err){
-                console.log(err);
-            })
-            .always(function(){
-                _this.$el.removeClass('ccl-is-loading');
-                _this.$resetSelectionBtn.hide();
-            });
+        this.updateScheduleData();
         
     };
         
     RoomResForm.prototype.initSlotEvents = function(){
-        var _this = this;
+        var that = this;
         
         if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
 
             this.$el.find('.ccl-c-room__slot').hover(function(){
-                _this.onSlotMouseIn(this);
+                that.onSlotMouseIn(this);
             }, function(){
-                _this.onSlotMouseOut(this);
+                that.onSlotMouseOut(this);
             });
 
             // click event fires BEFORE change event
             this.$roomSlotInputs.click(function(event){
                 var input = this;
-                _this.onSlotClick(input, event);
+                that.onSlotClick(input, event);
             });
             
             this.$roomSlotInputs.change(function(){
                 var input = this;
-                _this.onSlotChange(input);
+                that.onSlotChange(input);
             });
             
         }
@@ -429,10 +358,10 @@
 
     RoomResForm.prototype.onSlotClick = function(clickedInput, event){
         
-        var _this = this,
-            clickInputIndex = _this.$roomSlotInputs.index(clickedInput),
-            minIndex = clickInputIndex - _this.maxSlots,
-            maxIndex = clickInputIndex + _this.maxSlots;
+        var that = this,
+            clickInputIndex = that.$roomSlotInputs.index(clickedInput),
+            minIndex = clickInputIndex - that.maxSlots,
+            maxIndex = clickInputIndex + that.maxSlots;
 
         // disables slots that are outside of max selectable area
         function _isolateSelectableSlots() {
@@ -443,7 +372,7 @@
 
                 // get occupied slot's input, find it's index amoung all slot inputs
                 var slotInput = $(slot).find('[type="checkbox"]'),
-                    occupiedIndex = _this.$roomSlotInputs.index(slotInput);
+                    occupiedIndex = that.$roomSlotInputs.index(slotInput);
 
                 // if occupied slot falls in the selectable area
                 if ( minIndex < occupiedIndex && occupiedIndex < maxIndex ) {
@@ -461,7 +390,7 @@
             });
 
             // loop through slots, disable ones that fall outside of min/max indexes
-            _this.$roomSlotInputs.each(function(i,input){
+            that.$roomSlotInputs.each(function(i,input){
                 if ( i <= minIndex || i >= maxIndex ) {
                     $(input).parent('.ccl-c-room__slot').addClass('ccl-is-disabled');
                 }
@@ -472,7 +401,7 @@
         /* -------------------------------------------------------------
          * if no inputs yet selected, this is the first
          * ------------------------------------------------------------- */
-        if ( _this.selectedSlotInputs.length === 0 ) {
+        if ( that.selectedSlotInputs.length === 0 ) {
 
             _isolateSelectableSlots();
             
@@ -481,7 +410,7 @@
         /* -------------------------------------------------------------
          * if 1 input selected, selecting 2nd slot
          * ------------------------------------------------------------- */
-        if ( _this.selectedSlotInputs.length === 1 ) {
+        if ( that.selectedSlotInputs.length === 1 ) {
 
             if ( $(clickedInput).parent('.ccl-c-room__slot').hasClass('ccl-is-disabled') ) {
                 event.preventDefault();
@@ -494,14 +423,14 @@
         /* -------------------------------------------------------------
          * if 2 or more slots already selected
          * ------------------------------------------------------------- */
-        if ( _this.selectedSlotInputs.length >= 2 ) {
+        if ( that.selectedSlotInputs.length >= 2 ) {
 
             // if the clicked input is not part of current selection
             // clear all selected inputs
-            if ( _this.selectedSlotInputs.indexOf( clickedInput ) < 0 ) {
+            if ( that.selectedSlotInputs.indexOf( clickedInput ) < 0 ) {
             
-                _this.clearAllSlots();
-                _this.selectedSlotInputs = [];
+                that.clearAllSlots();
+                that.selectedSlotInputs = [];
 
             } 
             
@@ -513,21 +442,21 @@
                 event.preventDefault();
 
                 // get the input index from among selected inputs
-                var selectedSlotIndex = _this.selectedSlotInputs.indexOf( clickedInput ),
-                    selectedInputs = $.extend( [], _this.selectedSlotInputs );
+                var selectedSlotIndex = that.selectedSlotInputs.indexOf( clickedInput ),
+                    selectedInputs = $.extend( [], that.selectedSlotInputs );
                 
                 // clear all inputs EXCEPT the clicked one
                 selectedInputs.forEach(function(input,i){
                     if ( selectedSlotIndex != i ) {
-                        _this.clearSlot(input);
+                        that.clearSlot(input);
                     }
                 });
                 
                 // // set selected inputs to just this one
-                // _this.selectedSlotInputs = [ _this.selectedSlotInputs[selectedSlotIndex] ];
+                // that.selectedSlotInputs = [ that.selectedSlotInputs[selectedSlotIndex] ];
 
                 // update the current duration text
-                _this.setCurrentDurationText();
+                that.setCurrentDurationText();
 
             }
 
@@ -569,12 +498,12 @@
         // if highlight slots between two ends
         if ( this.selectedSlotInputs.length === 2 ) {
 
-            var _this = this;
+            var that = this;
 
-            _this.$el.find('.ccl-is-checked').first().nextUntil('.ccl-is-checked').each(function(i,slot){
+            that.$el.find('.ccl-is-checked').first().nextUntil('.ccl-is-checked').each(function(i,slot){
                 var slotInput = $(slot).find('input[type="checkbox"]');
-                _this.selectedSlotInputs.push(slotInput[0]);
-                _this.activateSlot(slot);
+                that.selectedSlotInputs.push(slotInput[0]);
+                that.activateSlot(slot);
             });
         }
 
@@ -618,15 +547,15 @@
 
     RoomResForm.prototype.clearAllSlots = function() {
 
-        var _this = this;
+        var that = this;
         
         // Extend the selected inputs array to a new variable.
         // The selected inputs array changes with every clearSlot() call
         // so, best to loop through an unchanging array.
-        var selectedInputs = $.extend( [], _this.selectedSlotInputs );
+        var selectedInputs = $.extend( [], that.selectedSlotInputs );
 
         $(selectedInputs).each(function(i,input){
-            _this.clearSlot(input);
+            that.clearSlot(input);
         });
 
     };
@@ -753,7 +682,7 @@
             this.$formNotification.remove();
         }
 
-        var _this = this,
+        var that = this,
             sortedSelection = $.extend([], this.selectedSlotInputs).sort(function(a,b){
                 return a.value > b.value;
             }),
@@ -800,7 +729,7 @@
                 console.log(error);
             })
             .always(function(){
-                _this.$el.removeClass('ccl-is-loading');
+                that.$el.removeClass('ccl-is-loading');
             });
 
         function _handleSubmitResponse(response) {
@@ -820,21 +749,50 @@
                 responseHTML.push('<p class="ccl-h4">Please talk to your nearest librarian for help.</p>');
             }
 
-            _this.$formCancel.prop('disabled',false).text('Close');
-            _this.$formSubmit.remove();
-            _this.$formContent.animate({opacity: 0}, CCL.DURATION);
-            _this.$formResponse
+            that.$formCancel.prop('disabled',false).text('Close');
+            that.$formSubmit.remove();
+            that.$formContent.animate({opacity: 0}, CCL.DURATION);
+            that.$formResponse
                 .delay(CCL.DURATION)
                 .animate({opacity: 1}, CCL.DURATION)
                 .html(responseHTML);
-            _this.$formContent
+            that.$formContent
                 .delay(CCL.DURATION)
-                .animate({height: _this.$formResponse.height() + 'px' }, CCL.DURATION)
+                .animate({height: that.$formResponse.height() + 'px' }, CCL.DURATION)
                 .css({zIndex: '-1'});
 
         }
 
     };
+
+    // ------------------------------------------------------- //
+    // Helpers
+
+    function _sortByKey( arr, key, order ) {
+        function sortASC(a,b) {
+            if (a[key] < b[key]){
+                return -1;
+            }
+            if (a[key] > b[key]){
+                return 1;
+            }
+            return 0;
+        }
+        function sortDESC(a,b) {
+            if (a[key] > b[key]){
+                return -1;
+            }
+            if (a[key] < b[key]){
+                return 1;
+            }
+            return 0;
+        }
+        if ( 'DESC' === order ) {
+            arr.sort(sortDESC);
+        } else {
+            arr.sort(sortASC);
+        }
+    }
 
     // ------------------------------------------------------- //
 

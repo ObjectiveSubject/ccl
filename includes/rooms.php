@@ -360,7 +360,7 @@ function get_bookings() {
 		check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 	}
 
-	$date = $_POST['availability'];
+	$date = $_POST['date'];
 	$room_id = $_POST['room'];
 
 	// get bookings for room

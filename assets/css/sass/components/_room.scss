@@ -101,6 +101,16 @@
     [type="checkbox"] {
         @extend .ccl-u-display-none;
     }
+
+    &.ccl-duration-2 {
+        min-width: rem(100);
+    }
+    &.ccl-duration-3 {
+        min-width: rem(150);
+    }
+    &.ccl-duration-4 {
+        min-width: rem(200);
+    }
 }
 
 .ccl-c-room__slot-label {
