@@ -218,7 +218,7 @@ get_header(); ?>
 
                                         <div class="ccl-c-modal__body">
 
-                                            <div class="js-room-res-form-content">
+                                            <div class="ccl-c-room__form-content js-room-res-form-content">
 
                                                 <div class="ccl-l-row">
                                                     <div class="ccl-l-column ccl-l-span-quarter-md ccl-u-mb-1">
@@ -277,7 +277,7 @@ get_header(); ?>
                                                 </div>
 
                                                 <p class="ccl-h4 ccl-u-mt-0">
-                                                    <span class="ccl-u-color-school js-current-duration">Please select available time slots</span>
+                                                    <span class="ccl-c-room__current-duration js-current-duration ccl-u-color-school">Please select available time slots</span>
                                                     <a href="#" class="ccl-c-room__slot-reset js-reset-selection">&times; Reset</a>
                                                 </p>
                                                 

@@ -37,7 +37,7 @@
 
     RoomResForm.prototype.init = function(){
 
-        this.$el.addClass('ccl-is-loading');
+        this.setLoading();
 
         this.updateScheduleData();
 
@@ -125,8 +125,6 @@
 
                 // parse time slots and return the appropriate set
                 timeSlotsArray = that.parseSchedule(spaceData.availability);
-
-                if ( that.roomId == 9148 ) console.log('timeSlotsArray', timeSlotsArray);
                 
                 // build schedule HTML
                 that.buildSchedule(timeSlotsArray);
@@ -141,7 +139,7 @@
 
             })
             .always(function(){
-                that.$el.removeClass('ccl-is-loading');
+                that.unsetLoading();
                 that.$resetSelectionBtn.hide();
             });
 
@@ -278,7 +276,7 @@
         
         this.dateYmd = this.$dateSelect.val();
         
-        this.$el.addClass('ccl-is-loading');
+        this.setLoading();
 
         this.updateScheduleData();
         
@@ -590,6 +588,15 @@
         }
     };
 
+    RoomResForm.prototype.setLoading = function(){
+        this.$currentDurationText.text('Loading schedule...');
+        this.$el.addClass('ccl-is-loading');
+    };
+
+    RoomResForm.prototype.unsetLoading = function(){
+        this.$el.removeClass('ccl-is-loading');
+    };
+
     RoomResForm.prototype.setCurrentDurationText = function() {
 
         var selection = $.extend([],this.selectedSlotInputs),
@@ -705,7 +712,7 @@
 
         // console.log( 'on Submit » ', payload );
 
-        this.$el.addClass('ccl-is-loading');
+        this.$el.addClass('ccl-is-submitting');
         this.$formCancel.prop('disabled',true);
         this.$formSubmit.text('Sending...').prop('disabled',true);
 

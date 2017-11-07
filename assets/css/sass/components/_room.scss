@@ -76,6 +76,14 @@
     }
 }
 
+.ccl-c-room__form-content {
+    transition: opacity $duration $easing;
+    .ccl-is-submitting & {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+}
+
 
 // Room Schedule
 // ------------------------------------- //
@@ -97,9 +105,10 @@
     flex-shrink: 1;
     padding: 0 1px 2px 1px;
     min-width: rem(50);
+    transition: opacity $duration $easing;
 
-    [type="checkbox"] {
-        @extend .ccl-u-display-none;
+    .ccl-is-loading & {
+        opacity: 0;
     }
 
     &.ccl-duration-2 {
@@ -110,6 +119,10 @@
     }
     &.ccl-duration-4 {
         min-width: rem(200);
+    }
+
+    [type="checkbox"] {
+        @extend .ccl-u-display-none;
     }
 }
 
@@ -216,6 +229,12 @@
         }
     }
 
+}
+
+.ccl-c-room__current-duration {
+    .ccl-is-loading & {
+        animation: pulse 1s infinite;
+    }
 }
 
 .ccl-c-room__slot-reset {
