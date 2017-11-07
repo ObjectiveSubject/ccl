@@ -48,13 +48,24 @@ function load_search_results() {
 	$query = esc_attr( $query );
 
 	$args   = array(
-		'post_type'           => array( 'guide', 'staff', 'page', 'faq', 'database', 'post' ),
+		'post_type'           => array( 'guide', 'staff', 'page', 'faq', 'database', 'post' ), // see $sort_order below for results ordering
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
 		'posts_per_page'      => 7 // probably need to figure out how to do a limited number from each type
 	);
 	$search = new \WP_Query( $args );
+
+	// Sort order for the first set of results returned to live search
+	// Uses the "nice name", rather than adding an unused slug to each of the parameters
+	$sort_order = array(
+		'Research Guide',
+		'Librarian',
+		'Page',
+		'FAQ',
+		'Database',
+		'Post'
+	);
 
 	$search_results = array();
 	$posts = array();
@@ -121,16 +132,6 @@ function load_search_results() {
 			$posts[] = $post;
 
 		}
-
-		// Sort order for the first set of results returned to live search
-		$sort_order = array(
-			'Research Guide',
-			'Database',
-			'Librarian',
-			'Page',
-			'FAQ',
-			'Post'
-		);
 
 		// sort $posts by ['type'] for given order
 		usort( $posts, function ( $a, $b ) use ( $sort_order ) {
