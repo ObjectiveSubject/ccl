@@ -349,7 +349,9 @@ function request_booking() {
 	// $response = json_decode( $response );
 	// $response = json_encode( $response );
 
-	wp_die( $response );
+	echo $response;
+	die();
+	// wp_die( $response );
 }
 
 /**
@@ -370,7 +372,9 @@ function get_bookings() {
 	// $response = json_decode( $bookings['body'] );
 	$response = $bookings['body'];
 
-	wp_die( $response );
+	echo $response;
+	die();
+	//wp_die( $response );
 }
 
 /**
@@ -397,5 +401,7 @@ function get_space_item() {
 	// $response = json_decode( $info['body'] );
 	$response = $info['body'];
 
-	wp_die( $response );
+	echo $response;
+	die();
+	// wp_die( $response );
 }
