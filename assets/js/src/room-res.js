@@ -29,7 +29,8 @@
         this.maxSlots = 4;
         this.$maxTime = this.$el.find('.js-max-time');
         this.slotMinutes = 30;
-        this.timeZone = '-800';
+        this.locale = "en-US";
+        this.timeZone = {timeZone: "America/Los_Angeles"};
 
         this.init();
 
@@ -96,6 +97,7 @@
                     bookingsjqXHR = getBookings[2],
                     timeSlotsArray;
 
+                // parse data to JSON if it's a string
                 spaceData = ( typeof spaceData === 'string' ) ? JSON.parse( spaceData )[0] : spaceData[0];
                 bookingsData = ( typeof bookingsData === 'string' ) ? JSON.parse( bookingsData ) : bookingsData;
 
@@ -119,11 +121,12 @@
                         
                     });
                     
+                    // sort time slot objects by the "from" key
                     _sortByKey( spaceData.availability, 'from' );
 
                 }
 
-                // parse time slots and return the appropriate set
+                // parse time slots and return an appropriate subset (only open to close hours)
                 timeSlotsArray = that.parseSchedule(spaceData.availability);
                 
                 // build schedule HTML
@@ -153,7 +156,15 @@
         // construct HTML for each time slot
         timeSlotsArray.forEach(function(item, i){
 
-            var itemClass = '';
+            var from = new Date( item.from ),
+                timeString,
+                itemClass = '';
+
+            if ( from.getMinutes() !== 0 ) {
+                timeString = that.readableTime( from, 'h:m' );
+            } else {
+                timeString = that.readableTime( from, 'ha' );
+            }
 
             if ( item.isBooked && item.hasOwnProperty('slotCount') ) {
                 itemClass = 'ccl-is-occupied ccl-duration-' + item.slotCount;
@@ -164,7 +175,7 @@
                 id: 'slot-' + that.roomId + '-' + i,
                 from: item.from,
                 to: item.to,
-                timeString: that.formatDateString( new Date( item.from ), 'readable' ),
+                timeString: timeString,
                 class: itemClass
             }) );
         
@@ -608,11 +619,11 @@
         if ( selectionLength > 0 ) {
 
             var time1Val = sortedSelection[0].value,
-                readableTime1 = this.formatDateString( new Date(time1Val), 'readable' );
+                readableTime1 = this.readableTime( new Date(time1Val) );
 
             var time2Val = ( selectionLength >= 2 ) ? sortedSelection[sortedSelection.length - 1].value : time1Val,
                 time2T = new Date(time2Val).getTime() + ( this.slotMinutes * 60 * 1000 ),
-                readableTime2 = this.formatDateString( new Date(time2T), 'readable' );
+                readableTime2 = this.readableTime( new Date(time2T) );
 
             this.$currentDurationText.text( 'From ' + readableTime1 + ' to ' + readableTime2 );
 
@@ -650,26 +661,37 @@
         this.$maxTime.text( maxText );
     };
 
-    RoomResForm.prototype.formatDateString = function(dateObj, readable){
+    RoomResForm.prototype.readableTime = function( dateObj, format ) {
+        
+        var localeString = dateObj.toLocaleString( this.locale, this.timeZone ), // e.g. --> "11/7/2017, 4:38:33 AM"
+            localeTime = localeString.split(", ")[1]; // "4:38:33 AM"
 
-        var minutes = ( dateObj.getMinutes().toString().length < 2 ) ? '0' + dateObj.getMinutes().toString() : dateObj.getMinutes().toString();
+        var time = localeTime.split(' ')[0], // "4:38:33",
+            timeObj = {
+                a: localeTime.split(' ')[1].toLowerCase(), // (am or pm) --> "a"
+                h: time.split(':')[0], // "4"
+                m: time.split(':')[1], // "38"
+            };
+
+        if ( format && typeof format === 'string' ) {
             
-        if ( readable ) {
+            var formatArr = format.split(''),
+                readableArr = [];
+            
+            for ( var i = 0; i < formatArr.length; i++ ) {
+                if ( timeObj[formatArr[i]] ) {
+                    readableArr.push(timeObj[formatArr[i]]);
+                } else {
+                    readableArr.push(formatArr[i]);
+                }
+            }
 
-            var ampm = ( dateObj.getHours() >= 12 ) ? 'p' : 'a',
-                hour12Format = ( dateObj.getHours() > 12 ) ? dateObj.getHours() - 12 : dateObj.getHours();
-
-            return hour12Format + ':' + minutes + ampm;
-
-        } else {
-
-            var hours = ( dateObj.getHours().toString().length < 2 ) ? '0' + dateObj.getHours().toString() : dateObj.getHours().toString(),
-                seconds = ( dateObj.getSeconds().toString().length < 2 ) ? '0' + dateObj.getSeconds().toString() : dateObj.getSeconds().toString();
-
-            return this.dateYmd + 'T' + hours + ':' + minutes + ':' + seconds + this.timeZone;
-
+            return readableArr.join('');
+            
         }
 
+        return timeObj.h + ':' + timeObj.m + timeObj.a;
+        
     };
 
     RoomResForm.prototype.onSubmit = function(event){
@@ -736,7 +758,7 @@
                 console.log(error);
             })
             .always(function(){
-                that.$el.removeClass('ccl-is-loading');
+                that.$el.removeClass('ccl-is-submitting');
             });
 
         function _handleSubmitResponse(response) {

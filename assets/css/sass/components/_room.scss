@@ -139,17 +139,12 @@
     display: block;
     height: 100%;
     cursor: pointer;
-    color: $gray;
+    color: black;
     position: relative;
 
     [type="checkbox"]:checked + & {
-        color: black;
+        // color: black;
         @include school-style(color);
-    }
-    .ccl-is-occupied & {
-        cursor: not-allowed;
-        text-decoration: line-through;
-        color: #ddd;
     }
     .ccl-is-disabled & {
         cursor: not-allowed;
@@ -170,7 +165,7 @@
         top: 50%;
         left: 50%;
         font-size: 1rem;
-        color: black;
+        color: rgba(black,0.5);
         transform: translate3d(-50%,-50%,0) rotate(45deg);
         transition: transform 100ms ease-out;
         line-height: 1;
@@ -183,11 +178,7 @@
     }
     [type="checkbox"]:not(:checked) + &:hover:after,
     .ccl-has-potential &:after {
-        @if ( lightness(black) > 50 ) {
-            color: black;
-        } @else {
-            color: white;
-        }
+        color: white;
     }
 
     [type="checkbox"]:checked + & {
@@ -216,16 +207,18 @@
     }
     
     .ccl-is-occupied & {
+        cursor: not-allowed;
+        text-decoration: line-through;
+        color: $gray;
+
         &:before {
-            background: #fafafa !important;
+            background: white !important;
+            box-shadow: inset 0 0 0 1px #ddd;
         }
         &:after {
             display: block !important;
             transform: translate3d(-50%,-50%,0) rotate(0);
             color: $gray !important;
-            @if ( lightness(#eee) < 50 ) {
-                color: white !important;
-            }
         }
     }
 
