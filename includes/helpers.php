@@ -190,3 +190,107 @@ function create_slug( $string ){
 	$slug = strtolower( $slug );
 	return $slug;
 }
+
+/*
+ * Sort and nest nav menu items
+ *
+ * $menu (string) menu name or ID
+ */
+function get_sorted_menu_items( $menu_id ) {
+
+	if ( empty( $menu_id ) ) {
+		return;
+	}
+    
+    $menu_items = (array) wp_get_nav_menu_items( $menu_id );
+    
+    if ( empty( $menu_items ) ) {
+		return;
+	}
+
+    $nested_menu_items = array();
+
+    foreach ( $menu_items as $item ) {
+        if ( ! is_object( $item ) ) continue;
+
+        $item_parent = $item->menu_item_parent;
+
+        if ( $item_parent ) {
+			if ( isset( $nested_menu_items[$item_parent]->children ) ) {
+				array_push( $nested_menu_items[$item_parent]->children, $item );
+			}
+        } else {
+			$item->children = array();
+            $nested_menu_items[$item->ID] = $item;
+        }
+    }
+
+	return array_values( $nested_menu_items );
+}
+
+
+/*
+ * build and echo a header menu
+ *
+ * $menu (string) menu name or ID
+ */
+function header_menu( $menu_id, $classname = '' ) {
+	
+	if ( empty( $menu_id ) ) {
+		return;
+	}
+	
+	$menu_items = (array) get_sorted_menu_items( $menu_id );
+
+	if ( empty( $menu_items ) ) {
+		return;
+	}
+
+	$classname = is_string( $classname ) ? $classname : '';
+
+	ob_start(); ?>
+
+	<nav><ul class="ccl-c-menu <?php echo $classname; ?>">
+									
+		<?php foreach( $menu_items as $item ) : 
+			
+			$has_children = isset( $item->children ) && count( $item->children );
+			$menu_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" );
+			if ( $has_children ) {
+				$menu_item_class[] = 'menu-item-has-children'; 
+			} ?>
+
+			<li id="menu-item-<?php echo $item->ID; ?>" class="<?php echo implode( ' ', $menu_item_class ); ?>">
+				<a href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
+
+				<?php if ( $has_children ) : ?>
+
+					<ul class="sub-menu">
+						
+						<?php foreach( $item->children as $child ) :
+							
+							$child_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" ); ?>
+
+							<li id="menu-item-<?php echo $child->ID; ?>" class="<?php echo implode( ' ', $child_item_class ); ?>">
+								<a href="<?php echo $child->url; ?>"><?php echo $child->title; ?></a>
+							</li>
+
+						<?php endforeach; ?>
+
+					</ul>
+
+				<?php endif; ?>
+
+			</li>
+
+		<?php endforeach; ?>
+
+	</ul></nav>
+
+	<?php
+	$html = ob_get_contents();
+	ob_get_clean();
+
+	return $html;
+
+}

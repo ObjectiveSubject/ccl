@@ -27,29 +27,26 @@
 
 				<hr style="background:black"/>
 
+				<?php $locations = get_nav_menu_locations(); ?>
+
 				<div class="ccl-l-row">
+
 					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
 						<?php if ( has_nav_menu( 'header_1' ) ) {
-							wp_nav_menu( array(
-								'theme_location' => 'header_1',
-								'menu_class' => 'ccl-c-menu ccl-is-primary',
-								'container' => 'nav',
-							) );
+							echo \CCL\Helpers\header_menu( $locations[ 'header_1' ], 'ccl-is-primary' );
 						} else {
 							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a primary header menu</a></div>';
 						} ?>
 					</div>
+
 					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
 						<?php if ( has_nav_menu( 'header_2' ) ) {
-							wp_nav_menu( array(
-								'theme_location' => 'header_2',
-								'menu_class' => 'ccl-c-menu ccl-is-secondary',
-								'container' => 'nav',
-							) );
+							echo \CCL\Helpers\header_menu( $locations[ 'header_2' ], 'ccl-is-secondary' );							
 						} else {
 							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary header menu</a></div>';
 						} ?>
 					</div>
+
 					<div class="ccl-l-column ccl-l-span-third-lg ccl-u-display-block-lg">
 						<ul class="ccl-u-clean-list ccl-u-mt-1">
 							<li>
