@@ -191,46 +191,92 @@ function create_slug( $string ){
 	return $slug;
 }
 
+
+/*
+ * Loops through an array of any depth to build a tree of items based on a map of parents and their children
+ * Used recursively to sort and nest menu items
+ *
+ * $items (array) array of menu items
+ * $children_map (array) a map of menu item IDs that contain their children
+ */
+function sort_and_populate( $items, $children_map ) {
+	
+	$sorted_menu_items = array();
+
+	foreach ( $items as $item ) {
+
+		$children = isset( $children_map[$item->ID] ) ? $children_map[$item->ID] : array();
+
+		if ( ! empty( $children ) ) {
+
+			$item->children = sort_and_populate( $children, $children_map );
+		
+		}
+		
+		$sorted_menu_items[] = $item;
+
+	}
+
+	return $sorted_menu_items;
+}
+
 /*
  * Sort and nest nav menu items
  *
  * $menu (string) menu name or ID
  */
 function get_sorted_menu_items( $menu_id ) {
-
+	
 	if ( empty( $menu_id ) ) {
 		return;
 	}
-    
-    $menu_items = (array) wp_get_nav_menu_items( $menu_id );
-    
-    if ( empty( $menu_items ) ) {
+	
+	$menu_items = (array) wp_get_nav_menu_items( $menu_id );
+	
+	if ( empty( $menu_items ) ) {
 		return;
 	}
 
-    $nested_menu_items = array();
+	$items_with_children = array();
+	
+	foreach ( $menu_items as $item ) {
+		if ( ! empty( $item->menu_item_parent ) ) {
 
-    foreach ( $menu_items as $item ) {
-        if ( ! is_object( $item ) ) continue;
-
-        $item_parent = $item->menu_item_parent;
-
-        if ( $item_parent ) {
-			if ( isset( $nested_menu_items[$item_parent]->children ) ) {
-				array_push( $nested_menu_items[$item_parent]->children, $item );
+			$parent_key = $item->menu_item_parent;
+			
+			if ( empty( $items_with_children[$parent_key] ) ) {
+				$items_with_children[$parent_key] = array();
 			}
-        } else {
-			$item->children = array();
-            $nested_menu_items[$item->ID] = $item;
-        }
-    }
 
-	return array_values( $nested_menu_items );
+			$items_with_children[$parent_key][] = $item;
+
+		}
+	}
+
+	$sorted = array();
+
+	foreach ( $menu_items as $item ) {
+
+		if ( empty( $item->menu_item_parent ) ) {
+
+			if ( isset( $items_with_children[$item->ID] ) ) {
+
+				$item->children = sort_and_populate( $items_with_children[$item->ID], $items_with_children );
+				
+			}
+			
+			$sorted[] = $item;
+
+		}
+
+	}
+
+	return $sorted;
 }
 
 
 /*
- * build and echo a header menu
+ * return a list of top level menu items
  *
  * $menu (string) menu name or ID
  */
@@ -250,42 +296,108 @@ function header_menu( $menu_id, $classname = '' ) {
 
 	ob_start(); ?>
 
-	<nav><ul class="ccl-c-menu <?php echo $classname; ?>">
+	<ul class="ccl-c-menu <?php echo $classname; ?>">
 									
 		<?php foreach( $menu_items as $item ) : 
 			
-			$has_children = isset( $item->children ) && count( $item->children );
 			$menu_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" );
-			if ( $has_children ) {
+			
+			if ( isset( $item->children ) && count( $item->children ) ) {
 				$menu_item_class[] = 'menu-item-has-children'; 
 			} ?>
 
 			<li id="menu-item-<?php echo $item->ID; ?>" class="<?php echo implode( ' ', $menu_item_class ); ?>">
-				<a href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
-
-				<?php if ( $has_children ) : ?>
-
-					<ul class="sub-menu">
-						
-						<?php foreach( $item->children as $child ) :
-							
-							$child_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" ); ?>
-
-							<li id="menu-item-<?php echo $child->ID; ?>" class="<?php echo implode( ' ', $child_item_class ); ?>">
-								<a href="<?php echo $child->url; ?>"><?php echo $child->title; ?></a>
-							</li>
-
-						<?php endforeach; ?>
-
-					</ul>
-
-				<?php endif; ?>
-
+				<a href="<?php echo $item->url; ?>" class="js-toggle-header-menu" data-target="#sub-menu-<?php echo $item->ID; ?>"><?php echo $item->title; ?></a>
 			</li>
 
 		<?php endforeach; ?>
 
-	</ul></nav>
+	</ul>
+
+	<?php
+	$html = ob_get_contents();
+	ob_get_clean();
+
+	return $html;
+
+}
+
+
+/*
+ * Loops through an array of any depth to build a tree of items
+ * Used recursively to build menu items
+ *
+ * $items (array) array of menu items
+ */
+function build_sub_menu_items( $items ) {
+	
+	foreach( $items as $item ) :
+
+		$item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" ); 
+		?>
+
+		<li id="menu-item-<?php echo $item->ID; ?>" class="<?php echo implode( ' ', $item_class ); ?>">
+			
+			<?php if ( $item->url == '#' ) : ?>
+				<span class="ccl-non-link"><?php echo $item->title; ?></span>
+			<?php else : ?>
+				<a href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a>
+			<?php endif; ?>
+
+			<?php if ( ! empty( $item->children ) ) : ?>
+				<ul class="ccl-c-sub-menu">
+					<?php build_sub_menu_items( $item->children ); ?>
+				</ul>
+			<?php endif; ?>		
+
+		</li>
+
+	<?php endforeach;
+}
+
+
+/*
+ * return HTML for child menu items
+ *
+ * $menu (string) menu name or ID
+ */
+function header_sub_menu( $menu_id, $classname = '' ) {
+	
+	if ( empty( $menu_id ) ) {
+		return;
+	}
+	
+	$menu_items = (array) get_sorted_menu_items( $menu_id );
+
+	if ( empty( $menu_items ) ) {
+		return;
+	}
+
+	$classname = is_string( $classname ) ? $classname : '';
+
+	ob_start(); ?>
+
+		<?php foreach( $menu_items as $item ) : 
+			
+			$has_children = ( ! empty( $item->children ) );
+			$menu_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" );
+			?>
+
+			<?php if ( $has_children ) : ?>
+
+				<div id="sub-menu-<?php echo $item->ID; ?>" class="<?php echo $classname; ?>">
+
+					<ul class="ccl-c-sub-menu">
+						
+						<?php build_sub_menu_items( $item->children ); ?>
+
+					</ul>
+
+				</div>
+
+			<?php endif; ?>
+
+		<?php endforeach; ?>
 
 	<?php
 	$html = ob_get_contents();

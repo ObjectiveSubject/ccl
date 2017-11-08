@@ -1,0 +1,15 @@
+.ccl-c-masthead__brand {
+    padding: $spacer 0;
+    border-bottom: 1px solid;    
+}
+
+.ccl-c-masthead__nav {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ccl-c-masthead__nav-item {
+    flex-basis: 33.333%;
+    flex-shrink: 0;
+}

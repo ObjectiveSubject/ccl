@@ -3,18 +3,17 @@
     background-repeat: no-repeat;
     background-position: 0 0;
     max-width: 100%;
+    background-size: 100%;
 
     &.ccl-is-vert {
         width: 220px;
         height: 70px;
         background-image: url(../images/vital-vert-inverse@2x.png);
-        background-size: 100%;
     }
 
     &.ccl-is-horz {
         width: 368px;
         height: 56px;
         background-image: url(../images/vital-horz@2x.png);
-        background-size: 100%;
     }
 }

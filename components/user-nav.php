@@ -9,7 +9,10 @@
             </li> -->
 
             <li class="ccl-c-user-nav__menu-item ccl-is-right" style="margin-left: auto">
-                <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">Chat with a librarian</a>
+                <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">
+                    <span class="ccl-u-hide-md" aria-hidden="true"><?php _e( 'Chat', 'ccl' ); ?></span>
+                    <span class="ccl-u-show-md"><?php _e( 'Chat with a Librarian', 'ccl' ); ?></span>
+                </a>
             </li>
             
             <li class="ccl-c-user-nav__menu-item ccl-is-right">
@@ -36,7 +39,7 @@
             <div class="ccl-c-modal__content">
 
                 <div class="ccl-c-modal__header">
-                    <div class="ccl-c-modal__title ccl-h5" id="label-librarian-chat">Chat with a Librarian</div>
+                    <div class="ccl-c-modal__title ccl-h5" id="label-librarian-chat"><?php _e( 'Chat with a Librarian', 'ccl' ); ?></div>
                     <button type="button" class="ccl-b-close" data-toggle="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -106,10 +106,8 @@ function modify_queries( $query ) {
 }
 
 /**
- * Add Menus
- *
- * @param $query
- */
+ * Add Menu Locations
+ * */
 function add_menus() {
 	
 	register_nav_menus(

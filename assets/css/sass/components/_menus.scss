@@ -1,0 +1,107 @@
+.ccl-c-menu {
+    @extend .ccl-u-clean-list;
+    @extend .ccl-u-mt-1;
+
+    a:focus {
+        outline: 0;
+    }
+}
+
+.ccl-c-sub-menu {    
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .ccl-is-primary > & {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+}
+
+.ccl-c-sub-menu-container {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: $spacer;
+    background: white;
+    z-index: 1;
+
+    &.ccl-is-primary {
+        left: 33.333%;
+    }
+    &.ccl-is-secondary {
+        left: 66.666%;
+    }
+}
+
+.menu-item {
+    position: relative;
+    font-weight: 500;
+    font-family: $gotham-narrow-medium;
+    line-height: 1;
+
+    .ccl-c-menu.ccl-is-primary > & {
+        
+        &:not(:first-child) {
+            margin-top: $spacer/2;
+        }
+
+        & > a {
+            font-size: rem(20);
+            @include media($lg) {
+                font-size: rem(24);
+            }
+        }
+    }
+    .ccl-c-menu.ccl-is-secondary > & {
+        
+        &:not(:first-child) {
+            margin-top: $spacer/2;
+        }
+
+        & > a {
+            font-size: rem(18);
+            @include media($lg) {
+                font-size: rem(20);
+            }
+        }
+    }
+
+    .ccl-c-sub-menu & {
+        text-transform: uppercase;
+        font-size: rem(15);
+        margin-bottom: 0.75em;
+
+        .ccl-is-primary & {
+            flex-basis: 30%;
+            flex-shrink: 0;
+        }
+    }
+
+    a {
+        display: block;
+    }
+
+    &.menu-item-has-children > a:after {
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 4px solid $gray;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        transform: rotate(45deg);
+        transform-origin: 0 100%;
+        margin-left: 5px;
+    }
+}
+
+.ccl-non-link {
+    display: block;
+    color: $gray;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 0.75em;
+    margin-bottom: 0.75em;
+}

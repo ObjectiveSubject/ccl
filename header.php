@@ -19,55 +19,60 @@
 			
 			<div class="ccl-l-container">
 				
-				<div class="site-title ccl-h2" style="font-family: Georgia,serif">
+				<div class="ccl-c-masthead__brand">
 					<a href="<?php echo get_home_url(); ?>" class="ccl-b-logo ccl-is-horz">
 						<span class="ccl-u-display-none"><?php echo bloginfo( 'name' ); ?></span>
 					</a>
 				</div>
 
-				<hr style="background:black"/>
+				<div class="ccl-c-masthead__nav">
 
-				<?php $locations = get_nav_menu_locations(); ?>
+					<?php $locations = get_nav_menu_locations(); ?>
 
-				<div class="ccl-l-row">
+					<?php if ( has_nav_menu( 'header_1' ) ) {
+						echo \CCL\Helpers\header_menu( $locations[ 'header_1' ], 'ccl-is-primary ccl-c-masthead__nav-item' );
+					} else {
+						echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a primary header menu</a></div>';
+					} ?>
 
-					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
-						<?php if ( has_nav_menu( 'header_1' ) ) {
-							echo \CCL\Helpers\header_menu( $locations[ 'header_1' ], 'ccl-is-primary' );
-						} else {
-							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a primary header menu</a></div>';
-						} ?>
-					</div>
-
-					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-lg">
-						<?php if ( has_nav_menu( 'header_2' ) ) {
-							echo \CCL\Helpers\header_menu( $locations[ 'header_2' ], 'ccl-is-secondary' );							
-						} else {
-							echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary header menu</a></div>';
-						} ?>
-					</div>
-
-					<div class="ccl-l-column ccl-l-span-third-lg ccl-u-display-block-lg">
-						<ul class="ccl-u-clean-list ccl-u-mt-1">
-							<li>
-								<hr class="ccl-u-my-nudge"/>
-								<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today’s hours 7:30am - 9pm</span>
-							</li>
-							<li>
-								<hr class="ccl-u-my-nudge"/>
-								<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i> Relevent Calendar Item</span>
-							</li>
-							<li>
-								<hr class="ccl-u-my-nudge"/>
-								<span class="ccl-h5">
-									<span class="ccl-u-color-red">
-										<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
-									</span>
-									Relevent notice message
+					<?php if ( has_nav_menu( 'header_2' ) ) {
+						echo \CCL\Helpers\header_menu( $locations[ 'header_2' ], 'ccl-is-secondary ccl-c-masthead__nav-item' );							
+					} else {
+						echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary header menu</a></div>';
+					} ?>
+				
+					<ul class="ccl-c-masthead__nav-item ccl-u-clean-list ccl-u-mt-1">
+						<li>
+							<hr class="ccl-u-my-nudge"/>
+							<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today’s hours 7:30am - 9pm</span>
+						</li>
+						<li>
+							<hr class="ccl-u-my-nudge"/>
+							<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i> Relevent Calendar Item</span>
+						</li>
+						<li>
+							<hr class="ccl-u-my-nudge"/>
+							<span class="ccl-h5">
+								<span class="ccl-u-color-red">
+									<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
 								</span>
-							</li>
-						</ul>
-					</div>
+								Relevent notice message
+							</span>
+						</li>
+					</ul>
+
+					<?php if ( has_nav_menu( 'header_1' ) ) { ?>
+						
+							<?php echo \CCL\Helpers\header_sub_menu( $locations[ 'header_1' ], 'ccl-c-sub-menu-container ccl-is-primary ccl-c-masthead__nav-item' ); ?>
+						
+					<?php } ?>
+
+					<?php if ( has_nav_menu( 'header_2' ) ) { ?>
+						
+							<?php echo \CCL\Helpers\header_sub_menu( $locations[ 'header_2' ], 'ccl-c-sub-menu-container ccl-is-secondary ccl-c-masthead__nav-item' ); ?>
+						
+					<?php } ?>
+
 				</div>
 
 			</div>
