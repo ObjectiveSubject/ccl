@@ -109,46 +109,42 @@ a.ccl-u-faded:focus {
 .ccl-u-display-inline { display: inline !important; }
 .ccl-u-display-inline-block { display: inline-block !important; }
 
-.ccl-u-display-block-sm {
-	display: none;
-	@include media($sm) {
-		display: block !important;
+.ccl-u-show-sm {
+	@include media( #{$sm - 1}, max ) {
+		display: none !important;
     }
 }
-.ccl-u-display-block-md {
-	display: none;
-	@include media($md) {
-		display: block !important;
+.ccl-u-show-md {
+	@include media( #{$md - 1}, max ) {
+		display: none !important;
     }
 }
-.ccl-u-display-block-lg {
-	display: none;
-	@include media($lg) {
-		display: block !important;
+.ccl-u-show-lg {
+	@include media( #{$lg - 1}, max ) {
+		display: none !important;
     }
 }
-.ccl-u-display-block-xl {
-	display: none;
-	@include media($xl) {
-		display: block !important;
+.ccl-u-show-xl {
+	@include media( #{$xl - 1}, max ) {
+		display: none !important;
     }
 }
-.ccl-u-display-none-sm {
+.ccl-u-hide-sm {
 	@include media($sm) {
 		display: none !important;
     }
 }
-.ccl-u-display-none-md {
+.ccl-u-hide-md {
 	@include media($md) {
 		display: none !important;
     }
 }
-.ccl-u-display-none-lg {
+.ccl-u-hide-lg {
 	@include media($lg) {
 		display: none !important;
     }
 }
-.ccl-u-display-none-xl {
+.ccl-u-hide-xl {
 	@include media($xl) {
 		display: none !important;
     }
