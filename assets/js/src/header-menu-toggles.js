@@ -13,6 +13,8 @@
         this.$el = $(el);
         this.target = this.$el.data('target');
         this.$target = $(this.target);
+        this.$parentMenu = this.$el.closest('.ccl-c-menu');
+        this.$closeIcon = $('<i class="ccl-b-icon close" aria-hidden="true"></i>');
 
         this.init();
     };
@@ -22,8 +24,47 @@
         var that = this;
 
         this.$el.click(function(event){
+
             event.preventDefault();
-            that.$target.fadeToggle();    
+
+            // if the target is already open
+            if ( that.$target.hasClass('ccl-is-active') ) {
+
+                // close target and remove active classes/elements
+                that.$parentMenu.removeClass('ccl-has-active-item');
+                that.$el.removeClass('ccl-is-active');
+                that.$target.removeClass('ccl-is-active').fadeOut(CCL.DURATION);
+                that.$closeIcon.remove();       
+
+            } 
+
+            // target is not open
+            else {
+
+                // close and reset all active menus
+                $('.ccl-c-menu.ccl-has-active-item').each(function(){
+                    $(this)
+                        .removeClass('ccl-has-active-item')
+                        .find('a.ccl-is-active').removeClass('ccl-is-active')
+                        .find('.ccl-b-icon.close').remove();
+                });
+                
+                // close and reset all active sub-menu containers
+                $('.ccl-c-sub-menu-container.ccl-is-active').each(function(){
+                    $(this).removeClass('ccl-is-active').fadeOut(CCL.DURATION);
+                });
+
+                // activate the selected target
+                that.$parentMenu.addClass('ccl-has-active-item');
+                that.$target.addClass('ccl-is-active').fadeIn(CCL.DURATION);
+                // prepend close icon
+                that.$closeIcon.prependTo(that.$el);
+                CCL.reflow(that.$closeIcon[0]);
+                that.$closeIcon.fadeIn(200);
+                that.$el.addClass('ccl-is-active');
+
+            }
+
         });
 
     };
