@@ -406,3 +406,30 @@ function header_sub_menu( $menu_id, $classname = '' ) {
 	return $html;
 
 }
+
+/**
+ * Fetch a librarian's statement from post_meta or fallback to default option if none found
+ *
+ * @param $id int post id of the staff member
+ *
+ * @return mixed|string Librarian's personal statement or the default one
+ */
+function get_librarian_statement( $id = 0 ) {
+
+	$statement = get_post_meta( $id, 'staff_statement', true );
+
+	if ( ! $statement ) {
+
+		$staff_settings = get_option( 'staff-settings' );
+
+		// set a notice message if no default statement is found
+		if ( ! array_key_exists( 'staff-statement_default', $staff_settings ) ) {
+			$statement = "No default librarian statement has been added.";
+		} else {
+			$statement = $staff_settings['staff-statement_default'];
+		}
+
+	}
+
+	return $statement;
+}
