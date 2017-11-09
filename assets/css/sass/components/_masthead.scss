@@ -13,3 +13,14 @@
     flex-basis: 33.333%;
     flex-shrink: 0;
 }
+
+.ccl-c-masthead__status {
+    @extend .ccl-u-clean-list;
+    @extend .ccl-u-mt-1;
+    text-transform: uppercase;
+
+    li {
+        border-top: 1px solid lightgray;
+        padding: rem(10) rem(16) rem(16);
+    }
+}

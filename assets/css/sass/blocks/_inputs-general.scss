@@ -22,7 +22,7 @@ textarea.ccl-b-input {
         color: $gray;
     }
 
-    &:hover, &:focus {
+    &:focus {
         outline: 1px dotted $border-color-input;
     }
 }

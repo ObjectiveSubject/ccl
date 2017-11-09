@@ -25,6 +25,7 @@
     position: absolute;
     right: 0;
     top: $spacer;
+    min-height: 100%;
     background: white;
     z-index: 1;
 
@@ -77,11 +78,35 @@
         .ccl-is-primary & {
             flex-basis: 30%;
             flex-shrink: 0;
+            flex-grow: 1;
+            &:not(:last-child) {
+                margin-right: $gutter;
+            }
         }
     }
 
     a {
         display: block;
+        position: relative;
+
+        .ccl-has-active-item &:not(.ccl-is-active) {
+            color: $gray;
+        }
+
+        .ccl-b-icon {
+            display: none;
+            font-size: 0.8em;
+            position: absolute;
+            right: 100%;
+            margin-right: rem(15);
+            transform: scale(0.5);
+            transition: transform $duration $easing;
+        }
+        &.ccl-is-active {
+            .ccl-b-icon {
+                transform: scale(1) rotate(90deg);
+            }
+        }
     }
 
     &.menu-item-has-children > a:after {
@@ -95,6 +120,10 @@
         transform: rotate(45deg);
         transform-origin: 0 100%;
         margin-left: 5px;
+        transition: transform $duration-short $easing;
+    }
+    &.menu-item-has-children > a.ccl-is-active:after {
+        transform: translate3d(5px,-2px,0) rotate(0deg);
     }
 }
 

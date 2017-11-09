@@ -15,7 +15,7 @@ $border-color-select: rgba(black, 0.6);
     cursor: pointer;
     color: inherit;
 
-    &:hover, &:focus {
+    &:focus {
         // color: $blue;
         // border-color: black;
         // @include school-style(color);
@@ -46,7 +46,7 @@ $border-color-select: rgba(black, 0.6);
         color: white;
         border-color: white;
 
-        &:hover, &:focus {
+        &:focus {
             outline: 1px dotted white;
         }
         
@@ -57,7 +57,7 @@ $border-color-select: rgba(black, 0.6);
                     border-color: black;
                     background-image: url(../images/caret-down-black@2x.png);
                     
-                    &:hover, &:focus {
+                    &:focus {
                         outline: 1px dotted black;
                     }
                 }

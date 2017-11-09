@@ -41,17 +41,14 @@
 						echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small">Add a secondary header menu</a></div>';
 					} ?>
 				
-					<ul class="ccl-c-masthead__nav-item ccl-u-clean-list ccl-u-mt-1">
+					<ul class="ccl-c-masthead__status ccl-c-masthead__nav-item">
 						<li>
-							<hr class="ccl-u-my-nudge"/>
 							<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today’s hours 7:30am - 9pm</span>
 						</li>
 						<li>
-							<hr class="ccl-u-my-nudge"/>
 							<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i> Relevent Calendar Item</span>
 						</li>
 						<li>
-							<hr class="ccl-u-my-nudge"/>
 							<span class="ccl-h5">
 								<span class="ccl-u-color-red">
 									<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:

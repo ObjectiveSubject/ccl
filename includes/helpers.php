@@ -301,13 +301,15 @@ function header_menu( $menu_id, $classname = '' ) {
 		<?php foreach( $menu_items as $item ) : 
 			
 			$menu_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" );
+			$link_class = '';
 			
 			if ( isset( $item->children ) && count( $item->children ) ) {
 				$menu_item_class[] = 'menu-item-has-children'; 
+				$link_class = 'js-toggle-header-menu';
 			} ?>
 
 			<li id="menu-item-<?php echo $item->ID; ?>" class="<?php echo implode( ' ', $menu_item_class ); ?>">
-				<a href="<?php echo $item->url; ?>" class="js-toggle-header-menu" data-target="#sub-menu-<?php echo $item->ID; ?>"><?php echo $item->title; ?></a>
+				<a href="<?php echo $item->url; ?>" class="<?php echo $link_class; ?>" data-target="#sub-menu-<?php echo $item->ID; ?>"><?php echo $item->title; ?></a>
 			</li>
 
 		<?php endforeach; ?>
