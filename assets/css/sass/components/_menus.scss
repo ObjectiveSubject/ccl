@@ -39,14 +39,13 @@
 
 .menu-item {
     position: relative;
-    font-weight: 500;
-    font-family: $gotham-narrow-medium;
+    font-family: $gotham-narrow-book;
     line-height: 1;
 
     .ccl-c-menu.ccl-is-primary > & {
         
         &:not(:first-child) {
-            margin-top: $spacer/2;
+            margin-top: 0.9em;
         }
 
         & > a {
@@ -59,7 +58,7 @@
     .ccl-c-menu.ccl-is-secondary > & {
         
         &:not(:first-child) {
-            margin-top: $spacer/2;
+            margin-top: 0.7em;
         }
 
         & > a {
@@ -73,7 +72,9 @@
     .ccl-c-sub-menu & {
         text-transform: uppercase;
         font-size: rem(15);
-        margin-bottom: 0.75em;
+        font-weight: 500;
+        font-family: $gotham-narrow-medium;
+        margin-bottom: 0.9em;
 
         .ccl-is-primary & {
             flex-basis: 30%;
@@ -132,5 +133,7 @@
     color: $gray;
     border-bottom: 1px solid lightgray;
     padding-bottom: 0.75em;
-    margin-bottom: 0.75em;
+    margin-bottom: 0.9em;
+    font-weight: 400;
+    font-family: $gotham-narrow-book;
 }
