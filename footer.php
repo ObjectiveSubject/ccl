@@ -2,6 +2,8 @@
 /**
  * The template for displaying the footer.
  */
+
+$footer_options = get_option( 'footer-options' );
 ?>
 
 	<footer id="colophon" class="ccl-c-footer ccl-u-pt-2 ccl-u-pb-3" role="contentinfo">
@@ -29,13 +31,23 @@
 				</div>
 
 				<div class="ccl-l-column ccl-l-span-third-lg">
-					<hr/>
-					Footer Column
+					<?php if ( array_key_exists( 'footer-column-1', $footer_options ) && $footer_options['footer-column-1'] ) : ?>
+
+						<?php echo apply_filters( 'the_content', $footer_options['footer-column-1'] ); ?>
+
+					<?php else : ?>
+						<p>Add content to footer column 1</p>
+					<?php endif; ?>
 				</div>
 
 				<div class="ccl-l-column ccl-l-span-third-lg">
-					<hr/>
-					Footer Column
+					<?php if ( array_key_exists( 'footer-column-2', $footer_options ) && $footer_options['footer-column-2'] ) : ?>
+
+						<?php echo apply_filters( 'the_content', $footer_options['footer-column-2'] ); ?>
+
+					<?php else : ?>
+						<p>Add content to footer column 2</p>
+					<?php endif; ?>
 				</div>
 
 			</div>
