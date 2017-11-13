@@ -24,7 +24,8 @@
 		this.$el = $(elem);
 		this.$form = this.$el.find('form');
 		this.$input = $(elem).find('#ccl-search');
-		this.$responseArea = this.$el.find('.ccl-c-search-results__list');
+		this.$response = this.$el.find('.ccl-c-search-results');
+		this.$responseList = this.$el.find('.ccl-c-search-results__list');
 		this.$responseItems = this.$el.find('.ccl-c-search-item');
 		this.$resultsLink = this.$el.find('.ccl-c-search-results__footer');
 		this.$searchIndex = this.$el.find('.ccl-c-search-index');
@@ -55,14 +56,23 @@
 				timeout = setTimeout(function () {
 
 					if ( query.length > 1 ) {
+						_this.$response.show();
 					 	_this.fetchResults( query );
 					}
 					else {
-						_this.$responseArea.html('');
+						_this.$responseList.html('');
 					}
 
-				}, 1000);
+				}, 1500);
 
+			})
+			.focus(function(){
+				if ( _this.$input.val() != '' ) {
+					_this.$response.show();
+				}
+			})
+			.blur(function(){
+				_this.$response.hide();
 			});
 
 		this.$searchIndex.change(function(){
@@ -71,8 +81,6 @@
 
 		this.$form.submit(function(event) {
 
-			console.log('submit');
-
 			event.preventDefault();
 
 			var query = _this.$input.val();
@@ -80,14 +88,13 @@
 			clearTimeout(timeout);
 
 			if ( query.length > 1 ) {
+				_this.$response.show();
 				_this.fetchResults( query );
 		   }
 		});
 	};
 
 	SearchAutocomplete.prototype.fetchResults = function( query ) {
-
-		console.log('fetchResults');
 
 		var _this = this,
 			data = {
@@ -125,7 +132,7 @@
 		var queryString = searchIndex + ':(' + query + ')';
 
 		// Clear response area list items (update when Pattern Library view isn't necessary)
-		_this.$responseArea.html('');
+		_this.$responseList.html('');
 		_this.$resultsLink.remove();
 
 		// Create list item for Worldcat search.
@@ -143,7 +150,7 @@
 							'</span>' +
 						'</a>';
 
-		_this.$responseArea.append(listItem);
+		_this.$responseList.append(listItem);
 
 		// Create list items for each post in results
 		if ( count > 0 ) {
@@ -156,7 +163,7 @@
 								'</span>' +
 							'</span>';
 
-			_this.$responseArea.append(separator);
+			_this.$responseList.append(separator);
 
 
 			// Build results list
@@ -195,7 +202,7 @@
 								'</span>' +
 							'</a>';
 
-				_this.$responseArea.append(listItem);
+				_this.$responseList.append(listItem);
 			});
 
 			// Build results count/link
@@ -206,7 +213,7 @@
 								'</a>' +
 						'</div>';
 
-		_this.$responseArea.append(listItem);
+		_this.$responseList.append(listItem);
 		}
 	};
 
@@ -221,8 +228,8 @@
 		this.fetchResults( query );
 	};
 
-	// If the user hits return or presses submit, the query will go directly to WorldCat. This function wraps
-	// the string in the specified index value (keyword, author, title, etc)
+	// If the user hits return or presses submit, the query will go directly to WorldCat. 
+	// This function wraps the string in the specified index value (keyword, author, title, etc)
 	SearchAutocomplete.prototype.wrapQuery = function() {
 		// event.preventDefault();
 
