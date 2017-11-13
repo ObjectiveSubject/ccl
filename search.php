@@ -24,7 +24,7 @@ get_header(); ?>
 
 				<?php while ( have_posts() ) : the_post(); ?>
 					<div class="ccl-l-row ccl-u-mb-1">
-						<article id="post-<?php the_ID(); ?>" <?php post_class('ccl-l-column ccl-l-span-8-lg'); ?>>
+						<article id="post-<?php the_ID(); ?>" <?php post_class('ccl-l-column ccl-l-span-9-lg'); ?>>
 
 							<header class="entry-header">
 								<h2 class="entry-title"><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>

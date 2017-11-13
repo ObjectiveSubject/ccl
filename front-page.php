@@ -63,7 +63,7 @@ get_header(); ?>
 
 					<div class="ccl-l-row">
 
-						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-8-md ccl-u-mt-2">
+						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-mt-2">
 							<?php echo apply_filters( 'the_content', $content ); ?>
 						</div>
 

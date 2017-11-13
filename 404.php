@@ -14,7 +14,7 @@ get_header(); ?>
 			</header>
 			
 			<div class="ccl-l-row">
-				<div class="ccl-c-entry-content ccl-l-column ccl-l-span-8-md ccl-u-my-2">
+				<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
 
 					<form class="ccl-c-search-form" role="search" method="get" action="<?php echo site_url(); ?>" style="border:1px solid">
 

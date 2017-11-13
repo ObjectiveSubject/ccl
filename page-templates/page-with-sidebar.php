@@ -46,11 +46,11 @@ get_header(); ?>
 				<div class="ccl-l-container">
 
 					<div class="ccl-l-row">
-						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-8-md ccl-u-my-2">
+						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
 							<?php the_content(); ?>
 						</div>
 
-						<div class="ccl-c-entry-sidebar ccl-l-column ccl-l-span-4-md ccl-u-my-2">
+						<div class="ccl-c-entry-sidebar ccl-l-column ccl-l-span-3-md ccl-u-my-2">
 							<?php echo apply_filters( 'the_content', $sidebar ); ?>
 						</div>
 					</div>
