@@ -54,14 +54,6 @@
             max-height: rem(450);
         }        
     }
-
-    a {
-        color: inherit;
-        &:hover, &:focus {
-            color: inherit;
-            opacity: 0.5;
-        }
-    }
 }
 
 .ccl-c-hero__thumb {
@@ -79,6 +71,14 @@
         display: flex;
         height: 100%;
         align-items: flex-end;
+    }
+
+    a {
+        color: inherit;
+        &:hover, &:focus {
+            color: inherit;
+            opacity: 0.5;
+        }
     }
 
     & > * {
