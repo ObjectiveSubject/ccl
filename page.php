@@ -34,7 +34,13 @@ get_header(); ?>
 
 							<div class="ccl-l-column ccl-l-span-two-thirds-lg">
 								<div class="ccl-c-hero__content">
-									<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
+								
+									<?php get_template_part( 'partials/block-anchors' ); ?>
+
+									<?php if ( $description ) : ?>
+										<div><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
+									<?php endif; ?>
+									
 								</div>
 							</div>
 							

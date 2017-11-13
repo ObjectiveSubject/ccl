@@ -70,7 +70,7 @@
     @include media($lg) {
         display: flex;
         height: 100%;
-        align-items: flex-end;
+        // align-items: flex-end;
     }
 
     a {
@@ -99,7 +99,6 @@
 .ccl-c-hero__action {
     @extend .ccl-h4;
     @extend .ccl-u-display-block;
-    margin-top: -$spacer;
 }
 
 .ccl-c-hero__title {
@@ -109,6 +108,7 @@
 .ccl-c-hero__menu {
     @extend .ccl-u-clean-list;
     margin-top: $spacer;
+    flex-shrink: 0;
     li {
         @extend .ccl-h3;
         margin-top: 0;

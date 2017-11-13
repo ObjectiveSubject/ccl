@@ -16,9 +16,9 @@ if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]
             $block_item_count = ( $has_block_items && is_array( $block['block_items'] ) ) ? count( $block['block_items'] ) : 0;
             $enable_carousel = $block_item_count > 3; ?>
 
-            <div class="ccl-l-container">
+            <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
-                <div id="block-<?php echo $index; ?>" class="ccl-c-promo">
+                <div class="ccl-c-promo">
 
                     <header class="ccl-c-promo__header">
 
@@ -102,9 +102,9 @@ if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]
 
         <?php elseif ( 'feature_item' == $block['block_type'] ) : ?>
 
-            <div class="ccl-l-container">
+            <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
-                <div id="block-<?php echo $index; ?>" class="ccl-c-promo--slim <?php echo 'ccl-is-' . $block['block_layout']; ?>">
+                <div class="ccl-c-promo--slim <?php echo 'ccl-is-' . $block['block_layout']; ?>">
 
                     <header class="ccl-c-promo__header">
 
@@ -154,9 +154,9 @@ if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]
                 $first_name = explode( ' ', $name )[0];
                 $profile_url = get_post_meta( $staff_id, 'member_friendly_url', true ); ?>
 
-                <div class="ccl-l-container">
+                <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
-                    <div id="block-<?php echo $index; ?>" class="ccl-c-promo">
+                    <div class="ccl-c-promo">
                     
                         <header class="ccl-c-promo__header">
 
@@ -246,9 +246,9 @@ if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]
         
         <?php else : ?>
 
-            <div class="ccl-l-container">
+            <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
-                <div id="block-<?php echo $index; ?>" class="ccl-c-promo">
+                <div class="ccl-c-promo">
 
                     <header class="ccl-c-promo__header">
 
