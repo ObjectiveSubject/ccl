@@ -35,7 +35,7 @@ get_header(); ?>
 						<?php \CCL\Helpers\get_component( 'search-box' ); ?>
 					</div>
 
-					<div class="ccl-c-hero__thumb ccl-b-media--16x9" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)" role="presentaion"></div>
+					<div class="ccl-c-hero__thumb" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)" role="presentaion"></div>
 
 					<div class="ccl-l-container">
 

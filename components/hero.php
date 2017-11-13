@@ -1,4 +1,6 @@
 <div class="ccl-c-hero ccl-has-image" style="background-image:url(http://unsplash.it/1500/750/)">
+
+    <div class="ccl-c-hero__thumb" style="background-image:url(http://unsplash.it/1500/750/)" role="presentaion"></div>
     
     <div class="ccl-l-container">
 

@@ -1,17 +1,10 @@
 .ccl-c-hero {
     position: relative;
     background-size: cover;
-    // background-color: black;
-    // color: white;
-    background-position: top center;
+    background-position: center;
     background-repeat: no-repeat;
-    padding: 6rem 0 3rem;
+    padding: 1rem 0 2rem;
     @include school-style(background-color);
-
-    @include media($lg) {
-        display: flex;
-        align-items: flex-end;
-    }
 
     &.ccl-has-search {
         @include media($lg) {
@@ -21,21 +14,16 @@
     }
 
     &.ccl-has-image {
-        padding-top: 0;
         
-        @include media( #{$md - 1}, max ) {
+        @include media( #{$lg - 1}, max ) {
+            padding-top: 0;
             background-image: none !important;
         }
-        @include media($md) {
-            padding-top: 6rem;
-            color: white;
-            
-        }
         @include media($lg) {
-            height: 56.25vw;
-            max-height: rem(625);
+            color: white;
+            min-height: rem(350);
         }
-
+        
         & > * {
             position: relative;
         }
@@ -50,7 +38,7 @@
         right: 0;
         bottom: 0;
         z-index: 0;
-        background: linear-gradient( to top, rgba(black, 0.9), rgba(black, 0.9) 20%, rgba(black, 0.1) );
+        background: linear-gradient( to bottom, rgba(black, 0.8), rgba(black, 0.8) 35%, rgba(black, 0.2) );
 
         @include media($md) {
             display: block;
@@ -75,7 +63,9 @@
 
 .ccl-c-hero__thumb {
     background-size: cover;
-    @include media($md) {
+    background-position: center;
+    height: rem(200);
+    @include media($lg) {
         display: none;
     }
 }
