@@ -2,6 +2,7 @@ $border-color-select: rgba(black, 0.6);
 
 .ccl-b-select {
     -webkit-appearance: none;
+    -moz-appearance: none;
     border: 1px solid $border-color-select;
     border-radius: 0;
     background-color: transparent;
@@ -43,6 +44,7 @@ $border-color-select: rgba(black, 0.6);
         padding-top: 0.2em;
         padding-bottom: 0.1em;
         background-image: url(../images/caret-down-white@2x.png);
+        background-color: black;
         color: white;
         border-color: white;
 
