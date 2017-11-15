@@ -17,10 +17,6 @@ $border-color-select: rgba(black, 0.6);
     color: inherit;
 
     &:focus {
-        // color: $blue;
-        // border-color: black;
-        // @include school-style(color);
-        // @include school-style(border-color);
         outline: 1px dotted $border-color-select;
     }
 
@@ -44,12 +40,13 @@ $border-color-select: rgba(black, 0.6);
         padding-top: 0.2em;
         padding-bottom: 0.1em;
         background-image: url(../images/caret-down-white@2x.png);
-        background-color: black;
         color: white;
         border-color: white;
 
         &:focus {
             outline: 1px dotted white;
+            background-color: black;
+            color: white !important;
         }
         
         @each $key, $hex in $school-map {
