@@ -7,6 +7,10 @@
     color: black;
     box-shadow: 0 1px 5px 0px rgba(black, 0.2);
 
+    .ccl-c-quick-nav & {
+        width: 100%;
+    }
+
     .ccl-c-hero & {
         @include media( #{$lg - 1}, max) {
             box-shadow: none;

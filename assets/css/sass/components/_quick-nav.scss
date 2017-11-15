@@ -65,10 +65,39 @@
         flex-grow: 0;
     }
 
-    &.ccl-is-search {
-        justify-content: flex-end;
+    .ccl-search-active & {
+        display: none;
     }
 
+    &.ccl-is-search-toggle {
+        justify-content: flex-end;
+
+        &:hover, &:focus {
+            color: white;
+            background: black;
+            border-color: black;
+        }
+
+        .ccl-b-icon {
+            font-size: 2rem;
+        }
+
+        .ccl-search-active & {
+            display: flex;
+
+            .ccl-b-icon:before {
+                content: $ccl-b-icon-close;
+            }
+        }
+    }
+
+    &.ccl-is-search-box {
+        display: none;
+        padding: 0;
+        .ccl-search-active & {
+            display: flex;
+        }
+    }
 }
 
 .ccl-c-quick-nav__item-text {

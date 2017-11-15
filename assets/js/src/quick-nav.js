@@ -15,6 +15,7 @@
         this.toggleOffset = $('.site-content').offset().top;
         this.$subMenus = this.$el.find('.sub-menu');
         this.$scrollSpyItems = this.$el.find('.ccl-c-quick-nav__scrollspy span');
+        this.$searchToggle = this.$el.find('.ccl-is-search-toggle');
 
         this.init();
     };
@@ -24,6 +25,7 @@
         this.initScroll();
         this.initMenus();
         this.initScrollSpy();
+        this.initSearch();
 
     };
 
@@ -92,6 +94,14 @@
 
         });
 
+    };
+
+    QuickNav.prototype.initSearch = function(){
+        var that = this;
+        this.$searchToggle.click(function(event){
+            event.preventDefault();
+            that.$el.toggleClass('ccl-search-active');
+        });
     };
 
     $(document).ready(function(){

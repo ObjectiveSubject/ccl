@@ -76,13 +76,15 @@
             <?php endif; ?>
         </div>
 
-        <div class="ccl-c-quick-nav__item ccl-is-search ccl-is-lazy ccl-has-divider">
-            <a href="#" class="ccl-b-btn ccl-is-naked">
-                <span class="ccl-u-display-none">Search</span>
-                <i class="ccl-b-icon search" aria-hidden="true"></i>
-            </a>
+        <div class="ccl-c-quick-nav__item ccl-is-search-box">
+            <?php \CCL\Helpers\get_component( 'search-box' ); ?>
         </div>
 
+        <a href="#" class="ccl-c-quick-nav__item ccl-is-search-toggle ccl-is-lazy ccl-has-divider">
+            <span class="ccl-u-display-none">Search</span>
+            <i class="ccl-b-icon search" aria-hidden="true"></i>
+        </a>
+    
     </div>
 
 </nav>
