@@ -16,4 +16,10 @@
         height: 56px;
         background-image: url(../images/vital-horz@2x.png);
     }
+
+    &.ccl-is-standalone {
+        width: 103px;
+        height: 25px;
+        background-image: url(../images/vital-standalone@2x.png);
+    }
 }

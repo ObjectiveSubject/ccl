@@ -1,9 +1,7 @@
 <?php
-$blocks = get_post_meta( get_the_ID(), 'block_group', true );
+$blocks = \CCL\Helpers\get_blocks();
 
-// The block check will almost always be true
-// The extended check is to see if a single empty "WYSIWYG" block has been saved
-if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]['block_type'] && '' != $blocks[0]['block_description'] ) ) : ?>
+if ( $blocks ) : ?>
 
     <!-- ### Blocks -->
 

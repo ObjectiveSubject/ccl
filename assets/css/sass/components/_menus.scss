@@ -38,9 +38,12 @@
 }
 
 .menu-item {
-    position: relative;
-    font-family: $gotham-narrow-book;
-    line-height: 1;
+
+    .ccl-c-menu & {
+        position: relative;
+        font-family: $gotham-narrow-book;
+        line-height: 1;
+    }
 
     .ccl-c-menu.ccl-is-primary > & {
         
@@ -86,7 +89,7 @@
         }
     }
 
-    a {
+    .ccl-c-menu & a {
         display: block;
         position: relative;
 
@@ -110,7 +113,7 @@
         }
     }
 
-    &.menu-item-has-children > a:after {
+    .ccl-c-menu &.menu-item-has-children > a:after {
         content: "";
         display: inline-block;
         width: 0;
@@ -123,7 +126,7 @@
         margin-left: 5px;
         transition: transform $duration-short $easing;
     }
-    &.menu-item-has-children > a.ccl-is-active:after {
+    .ccl-c-menu &.menu-item-has-children > a.ccl-is-active:after {
         transform: translate3d(5px,-2px,0) rotate(0deg);
     }
 }

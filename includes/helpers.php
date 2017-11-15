@@ -435,3 +435,32 @@ function get_librarian_statement( $id = 0 ) {
 
 	return $statement;
 }
+
+/**
+ * Get blocks from a post
+ *
+ * @param $id {int} post id
+ *
+ * @return bool|array Array of blocks OR FALSE
+ */
+function get_blocks( $id = 0 ) {
+
+	if ( ! $id ) {
+		$id = get_the_ID();
+	}
+
+	$blocks = get_post_meta( $id, 'block_group', true );
+	
+	// The block check will almost always be true
+	// The extended check is to see if a single empty "WYSIWYG" block has been saved
+	if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]['block_type'] && '' != $blocks[0]['block_description'] ) ) {
+		
+		return $blocks;
+	
+	} else {
+	
+		return false;
+	
+	}
+
+}

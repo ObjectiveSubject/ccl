@@ -12,7 +12,7 @@
         },
         className = {
             ACTIVE: 'ccl-is-active',
-            MENU: 'ccl-c-dropdown__menu'
+            CONTENT: 'ccl-c-dropdown__content'
         };
 
     var DropdownToggle = function(el){
@@ -21,7 +21,7 @@
         
         var target = this.$toggle.data('target');
 
-        this.$menu = $( target );
+        this.$content = $( target );
         
         this.init();
     };
@@ -37,7 +37,7 @@
         });
 
         $(document).on( 'click', function(event){
-            var hasActiveMenus = $( '.' + className.MENU + '.' + className.ACTIVE ).length;
+            var hasActiveMenus = $( '.' + className.CONTENT + '.' + className.ACTIVE ).length;
             if ( hasActiveMenus ){
                 _clearMenus();
             }
@@ -53,24 +53,24 @@
             return;
         }
 
-        this.showMenu();
+        this.showContent();
 
     };
 
-    DropdownToggle.prototype.showMenu = function(){
+    DropdownToggle.prototype.showContent = function(){
         this.$toggle.attr('aria-expanded', 'true');
-        this.$menu.addClass( className.ACTIVE );
+        this.$content.addClass( className.ACTIVE );
         this.$parent.addClass( className.ACTIVE );
     };
 
     DropdownToggle.prototype.hideMenu = function(){
         this.$toggle.attr('aria-expanded', 'false');
-        this.$menu.removeClass( className.ACTIVE );
+        this.$content.removeClass( className.ACTIVE );
         this.$parent.removeClass( className.ACTIVE );
     };
 
     function _clearMenus() {
-        $('.ccl-c-dropdown, .ccl-c-dropdown__menu').removeClass( className.ACTIVE );
+        $('.ccl-c-dropdown, .ccl-c-dropdown__content').removeClass( className.ACTIVE );
         $( selector.TOGGLE ).attr('aria-expanded', 'false');
     }
 
