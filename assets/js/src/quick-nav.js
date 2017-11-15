@@ -14,6 +14,7 @@
         this.$el = $(el);
         this.toggleOffset = $('.site-content').offset().top;
         this.$subMenus = this.$el.find('.sub-menu');
+        this.$scrollSpyItems = this.$el.find('.ccl-c-quick-nav__scrollspy span');
 
         this.init();
     };
@@ -22,6 +23,7 @@
 
         this.initScroll();
         this.initMenus();
+        this.initScrollSpy();
 
     };
 
@@ -61,6 +63,35 @@
                 $subMenu.slideToggle();
             });
         });
+    };
+
+    QuickNav.prototype.initScrollSpy = function(){
+
+        var that = this;
+
+        this.$scrollSpyItems.each(function(){
+
+            var $spyItem = $(this),
+                target = $spyItem.data('target');
+
+            $window.scroll( CCL.throttle( _onScroll, 100 ) );
+
+            function _onScroll() {
+             
+                var scrollTop = $window.scrollTop(),
+                    targetTop = $(target).offset().top - 150;
+
+                if ( scrollTop >= targetTop ) {
+                    that.$scrollSpyItems.removeClass('ccl-is-active');
+                    $spyItem.addClass('ccl-is-active');
+                } else {
+                    $spyItem.removeClass('ccl-is-active');
+                }
+
+            }
+
+        });
+
     };
 
     $(document).ready(function(){
