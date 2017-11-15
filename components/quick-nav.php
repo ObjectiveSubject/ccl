@@ -52,13 +52,16 @@
         <div class="ccl-c-dropdown ccl-c-quick-nav__item ccl-has-divider">
             <?php 
             $blocks = \CCL\Helpers\get_blocks();
-            if ( $blocks ) : ?>
+            if ( $blocks && count( $blocks ) > 1 ) : ?>
 
                     <a href="#dropdown-block-list" class="ccl-c-dropdown__toggle ccl-c-quick-nav__scrollspy ccl-c-quick-nav__item-text" data-toggle="dropdown" data-target="#dropdown-block-list" aria-expanded="false" aria-haspopup="true">
                         <?php foreach ( $blocks as $index => $block ) : 
                             $title = empty( $block['block_title'] ) ? '(no title)' : $block['block_title']; ?>
                             <?php if ( $block['block_type'] != 'banner' ) : ?>
-                                <span data-target="<?php echo '#block-' . $index; ?>"><?php echo esc_html( $title ); ?></span>
+                                <span data-target="<?php echo '#block-' . $index; ?>">
+                                    <?php echo esc_html( $title ); ?>
+                                    <i class="ccl-b-caret-down" aria-hidden="true"></i>
+                                </span>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </a>
@@ -67,7 +70,11 @@
                             <?php foreach ( $blocks as $index => $block ) : 
                                 $title = empty( $block['block_title'] ) ? '(no title)' : $block['block_title']; ?>
                                 <?php if ( $block['block_type'] != 'banner' ) : ?>
-                                    <li class="menu-item"><a href="<?php echo '#block-' . $index; ?>" class="js-smooth-scroll"><?php echo esc_html( $title ); ?></a></li>
+                                    <li class="menu-item">
+                                        <a href="<?php echo '#block-' . $index; ?>" class="js-smooth-scroll">
+                                            <?php echo esc_html( $title ); ?>
+                                        </a>
+                                    </li>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
