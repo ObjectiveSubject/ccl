@@ -187,17 +187,17 @@
             padding: 0.2rem 0;
             text-transform: uppercase;
         }
-    }
 
-    a[href="#"] {
-        color: $gray;
-        border-bottom: 1px solid lightgray;
-        font-weight: 400;
-        font-family: $gotham-narrow-book;
-        cursor: default;
-        pointer-events: none;
-        &:after {
-            display: none !important;
+        a[href="#"] {
+            color: $gray;
+            border-bottom: 1px solid lightgray;
+            font-weight: 400;
+            font-family: $gotham-narrow-book;
+            cursor: default;
+            pointer-events: none;
+            &:after {
+                display: none !important;
+            }
         }
     }
 }
