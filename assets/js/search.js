@@ -70,9 +70,23 @@
 				if ( _this.$input.val() != '' ) {
 					_this.$response.show();
 				}
+				
 			})
-			.blur(function(){
-				_this.$response.hide();
+			.blur(function(event){
+				console.log('input blurred');
+				$(document).on('click', _onBlurredClick);
+
+				function _onBlurredClick(event) {
+					
+					console.log('onblurredclick running');
+					
+					if ( ! $.contains( _this.$el[0], event.target ) ) {
+						_this.$response.hide();
+					}
+		
+					$(document).off('click', _onBlurredClick);
+		
+				}
 			});
 
 		this.$searchIndex.change(function(){
