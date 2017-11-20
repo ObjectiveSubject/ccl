@@ -2,7 +2,7 @@
     border-top: 1px solid rgba(black,0.6);
     padding-top: $spacer;
     margin-top: $spacer;
-    margin-bottom: $spacer * 3;
+    // margin-bottom: $spacer * 3;
     @include media($lg) {
         margin-top: $spacer * 2;
     }
@@ -39,6 +39,16 @@
     @extend .ccl-u-clean-list;
     margin-top: $spacer;
     font-weight: bold;
+
+    & > * {
+        line-height: 1;
+        margin-bottom: 0.5em;
+    }
+}
+
+.ccl-c-profile-card__cta {
+    @extend .ccl-h4;
+    @extend .ccl-u-mt-0;
 }
 
 .ccl-c-profile-card__avatar {

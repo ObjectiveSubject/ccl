@@ -13,7 +13,9 @@ get_header(); ?>
 			$thumb_url   = get_the_post_thumbnail_url( $post, 'full' );
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
 			$description = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
-			$hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
+            $hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
+            $is_subject_sort = strpos( $_SERVER['QUERY_STRING'], 'sort=subject' ) > -1;
+            $is_alpha_sort = ( ! $is_subject_sort );
 			?>
 
 			<article <?php post_class(); ?>>
@@ -44,115 +46,20 @@ get_header(); ?>
 						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
 							<?php the_content(); ?>
 						</div>
-					</div>
-
-                    <?php 
-                    $args = array(
-                        'post_type' => 'staff',
-                        'posts_per_page' => 500
-                    );
+                    </div>
                     
-                    $librarians = new WP_Query( $args ); 
-                    $sorted_librarians = $librarians->posts;
+                    <p>
+                        <a href="?sort=alpha" class="ccl-h4 ccl-u-mr-2 <?php echo ( ! $is_alpha_sort ) ? 'ccl-u-faded' : ''; ?>">Alphabetical by Name</a>
+                        <a href="?sort=subject" class="ccl-h4 <?php echo ( ! $is_subject_sort ) ? 'ccl-u-faded' : ''; ?>">Alphabetical by Subject</a>
+                    </p>
 
-                    usort( $sorted_librarians, function( $a, $b){
-
-                        $name_a = explode( ' ', $a->post_title );
-                        $last_a = array_reverse($name_a)[0];
-                        
-                        $name_b = explode( ' ', $b->post_title );
-                        $last_b = array_reverse($name_b)[0];
-
-                        if ( $last_a == $last_b ) {
-                            return 0;
-                        }
-
-                        return ( $last_a < $last_b ) ? -1 : 1;
-
-                    } );
-
-                    if ( $librarians->have_posts() ) : ?>
-
-                        <div class="ccl-l-row ccl-u-mt-2">
-                        
-                            <?php foreach ( $sorted_librarians as $post ) : setup_postdata( $post ); ?>
-
-                                <div class="ccl-l-column ccl-l-span-half-md">
-
-                                    <?php 
-                                    $subjects = get_the_terms( $post->ID, 'subject' );
-                                    $member_image = get_post_meta( $post->ID, 'member_image', true );
-                                    $name = get_the_title( $post->ID );
-                                    $first_name = explode( ' ', $name )[0];
-                                    $profile_url = get_post_meta( $post->ID, 'member_friendly_url', true ); ?>
-
-                                    <div class="ccl-c-profile-card">
-                                    
-                                        <div class="ccl-l-row">
-        
-                                            <div class="ccl-l-column ccl-l-span-half-md">
-        
-                                                <div class="ccl-c-profile-card__header">
-                                                    <div class="ccl-c-profile-card__title"><?php echo $name; ?></div>
-                                                    
-                                                    <?php if ( ! empty( $subjects ) ) : 
-                                                        
-                                                        $subjects_count = count( $subjects );
-                                                        $max = 6;
-                                                        $remaining = $subjects_count - $max; ?>  
-                                                    
-                                                        <div class="ccl-c-profile-card__list" role="list">
-        
-                                                            <?php foreach( $subjects as $index => $subject ) {
-                                                                
-                                                                if ( $index === $max ) {
-                                                                    echo '<button class="ccl-b-btn ccl-is-naked ccl-b-more-toggle" role="listitem">+' . $remaining . ' more</button>';
-                                                                }
-                                                                if ( $index < $max ) {
-                                                                    echo '<div class="ccl-u-faded" role="listitem">' . $subject->name . '</div>';
-                                                                } else {
-                                                                    echo '<div class="ccl-u-faded ccl-b-more-toggled" role="listitem">' . $subject->name . '</div>';
-                                                                }
-                                                                
-                                                            } ?>
-        
-                                                        </div>
-                                                    
-                                                    <?php endif; ?>
-                                                    
-                                                    <ul class="ccl-c-profile-card__list">
-                                                        <?php if ( $profile_url ) : ?>
-                                                            <li><a href="<?php echo esc_url( $profile_url ); ?>" target="_blank">Contact <?php echo $first_name; ?></a></li>
-                                                        <?php endif; ?>
-                                                        <li><a href="#">Make an appointment with <?php echo $first_name; ?></a></li>
-                                                    </ul>
-                                                </div>
-        
-                                            </div>
-        
-                                            <div class="ccl-l-column ccl-l-span-half-md">
-        
-                                                <?php if ( ! $member_image ) {
-                                                    $member_image = CCL_TEMPLATE_URL . "/assets/images/person.svg";
-                                                } ?>
-        
-                                                <div class="ccl-c-profile-card__avatar" role="presentation" style="background-image:url(<?php echo $member_image; ?>)"></div>
-        
-                                            </div>
-        
-                                        </div>
-        
-                                    </div>
-
-                                </div>
-
-                            <?php endforeach; wp_reset_postdata(); wp_reset_query(); ?>
-
-                        </div>
-
-                    <?php endif; ?>
-
-				</div>
+                </div> 
+                
+                <?php if ( $is_subject_sort ) {
+                    get_template_part( 'partials/staff-subject-list' );
+                } else {
+                    get_template_part( 'partials/staff-alpha-list' );
+                } ?>
 
 				<?php get_template_part( 'partials/blocks' ); ?>
 
