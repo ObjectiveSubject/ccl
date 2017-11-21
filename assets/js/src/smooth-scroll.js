@@ -13,11 +13,16 @@
             e.preventDefault();
 
             var target = $(this).data('target') || $(this).attr('href'),
-                $target = $(target);
+                $target = $(target),
+                scrollOffset = 0;
+
+            $('.ccl-is-fixed').each(function(){
+                scrollOffset += $(this).outerHeight();
+            });
 
             if ( $target.length ) {
-                var targetOffset = $target.offset().top;
-                $('html, body').animate( {'scrollTop': targetOffset}, 800 );
+                var targetTop = $target.offset().top;
+                $('html, body').animate( { 'scrollTop': targetTop - scrollOffset }, 800 );
             }
 
         });
