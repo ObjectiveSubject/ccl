@@ -14,8 +14,8 @@ get_header(); ?>
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
 			$description = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
             $hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
-            $is_subject_sort = strpos( $_SERVER['QUERY_STRING'], 'sort=subject' ) > -1;
-            $is_alpha_sort = ( ! $is_subject_sort );
+            $is_alpha_sort = strpos( $_SERVER['QUERY_STRING'], 'sort=alpha' ) > -1;
+            $is_subject_sort = ( ! $is_alpha_sort );
 			?>
 
 			<article <?php post_class(); ?>>
@@ -49,9 +49,42 @@ get_header(); ?>
                     </div>
                     
                     <p>
-                        <a href="?sort=alpha" class="ccl-h4 ccl-u-mr-2 <?php echo ( ! $is_alpha_sort ) ? 'ccl-u-faded' : ''; ?>">Alphabetical by Name</a>
-                        <a href="?sort=subject" class="ccl-h4 <?php echo ( ! $is_subject_sort ) ? 'ccl-u-faded' : ''; ?>">Alphabetical by Subject</a>
+                        <a href="?sort=subject" class="ccl-h4 ccl-u-mr-2 <?php echo ( ! $is_subject_sort ) ? 'ccl-u-faded' : 'ccl-u-color-school ccl-u-color-hover-black'; ?>">Alphabetical by Subject</a>
+                        <a href="?sort=alpha" class="ccl-h4 <?php echo ( ! $is_alpha_sort ) ? 'ccl-u-faded' : 'ccl-u-color-school ccl-u-color-hover-black'; ?>">Alphabetical by Name</a>
                     </p>
+
+					<?php if ( $is_subject_sort ) :
+						
+						$subjects = get_terms( array( 'taxonomy' => 'subject' ) );
+						
+						if ( $subjects ) : ?>
+
+							<div class="ccl-c-accordion">
+
+								<div class="ccl-c-accordion__toggle">
+									<?php _e( 'See all subjects' , 'ccl' ); ?>
+								</div>
+
+								<div class="ccl-c-accordion__content">
+									
+									<div class="ccl-l-row">
+
+										<?php foreach ( $subjects as $subject ) : ?>
+										
+											<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-md ccl-l-span-quarter-lg">
+												<p class="ccl-h5"><a href="<?php echo "#subject-$subject->slug"; ?>" class="js-smooth-scroll" title="scroll to subject <?php echo $subject->name; ?>"><?php echo $subject->name; ?></a></p>
+											</div>
+										
+										<?php endforeach; ?>
+
+									</div>
+									
+								</div>
+							</div>
+
+						<?php endif; ?>	
+
+					<?php endif; ?>
 
                 </div> 
                 

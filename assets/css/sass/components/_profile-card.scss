@@ -2,10 +2,6 @@
     border-top: 1px solid rgba(black,0.6);
     padding-top: $spacer;
     margin-top: $spacer;
-    // margin-bottom: $spacer * 3;
-    @include media($lg) {
-        margin-top: $spacer * 2;
-    }
 
     .ccl-c-promo & {
         border-top: 0;
