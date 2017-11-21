@@ -31,7 +31,9 @@
     display: none;
     position: absolute;
     right: 0;
-    top: $spacer;
+    top: 0;
+    box-shadow: $box-shadow;
+    padding: $gutter;
     min-height: 100%;
     background: white;
     z-index: 1;
