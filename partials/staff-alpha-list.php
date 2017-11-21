@@ -1,7 +1,14 @@
 <?php 
 $args = array(
     'post_type' => 'staff',
-    'posts_per_page' => 500
+    'posts_per_page' => 500,
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'staff_role',
+            'field' => 'slug',
+            'terms' => 'librarian'
+        ) 
+    )
 );
 
 $librarians = new WP_Query( $args ); 

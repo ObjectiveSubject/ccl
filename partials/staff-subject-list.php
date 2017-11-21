@@ -13,6 +13,12 @@
                 'post_type' => 'staff',
                 'posts_per_page' => 500,
                 'tax_query' => array(
+                    'relationship' => 'AND',
+                    array(
+                        'taxonomy' => 'staff_role',
+                        'field' => 'slug',
+                        'terms' => 'librarian'
+                    ),
                     array(
                         'taxonomy' => 'subject',
                         'field' => 'id',

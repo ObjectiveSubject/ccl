@@ -43,6 +43,9 @@ function register_staff_post_type() {
 		),
 		'map_meta_cap'    => true, // Allows created posts to be edited
 		'admin_cols' => array(
+			'role' => array(
+				'taxonomy' => 'staff_role'
+			),
 			'subject' => array(
 				'taxonomy' => 'subject'
 			),
