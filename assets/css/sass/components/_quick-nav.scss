@@ -1,48 +1,73 @@
 .ccl-c-quick-nav {
     box-shadow: 0 3px 3px rgba(black, 0.2);
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: 39px;
     left: 0;
     width: 100%;
     z-index: 1000;   
-    // padding-top: rem(15);
-    opacity: 0;
-    transform: translate3d(0,-100%,0);
+    transform: translate3d(0,0,0);
+    opacity: 1;
     transition: transform $duration $easing, opacity $duration $easing;
     background-color: white;
 
+    .admin-bar & {
+        top: 85px;
+        @include media($admin-bar-change-size) {
+            top: 71px;
+        }
+    }
+
+    .home & {
+        @include media($lg) {
+            opacity: 0;
+            transform: translate3d(0,-150%,0);
+        }
+    }
+
     &.ccl-is-fixed {
+        position: fixed;
         transform: translate3d(0,0,0);
+        top: 0;
         opacity: 1;
         .admin-bar & {
-            @include media($md){
-                top: 46px;
+            @include media($admin-bar-fix-point){
+                top: $admin-bar-height-mobile;
             }
-            @include media(786px){
-                top: 32px;
+            @include media($admin-bar-change-size){
+                top: $admin-bar-height-desktop;
             }
         }
+        
     }
 }
 
 .ccl-c-quick-nav__bar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 auto;
     max-width: $max-width;
     padding: 0 $gutter;
     width: 100%;
+
+    .ccl-search-active & {
+        flex-wrap: nowrap;
+    }
+
+    @include media($md) {
+        flex-wrap: nowrap;
+    }
 }
 
 .ccl-c-quick-nav__item {
-    min-height: rem(55);
     display: flex;
     flex-basis: 100%;
-    flex-grow: 1;
     align-items: center;
-    border-bottom: 1px solid;
-    padding: 0 $gutter;
     min-height: rem(64);
+
+    @include media($md) {
+        padding: 0 $gutter;
+    }
 
     &:first-child {
         padding-left: 0;
@@ -51,27 +76,54 @@
         margin-left: auto;
     }
 
-    &.ccl-is-lazy {
-        flex-basis: auto;
-        flex-grow: 0;
-    }
-
-    &.ccl-has-divider {
-        border-right: 1px solid;
-    }
-
     &.ccl-is-brand {
+        display: none;
         flex-basis: 20%;
         flex-shrink: 0;
         flex-grow: 0;
+        @include media($lg) {
+            display: flex;
+        }
     }
 
-    .ccl-search-active & {
-        display: none;
+    &.ccl-is-primary {
+        border-bottom: 1px solid;
+
+        .ccl-no-secondary & {
+            flex-basis: calc(100% - 72px);
+            border-right: 1px solid;
+            border-bottom: 0;
+        }
+
+        @include media($md) {
+            border-right: 1px solid;
+            flex-basis: auto !important;
+            flex-grow: 0 !important;
+            border-bottom: 0 !important;
+        }
+    }
+
+    &.ccl-is-secondary {
+        border-right: 1px solid;
+        flex-basis: calc(100% - 72px);
+        
+        @include media($md - 1, max) {
+            min-height: rem(48);
+        }
     }
 
     &.ccl-is-search-toggle {
         justify-content: flex-end;
+        flex-basis: 72px;
+        flex-grow: 0;
+        justify-content: center;
+
+        @include media($md - 1, max) {
+            min-height: rem(48);
+        }
+        @include media($md) {
+            border-right: 1px solid;
+        }
 
         &:hover {
             background: rgba(black, 0.2);
@@ -79,8 +131,11 @@
         }
 
         .ccl-b-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
             transition: transform $duration-short $easing;
+            @include media($md) {
+                font-size: 2rem;
+            }
         }
 
         .ccl-search-active & {
@@ -101,20 +156,34 @@
         display: none;
         padding: 0;
         margin-top: 0;
+        border-right: 1px solid;
         .ccl-search-active & {
             display: flex;
         }
+
+        @include media($md) {
+            border-right: 0;
+        }
+    }
+
+    .ccl-search-active & {
+        display: none;
     }
 }
 
 .ccl-c-quick-nav__item-text {
     font-family: $gotham-narrow-book;
-    font-size: rem(20);
+    font-size: rem(24);
     line-height: 1;
-    @include media($lg) {
-        font-size: rem(24);
-        white-space: nowrap;
-	}
+    white-space: nowrap;
+
+    .ccl-is-secondary & {
+        @include media($md - 1, max) {
+            font-size: rem(20);
+            font-weight: 500;
+            font-family: $gotham-narrow-medium;
+        }   
+    }
 }
 
 .ccl-c-quick-nav__menu {

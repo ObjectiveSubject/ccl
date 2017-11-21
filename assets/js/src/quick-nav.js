@@ -12,10 +12,18 @@
     var QuickNav = function(el){
 
         this.$el = $(el);
-        this.toggleOffset = $('.site-content').offset().top;
         this.$subMenus = this.$el.find('.sub-menu');
         this.$scrollSpyItems = this.$el.find('.ccl-c-quick-nav__scrollspy span');
         this.$searchToggle = this.$el.find('.ccl-is-search-toggle');
+
+        // set the toggle offset and account for the WP admin bar 
+    
+        if ( $('body').hasClass('admin-bar') && $('#wpadminbar').css('position') == 'fixed' ) {
+            var adminBarHeight = $('#wpadminbar').outerHeight();
+            this.toggleOffset = $('.ccl-c-user-nav').offset().top + $('.ccl-c-user-nav').outerHeight() - adminBarHeight;
+        } else {
+            this.toggleOffset = $('.ccl-c-user-nav').offset().top + $('.ccl-c-user-nav').outerHeight();
+        }
 
         this.init();
     };
@@ -33,7 +41,7 @@
 
         var that = this;
         
-        $window.scroll( CCL.throttle( _onScroll, 100 ) );
+        $window.scroll( CCL.throttle( _onScroll, 50 ) );
 
         function _onScroll() {
             

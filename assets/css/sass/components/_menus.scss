@@ -5,6 +5,13 @@
     a:focus {
         outline: 0;
     }
+
+    .home .ccl-c-masthead & {
+        display: none;
+        @include media($lg) {
+            display: block;
+        }
+    }
 }
 
 .ccl-c-sub-menu {    

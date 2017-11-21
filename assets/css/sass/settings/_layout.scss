@@ -7,7 +7,6 @@ $md: 768px;
 $lg: 1000px;
 $xl: 1500px;
 
-
 // Grid
 // ------------------------------------------- /
 
@@ -15,3 +14,10 @@ $max-width: rem(1080);
 $gutter: 18px;
 $columns: 12;
 $spacer: 1.5rem;
+
+// Wordpress Admin Bar
+// ------------------------------------------- /
+$admin-bar-change-size: 783px;
+$admin-bar-fix-point: 601px;
+$admin-bar-height-mobile: 46px;
+$admin-bar-height-desktop: 32px; 
