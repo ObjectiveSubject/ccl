@@ -12,6 +12,7 @@ function setup() {
 	};
 
 	add_shortcode( 'accordion', $n( 'accordion_fn' ) );
+	add_shortcode( 'button', $n( 'button_fn' ) );
 	add_shortcode( 'calendar_widget', $n( 'calendar_fn' ) );
 	add_shortcode( 'icon', $n( 'icon_fn' ) );
 	add_shortcode( 'modal', $n( 'modal_fn' ) );
@@ -211,6 +212,41 @@ function modal_toggle_fn( $attributes = false ) {
 	<?php
 	$html = ob_get_contents();
 	ob_get_clean();
+
+	return $html;
+}
+
+/**
+ * Create a button CTA shortcode
+ *
+ * @param $attributes array List of attributes from the given shortcode
+ *
+ * @return mixed HTML output for the shortcode
+ */
+function button_fn( $attributes = false, $content = null ) {
+
+	$data = shortcode_atts( array(
+		'url'   => '',
+		'size'  => '', // small, default ""
+		'style' => '', // solid, default ""
+	), $attributes );
+
+	if ( ! $data['url'] ) {
+		return null; // will return nothing if no url is specified
+	}
+
+	$classes = '';
+
+	// @todo error trapping could be built-in here to check for valid class names
+	if ( array_key_exists( 'size', $data ) && $data['size'] ) {
+		$classes  = 'ccl-is-' . esc_attr( $data['size'] ) . ' ';
+	}
+
+	if ( array_key_exists( 'style', $data ) && $data['style'] ) {
+		$classes .= 'ccl-is-' . esc_attr( $data['style'] );
+	}
+
+	$html = '<a href="' . esc_url( $data['url'] ) . '" class="ccl-b-btn ' . $classes . '">' . $content . '</a>';
 
 	return $html;
 }
