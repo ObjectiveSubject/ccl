@@ -15,6 +15,7 @@ function setup() {
 	add_shortcode( 'button', $n( 'button_fn' ) );
 	add_shortcode( 'calendar_widget', $n( 'calendar_fn' ) );
 	add_shortcode( 'icon', $n( 'icon_fn' ) );
+	add_shortcode( 'libwizard_form', $n( 'libwizard_form_fn' ) );
 	add_shortcode( 'modal', $n( 'modal_fn' ) );
 	add_shortcode( 'modal_toggle', $n( 'modal_toggle_fn' ) );
 	add_shortcode( 'scheduler', $n( 'scheduler_fn' ) );
@@ -57,6 +58,24 @@ $data = shortcode_atts( array(
 $html = \CCL\Integrations\LibCal\schedule_widget( false, $data );
 
 return $html;
+}
+
+/**
+ * Display a LibWizard form
+ *
+ * @param $attributes array List of attributes from the given shortcode
+ *
+ * @return mixed HTML output for the shortcode
+ */
+function libwizard_form_fn( $attributes ) {
+
+	$data = shortcode_atts( array(
+		'id' => '',
+	), $attributes );
+
+	$html = \CCL\Integrations\LibWizard\form_widget( false, $data );
+
+	return $html;
 }
 
 

@@ -42,6 +42,7 @@ require_once CCL_INC . 'template-tags.php';
 require_once CCL_INC . 'integrations/libanswers.php';
 require_once CCL_INC . 'integrations/libcal.php';
 require_once CCL_INC . 'integrations/libguides.php';
+require_once CCL_INC . 'integrations/libwizard.php';
 require_once CCL_INC . 'integrations/settings.php';
 
 // Include lib classes
