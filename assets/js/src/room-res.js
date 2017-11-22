@@ -17,6 +17,7 @@
         this.$formResponse = this.$el.find('.js-room-res-form-response').css({position: 'absolute', top: '1rem', left: '1rem', opacity: 0});
         this.$formCancel = this.$el.find('.js-room-res-form-cancel');
         this.$formSubmit = this.$el.find('.js-room-res-form-submit');
+        this.$formReload = this.$el.find('.js-room-res-form-reload');
         this.roomId = this.$el.data('resource-id');
         this.$dateSelect = this.$el.find('.js-room-date-select');
         this.dateYmd = this.$dateSelect.val();
@@ -269,6 +270,11 @@
         this.$el.submit(function(event){
             event.preventDefault();
             that.onSubmit();
+        });
+
+        this.$formReload.click(function(event){
+            event.preventDefault();
+            that.reloadForm();
         });
 
     };
@@ -557,6 +563,8 @@
     RoomResForm.prototype.clearAllSlots = function() {
 
         var that = this;
+
+        this.$resetSelectionBtn.hide();
         
         // Extend the selected inputs array to a new variable.
         // The selected inputs array changes with every clearSlot() call
@@ -732,8 +740,6 @@
                 ]
             };
 
-        // console.log( 'on Submit » ', payload );
-
         this.$el.addClass('ccl-is-submitting');
         this.$formCancel.prop('disabled',true);
         this.$formSubmit.text('Sending...').prop('disabled',true);
@@ -779,7 +785,9 @@
             }
 
             that.$formCancel.prop('disabled',false).text('Close');
-            that.$formSubmit.remove();
+            that.$formSubmit.hide();
+            that.$formReload.show();
+
             that.$formContent.animate({opacity: 0}, CCL.DURATION);
             that.$formResponse
                 .delay(CCL.DURATION)
@@ -790,8 +798,32 @@
                 .animate({height: that.$formResponse.height() + 'px' }, CCL.DURATION)
                 .css({zIndex: '-1'});
 
+            that.$el.removeClass('ccl-is-submitting');
+
         }
 
+    };
+
+    RoomResForm.prototype.reloadForm = function(){
+        
+        this.$formCancel.text('Cancel');
+        this.$formSubmit.text('Submit').prop('disabled',false).show();
+        this.$formReload.hide();
+        
+        this.clearAllSlots();
+
+        this.$formResponse
+            .animate({opacity: 0}, CCL.DURATION)
+            .delay(CCL.DURATION)
+            .html('');
+        this.$formContent
+            .delay(CCL.DURATION)
+            .css({ height: '', zIndex: '' })
+            .animate({opacity: 1}, CCL.DURATION);
+
+        this.setLoading();
+        
+        this.updateScheduleData();
     };
 
     // ------------------------------------------------------- //
