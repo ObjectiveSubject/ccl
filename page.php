@@ -67,16 +67,16 @@ get_header(); ?>
 			<?php $related_posts = \CCL\Helpers\get_ccl_related_posts(); ?>
 
 			<?php if ( $related_posts && $related_posts->have_posts() ) : ?>
-				<div class="ccl-c-related ccl-u-bg-school ccl-u-py-2">
+				<div class="ccl-u-bg-school ccl-u-py-2">
 
 					<div class="ccl-l-container">
 
-						<h2 class="ccl-c-related__title ccl-u-mt-0">Related</h2>
+						<h2 class="ccl-u-mt-0">Related</h2>
 
 						<div class="ccl-l-row ccl-u-mt-1">
 
 							<?php while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
-								<article class="ccl-c-related__post ccl-l-column ccl-l-span-4-md ccl-u-mb-1">
+								<article class="ccl-l-column ccl-l-span-4-md ccl-u-mb-1">
 
 									<?php if ( has_post_thumbnail() ) : ?>
 										<div class="ccl-u-mb-nudge">
