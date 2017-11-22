@@ -99,6 +99,7 @@
             border-right: 1px solid;
             flex-basis: auto !important;
             flex-grow: 0 !important;
+            flex-shrink: 0 !important;
             border-bottom: 0 !important;
         }
     }
@@ -274,6 +275,8 @@
 .ccl-c-quick-nav__scrollspy {
     width: 100%;
     height: rem(20);
+    position: relative;
+
     @include media($lg) {
         height: rem(24);
     }
@@ -282,11 +285,13 @@
         display: block;
         opacity: 0;
         position: absolute;
+        top: 50%;
+        left: 0;
         transform: translate3d(0,50%,0);
         transition: transform $duration $easing, opacity $duration $easing;
     }
     span.ccl-is-active {
         opacity: 1;
-        transform: translate3d(0,0,0);
+        transform: translate3d(0,-50%,0);
     }
 }
