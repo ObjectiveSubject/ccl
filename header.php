@@ -45,10 +45,10 @@
 
 
 					<?php
-					// @todo Write helper for Calendar Item (import all events, get first post)
 					// @todo Sort out how to handle "Notices"
 					// @todo Cache the build header functions?
 
+					$events             = \CCL\Helpers\get_header_events();
 					$hours              = \CCL\Helpers\get_library_hours();
 					$main_library_hours = $hours->locations[0]->rendered;
 
@@ -61,9 +61,19 @@
 								<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today&#39;s hours <?php echo $main_library_hours; ?></span>
 							</li>
 						<?php endif; ?>
-						<li>
-							<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i> Relevant Calendar Item</span>
-						</li>
+
+						<?php if ( $events ) : ?>
+
+							<li>
+								<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
+									<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>">
+										<?php echo apply_filters( 'the_title', $events->events[0]->title ); ?>
+									</a>
+								</span>
+							</li>
+
+						<?php endif; ?>
+
 						<li>
 							<span class="ccl-h5">
 								<span class="ccl-u-color-red">

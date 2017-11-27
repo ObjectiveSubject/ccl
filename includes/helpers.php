@@ -487,3 +487,30 @@ function get_library_hours() {
 
 	return $hours_data;
 }
+
+/**
+ * Retrieve the current events for header from LibCal Events
+ *
+ * @return array|mixed|string|\WP_Error
+ */
+function get_header_events() {
+
+	$event_cache  = get_transient( 'header_events' );
+
+	if ( $event_cache ) {
+		$event_data = $event_cache;
+	} else {
+
+		$parameters = array(
+			'limit' => 1
+		);
+
+		$event_data = \CCL\Integrations\LibCal\get_events( $parameters );
+
+		if ( ! is_wp_error ( $event_data ) ) {
+			set_transient( 'header_events', $event_data, 15 * MINUTE_IN_SECONDS ); // maybe cache for 15 minutes
+		}
+	}
+
+	return $event_data;
+}
