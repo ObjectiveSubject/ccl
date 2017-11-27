@@ -348,6 +348,42 @@ function get_hours() {
 }
 
 /**
+ * Fetch Events from LibCal
+ *
+ * @return array|string|\WP_Error
+ */
+function get_events( $params = array() ) {
+
+	$token = get_token();
+
+	$params['cal_id'] = 1889; // hardcoded calendar id for now
+
+	// turn array/object into query string
+	$params = http_build_query( $params );
+
+	$request = wp_remote_get( '	https://api2.libcal.com/1.1/events?' . $params , array(
+		'headers' => array(
+			'Authorization' => 'Bearer '. $token
+		),
+		'body'   => array(),
+		'debug'  => true
+	) );
+
+	if ( is_wp_error ( $request ) ) {
+
+		return $request->get_error_message();
+
+	} else {
+		// check for API errors??
+
+		$results = json_decode( $request['body'] );
+
+		return $results;
+	}
+
+}
+
+/**
  * Helper function for displaying LibCal's Calendar widget
  *
  * More info here:
