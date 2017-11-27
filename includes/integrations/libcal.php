@@ -324,6 +324,30 @@ function reserve_space( $payload ) {
 }
 
 /**
+ * Fetch library hours from LibCal
+ *
+ * @return array|mixed|string|\WP_Error JSON array of library hours or error message
+ */
+function get_hours() {
+
+	// systemTime=1 formats the hour as system rather than short (9:00pm vs 9pm)
+	$request = wp_remote_get( 'https://api3.libcal.com/api_hours_today.php?iid=333&lid=0&format=json&systemTime=1' );
+
+	if ( is_wp_error ( $request ) ) {
+
+		return $request;
+
+	} else {
+
+		// $results = $request;
+		$results = json_decode( $request['body'] );
+
+	}
+
+	return $results;
+}
+
+/**
  * Helper function for displaying LibCal's Calendar widget
  *
  * More info here:

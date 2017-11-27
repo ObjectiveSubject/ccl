@@ -464,3 +464,26 @@ function get_blocks( $id = 0 ) {
 	}
 
 }
+
+/**
+ * Attempts to grab libcal data and store in a transient
+ *
+ * @return array|mixed|string|\WP_Error
+ */
+function get_library_hours() {
+
+	$hours_cache  = get_transient( 'library_hours_data' );
+
+	if ( $hours_cache ) {
+		$hours_data = $hours_cache;
+	} else {
+
+		$hours_data = \CCL\Integrations\LibCal\get_hours();
+
+		if ( ! is_wp_error ( $hours_data ) ) {
+			set_transient( 'library_hours_data', $hours_data, 3 * HOUR_IN_SECONDS ); // maybe cache for 3 hours
+		}
+	}
+
+	return $hours_data;
+}
