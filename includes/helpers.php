@@ -514,3 +514,30 @@ function get_header_events() {
 
 	return $event_data;
 }
+
+/**
+ * Header notices
+ *
+ * @return array|mixed|string|\WP_Error
+ */
+function get_header_notices() {
+
+	$notice_cache  = get_transient( 'header_notices' );
+
+	if ( $notice_cache ) {
+		$notice_data = $notice_cache;
+	} else {
+
+		$notice_data = array(
+			"All books must be returned",
+			"Cake is available on the second floor",
+			"Pure Science is 500"
+		);
+
+		if ( ! is_wp_error ( $notice_data ) ) {
+			set_transient( 'header_notices', $notice_data, 15 * MINUTE_IN_SECONDS ); // maybe cache for 15 minutes
+		}
+	}
+
+	return $notice_data;
+}

@@ -51,6 +51,7 @@
 					$events             = \CCL\Helpers\get_header_events();
 					$hours              = \CCL\Helpers\get_library_hours();
 					$main_library_hours = $hours->locations[0]->rendered;
+					$notices              = \CCL\Helpers\get_header_notices();
 
 					?>
 
@@ -74,14 +75,19 @@
 
 						<?php endif; ?>
 
-						<li>
-							<span class="ccl-h5">
-								<span class="ccl-u-color-red">
-									<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
+						<?php if ( $notices ) : ?>
+
+							<li>
+								<span class="ccl-h5">
+									<span class="ccl-u-color-red">
+										<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
+									</span>
+									<?php $notice = shuffle( $notices ); // Return a random notice ?>
+									<?php echo apply_filters( 'the_title', $notices[0] ); ?>
 								</span>
-								Relevant notice message
-							</span>
-						</li>
+							</li>
+
+						<?php endif; ?>
 					</ul>
 
 					<?php if ( has_nav_menu( 'header_1' ) ) { ?>
