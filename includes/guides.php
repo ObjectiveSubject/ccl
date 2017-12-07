@@ -34,7 +34,7 @@ function register_guides_post_type() {
 
 	register_extended_post_type( 'guide', array(
 		'menu_icon'       => 'dashicons-book-alt',
-		'supports'        => false, // title, content, editor, thumbnail would allow content to be edited
+		'supports'        => array( 'title' ), // false turns everything off
 		'capability_type' => 'post',
 		'capabilities'    => array(
 			'create_posts' => 'do_not_allow', // Remove support for "Add New" (can also change to a role, rather than false)
@@ -283,9 +283,7 @@ function render_guide_data_metabox() {
 	$raw_data = get_post_meta( $post->ID, 'guide_raw_data', true );
 
 	$content = $post->post_content;
-
-	echo '<h4><a href="' . get_the_permalink( $post->ID ) . '" target="_blank">' . get_the_title( $post->ID ) . '</a></h4>';
-
+	
 	echo '<p>';
 
 	echo '<strong>Guide ID:</strong> ' . get_post_meta( $post->ID, 'guide_id', true ) . '<br>';
