@@ -22,7 +22,7 @@ th {
     width: 100%;
     
     td, th {
-        padding: 0.5rem;
+        padding: 1rem 0.5rem;
         &:first-child {
             padding-left: 0;
         }
@@ -45,7 +45,6 @@ th {
     @extend .ccl-b-table;
     
     td, th {
-        padding: 0.5rem;
         &:first-child, &:last-child {
             padding-left: 0.5rem;
             padding-right: 0.5rem;

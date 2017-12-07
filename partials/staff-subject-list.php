@@ -1,6 +1,13 @@
 <div class="ccl-l-container">
             
-    <div class="ccl-l-row">
+        <table class="ccl-b-table--striped ccl-is-hoverable">
+
+        <thead>
+            <th>Subject</th>
+            <th>Librarians</th>
+            <th>Contact</th>
+        </thead>
+        <tbody>
 
         <?php 
 
@@ -27,26 +34,53 @@
                 )
             );
 
-            $librarians = new WP_Query( $args ); 
+            $librarians = new WP_Query( $args );  ?>
 
-            if ( $librarians->have_posts() ) : ?>
-                
-                <div id="<?php echo "subject-$subject->slug"; ?>" class="ccl-l-column ccl-l-span-6-md ccl-l-span-5-lg <?php echo ( $count % 2 === 0 ) ? '' : 'ccl-l-offset-2-lg'; ?>">
-                
-                    <h2 class="ccl-h4 ccl-u-mt-2 ccl-u-color-school"><?php echo $subject->name; ?></h2>
+            <tr>
 
-                    <?php while ( $librarians->have_posts() ) : $librarians->the_post() ?>
+                <td><?php echo $subject->name; ?></td>
 
-                        <?php get_template_part( 'partials/staff-profile-card' ); ?>
+                <td>
 
-                    <?php endwhile; wp_reset_query(); ?>
+                    <?php if ( $librarians->have_posts() ) : ?>
+                        
+                        <?php while ( $librarians->have_posts() ) : $librarians->the_post(); ?>
+            
+                            <div><strong><?php the_title(); ?></strong></div>
 
-                </div>
+                        <?php endwhile; ?>
 
-            <?php endif; ?>
+                    <?php endif; ?>
+
+                </td>
+
+                <td>
+
+                    <?php if ( $librarians->have_posts() ) : ?>
+                        
+                        <?php while ( $librarians->have_posts() ) : $librarians->the_post();
+            
+                            $profile_url = get_post_meta( $post->ID, 'member_friendly_url', true ); ?>
+
+                            <div>
+                                <a href="<?php echo esc_url( $profile_url ); ?>" class="ccl-u-color-school" target="_blank">
+                                    <strong>Contact <?php the_title(); ?></strong>
+                                    <span class="ccl-b-icon arrow-right" aria-hidden="true"></span>
+                                </a>
+                            </div>
+
+                        <?php endwhile; ?>
+
+                        <?php wp_reset_query(); ?>
+
+                    <?php endif; ?>
+
+                </td>
+
+            </tr>
 
         <?php $count++; endforeach; ?>
 
-    </div>
+        </tbody></table>
 
 </div>

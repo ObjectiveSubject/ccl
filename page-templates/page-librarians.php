@@ -53,39 +53,6 @@ get_header(); ?>
                         <a href="?sort=alpha" class="ccl-h4 <?php echo ( ! $is_alpha_sort ) ? 'ccl-u-faded' : 'ccl-u-color-school ccl-u-color-hover-black'; ?>">Alphabetical by Name</a>
                     </p>
 
-					<?php if ( $is_subject_sort ) :
-						
-						$subjects = get_terms( array( 'taxonomy' => 'subject' ) );
-						
-						if ( $subjects ) : ?>
-
-							<div class="ccl-c-accordion">
-
-								<div class="ccl-c-accordion__toggle">
-									<?php _e( 'See all subjects' , 'ccl' ); ?>
-								</div>
-
-								<div class="ccl-c-accordion__content">
-									
-									<div class="ccl-l-row">
-
-										<?php foreach ( $subjects as $subject ) : ?>
-										
-											<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-third-md ccl-l-span-quarter-lg">
-												<p class="ccl-h5"><a href="<?php echo "#subject-$subject->slug"; ?>" class="js-smooth-scroll" title="scroll to subject <?php echo $subject->name; ?>"><?php echo $subject->name; ?></a></p>
-											</div>
-										
-										<?php endforeach; ?>
-
-									</div>
-									
-								</div>
-							</div>
-
-						<?php endif; ?>	
-
-					<?php endif; ?>
-
                 </div> 
                 
                 <?php if ( $is_subject_sort ) {
