@@ -50,15 +50,19 @@ get_header(); ?>
 
 				</div>
 
-				<div class="ccl-l-container">
+				<?php if ( get_the_content() ) : ?>
 
-					<div class="ccl-l-row">
-						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
-							<?php the_content(); ?>
+					<div class="ccl-l-container">
+
+						<div class="ccl-l-row">
+							<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
+								<?php the_content(); ?>
+							</div>
 						</div>
+
 					</div>
 
-				</div>
+				<?php endif; ?>
 
 				<?php get_template_part( 'partials/blocks' ); ?>
 
