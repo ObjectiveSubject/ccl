@@ -7,6 +7,7 @@
  */
 
 require_once CCL_INC . 'metaboxes/general.php';
+require_once CCL_INC . 'metaboxes/attachments.php';
 require_once CCL_INC . 'metaboxes/blocks.php';
 require_once CCL_INC . 'metaboxes/page.php';
 require_once CCL_INC . 'metaboxes/staff.php';
@@ -16,5 +17,6 @@ CCL\MetaBoxes\General\setup();
 CCL\MetaBoxes\Blocks\setup();
 CCL\MetaBoxes\Page\setup();
 CCL\MetaBoxes\Staff\setup();
+CCL\MetaBoxes\Attachments\setup();
 
 // Add other metaboxes here
