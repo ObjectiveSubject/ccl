@@ -127,7 +127,7 @@
         
         var callKey = this.getCallKey(query),
             callData = {},
-            room;
+            floorId;
 
         if ( ! callKey ) {
             this.throwFindError();
@@ -147,14 +147,14 @@
          * to provide data for which call numbers belong to which rooms
          * ----------------------------------------------------------------- */
 
-        room = callData.floor_int;
+        floorId = callData.floor_int;
 
         /* ----------------------------------------------------------------- */
 
-        this.$el.find('a[href="#floor-'+room+'"]').addClass('ccl-is-active');
-        this.$el.find('#room-'+room+'-1').addClass('ccl-is-active');
+        this.$el.find('a[href="#floor-'+floorId+'"]').addClass('ccl-is-active');
+        this.$el.find('[id*="room-'+floorId+'-"]').addClass('ccl-is-active');
 
-        tabs.setActive( '#floor-' + room );
+        tabs.setActive( '#floor-' + floorId );
         
     };
 

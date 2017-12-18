@@ -259,7 +259,7 @@
 
      $(document).ready(function(){
 		// .each() will fail gracefully if no elements are found
-		$('.ccl-c-search').each(function(){
+		$('.ccl-js-search-form').each(function(){
 			new SearchAutocomplete(this);
 		 });
      });
