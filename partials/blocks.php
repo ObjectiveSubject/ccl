@@ -250,6 +250,76 @@ if ( $blocks ) : ?>
 
             <?php endif; ?>
         
+        
+        <?php elseif ( 'search' == $block['block_type'] ) : ?>
+
+            <?php 
+            $enable_live_results = $block['block_search_is_live'];
+            $search_js_class = ( $enable_live_results ) ? 'ccl-js-search-form' : '';
+            $search_label = ( $enable_live_results ) ? 'Start typing to search' : 'Search...'; ?>
+            
+            <div id="block-<?php echo $index; ?>" class="ccl-l-container ccl-u-clearfix">
+
+                <?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+
+                    <div class="ccl-h2 ccl-u-mt-2"><?php echo $block['block_title']; ?></div>
+
+                <?php endif; ?>
+
+                <div class="ccl-c-search <?php echo $search_js_class; ?> ccl-u-mt-2">
+
+                    <form class="ccl-c-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
+                        <label for="ccl-search" class="ccl-u-display-none">><?php echo $search_label; ?></label>
+                        <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="<?php echo $search_label; ?>"/>
+
+                        <div class="ccl-c-search-form__option">
+                            <strong>As:</strong>
+                            <select class="ccl-b-select ccl-c-search-index" name="index" title="Index">
+                                <option value="ti">Title</option>
+                                <option value="kw" selected="selected">Keyword</option>
+                                <option value="au">Author</option>
+                                <option value="su">Subject</option>
+                            </select>
+                        </div>
+                        
+                        <div class="ccl-c-search-form__option">
+                            <strong>In:</strong>
+                            <select class="ccl-b-select" name="database" title="Database">
+                                <option value="all" selected="selected">All Databases</option>
+                                <option value="Z-wcorg">WorldCat</option>
+                                <option value="Z-oais">OAlster</option>
+                                <option value="Bcnf">PapersFirst</option>
+                            </select>
+                        </div>
+                    
+                        <button type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid" style="min-width: 8rem">
+                            <i class="ccl-b-icon search" aria-hidden="true"></i>
+                            <span class="ccl-u-display-none">Search</span>
+                        </button>
+                    </form>
+
+                    <?php if ( $enable_live_results ) : ?>
+                        
+                        <div class="ccl-c-search-results">
+                            <div class="ccl-c-search-results__list" role="list">
+
+                            </div>
+                        </div>
+
+                    <?php endif; ?>
+
+                </div>
+
+                <?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
+                        
+                    <div class="ccl-u-mt-2">
+                        <?php echo apply_filters( 'the_content', $block['block_description'] ); ?>
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
+
         <?php else : ?>
 
             <div id="block-<?php echo $index; ?>" class="ccl-l-container">

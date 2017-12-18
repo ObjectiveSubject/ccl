@@ -55,6 +55,7 @@ function content_blocks() {
 			'banner'             => __( 'Banner Image(s)', 'cmb2' ),
 			'carousel'           => __( 'Carousel/Feature Items', 'cmb2' ),
 			'feature_item'       => __( 'Single Featured Item', 'cmb2' ),
+			'search'       		 => __( 'Search Box', 'cmb2' ),
 			'staff'       		 => __( 'Staff Profile', 'cmb2' ),
 			'wysiwyg'            => __( 'WYSIWYG', 'cmb2' ),
 		),
@@ -79,7 +80,15 @@ function content_blocks() {
 		// 'default' => 'standard value (optional)',
 		'id'      => $prefix . 'title',
 		'type'    => 'text',
-		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel'
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel show-on-search'
+	) );
+
+	$cmb->add_group_field( $block_group_id, array(
+		'name' => 'Enable Live Results',
+		'desc' => 'Check to enable live search results as you type',
+		'id'   => $prefix . 'search_is_live',
+		'type' => 'checkbox',
+		'classes' => 'ccl-toggled-field show-on-search'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
@@ -102,7 +111,7 @@ function content_blocks() {
 		// 'default' => 'standard value (optional)',
 		'id'      => $prefix . 'description',
 		'type'    => 'wysiwyg',
-		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-carousel show-on-feature_item'
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-carousel show-on-feature_item show-on-search'
 		// 'options' => array(
 			// 'editor_class' => $prefix . 'description_wysiwyg',
 			// 'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'

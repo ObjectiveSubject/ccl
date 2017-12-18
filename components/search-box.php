@@ -1,6 +1,6 @@
-<div class="ccl-c-search">
+<div class="ccl-c-search ccl-js-search-form">
 
-    <form class="ccl-c-search-form ccl-js-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
+    <form class="ccl-c-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
         <label for="ccl-search" class="ccl-u-display-none">Start typing to search</label>
         <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search"/>
 
