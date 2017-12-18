@@ -28,6 +28,10 @@
     transition: opacity 300ms ease-out;
     outline: 0;
 
+    a {
+        display: block;
+    }
+
     .ccl-is-static & {
         float: none;
         

@@ -63,12 +63,20 @@ if ( $blocks ) : ?>
 
                                 <?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
 
-                                    <?php $image_size = ( $enable_carousel ) ? 'thumbnail' : 'medium'; ?>
+                                    <?php 
+                                    $image_size = ( $enable_carousel ) ? 'thumbnail' : 'medium';
+                                    $image_link = get_post_meta( $image_id, 'attachment_link', true ); ?>
 
-                                    <article class="ccl-c-carousel__slide">
-                                        <div class="ccl-u-mb-nudge"><?php echo wp_get_attachment_image( $image_id, $image_size ); ?></div>
-                                        <p class="ccl-h4 ccl-u-mt-0"><?php echo get_the_title( $image_id ); ?></p>
-                                        <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo get_the_excerpt( $image_id ); ?></p>
+                                    <article class="ccl-c-carousel__slide" data-link="<?php echo $image_link; ?>">
+                                        <?php if ( $image_link ) : ?>
+                                            <a href="<?php echo $image_link; ?>">
+                                        <?php endif; ?>
+                                                <div class="ccl-u-mb-nudge"><?php echo wp_get_attachment_image( $image_id, $image_size ); ?></div>
+                                                <p class="ccl-h4 ccl-u-mt-0"><?php echo get_the_title( $image_id ); ?></p>
+                                                <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo get_the_excerpt( $image_id ); ?></p>
+                                        <?php if ( $image_link ) : ?>
+                                            </a>
+                                        <?php endif; ?>
                                     </article>
 
                                 <?php endforeach; ?>
