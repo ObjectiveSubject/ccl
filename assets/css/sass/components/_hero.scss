@@ -111,8 +111,26 @@
     @extend .ccl-u-clean-list;
     margin-top: $spacer;
     flex-shrink: 0;
+
     li {
         @extend .ccl-h3;
-        margin-top: 0;
+        line-height: 1;
+        margin-top: 0.25em;
+        padding-top: 0.25em;
+        border-top: 1px solid;
+        
+        .ccl-b-icon {
+            display: block;
+            font-size: 0.7em;
+            float: right;
+            margin-top: 0.15em;
+            transition: transform $duration $easing, opacity $duration $easing;
+            opacity: 0;
+            transform: translate3d(0,-50%,0);
+        }
+        &:hover .ccl-b-icon {    
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
     }
 }

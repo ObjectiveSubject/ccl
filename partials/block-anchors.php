@@ -13,7 +13,10 @@ if ( $blocks ) : ?>
             $title = empty( $block['block_title'] ) ? '(no title)' : $block['block_title']; ?>
 
             <?php if ( $block['block_type'] != 'banner' ) : ?>
-                <li><a href="<?php echo '#block-' . $index; ?>"><?php echo esc_html( $title ); ?></a></li>
+                <li>
+                    <a href="<?php echo '#block-' . $index; ?>"><?php echo esc_html( $title ); ?></a>
+                    <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                </li>
             <?php endif; ?>
 
         <?php endforeach; ?>
