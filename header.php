@@ -63,7 +63,7 @@
 							</li>
 						<?php endif; ?>
 
-						<?php if ( $events ) : ?>
+						<?php if ( $events && ! empty( $events->events ) ) : ?>
 
 							<li>
 								<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
