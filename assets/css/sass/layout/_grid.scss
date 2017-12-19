@@ -231,24 +231,3 @@
         }
     }
 }
-
-
-
-
-// Visual Grid Columns
-// ---------------------------------- //
-.ccl-l-visual-grid {
-    position: relative;
-    
-    &:before {
-        content: "";
-        background: repeating-linear-gradient(to right, transparent, transparent $gutter, rgba(18, 109, 181, 0.1) $gutter, rgba(18, 109, 181, 0.1) #{ 1/$columns * 100% });
-        display: block;
-        position: absolute;
-        top: 0;
-        left: -$gutter/2;
-        right: $gutter/2;
-        bottom: 0;
-        z-index: 0;
-    }
-}
