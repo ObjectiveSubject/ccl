@@ -11,10 +11,13 @@ get_header(); ?>
 
 			if ( 'page' == get_option( 'show_on_front' ) ) {
 
-				$thumb_url   = get_the_post_thumbnail_url( $post, 'large' );
-				$title       = get_the_title(); // write conditional for front-page being set
-				$description = get_the_excerpt();
-				$content	 = get_the_content();
+				$thumb_url   	 = get_the_post_thumbnail_url( $post, 'large' );
+				$contextual_text = get_post_meta( get_the_ID(), 'hero_context_text', true );
+				$contextual_url  = get_post_meta( get_the_ID(), 'hero_context_url', true );
+				$custom_title 	 = get_post_meta( get_the_ID(), 'hero_custom_title', true );
+				$title       	 = $custom_title ? $custom_title : get_the_title();   // Could use 'the_title()' but this allows for override
+				$description 	 = get_the_excerpt();
+				$content	 	 = get_the_content();
 
 			} else {
 				// Fall backs if not front-page is set
@@ -39,21 +42,39 @@ get_header(); ?>
 
 					<div class="ccl-l-container">
 
+						<?php if ( $contextual_text ) : ?>
+							<?php if ( $contextual_url ) : ?>
+								<div><a href="<?php echo $contextual_url; ?>" class="ccl-c-hero__action"><?php echo $contextual_text; ?></a></div>
+							<?php else : ?>
+								<div><span class="ccl-c-hero__action"><?php echo $contextual_text; ?></span></div>
+							<?php endif; ?>
+						<?php endif; ?>
+
 						<div class="ccl-l-row">
 
-							<div class="ccl-l-column ccl-l-span-third-lg">
-								<div class="ccl-c-hero__header">
+							<div class="ccl-l-column">
+								<div class="ccl-c-hero__header">	
 									<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
 								</div>
 							</div>
 
-							<div class="ccl-l-column ccl-l-span-two-thirds-lg">
-								<div class="ccl-c-hero__content">
-									<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
+							<?php if ( ! empty( $description ) ) : ?>
+								<div class="ccl-l-column ccl-l-span-two-thirds-lg">
+									<div class="ccl-c-hero__content">
+									
+										<?php get_template_part( 'partials/block-anchors' ); ?>
+
+										<?php if ( $description ) : ?>
+											<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
+										<?php endif; ?>
+									
+									</div>
 								</div>
-							</div>
+							<?php endif; ?>
 							
 						</div>
+
+						<?php get_template_part( 'partials/quick-links' ); ?>
 
 					</div>
 
@@ -63,7 +84,7 @@ get_header(); ?>
 
 					<div class="ccl-l-row">
 
-						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-mt-2">
+						<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
 							<?php echo apply_filters( 'the_content', $content ); ?>
 						</div>
 

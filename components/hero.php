@@ -4,11 +4,12 @@
     
     <div class="ccl-l-container">
 
+        <div><a href="#" class="ccl-c-hero__action">&laquo; Contextual Action</a></div>
+
         <div class="ccl-l-row">
 
             <div class="ccl-l-column ccl-l-span-third-lg">
                 <div class="ccl-c-hero__header">
-                    <a href="#" class="ccl-c-hero__action">&laquo; Contextual Action</a>
                     <h1 class="ccl-c-hero__title">Hero Title</h1>
                 </div>
             </div>

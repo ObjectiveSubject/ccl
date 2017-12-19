@@ -10,10 +10,13 @@ get_header(); ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 
 			<?php
-			$thumb_url   = get_the_post_thumbnail_url( $post, 'full' );
-			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
-			$description = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
-			$hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
+			$thumb_url   	 = get_the_post_thumbnail_url( $post, 'full' );
+			$contextual_text = get_post_meta( get_the_ID(), 'hero_context_text', true );
+			$contextual_url  = get_post_meta( get_the_ID(), 'hero_context_url', true );
+			$custom_title 	 = get_post_meta( get_the_ID(), 'hero_custom_title', true );
+			$title       	 = $custom_title ? $custom_title : get_the_title();   // Could use 'the_title()' but this allows for override
+			$description 	 = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
+			$hero_class  	 = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
 			?>
 
 			<article <?php post_class(); ?>>
@@ -24,11 +27,21 @@ get_header(); ?>
 					
 					<div class="ccl-l-container">
 
+						<?php if ( $contextual_text ) : ?>
+							<?php if ( $contextual_url ) : ?>
+								<div><a href="<?php echo $contextual_url; ?>" class="ccl-c-hero__action"><?php echo $contextual_text; ?></a></div>
+							<?php else : ?>
+								<div><span class="ccl-c-hero__action"><?php echo $contextual_text; ?></span></div>
+							<?php endif; ?>
+						<?php endif; ?>
+
 						<div class="ccl-l-row">
 
 							<div class="ccl-l-column ccl-l-span-third-lg">
 								<div class="ccl-c-hero__header">
-									<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
+									<h1 class="ccl-c-hero__title">
+										<?php echo apply_filters( 'the_title', $title ); ?>
+									</h1>
 								</div>
 							</div>
 
@@ -38,7 +51,7 @@ get_header(); ?>
 									<?php get_template_part( 'partials/block-anchors' ); ?>
 
 									<?php if ( $description ) : ?>
-										<div><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
+										<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
 									<?php endif; ?>
 									
 								</div>

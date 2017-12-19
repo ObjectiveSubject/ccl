@@ -101,6 +101,12 @@
 .ccl-c-hero__action {
     @extend .ccl-h4;
     @extend .ccl-u-display-block;
+    color: white !important;
+}
+a.ccl-c-hero__action {
+    &:hover, &:focus {
+        opacity: $faded;
+    }
 }
 
 .ccl-c-hero__title {

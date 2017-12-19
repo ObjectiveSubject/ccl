@@ -1,0 +1,67 @@
+.ccl-c-quick-links {
+    @extend .ccl-u-clean-list;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: $gutter/-2;
+    margin-right: $gutter/-2;
+
+    .ccl-c-hero & {
+        @extend .ccl-u-mt-2;
+    }
+}
+
+.ccl-c-quick-link {
+    border-top: 1px solid;
+    padding: rem(10) 0;
+    margin-left: $gutter/2;
+    margin-right: $gutter/2;
+    flex: ccl-span( 6 );
+    max-width: ccl-span( 6 );
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    @include media($sm) {
+        flex: ccl-span( 4 );
+        max-width: ccl-span( 4 );
+    }
+
+    @include media($md) {
+        flex: ccl-span( 3 );
+        max-width: ccl-span( 3 );
+    }
+
+    @include media($lg) {
+        flex: ccl-span( 1, 10 );
+        max-width: ccl-span( 1, 10 );
+    }
+
+    a {
+        display: flex;
+        flex-wrap: wrap;
+        height: 100%;
+    }
+
+    .ccl-c-hero & {
+        a {
+            color: white !important;
+            &:hover {
+                opacity: $faded;
+            }
+        }
+    }
+}
+
+.ccl-c-quick-link__title {
+    @extend .ccl-h4;
+    @extend .ccl-u-mt-0;
+    flex-basis: 100%;
+    line-height: 1;
+}
+
+.ccl-c-quick-link__icon {
+    @extend .ccl-u-display-block;
+    flex-basis: 100%;
+    align-self: flex-end;
+    font-size: 1.75rem;
+    margin-top: rem(10);
+}

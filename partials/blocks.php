@@ -184,18 +184,22 @@ if ( $blocks ) : ?>
 
         <?php elseif ( 'banner' == $block['block_type'] ) : ?>
 
-            <div id="block-<?php echo $index; ?>" class="ccl-c-banner">
+            <?php if ( isset( $block['block_items'] ) ) : ?>
 
-                <?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
+                <div id="block-<?php echo $index; ?>" class="ccl-c-banner">
 
-                    <?php
-                    echo wp_get_attachment_image( $image_id, 'large' );
-                    break; // only get first image, break after
-                    ?>
+                    <?php foreach ( (array) $block['block_items'] as $image_id => $image_url ) : ?>
 
-                <?php endforeach; ?>
+                        <?php
+                        echo wp_get_attachment_image( $image_id, 'large' );
+                        break; // only get first image, break after
+                        ?>
 
-            </div>
+                    <?php endforeach; ?>
+
+                </div>
+
+        <?php endif; ?>
 
         <?php elseif ( 'feature_item' == $block['block_type'] ) : ?>
 
@@ -349,7 +353,7 @@ if ( $blocks ) : ?>
             $search_js_class = ( $enable_live_results ) ? 'ccl-js-search-form' : '';
             $search_label = ( $enable_live_results ) ? 'Start typing to search' : 'Search...'; ?>
             
-            <div id="block-<?php echo $index; ?>" class="ccl-l-container ccl-u-clearfix">
+            <div id="block-<?php echo $index; ?>" class="ccl-l-container ccl-u-pb-2 ccl-u-clearfix">
 
                 <?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
 
