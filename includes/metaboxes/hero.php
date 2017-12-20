@@ -114,7 +114,7 @@ function hero_fields() {
 			'search' 			=> __( 'Magnifying Glass', 'cmb2' ),
 			'pointer-right-open'=> __( 'Mouse Cursor', 'cmb2' ),
 			'clip' 				=> __( 'Paper Clip', 'cmb2' ),
-			'person-open ' 		=> __( 'Person', 'cmb2' ),
+			'person-open' 		=> __( 'Person', 'cmb2' ),
 			'question' 			=> __( 'Question Mark', 'cmb2' ),
 		),
 	) );
