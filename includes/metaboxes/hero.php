@@ -55,6 +55,13 @@ function hero_fields() {
         )
 	) );
 
+	$cmb->add_field( array(
+		'name'	=> __( 'Content Blocks Nav', 'cmb2' ),
+		'desc'  => __( 'Hide the nav for content blocks', 'cmb2' ),
+		'id'  	=> $prefix . 'hide_blocks_nav',
+        'type'	=> 'checkbox',
+	) );
+
 	$quick_link_id = $cmb->add_field( array(
 		'id'          => $prefix . 'quick_links',
 		'type'        => 'group',
@@ -65,7 +72,7 @@ function hero_fields() {
 			'add_button'    => __( 'Add Another Link', 'cmb2' ),
 			'remove_button' => __( 'Remove Link', 'cmb2' ),
 			'sortable'      => true, // beta
-			// 'closed'     => true, // true to have the groups closed by default
+			'closed'     => true, // true to have the groups closed by default
 		),
 	) );
 

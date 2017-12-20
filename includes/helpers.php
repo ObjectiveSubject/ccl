@@ -437,6 +437,29 @@ function get_librarian_statement( $id = 0 ) {
 }
 
 /**
+ * Check if a post has blocks
+ *
+ * @param $id {int} post id
+ *
+ * @return bool
+ */
+function has_block_content( $id = 0, $blocks = false ) {
+
+	if ( ! $id ) {
+		$id = get_the_ID();
+	}
+
+	if ( ! $blocks ) {
+		$blocks = get_post_meta( $id, 'block_group', true );
+	}
+	
+	// The block check will almost always be true
+	// The extended check is to see if there's only 1 block and it's of type "none" 
+	return ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'none' == $blocks[0]['block_type'] ) );
+
+}
+
+/**
  * Get blocks from a post
  *
  * @param $id {int} post id
@@ -451,9 +474,7 @@ function get_blocks( $id = 0 ) {
 
 	$blocks = get_post_meta( $id, 'block_group', true );
 	
-	// The block check will almost always be true
-	// The extended check is to see if a single empty "WYSIWYG" block has been saved
-	if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'none' == $blocks[0]['block_type'] ) ) {
+	if ( has_block_content( $id, $blocks ) ) {
 		
 		return $blocks;
 	
