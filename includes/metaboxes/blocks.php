@@ -49,9 +49,9 @@ function content_blocks() {
 		'name'                => __( 'Block Type', 'cmb2' ),
 		'id'                  => $prefix . 'type',
 		'type'                => 'select',
-		// 'show_option_none' => true,
-		'default'             => 'carousel',
+		'default'             => 'none',
 		'options'             => array(
+			'none'               => __( 'None', 'cmb2' ),
 			'banner'             => __( 'Banner Image(s)', 'cmb2' ),
 			'carousel'           => __( 'Carousel/Feature Items', 'cmb2' ),
 			'events'          	 => __( 'Events', 'cmb2' ),

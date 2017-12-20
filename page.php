@@ -15,7 +15,7 @@ get_header(); ?>
 			$contextual_url  = get_post_meta( get_the_ID(), 'hero_context_url', true );
 			$custom_title 	 = get_post_meta( get_the_ID(), 'hero_custom_title', true );
 			$title       	 = $custom_title ? $custom_title : get_the_title();   // Could use 'the_title()' but this allows for override
-			$description 	 = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
+			$description 	 = ( $post->post_excerpt ) ? $post->post_excerpt: ''; // Could use 'the_excerpt()' but this allows for override
 			$hero_class  	 = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
 			?>
 

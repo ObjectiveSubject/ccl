@@ -453,7 +453,7 @@ function get_blocks( $id = 0 ) {
 	
 	// The block check will almost always be true
 	// The extended check is to see if a single empty "WYSIWYG" block has been saved
-	if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'wysiwyg' == $blocks[0]['block_type'] && '' != $blocks[0]['block_description'] ) ) {
+	if ( is_array( $blocks ) && ! ( 1 == count( $blocks ) && 'none' == $blocks[0]['block_type'] ) ) {
 		
 		return $blocks;
 	
