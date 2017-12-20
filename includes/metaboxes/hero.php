@@ -102,13 +102,13 @@ function hero_fields() {
 			'asterisk' 			=> __( 'Asterisk', 'cmb2' ),
 			'book' 				=> __( 'Book', 'cmb2' ),
 			'calendar' 			=> __( 'Calendar', 'cmb2' ),
-			'clip' 				=> __( 'Paper Clip', 'cmb2' ),
 			'clock' 			=> __( 'Clock', 'cmb2' ),
 			'compass' 			=> __( 'Compass', 'cmb2' ),
-			'person-open ' 		=> __( 'Person', 'cmb2' ),
-			'pointer-right-open'=> __( 'Mouse Cursor', 'cmb2' ),
-			'question' 			=> __( 'Question Mark', 'cmb2' ),
 			'search' 			=> __( 'Magnifying Glass', 'cmb2' ),
+			'pointer-right-open'=> __( 'Mouse Cursor', 'cmb2' ),
+			'clip' 				=> __( 'Paper Clip', 'cmb2' ),
+			'person-open ' 		=> __( 'Person', 'cmb2' ),
+			'question' 			=> __( 'Question Mark', 'cmb2' ),
 		),
 	) );
 
