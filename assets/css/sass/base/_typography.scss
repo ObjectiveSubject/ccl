@@ -28,7 +28,6 @@ textarea {
  h1, .ccl-h1 {
 	margin-top: $spacer;
 	margin-bottom: 0;
-	font-family: $gotham-narrow-light;
 	font-weight: 300;
 	font-size: rem(34);
 	line-height: 1.1em;
@@ -43,7 +42,6 @@ textarea {
 	font-size: rem(24);
 	line-height: 1.25em;
 	font-weight: 500;
-	font-family: $gotham-narrow-medium;
 	@include media($lg) {
 		font-size: rem(36);
 		line-height: 1.1em;
@@ -55,7 +53,6 @@ textarea {
 	font-size: rem(20);
 	line-height: 1.25em;
 	font-weight: 500;
-	font-family: $gotham-narrow-medium;
 	@include media($lg) {
 		font-size: rem(24);
 	}
@@ -66,7 +63,6 @@ textarea {
 	font-size: rem(18);
 	line-height: 1.2em;
 	font-weight: 500;
-	font-family: $gotham-narrow-medium;
 	@include media($lg) {
 		font-size: rem(20);
 	}
@@ -74,7 +70,6 @@ textarea {
  h5, .ccl-h5 {
 	margin-top: $spacer;
 	margin-bottom: 0;
-	font-family: $gotham-narrow-medium;
 	font-size: rem(14);
 	line-height: 1.3em;
 	font-weight: 500;
@@ -82,7 +77,6 @@ textarea {
  h6, .ccl-h6 {
 	margin-top: $spacer;
 	margin-bottom: 0;
-	font-family: $gotham-narrow-medium;
 	font-size: rem(12);
 	line-height: 1.4em;
 	font-weight: 500;
@@ -125,7 +119,6 @@ dd {
 
 b, strong {
 	font-weight: 500;
-	font-family: $gotham-narrow-medium;
 }
 
 dfn, cite, em, i {
@@ -136,7 +129,6 @@ blockquote {
 	@extend .ccl-h3;
 	@extend .ccl-u-display-block;
 	position: relative;
-	font-family: $font-main;
 	margin: ($spacer * 2) 0;
 	padding-top: $spacer * 2;
 

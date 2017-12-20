@@ -173,7 +173,6 @@
 }
 
 .ccl-c-quick-nav__item-text {
-    font-family: $gotham-narrow-book;
     font-size: rem(24);
     line-height: 1;
     white-space: nowrap;
@@ -182,7 +181,6 @@
         @include media($md - 1, max) {
             font-size: rem(20);
             font-weight: 500;
-            font-family: $gotham-narrow-medium;
         }   
     }
 }
@@ -251,7 +249,6 @@
 
         .menu-item {
             border: 0;
-            font-family: $gotham-narrow-medium;
             font-size: rem(15);
             font-weight: 500;
             padding: 0.2rem 0;
@@ -262,7 +259,6 @@
             color: $gray;
             border-bottom: 1px solid lightgray;
             font-weight: 400;
-            font-family: $gotham-narrow-book;
             cursor: default;
             pointer-events: none;
             &:after {

@@ -50,7 +50,6 @@
 
     .ccl-c-menu & {
         position: relative;
-        font-family: $gotham-narrow-book;
         line-height: 1;
     }
 
@@ -85,7 +84,6 @@
         text-transform: uppercase;
         font-size: rem(15);
         font-weight: 500;
-        font-family: $gotham-narrow-medium;
         margin-bottom: 0.9em;
 
         .ccl-is-primary & {
@@ -147,5 +145,4 @@
     padding-bottom: 0.75em;
     margin-bottom: 0.9em;
     font-weight: 400;
-    font-family: $gotham-narrow-book;
 }
