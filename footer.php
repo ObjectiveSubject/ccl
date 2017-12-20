@@ -12,7 +12,7 @@ $footer_options = get_option( 'footer-options' );
 				<?php 
 				$schools = array(
 					array( 'name' => 'CGU', 				'url' => 'https://www.cgu.edu/', 			 'logo' => CCL_ASSETS . 'images/logos/cgu@2x.png', 				'width' => 108, 'height' => 58 ),
-					array( 'name' => 'CUC', 				'url' => 'http://www.cuc.claremont.edu/', 	 'logo' => CCL_ASSETS . 'images/logos/cuc@2x.png', 				'width' => 72, 'height' => 78 ),
+					array( 'name' => 'CUC', 				'url' => 'http://www.cuc.claremont.edu/', 	 'logo' => CCL_ASSETS . 'images/logos/tccs@2x.png', 			'width' => 100, 'height' => 100 ),
 					array( 'name' => 'Claremont McKenna', 	'url' => 'http://www.claremontmckenna.edu/', 'logo' => CCL_ASSETS . 'images/logos/claremontmckenna@2x.png', 'width' => 84, 'height' => 70 ),
 					array( 'name' => 'Harvey Mudd', 		'url' => 'https://www.hmc.edu/', 			 'logo' => CCL_ASSETS . 'images/logos/hmc@2x.png', 				'width' => 64, 'height' => 66 ),
 					array( 'name' => 'KGI', 				'url' => 'http://www.kgi.edu/', 			 'logo' => CCL_ASSETS . 'images/logos/kgi@2x.png', 				'width' => 158, 'height' => 36 ),
