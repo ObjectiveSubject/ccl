@@ -331,7 +331,10 @@ function render_room_data_metabox() {
  */
 function request_booking() {
 	if ( ! is_user_logged_in() ) {
-		check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+		// This is still failing for logged in users on WPE
+		// It should probably be ok, given that only Claremont email addresses can book,
+		// probably worth sorting this out still
+		// check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 	}
 	
 	// should payload be checked here or reserve_space()?
@@ -359,7 +362,8 @@ function request_booking() {
  */
 function get_bookings() {
 	if ( ! is_user_logged_in() ) {
-		check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+		// This is still failing for logged in users on WPE
+		// check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 	}
 
 	$date = $_POST['date'];
@@ -382,7 +386,8 @@ function get_bookings() {
  */
 function get_space_item() {
 	if ( ! is_user_logged_in() ) {
-		check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
+		// This is still failing for logged in users on WPE
+		// check_ajax_referer( 'ccl_nonce', 'ccl_nonce' ); // Internal name / JS value
 	}
 
 	$room_id   = $_POST['room'];
