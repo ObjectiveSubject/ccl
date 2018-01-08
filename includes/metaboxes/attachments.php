@@ -11,9 +11,11 @@ function setup() {
 		return __NAMESPACE__ . "\\$function";
 	};
 
-	// NOTE: Uncomment to activate metabox
 	add_action( 'cmb2_init',  $n( 'attachment_fields' ) );
+	add_action( 'edit_attachment', $n( 'save_attachment_fields' ) );
+
 	add_filter( 'attachment_fields_to_edit', $n('add_attachment_fields_to_edit'), 10, 2 );
+
 }
 
 /**
@@ -46,12 +48,31 @@ function attachment_fields() {
  * See https://codex.wordpress.org/Plugin_API/Filter_Reference/attachment_fields_to_edit
  */
 function add_attachment_fields_to_edit( $form_fields, $post ) {
-    $field_value = get_post_meta( $post->ID, 'attachment_link', true );
-    $form_fields['attachment_link'] = array(
-        'value' => $field_value ? $field_value : '',
-        'label' => __( 'Promo Carousel Link' ),
-		'helps' => __( 'Add a link to be used in promo carousels' ),
+
+	$field_value = get_post_meta( $post->ID, 'attachment_link', true );
+
+	$form_fields['attachment_link'] = array(
+		'value'        => $field_value ? $field_value : '',
+		'label'        => __( 'Promo Carousel Link' ),
+		'helps'        => __( 'Add a link to be used in promo carousels' ),
 		'show_in_edit' => false
-    );
-    return $form_fields;
+	);
+
+	return $form_fields;
+}
+
+/**
+ * Save attachment fields from add_attachment_fields_to_edit()
+ *
+ * @param $attachment_id
+ */
+function save_attachment_fields( $attachment_id ) {
+
+	if ( isset( $_REQUEST['attachments'][ $attachment_id ]['attachment_link'] ) ) {
+
+		$link = $_REQUEST['attachments'][ $attachment_id ]['attachment_link'];
+		update_post_meta( $attachment_id, 'attachment_link', esc_url( $link ) );
+
+	}
+
 }
