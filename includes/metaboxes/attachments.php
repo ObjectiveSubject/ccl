@@ -71,7 +71,7 @@ function save_attachment_fields( $attachment_id ) {
 	if ( isset( $_REQUEST['attachments'][ $attachment_id ]['attachment_link'] ) ) {
 
 		$link = $_REQUEST['attachments'][ $attachment_id ]['attachment_link'];
-		update_post_meta( $attachment_id, 'attachment_link', esc_url( $link ) );
+		update_post_meta( $attachment_id, 'attachment_link', $link );
 
 	}
 
