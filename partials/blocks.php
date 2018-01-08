@@ -93,21 +93,56 @@ if ( $blocks ) : ?>
 
         <?php elseif ( 'events' == $block['block_type'] ) : ?>
 
-            <?php 
-            $events = array();
-            $count = 6;
-            do {
-                array_push( $events, array(
-                    'title' => 'Event Title',
-                    'start' => 'Day, Month 00, 7:00',
-                    'end' => '8:00p',
-                    'venue' => 'Venue Name',
-                    'image' => 'http://placehold.it/500x350',
-                    'url' => '#'
-                ) );
-                $count--;
-            } while ( $count > 0 );
-            
+			<?php
+			$event_category = get_post_meta( $post->ID, 'event_category_id', true ); // get category from meta
+			$event_data     = '';
+			$events         = array();
+			$transient_slug = 'all';
+
+			if ( $event_category ) {
+				$transient_slug = 'category_' . $event_category;
+			}
+
+			// check to see if we have a cached version of the events
+			$event_cache = get_transient( 'events_' . $transient_slug );
+
+			if ( $event_cache ) {
+
+				$event_data = $event_cache;
+
+			} else {
+
+				$parameters = array(
+					'limit'       => 10, // default it 20
+					'category_id' => $event_category // grab from a specific category
+					// 'date'  => '2017-12-01', // useful for grabbing old events for testing
+				);
+
+				$event_data = \CCL\Integrations\LibCal\get_events( $parameters );
+
+				if ( ! is_wp_error( $event_data ) ) {
+					set_transient( 'events_' . $transient_slug, $event_data, 15 * MINUTE_IN_SECONDS ); // maybe cache for 15 minutes
+				}
+
+			}
+
+			// This intermediary step likely isn't entirely necessary, mostly taking care of data massaging in one place
+			foreach ( $event_data->events as $event ) {
+
+				$start = date( 'l, F n, g:i', strtotime( $event->start ) );
+				$end   = $event->end ? '&ndash;' . date( 'g:ia', strtotime( $event->end ) ) : '';
+
+				$date_time = $start . $end;
+
+				array_push( $events, array(
+					'title'     => esc_html( $event->title ),
+					'date_time' => $date_time,
+					'venue'     => esc_html( $event->location->name ),
+					'image'     => esc_url( $event->featured_image ),
+					'url'       => esc_url( $event->url->public )
+				) );
+			}
+
             $has_block_items = ( isset ( $events ) && $events );
             $block_item_count = ( $has_block_items && is_array( $events ) ) ? count( $events ) : 0;
             $enable_carousel = $block_item_count > 3; ?>
@@ -165,7 +200,7 @@ if ( $blocks ) : ?>
                                         <a href="<?php echo $event['url']; ?>">
                                             <div class="ccl-u-mb-nudge"><img src="<?php echo $event['image'] ?>" alt="Event image" /></div>
                                             <p class="ccl-h4 ccl-u-mt-0"><?php echo $event['title']; ?></p>
-                                            <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo $event['start'] . '-' . $event['end']; ?></p>
+                                            <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo $event['date_time']; ?></p>
                                             <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo $event['venue']; ?></p>
                                         </a>
                                     </article>

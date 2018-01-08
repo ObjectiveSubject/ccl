@@ -120,6 +120,15 @@ function content_blocks() {
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
+		'name'    => __( 'Event Category ID#', 'cmb2' ),
+		// 'desc'    => 'field description (optional)',
+		// 'default' => 'standard value (optional)',
+		'id'      => $prefix . 'category_id',
+		'type'    => 'text',
+		'classes' => 'ccl-toggled-field show-on-events'
+	) );
+
+	$cmb->add_group_field( $block_group_id, array(
 		'name'        => __( 'Staff Member', 'cmb2' ),
 		'id'          => $prefix . 'staff_member',
 		'type'        => 'post_search_text', // This field type
