@@ -114,7 +114,7 @@ if ( $blocks ) : ?>
 
 				$parameters = array(
 					'limit'       => 10, // default it 20
-					'category_id' => $event_category // grab from a specific category
+					'category_id' => $event_category, // grab from a specific category
 					// 'date'  => '2017-12-01', // useful for grabbing old events for testing
 				);
 
@@ -145,40 +145,40 @@ if ( $blocks ) : ?>
 
             $has_block_items = ( isset ( $events ) && $events );
             $block_item_count = ( $has_block_items && is_array( $events ) ) ? count( $events ) : 0;
-            $enable_carousel = $block_item_count > 3; ?>
+            $enable_carousel = $block_item_count > 3;
+            
+            if ( $has_block_items ) : ?>
 
-            <div id="block-<?php echo $index; ?>" class="ccl-l-container">
+                <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
-                <div class="ccl-c-promo">
+                    <div class="ccl-c-promo">
 
-                    <header class="ccl-c-promo__header">
+                        <header class="ccl-c-promo__header">
 
-                        <?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+                            <?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
 
-                            <div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
+                                <div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
 
-                        <?php endif; ?>
+                            <?php endif; ?>
 
-                        <?php if ( isset( $block['block_cta'] ) && $block['block_cta'] ) : ?>
+                            <?php if ( isset( $block['block_cta'] ) && $block['block_cta'] ) : ?>
 
-                            <div class="ccl-c-promo__cta">
-                                <?php echo apply_filters( 'the_content', $block['block_cta'] ); ?>
-                            </div>
+                                <div class="ccl-c-promo__cta">
+                                    <?php echo apply_filters( 'the_content', $block['block_cta'] ); ?>
+                                </div>
 
-                        <?php endif; ?>
-                        
-                        <?php if ( $enable_carousel ) : ?>
+                            <?php endif; ?>
+                            
+                            <?php if ( $enable_carousel ) : ?>
 
-                            <div class="ccl-c-promo__action">
-                                <button id="carousel-<?php echo $index; ?>-prev" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
-                                <button id="carousel-<?php echo $index; ?>-next" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
-                            </div>
+                                <div class="ccl-c-promo__action">
+                                    <button id="carousel-<?php echo $index; ?>-prev" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
+                                    <button id="carousel-<?php echo $index; ?>-next" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
+                                </div>
 
-                        <?php endif; ?>
+                            <?php endif; ?>
 
-                    </header>
-
-                    <?php if ( $has_block_items ) : ?>
+                        </header>
 
                         <?php $carousel_class = ( $enable_carousel ) ? 'js-promo-carousel' : 'ccl-is-static'; ?>
 
@@ -211,11 +211,11 @@ if ( $blocks ) : ?>
 
                         </div>
 
-                    <?php endif; ?>
+                    </div>
 
                 </div>
 
-            </div>
+            <?php endif; ?>
 
         <?php elseif ( 'banner' == $block['block_type'] ) : ?>
 
