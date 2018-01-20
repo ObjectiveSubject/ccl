@@ -63,6 +63,20 @@
 }
 
 
+// Layout
+// ------------------------------------------ /
+.ccl-u-columns-2-md {
+	@include media($md) {
+		columns: 2
+	}
+}
+.ccl-u-columns-3-lg {
+	@include media($lg) {
+		columns: 3; 
+	}
+}
+
+
 // Colors
 // ------------------------------------------ /
 @each $color-name, $color-value in $color-map {

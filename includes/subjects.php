@@ -31,7 +31,8 @@ function register_subject_taxonomy() {
 		array(
 			// post types
 			'guide',
-			'staff'
+			'staff',
+			'database'
 		),
 		array(
 			// parameters
