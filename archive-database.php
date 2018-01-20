@@ -4,13 +4,17 @@
  */
 
 get_header();
-$filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with']; ?>
+$filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'];
+$filter_by_subject = isset( $_GET['post_type'] ) && '' !== $_GET['post_type'];
+$subject = get_queried_object(); ?>
 
 	<div class="site-content">
 
-        <header class="ccl-c-hero">
+        <header class="ccl-c-hero ccl-is-naked">
             
             <div class="ccl-l-container">
+
+                <div><a href="<?php echo site_url('database-directory/'); ?>" class="ccl-c-hero__action">&laquo; Back to Database Directory</a></div>
 
 				<div class="ccl-l-row">
 
@@ -18,7 +22,8 @@ $filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with']
 						<div class="ccl-c-hero__header">
 							<h1 class="ccl-c-hero__title">
                                 <?php _e( 'Databases', 'ccl' ); ?>
-                                <?php echo $filter_by_letter ? strtoupper( ': ' . $_GET['begins_with'] ) : ''; ?>
+                                <?php echo $filter_by_letter ? ': "' . strtoupper( $_GET['begins_with'] ) . '"' : ''; ?>
+                                <?php echo $filter_by_subject ? ':<br/>' . $subject->name : ''; ?>
                             </h1>
 						</div>
 					</div>
@@ -37,7 +42,11 @@ $filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with']
 
         <div class="ccl-l-container ccl-u-my-3">
 
-			<?php if ( have_posts() ) : ?>
+            <?php if ( have_posts() ) : ?>
+            
+                <?php if ( get_query_var( 'paged' ) > 1 ) { 
+                    the_posts_navigation(); 
+                } ?>
 
                 <?php 
                 $shown_posts = 0;
@@ -52,16 +61,19 @@ $filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with']
 
                     <?php if ( $show_article ) : ?>
 
-						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                        <article id="post-<?php the_ID(); ?>" <?php post_class('ccl-c-database ccl-u-mt-1'); ?>>
+                        
+                            <div class="ccl-l-row">
 
-							<header class="entry-header">
-								<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+                                <header class="ccl-l-column ccl-l-span-12 ccl-l-span-6-md ccl-l-span-4-lg">
+                                    <?php the_title( sprintf( '<h2 class="ccl-h4"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+                                </header>
 
-							</header>
+                                <div class="ccl-l-column">
+                                    <?php the_excerpt(); ?>
+                                </div>
 
-							<div class="entry-summary">
-								<?php the_excerpt(); ?>
-							</div>
+                            </div>
 
                         </article>
 
@@ -71,11 +83,13 @@ $filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with']
 
                 <?php endwhile; ?>
                 
-                <?php if ( $shown_posts > 0 ) {
-                    the_posts_navigation();
-                } else {
-                    echo '<p class="ccl-h1 ccl-u-mb-2">No posts found.</p>';
-                } ?>
+                <?php if ( $shown_posts > 0 ) : ?>
+                    <div class="ccl-u-mt-3">
+                        <?php the_posts_navigation(); ?>
+                    </div>
+                <?php else : ?>
+                    <p class="ccl-h1">No posts found.</p>
+                <?php endif; ?>
 
 			<?php else : ?>
 

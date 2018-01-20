@@ -56,6 +56,11 @@
             max-height: rem(450);
         }        
     }
+
+    &.ccl-is-naked {
+        background: none !important;
+        color: black;
+    }
 }
 
 .ccl-c-hero__thumb {
@@ -102,6 +107,10 @@
     @extend .ccl-h4;
     @extend .ccl-u-display-block;
     color: white !important;
+
+    .ccl-is-naked & {
+        color: black !important;
+    }
 }
 a.ccl-c-hero__action {
     &:hover, &:focus {
