@@ -102,6 +102,11 @@
         margin-top: 0;
     }
 
+    a {
+        border-bottom: 1px solid;
+        color: inherit;
+    }
+
     .ccl-c-carousel & {
         font-size: rem(14);
         * {
