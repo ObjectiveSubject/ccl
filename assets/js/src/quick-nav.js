@@ -69,8 +69,20 @@
             $toggle.click(function(event){
                 event.stopPropagation();
                 event.preventDefault();
-                $(this).toggleClass('ccl-is-active');
-                $subMenu.slideToggle();
+
+                if ( $(this).hasClass('ccl-is-active') ) {
+                    $(this).removeClass('ccl-is-active ccl-u-color-school');
+                    $subMenu.fadeOut(250);
+                    return;
+                }
+
+                $('.ccl-c-quick-nav__menu a.ccl-is-active')
+                    .removeClass('ccl-is-active ccl-u-color-school')
+                    .siblings('.sub-menu')
+                        .fadeOut(250);
+                
+                $(this).toggleClass('ccl-is-active ccl-u-color-school');
+                $subMenu.fadeToggle(250);
             });
         });
     };
