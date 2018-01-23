@@ -59,14 +59,17 @@ $subject = get_queried_object(); ?>
 						$show_article = true;
 					} ?>
 
-                    <?php if ( $show_article ) : ?>
+                    <?php if ( $show_article ) :
+                        
+                        $database_friendly_url = get_post_meta( $post->ID, 'database_friendly_url', true );
+                        $url = $database_friendly_url ? $database_friendly_url : get_permalink(); ?>
 
                         <article id="post-<?php the_ID(); ?>" <?php post_class('ccl-c-database ccl-u-mt-1'); ?>>
                         
                             <div class="ccl-l-row">
 
                                 <header class="ccl-l-column ccl-l-span-12 ccl-l-span-6-md ccl-l-span-4-lg">
-                                    <?php the_title( sprintf( '<h2 class="ccl-h4"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+                                    <?php the_title( sprintf( '<h2 class="ccl-h4"><a href="%s" target="_blank" rel="bookmark">', esc_url( $url ) ), '</a></h2>' ); ?>
                                 </header>
 
                                 <div class="ccl-l-column">
