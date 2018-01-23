@@ -133,7 +133,13 @@ function get_all_databases() {
 
 	$token = get_token();
 
-	$request = wp_remote_get( 'https://lgapi-us.libapps.com/1.2/az', array(
+	$params = array(
+		'expand' => 'subjects' // need to know who created the guide
+	);
+
+	$query_string = urldecode_deep( http_build_query( $params ) ); // urldecode is necessary to prevent the comma from being encoded
+
+	$request = wp_remote_get( 'https://lgapi-us.libapps.com/1.2/az?' . $query_string, array(
 		'headers' => array(
 			'Authorization' => 'Bearer '. $token
 		),

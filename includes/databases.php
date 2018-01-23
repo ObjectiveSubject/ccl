@@ -244,6 +244,15 @@ function add_database( $database ) {
 	// Set category in XX taxonomy and create if it doesn't exist
 	// $category = $database['category'];
 	// wp_set_object_terms( $database_id, $category, 'XX' );
+	// Add Subjects to custom taxonomy
+	if ( array_key_exists( 'subjects', $database ) ) {
+		$subjects_array = array();
+		foreach ( $database['subjects'] as $subject ) {
+			$subjects_array[] = $subject['name'];
+		}
+		// Add subject name to subject taxonomy
+		wp_set_object_terms( $post_id, $subject['name'], 'subject' );
+	}
 
 	if ( $duplicate_check->have_posts() ) {
 		return "added";
