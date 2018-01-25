@@ -14,7 +14,7 @@ function setup() {
 	add_action( 'wp_enqueue_scripts', $n( 'scripts' ) );
 	add_action( 'wp_enqueue_scripts', $n( 'styles' ) );
 	add_action( 'after_setup_theme', $n( 'features' ) );
-	// add_action( 'pre_get_posts', $n( 'modify_queries' ) );
+	add_action( 'pre_get_posts', $n( 'modify_queries' ) );
 	add_action( 'init', $n( 'add_menus' ) );
 
 	// Remove WordPress header cruft
@@ -101,7 +101,28 @@ function styles( $debug = false ) {
  */
 function modify_queries( $query ) {
 
-   	// Perform query modifications here
+	   // Perform query modifications here
+
+		if ( ! is_admin() && $query->is_main_query() ) {
+
+			if ( is_post_type_archive( 'database' ) ) {
+				
+				$query->set( 'orderby', 'title' );
+				$query->set( 'order', 'ASC' );
+
+				$is_filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'];
+
+				if ( $is_filter_by_letter ) {
+
+					// The best thing to do here would probably be to perform a custom query for databases beginning with the appropriate letter.
+					// But it seems you have to use SQL queries to do that, which are more complicated and possibly less performant.
+
+					// Instead we just return all the databases and use a conditional in the template (see archive-database.php).
+					$query->set( 'posts_per_page', 1000 );
+				}
+			}
+
+		}
 
 }
 
