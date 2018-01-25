@@ -51,44 +51,50 @@
 
 					$events             = \CCL\Helpers\get_header_events();
 					$hours              = \CCL\Helpers\get_library_hours();
-					$main_library_hours = $hours->locations[0]->rendered;
-					$notices              = \CCL\Helpers\get_header_notices();
+					$notices            = \CCL\Helpers\get_header_notices();
 
 					?>
 
 
 					<ul class="ccl-c-masthead__status ccl-c-masthead__nav-item">
-						<?php if ( $main_library_hours ) : ?>
+						<?php if ( $hours ) : ?>
 							<li>
-								<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today&#39;s hours <?php echo $main_library_hours; ?></span>
+								<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today&#39;s hours</span>
+								<ul class="ccl-c-masthead__hours">
+									<?php foreach($hours->locations as $location): ?>
+										<li class="ccl-u-font-size-sm"><span><?php echo $location->name; ?></span> <span><?php echo $location->rendered; ?></span></li>
+									<?php endforeach; ?>
+									<li><a class="ccl-u-font-size-sm ccl-c-masthead__more-hours" href="<?php echo esc_url( home_url('/hours/') ); ?>">More Hours <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a></il>									
+								</ul>
+
 							</li>
 						<?php endif; ?>
-
-						<?php if ( $events && ! empty( $events->events ) ) : ?>
-
-							<li>
-								<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
-									<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>">
-										<?php echo apply_filters( 'the_title', $events->events[0]->title ); ?>
-									</a>
-								</span>
-							</li>
-
-						<?php endif; ?>
-
-						<?php if ( $notices ) : ?>
-
-							<li>
-								<span class="ccl-h5">
-									<span class="ccl-u-color-red">
-										<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
+						
+						<li>
+							<?php if ( $events && ! empty( $events->events ) ) : ?>
+								<div>
+									<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
+										<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>">
+											<?php echo apply_filters( 'the_title', $events->events[0]->title ); ?>
+										</a>
 									</span>
-									<?php $notice = shuffle( $notices ); // Return a random notice ?>
-									<?php echo apply_filters( 'the_title', $notices[0] ); ?>
-								</span>
-							</li>
+								</div>
+							<?php endif; ?>						
 
-						<?php endif; ?>
+							<?php if ( $notices ) : ?>
+								<div>
+									<span class="ccl-h5">
+										<span class="ccl-u-color-red">
+											<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
+										</span>
+										<?php $notice = shuffle( $notices ); // Return a random notice ?>
+										<?php echo apply_filters( 'the_title', $notices[0] ); ?>
+									</span>
+								</div>
+							<?php endif; ?>
+						
+						</li>
+
 					</ul>
 
 					<?php if ( has_nav_menu( 'header_1' ) ) { ?>

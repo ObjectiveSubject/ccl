@@ -64,7 +64,7 @@
 						_this.$responseList.html('');
 					}
 
-				}, 1500);
+				}, 500);
 
 			})
 			.focus(function(){
