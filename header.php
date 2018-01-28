@@ -64,7 +64,7 @@
 									<?php foreach($hours->locations as $location): ?>
 										<li class="ccl-u-font-size-sm"><span><?php echo $location->name; ?></span> <span><?php echo $location->rendered; ?></span></li>
 									<?php endforeach; ?>
-									<li><a class="ccl-u-font-size-sm ccl-c-masthead__more-hours" href="<?php echo esc_url( home_url('/hours/') ); ?>">More Hours <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a></il>									
+									<li><a class="ccl-u-font-size-sm ccl-c-masthead__more-hours" href="<?php echo esc_url( home_url('/hours/') ); ?>">More Hours <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a></li>
 								</ul>
 
 							</li>
