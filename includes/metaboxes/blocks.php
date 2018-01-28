@@ -159,4 +159,18 @@ function content_blocks() {
 		// ),
 	) );
 
+	$cmb->add_group_field( $block_group_id, array(
+		'name'    => __( 'Databases Available', 'cmb2' ),
+		'desc'    => '',
+		'id'      => $prefix . 'databases',
+		'type'    => 'multicheck',
+		'options' => array(
+			// Make sure the options here match those available in the block (/partials/blocks.php)
+			'all' => 'Libraries Worldwide',
+			'ccl' => 'Claremont Colleges Library',
+			'sc'  => 'Special Collections',
+		),
+		'classes' => 'ccl-toggled-field show-on-banner show-on-wysiwyg show-on-search show-on-feature_item',
+	) );
+
 }

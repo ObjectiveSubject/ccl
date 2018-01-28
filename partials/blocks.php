@@ -384,9 +384,29 @@ if ( $blocks ) : ?>
         <?php elseif ( 'search' == $block['block_type'] ) : ?>
 
             <?php 
-            $enable_live_results = $block['block_search_is_live'];
+            $enable_live_results = isset( $block['block_search_is_live'] );
             $search_js_class = ( $enable_live_results ) ? 'ccl-js-search-form' : '';
-            $search_label = ( $enable_live_results ) ? 'Start typing to search' : 'Search...'; ?>
+            $search_label = ( $enable_live_results ) ? 'Start typing to search' : 'Search...';
+
+            // Databases added to the custom field in /includes/metaboxes/blocks.php need to be added here
+			$databases = array(
+				'all' => array(
+					'label' => 'Libraries Worldwide',
+					'value' => ''
+				),
+				'ccl' => array(
+					'label' => 'Claremont Colleges Library',
+					'value' => 'wz:519'
+				),
+				'sc'  => array(
+					'label' => 'Special Collections',
+					'value' => 'wz:519::zs:36307'
+				)
+			);
+
+			$database_display = ( isset( $block['block_databases'] ) ) ? $block['block_databases'] : array( 'all' );
+			$database_selected = 'all';
+            ?>
             
             <div id="block-<?php echo $index; ?>" class="ccl-l-container ccl-u-pb-2 ccl-u-clearfix">
 
@@ -414,12 +434,15 @@ if ( $blocks ) : ?>
                         
                         <div class="ccl-c-search-form__option">
                             <strong>In:</strong>
-                            <select class="ccl-b-select" name="database" title="Database">
-                                <option value="all" selected="selected">All Databases</option>
-                                <option value="Z-wcorg">WorldCat</option>
-                                <option value="Z-oais">OAlster</option>
-                                <option value="Bcnf">PapersFirst</option>
-                            </select>
+							<select class="ccl-b-select" name="database" title="Database">
+		                        <?php foreach ( $database_display as $slug ) : // replace with $database_order ?>
+
+									<option value="<?php echo esc_attr( $databases[ $slug ][ 'value' ] ); ?>" <?php if ( $slug == $database_selected ) { echo 'selected="selected"'; } ?>>
+										<?php echo esc_html( $databases[ $slug ][ 'label' ] ); ?>
+									</option>
+
+		                        <?php endforeach; ?>
+							</select>
                         </div>
                     
                         <button type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid" style="min-width: 8rem">
