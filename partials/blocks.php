@@ -434,7 +434,7 @@ if ( $blocks ) : ?>
                         
                         <div class="ccl-c-search-form__option">
                             <strong>In:</strong>
-							<select class="ccl-b-select" name="database" title="Database">
+							<select class="ccl-b-select ccl-c-search-location" name="location" title="location">
 		                        <?php foreach ( $database_display as $slug ) : // replace with $database_order ?>
 
 									<option value="<?php echo esc_attr( $databases[ $slug ][ 'value' ] ); ?>" <?php if ( $slug == $database_selected ) { echo 'selected="selected"'; } ?>>
