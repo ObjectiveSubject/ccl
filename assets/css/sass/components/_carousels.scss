@@ -60,6 +60,11 @@
         display: block;
         max-width: 350px;
     }
+    
+    & > p {
+        display: block;
+        max-width: 330px;    
+    }
 }
 
 .ccl-c-carousel__paging {
