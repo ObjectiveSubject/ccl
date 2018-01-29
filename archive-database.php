@@ -4,6 +4,9 @@
  */
 
 get_header();
+
+$begins_with = substr( sanitize_text_field( $_GET['begins_with'] ), 0, 1 ); // Sanitize and reduce to one character, technically could be validated against A-Z
+
 $filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'];
 $filter_by_subject = isset( $_GET['post_type'] ) && '' !== $_GET['post_type'];
 $subject = get_queried_object();
@@ -29,7 +32,7 @@ $pagination_args = array(
 						<div class="ccl-c-hero__header">
 							<h1 class="ccl-c-hero__title">
                                 <?php _e( 'Databases', 'ccl' ); ?>
-                                <?php echo $filter_by_letter ? ': "' . strtoupper( $_GET['begins_with'] ) . '"' : ''; ?>
+                                <?php echo $filter_by_letter ? ': "' . strtoupper( $begins_with ) . '"' : ''; ?>
                                 <?php echo $filter_by_subject ? ':<br/>' . $subject->name : ''; ?>
                             </h1>
 						</div>
@@ -58,7 +61,7 @@ $pagination_args = array(
                     <?php 
                     if ( $filter_by_letter ) {
 						$first_letter = strtoupper( substr( get_the_title(), 0, 1 ) );
-						$show_article = $first_letter == strtoupper( $_GET['begins_with'] );
+						$show_article = $first_letter == strtoupper( $begins_with );
 					} else {
 						$show_article = true;
                     } 
