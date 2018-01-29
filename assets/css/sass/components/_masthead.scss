@@ -47,13 +47,13 @@
 .ccl-c-masthead__status {
     @extend .ccl-u-clean-list;
     @extend .ccl-u-mt-1;
+    border-top: 1px solid lightgray;    
     text-transform: uppercase;
     display: flex;
     flex-wrap: wrap;
 
     li {
-        border-top: 1px solid lightgray;
-        padding: rem(10) 0 rem(16);
+        padding: rem(10) 0 0 0;
         margin-left: $gutter/2;
         margin-right: $gutter/2; 
         flex: ccl-span( 12 );        
@@ -61,11 +61,7 @@
         @include media($size: $sm, $size2: $lg){
             flex: ccl-span( 6 );
         }
-        
-        @include media($lg) {
-            padding: rem(10) rem(16) rem(16);
-        }        
-        
+
     }
 }
 
@@ -80,7 +76,7 @@
         justify-content: space-between;
         
         @include media($lg){
-            padding: 0 0 rem(10) rem(16);            
+            padding: 0 0 rem(10) rem(10);            
         }
         
         .ccl-c-masthead__more-hours{
@@ -89,4 +85,11 @@
             
         }
     }
+}
+
+
+.ccl-c-masthead__event,
+.ccl-c-masthead__notice{
+    border-top: 1px solid lightgray;
+    padding: rem(10) 0 rem(10);      
 }

@@ -72,17 +72,25 @@
 						
 						<li>
 							<?php if ( $events && ! empty( $events->events ) ) : ?>
-								<div>
+								<div class="ccl-c-masthead__event">
 									<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
-										<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>">
-											<?php echo apply_filters( 'the_title', $events->events[0]->title ); ?>
+									
+										<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>" target="_blank">
+											<?php 
+												
+												$event_date = new DateTime( $events->events[0]->start );
+												
+												$event_date = $event_date->format( 'D m/d @ g:i a' );
+												
+												echo $event_date . " - " . apply_filters( 'the_title', $events->events[0]->title ); 
+											?>
 										</a>
 									</span>
 								</div>
 							<?php endif; ?>						
 
 							<?php if ( $notices ) : ?>
-								<div>
+								<div class="ccl-c-masthead__notice">
 									<span class="ccl-h5">
 										<span class="ccl-u-color-red">
 											<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
