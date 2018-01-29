@@ -84,20 +84,6 @@ get_header(); ?>
 
 							<?php endif; ?>
 
-							<?php // RAW DATA (delete at some point) ?>
-							<?php if ( $raw_data ) : ?>
-								<div class="ccl-c-accordion">
-									<div class="ccl-c-accordion__toggle">
-										Raw Data
-									</div>
-									<div class="ccl-c-accordion__content">
-										<pre>
-											<?php echo esc_html( print_r( $raw_data ) ); ?>
-										</pre>
-									</div>
-								</div>
-							<?php endif; ?>
-
 						</div>
 
 					</div>

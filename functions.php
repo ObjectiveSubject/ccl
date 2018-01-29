@@ -59,7 +59,7 @@ CCL\Core\setup();
 CCL\Admin\setup();
 CCL\Comments\setup();
 CCL\Databases\setup();
-CCL\Events\setup();
+// CCL\Events\setup();
 CCL\Faqs\setup();
 CCL\Footer\setup();
 CCL\Guides\setup();
