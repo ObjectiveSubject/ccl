@@ -7,11 +7,19 @@
             <!-- <li class="ccl-c-user-nav__menu-item">
                 Library Open 7am - 9pm Today
             </li> -->
-
+            
             <li class="ccl-c-user-nav__menu-item ccl-is-right" style="margin-left: auto">
+                <a href="https://ccl.on.worldcat.org/myaccount" target="_blank">
+                <span class="ccl-u-hide-md">Library Account</span>
+                <span class="ccl-u-show-md">View Library Account <i class="ccl-b-icon list" aria-hidden="true"></i></span> 
+                </a>
+            </li>
+
+            <li class="ccl-c-user-nav__menu-item ccl-is-right" >
                 <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">
                     <span class="ccl-u-hide-md" aria-hidden="true"><?php _e( 'Chat', 'ccl' ); ?></span>
-                    <span class="ccl-u-show-md"><?php _e( 'Chat with a Librarian', 'ccl' ); ?></span>
+                    <span class="ccl-u-show-md"><?php _e( 'Chat with a Librarian', 'ccl' ); ?> <i class="ccl-b-icon person-open" aria-hidden="true"></i>
+                    </span>
                 </a>
             </li>
             
