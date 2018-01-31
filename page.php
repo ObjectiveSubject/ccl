@@ -48,7 +48,13 @@ get_header(); ?>
 							<div class="ccl-l-column ccl-l-span-two-thirds-lg">
 								<div class="ccl-c-hero__content">
 								
-									<?php get_template_part( 'partials/block-anchors' ); ?>
+									<?php 
+										$hide_blocks_nav = get_post_meta( get_the_ID(), 'hero_hide_blocks_nav' );
+
+										if ( ! $hide_blocks_nav ) {
+											get_template_part( 'partials/block-anchors' );
+										} 
+									?>
 
 									<?php if ( $description ) : ?>
 										<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
