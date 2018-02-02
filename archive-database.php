@@ -5,7 +5,9 @@
 
 get_header();
 
-$begins_with = isset( $_GET['begins_with'] ) && substr( sanitize_text_field( $_GET['begins_with'] ), 0, 1 ); // Sanitize and reduce to one character, technically could be validated against A-Z
+if( isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'] ){
+    $begins_with =   substr( sanitize_text_field( $_GET['begins_with'] ), 0, 1 ); // Sanitize and reduce to one character, technically could be validated against A-Z
+}
 
 $filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'];
 $filter_by_subject = isset( $_GET['post_type'] ) && '' !== $_GET['post_type'];
