@@ -12,6 +12,7 @@ require_once CCL_INC . 'metaboxes/blocks.php';
 require_once CCL_INC . 'metaboxes/hero.php';
 require_once CCL_INC . 'metaboxes/page.php';
 require_once CCL_INC . 'metaboxes/staff.php';
+require_once CCL_INC . 'metaboxes/libcalrooms.php';
 
 // Add General metabox first, so it always appears at top
 CCL\MetaBoxes\General\setup();
@@ -20,5 +21,6 @@ CCL\MetaBoxes\Page\setup();
 CCL\MetaBoxes\Staff\setup();
 CCL\MetaBoxes\Attachments\setup();
 CCL\MetaBoxes\Hero\setup();
+CCL\MetaBoxes\LibcalRooms\setup();
 
 // Add other metaboxes here

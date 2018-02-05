@@ -76,14 +76,9 @@
 									<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
 									
 										<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>" target="_blank">
-											<?php 
-												
-												$event_date = new DateTime( $events->events[0]->start );
-												
-												$event_date = $event_date->format( 'D m/d @ g:i a' );
-												
-												echo $event_date . " - " . apply_filters( 'the_title', $events->events[0]->title ); 
-											?>
+											<?php $event_date = date( 'D m/d @ g:i a', strtotime( $events->events[0]->start) ); ?>
+
+											<span><?php echo $event_date; ?></span> - <span><?php echo apply_filters( 'the_title', $events->events[0]->title ); ?></span>
 										</a>
 									</span>
 								</div>

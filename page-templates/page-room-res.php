@@ -141,11 +141,12 @@ get_header(); ?>
                                         <?php endif; ?>
                                     
                                         <!-- <a href="#" class="ccl-h4 ccl-u-mt-0" data-toggle="modal" data-target="#<?php //echo 'room-' . $room_id . '-map'; ?>">Show on Map</a> -->
-
+                                        
+                                        <?php if( $room_id ): ?>    
                                         <a href="#" class="ccl-h4 ccl-u-mt-0" data-toggle="modal" data-target="#<?php echo 'room-' . $room_id . '-reserve'; ?>">
                                             <?php _e( 'Book Room', 'ccl' ); ?>
                                         </a>
-
+                                        <?php endif; ?>
                                     </p>
                                 </header>
 
@@ -156,7 +157,7 @@ get_header(); ?>
                                         <?php if ( $room_description ) : ?>
                                             
                                             <article class="ccl-c-promo__description ccl-c-carousel__slide">
-                                                <div style="max-width:300px"><?php echo esc_html( $room_description ); ?></div>
+                                                <div style="max-width:300px"><?php echo  $room_description; ?></div>
                                             </article>
 
                                         <?php endif; ?>

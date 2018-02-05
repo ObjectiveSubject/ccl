@@ -242,22 +242,23 @@ function add_room( $room ) {
 
 	$args['post_title']   = $room['name']; // post_title
 	$args['post_content'] = ! empty( $room['description'] ) ? $room['description'] : ''; // post_content
-	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_status'] = 'publish'; // default is draft
 	$args['post_type']    = 'room';
 
 	/*
 	 * Create the Room and grab post id (for post meta insertion)
 	 */
 	$post_id = wp_insert_post( $args );
+	
 
 	// Insert data into custom fields
-	add_post_meta( $post_id, 'room_id', $room['id'], true);
-	add_post_meta( $post_id, 'room_description', $room['description'], true);
-	add_post_meta( $post_id, 'room_image', $room['image'], true);
-	add_post_meta( $post_id, 'room_capacity', $room['capacity'], true);
+	update_post_meta( $post_id, 'room_id', $room['id'] );
+	update_post_meta( $post_id, 'room_description', $room['description'] );
+	update_post_meta( $post_id, 'room_image', $room['image'] );
+	update_post_meta( $post_id, 'room_capacity', $room['capacity'] );
 
 	// Raw data for development
-	add_post_meta( $post_id, 'room_raw_data', $room, true);
+	update_post_meta( $post_id, 'room_raw_data', $room );
 
 	// @todo use this for subject?
 	// Set category in XX taxonomy and create if it doesn't exist
