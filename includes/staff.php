@@ -236,7 +236,7 @@ function add_staff_member( $member ) {
 
 	$args['post_title'] = $member['first_name'] . " " . $member['last_name']; // post_title
 	// $args['post_content'] = $member['description']; // post_content
-	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_status'] = 'publish'; // default is draft
 	$args['post_type'] = 'staff';
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
@@ -249,15 +249,15 @@ function add_staff_member( $member ) {
 	$member_post_id = wp_insert_post( $args );
 
 	// Insert data into custom fields
-	add_post_meta( $member_post_id, 'member_id', $member['id'], true ); // custom field ->
-	add_post_meta( $member_post_id, 'member_first_name', $member['first_name'], true ); // custom field ->
-	add_post_meta( $member_post_id, 'member_last_name', $member['last_name'], true ); // custom field ->
-	add_post_meta( $member_post_id, 'member_email', $member['email'], true ); // custom field ->
-	add_post_meta( $member_post_id, 'member_image', $member['profile']['image']['url'], true ); // custom field ->
-	add_post_meta( $member_post_id, 'member_friendly_url', $member['profile']['url'], true ); // custom field ->
+	update_post_meta( $member_post_id, 'member_id', $member['id']); // custom field ->
+	update_post_meta( $member_post_id, 'member_first_name', $member['first_name'] ); // custom field ->
+	update_post_meta( $member_post_id, 'member_last_name', $member['last_name'] ); // custom field ->
+	update_post_meta( $member_post_id, 'member_email', $member['email'] ); // custom field ->
+	update_post_meta( $member_post_id, 'member_image', $member['profile']['image']['url'] ); // custom field ->
+	update_post_meta( $member_post_id, 'member_friendly_url', $member['profile']['url'] ); // custom field ->
 
 	// Raw data for development
-	add_post_meta( $member_post_id, 'member_raw_data', $member, true);
+	update_post_meta( $member_post_id, 'member_raw_data', $member );
 
 	// Add Subjects to custom taxonomy
 	if ( array_key_exists( 'subjects', $member ) ) {

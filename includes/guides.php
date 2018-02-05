@@ -232,12 +232,12 @@ function add_guide( $guide ) {
 	$post_id = wp_insert_post( $args );
 
 	// Insert data into custom fields
-	add_post_meta( $post_id, 'guide_id', $guide['id'], true);
-	add_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url'], true);
-	add_post_meta( $post_id, 'guide_owner_id', $guide['owner_id'], true);
+	update_post_meta( $post_id, 'guide_id', $guide['id']);
+	update_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url']);
+	update_post_meta( $post_id, 'guide_owner_id', $guide['owner_id']);
 
 	// Raw data for development
-	add_post_meta( $post_id, 'guide_raw_data', $guide, true);
+	update_post_meta( $post_id, 'guide_raw_data', $guide, true);
 
 	// Add Subjects to custom taxonomy
 	if ( array_key_exists( 'subjects', $guide ) ) {

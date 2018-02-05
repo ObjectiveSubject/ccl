@@ -241,12 +241,12 @@ function add_faq( $faq ) {
 	$post_id = wp_insert_post( $args );
 
 	// Insert data into custom fields
-	add_post_meta( $post_id, 'faq_id', $faq['faqid'], true);
-	add_post_meta( $post_id, 'faq_friendly_url', $faq['url']['public'], true);
-	add_post_meta( $post_id, 'faq_owner_id', $faq['owner']['id'], true);
+	update_post_meta( $post_id, 'faq_id', $faq['faqid'] );
+	update_post_meta( $post_id, 'faq_friendly_url', $faq['url']['public'] );
+	update_post_meta( $post_id, 'faq_owner_id', $faq['owner']['id'] );
 
 	// Raw data for development
-	add_post_meta( $post_id, 'faq_raw_data', $faq, true);
+	update_post_meta( $post_id, 'faq_raw_data', $faq );
 
 	if ( $duplicate_check->have_posts() ) {
 		return "added";

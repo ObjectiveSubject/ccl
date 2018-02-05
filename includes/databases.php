@@ -232,13 +232,13 @@ function add_database( $database ) {
 	$post_id = wp_insert_post( $args );
 
 	// Insert data into custom fields
-	add_post_meta( $post_id, 'database_id', $database['id'], true);
+	update_post_meta( $post_id, 'database_id', $database['id'] );
 
 	// Raw data for development
-	add_post_meta( $post_id, 'database_raw_data', $database, true);
+	update_post_meta( $post_id, 'database_raw_data', $database );
 
 	// Database friendly URL
-	add_post_meta( $post_id, 'database_friendly_url', $database['url'], true);
+	update_post_meta( $post_id, 'database_friendly_url', $database['url'] );
 
 	// @todo use this for subject?
 	// Set category in XX taxonomy and create if it doesn't exist
