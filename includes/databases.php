@@ -219,7 +219,7 @@ function add_database( $database ) {
 
 	$args['post_title']   = $database['name']; // post_title
 	$args['post_content'] = $database['description']; // post_content
-	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_status'] = 'publish'; // default is draft
 	$args['post_type']    = 'database';
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
