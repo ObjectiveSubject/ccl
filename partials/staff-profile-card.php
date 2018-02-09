@@ -43,7 +43,7 @@ $profile_url = get_post_meta( $post->ID, 'member_friendly_url', true ); ?>
                     <?php if ( $profile_url ) : ?>
                         <li class="ccl-c-profile-card__cta"><a href="<?php echo esc_url( $profile_url ); ?>" target="_blank">Contact <?php echo $first_name; ?></a></li>
                     <?php endif; ?>
-                    <li class="ccl-c-profile-card__cta"><a href="#">Make an appointment with <?php echo $first_name; ?></a></li>
+                    <li class="ccl-c-profile-card__cta"><a href="https://claremont.libcal.com/appointments/?g=1372" target="_blank">Make an appointment with <?php echo $first_name; ?></a></li>
                 </ul>
             </div>
 

@@ -219,7 +219,7 @@ function add_guide( $guide ) {
 
 	$args['post_title']   = $guide['name']; // post_title
 	$args['post_content'] = $guide['description']; // post_content
-	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_status'] = 'publish'; // default is draft
 	$args['post_type']    = 'guide';
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {

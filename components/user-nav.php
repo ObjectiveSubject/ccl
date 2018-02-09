@@ -24,7 +24,7 @@
             </li>
             
             <li class="ccl-c-user-nav__menu-item ccl-is-right">
-                <select class="ccl-b-select ccl-is-inverse" data-toggle="school">
+                <select class="ccl-b-select ccl-is-inverse" data-toggle="school" aria-label="Select School" >
                     <option value="default">Select School</option>
                     <option value="cgu">CGU</option>
                     <option value="claremont-mckenna">Claremont McKenna</option>

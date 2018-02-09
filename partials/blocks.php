@@ -298,7 +298,7 @@ if ( $blocks ) : ?>
 
                             <?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
 
-                                <div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
+                                <div class="ccl-c-promo__title" role="heading" aria-level="2"><?php echo $block['block_title']; ?></div>
 
                             <?php endif; ?>
 
@@ -352,7 +352,7 @@ if ( $blocks ) : ?>
                                                 <?php if ( $profile_url ) : ?>
                                                     <li><a href="<?php echo esc_url( $profile_url ); ?>" target="_blank">Contact <?php echo $first_name; ?></a></li>
                                                 <?php endif; ?>
-                                                <li><a href="#">Make an appointment with <?php echo $first_name; ?></a></li>
+                                                <li><a href="https://claremont.libcal.com/appointments/?g=1372" target="_blank">Make an appointment with <?php echo $first_name; ?></a></li>
                                             </ul>
                                         </div>
 
