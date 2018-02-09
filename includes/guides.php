@@ -230,14 +230,21 @@ function add_guide( $guide ) {
 	 * Create/update the Guide and grab post id (for post meta insertion)
 	 */
 	$post_id = wp_insert_post( $args );
+	
+	//format guide owner name
+	$owner_name = $guide['owner']['first_name'] . " " . $guide['owner']['last_name'];
 
 	// Insert data into custom fields
 	update_post_meta( $post_id, 'guide_id', $guide['id']);
 	update_post_meta( $post_id, 'guide_friendly_url', $guide['friendly_url']);
 	update_post_meta( $post_id, 'guide_owner_id', $guide['owner_id']);
+	update_post_meta( $post_id, 'guide_owner', $owner_name );
+	update_post_meta( $post_id, 'guide_owner_email', $guide['owner']['email']);
+	update_post_meta( $post_id, 'guide_updated', $guide['updated']);
+	update_post_meta( $post_id, 'guide_description', $guide['description'] );
 
 	// Raw data for development
-	update_post_meta( $post_id, 'guide_raw_data', $guide, true);
+	update_post_meta( $post_id, 'guide_raw_data', $guide);
 
 	// Add Subjects to custom taxonomy
 	if ( array_key_exists( 'subjects', $guide ) ) {
@@ -278,10 +285,16 @@ function add_guide_meta_box( $post ) {
 function render_guide_data_metabox() {
 	global $post;
 
-	$friendly_url = get_post_meta( $post->ID, 'guide_friendly_url', true );
-	$owner_id = get_post_meta( $post->ID, 'guide_owner_id', true );
-	$raw_data = get_post_meta( $post->ID, 'guide_raw_data', true );
+	$friendly_url		= get_post_meta( $post->ID, 'guide_friendly_url', true );
+	$owner_id			= get_post_meta( $post->ID, 'guide_owner_id', true );
+	$raw_data			= get_post_meta( $post->ID, 'guide_raw_data', true );
+	$guide_owner		= get_post_meta( $post->ID, 'guide_owner', true);
+	$guide_owner_email	= get_post_meta( $post->ID, 'guide_owner_email', true);
+	$guide_updated		= get_post_meta( $post->ID, 'guide_updated', true);
+	$guide_updated		= date( 'm/d/y', strtotime( $guide_updated ) );
+	$guide_description	= get_post_meta( $post->ID, 'guide_description', true );
 
+	$guide_description	= !empty( $guide_description ) ? $guide_description : 'No description yet'. '<br>';
 	$content = $post->post_content;
 	
 	echo '<p>';
@@ -290,6 +303,8 @@ function render_guide_data_metabox() {
 
 	if ( $friendly_url ) {
 		echo '<strong>Friendly URL:</strong> <a href="' . $friendly_url . '" target="_blank">' . $friendly_url . '</a><br>';
+		echo '<strong>Updated:</strong> ' . $guide_updated . '<br>';
+		echo '<strong>Description:</strong> ' . $guide_description;
 	}
 
 	// Find owner in Staff
@@ -303,9 +318,11 @@ function render_guide_data_metabox() {
 		),
 	) );
 
+	
 	if ( $owner->have_posts() ) {
 		$owner->the_post();
-		echo '<strong>Owner:</strong> <a href="' . get_the_permalink() . '">' . get_the_title() . '</a> (owner id: ' . $owner_id . ')<br>';
+		echo '<strong>Owner:</strong> <a href="' . get_the_permalink() . '">' . get_the_title() . '</a> (Full Name: '. $guide_owner .')<br>' ;
+		echo '<strong>Email:</strong> ' . $guide_owner_email . '<br>';
 	} else {
 		echo '<strong>Owner ID:</strong> ' . get_post_meta( $post->ID, 'guide_owner_id', true ) . ' (no local staff member found)<br>'; // replace with link to Librarian if they exist
 

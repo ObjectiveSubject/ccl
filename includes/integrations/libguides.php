@@ -134,7 +134,7 @@ function get_all_databases() {
 	$token = get_token();
 
 	$params = array(
-		'expand' => 'subjects' // need to know who created the guide
+		'expand' => 'subjects,friendly_url,az_types,permitted_uses' // need to know who created the guide
 	);
 
 	$query_string = urldecode_deep( http_build_query( $params ) ); // urldecode is necessary to prevent the comma from being encoded
@@ -182,7 +182,7 @@ function get_all_guides() {
 		'key'         => $site_key,
 		'status'      => 1, // only retrieve published guides
 		'guide_types' => '3,4', // 1) General, 2) Course, 3) Subject, 4) Topic, 5) Internal, 6) Template
-		'expand'      => 'owner,subjects' // need to know who created the guide
+		'expand'      => 'owner,subjects,tags,group,pages.boxes,metadata,pages' // need to know who created the guide
 	);
 
 	$query_string = urldecode_deep( http_build_query( $params ) ); // urldecode is necessary to prevent the comma from being encoded

@@ -165,6 +165,7 @@ function process_databases() {
 
 	// Events are stored as an indexed array under Event
 	foreach ( $databases as $database ) {
+		
 		$add_database = add_database( $database );
 
 		if ( 'added' == $add_database ) {

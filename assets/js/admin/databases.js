@@ -15,6 +15,7 @@
 
 			submitButton.click( function(e) {
 				e.preventDefault();
+				console.log( this );
 				databasesAdmin.importDatabases();
 			});
 		},
@@ -35,9 +36,18 @@
 				databases_nonce: nonce
 			};
 
-			$.post(ajaxurl, data, function(response) {
+			$.post(ajaxurl, data, function(response, XMLHttpRequest) {
+				
+				console.log( XMLHttpRequest );
 				spinner.removeClass('is-active');
 				spinner.hide();
+				responseArea.append(response);
+			})
+			.fail(function( response, XMLHttpRequest ){
+				
+				console.log( XMLHttpRequest );
+				spinner.removeClass('is-active');
+				spinner.hide();				
 				responseArea.append(response);
 			});
 		}
