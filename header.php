@@ -75,6 +75,7 @@
 								<div class="ccl-c-masthead__event">
 									<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
 									
+										<?php date_default_timezone_set('America/Los_Angeles'); ?>
 										<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>" target="_blank">
 											<?php $event_date = date( 'D m/d @ g:i a', strtotime( $events->events[0]->start) ); ?>
 

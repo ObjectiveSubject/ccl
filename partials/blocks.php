@@ -125,11 +125,13 @@ if ( $blocks ) : ?>
 				}
 
 			}
+			
+			date_default_timezone_set('America/Los_Angeles');
 
 			// This intermediary step likely isn't entirely necessary, mostly taking care of data massaging in one place
 			foreach ( $event_data->events as $event ) {
 
-				$start = date( 'l, F n, g:i', strtotime( $event->start ) );
+				$start = date( 'l, F d, g:i', strtotime( $event->start ) );
 				$end   = $event->end ? '&ndash;' . date( 'g:ia', strtotime( $event->end ) ) : '';
 
 				$date_time = $start . $end;
