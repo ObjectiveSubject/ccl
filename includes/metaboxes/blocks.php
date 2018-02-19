@@ -81,7 +81,7 @@ function content_blocks() {
 		// 'default' => 'standard value (optional)',
 		'id'      => $prefix . 'title',
 		'type'    => 'text',
-		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel show-on-search show-on-events'
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel show-on-search show-on-events show-on-feature_item'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
@@ -170,7 +170,7 @@ function content_blocks() {
 			'ccl' => 'Claremont Colleges Library',
 			'sc'  => 'Special Collections',
 		),
-		'classes' => 'ccl-toggled-field show-on-banner show-on-wysiwyg show-on-search show-on-feature_item',
+		'classes' => 'ccl-toggled-field show-on-search',
 	) );
 
 }
