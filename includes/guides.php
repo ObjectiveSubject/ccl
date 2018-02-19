@@ -304,7 +304,7 @@ function render_guide_data_metabox() {
 	if ( $friendly_url ) {
 		echo '<strong>Friendly URL:</strong> <a href="' . $friendly_url . '" target="_blank">' . $friendly_url . '</a><br>';
 		echo '<strong>Updated:</strong> ' . $guide_updated . '<br>';
-		echo '<strong>Description:</strong> ' . $guide_description;
+		echo '<strong>Description:</strong> ' . $guide_description . '<br>';
 	}
 
 	// Find owner in Staff

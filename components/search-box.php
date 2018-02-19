@@ -1,5 +1,20 @@
-<div class="ccl-c-search ccl-js-search-form">
+<?php $search_description = 'Before going to Library Search, this searchbox will show helpful resources like LibGuides, staff, web pages, databases and more.';?>
 
+<?php if( is_front_page() ): ?>
+    <div class="ccl-c-search__description ccl-l-row">    
+        <a class="ccl-c-search__description-content" href="#" data-toggle="tooltip" title="<?php echo $search_description; ?>">About this search box <i class="ccl-b-icon alert" aria-hidden="true"></i></a>
+        <a class="ccl-c-search__description-content" href="https://ccl.on.worldcat.org/advancedsearch" target="_blank">Advanced Search <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a> 
+    </div>        
+<?php else: ?>
+    <div class="ccl-c-search__quick-desc">
+        
+        <?php get_template_part('components/slidetoggle'); ?>
+
+    </div>        
+<?php endif; ?>    
+    
+
+<div class="ccl-c-search ccl-js-search-form">
     <form class="ccl-c-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
         <label for="ccl-search" class="ccl-u-display-none">Start typing to search</label>
         <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search" aria-label="Search"/>

@@ -1,0 +1,81 @@
+//styling for slidetoggler content
+
+
+.ccl-c-slideToggle{
+    margin: $spacer $spacer 0 $spacer/2;
+    font-size: rem(14);
+    
+    @include media( $lg ){
+        font-size: 1rem;
+    }
+    
+    
+    .ccl-c-slideToggle__links{
+        @extend .ccl-u-clean-list;
+        display: flex;
+        justify-content: flex-end;
+        
+        li{
+            display:inline-block;
+            
+            //add spacing between links except for last child
+            &:not(:last-child) {
+                margin-right: $spacer;
+            }
+        }
+        
+        .ccl-c-slideToggle__title{
+            @extend .ccl-u-transition;            
+            display: inline-block;
+            cursor: pointer;
+            
+            &:after {
+                @extend .ccl-u-transition;                  
+                content: "";
+                display: inline-block;
+                width: 0;
+                height: 0;
+                vertical-align: middle;
+                margin-left: .8em;                
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-top: 5px solid;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;                
+            }
+            
+            //when the active class is applied, add the border top 
+            &.ccl-is-active {
+                @extend .ccl-u-transition;                
+                border-top: 1px solid; 
+                
+                // rotate the caret
+                &:after {
+                    transform: rotate(180deg);
+                }
+                
+            }
+        }
+        
+    }
+    
+    .ccl-c-slideToggle__container{
+        
+        .ccl-c-slideToggle__content{
+            @extend .ccl-u-faded;
+            margin: $spacer/2 0 0 0;
+            padding: $spacer/3;
+            box-sizing: border-box;
+            border-top: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
+            //display none so we can toggle
+            display: none;
+            
+            @include media( $sm ){
+                margin: $spacer/2 0 0 $spacer;
+            }
+
+        }
+    }
+}

@@ -21,10 +21,10 @@
 		<header id="masthead" class="ccl-c-masthead ccl-u-mb-1" role="banner">
 			
 			<div class="ccl-l-container">
-				
+				<?php $aria_headers = is_front_page() ? 'role="heading" aria-level="1"' : ''; ?>
 				<div class="ccl-c-masthead__brand">
-					<a href="<?php echo get_home_url(); ?>" class="ccl-b-logo ccl-is-horz">
-						<span class="ccl-u-display-none"><?php echo bloginfo( 'name' ); ?></span>
+					<a href="<?php echo get_home_url(); ?>" class="ccl-b-logo ccl-is-horz" <?php echo $aria_headers; ?> >
+						<span class="ccl-u-display-none" ><?php echo bloginfo( 'name' ); ?></span>
 					</a>
 				</div>
 
@@ -85,7 +85,8 @@
 								</div>
 							<?php endif; ?>						
 
-							<?php if ( $notices ) : ?>
+							<?php //temporarily remove the notices until we build an options page ?>
+							<?php if ( ! $notices ) : ?>
 								<div class="ccl-c-masthead__notice">
 									<span class="ccl-h5">
 										<span class="ccl-u-color-red">

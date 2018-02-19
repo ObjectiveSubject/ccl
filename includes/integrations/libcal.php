@@ -383,6 +383,44 @@ function get_events( $params = array() ) {
 
 }
 
+
+/**
+ * Helper function to get all MyScheduler content during the staff import
+ * 
+ * This content will be used to compare against the staff import, so we can assign a MyScheduler ID
+ * 
+ * @return array|string|\WP_Error 
+ * 
+ */
+ 
+ function get_MyScheduler(){
+ 
+ 	$token = get_token();
+ 	
+ 	$request = wp_remote_get( 'https://api2.libcal.com/1.1/myscheduler/users', array(
+ 				'headers'	=> array(
+ 					'Authorization' => 'Bearer ' . $token	
+ 				),
+ 				'body'   => array(),
+				'debug'  => true
+ 			)
+ 		);
+ 	
+ 	if ( is_wp_error ( $request ) ) {
+
+		return $request->get_error_message();
+
+	} else {
+		// check for API errors??
+
+		$results = json_decode( $request['body'] );
+
+		return $results;
+	}	
+ 	
+ }
+ 
+
 /**
  * Helper function for displaying LibCal's Calendar widget
  *

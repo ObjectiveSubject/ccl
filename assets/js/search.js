@@ -52,6 +52,9 @@
 
 				// get value of search input
 				var query = _this.$input.val();
+				//remove double quotations and other characters from string
+				query = query.replace(/[^a-zA-Z0-9 -'.,]/g, "");
+				//console.log(query);
 
 				// set a timeout function to update results once 600ms passes
 				timeout = setTimeout(function () {
@@ -59,6 +62,7 @@
 					if ( query.length > 1 ) {
 						_this.$response.show();
 					 	_this.fetchResults( query );
+					 	
 					}
 					else {
 						_this.$responseList.html('');
@@ -148,7 +152,7 @@
 
 	SearchAutocomplete.prototype.fetchResultsDONE = function( response ) {
 		
-		//console.log( response );
+		console.log( response );
 		
 		var _this = this,
 			results = $.parseJSON(response),

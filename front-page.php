@@ -12,6 +12,7 @@ get_header(); ?>
 			if ( 'page' == get_option( 'show_on_front' ) ) {
 
 				$thumb_url   	 = get_the_post_thumbnail_url( $post, 'large' );
+				$hide_title		 = get_post_meta( get_the_ID(), 'hero_hide_title', true );				
 				$contextual_text = get_post_meta( get_the_ID(), 'hero_context_text', true );
 				$contextual_url  = get_post_meta( get_the_ID(), 'hero_context_url', true );
 				$custom_title 	 = get_post_meta( get_the_ID(), 'hero_custom_title', true );
@@ -52,11 +53,13 @@ get_header(); ?>
 
 						<div class="ccl-l-row">
 
-							<div class="ccl-l-column">
-								<div class="ccl-c-hero__header">	
-									<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
+							<?php if( ! $hide_title): ?>
+								<div class="ccl-l-column">
+									<div class="ccl-c-hero__header">	
+										<h1 class="ccl-c-hero__title"><?php echo apply_filters( 'the_title', $title ); ?></h1>
+									</div>
 								</div>
-							</div>
+							<?php endif; //end of hiding title ?>
 
 							<?php if ( ! empty( $description ) || \CCL\Helpers\has_block_content() ) : ?>
 								<div class="ccl-l-column ccl-l-span-two-thirds-lg">

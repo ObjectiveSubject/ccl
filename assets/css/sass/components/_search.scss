@@ -1,11 +1,49 @@
 
-// Search bar
+//search bar description for homepage
+.ccl-c-search__description{
+    @extend .ccl-u-transition;
+    font-size: .9rem;
+    margin: rem(8) 0;   
+    justify-content: space-around;
+    
+    a {
+        color: white !important;
+        &:hover {
+            opacity: .7;
+        }
+    }    
+    @include media( $md ) {
+        margin: 1.5rem $gutter/2 0 $gutter/2;
+        justify-content: flex-end;
+    }
+    
+    .ccl-c-search__description-content{
+        @extend .ccl-u-mt-nudge;
+        
+        @include media( $lg ){
+            font-size: 1rem;
+        }
+        
+        &:first-of-type{
+            @include media( $sm ){
+                margin-right: 1em;
+            }
+        }
 
+    }
+    
+}
+
+//search bar description for all other pages
+
+
+// Search bar
 .ccl-c-search {
     position: relative;
     background: white;
     color: black;
     box-shadow: 0 1px 5px 0px rgba(black, 0.2);
+    @extend .ccl-u-mt-nudge;
 
     .ccl-c-quick-nav & {
         width: 100%;
@@ -21,7 +59,7 @@
             padding-right: $gutter;
         }
         @include media($lg) {
-            margin: 3rem 0;
+            margin-bottom: 3rem;
         }
     }
 }
@@ -30,6 +68,7 @@
     display: flex;
     flex-wrap: wrap;
     position: relative;
+
 
     .ccl-c-hero & {
         @include media( #{$lg - 1}, max) {

@@ -160,6 +160,12 @@
         border-right: 1px solid;
         .ccl-search-active & {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            @include media( $sm ){
+                align-items: flex-end;
+            }
         }
 
         @include media($md) {

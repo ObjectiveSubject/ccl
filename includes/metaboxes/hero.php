@@ -32,6 +32,13 @@ function hero_fields() {
 	) );
 
 	$cmb->add_field( array(
+		'name'	=> __( 'Hide Title Container', 'cmb2' ),
+		'desc'  => __( 'Hide the title container for this page', 'cmb2' ),
+		'id'  	=> $prefix . 'hide_title',
+        'type'	=> 'checkbox',
+	) );
+
+	$cmb->add_field( array(
 		'name'	=> __( 'Contextual Text', 'cmb2' ),
 		'desc'  => __( 'Add text above the page title', 'cmb2' ),
 		'id'  	=> $prefix . 'context_text',

@@ -239,7 +239,7 @@ function add_database( $database ) {
 	update_post_meta( $post_id, 'database_raw_data', $database );
 
 	// Database friendly URL
-	update_post_meta( $post_id, 'database_friendly_url', $database['url'] );
+	update_post_meta( $post_id, 'database_friendly_url', $database['friendly_url'] );
 
 	// @todo use this for subject?
 	// Set category in XX taxonomy and create if it doesn't exist
