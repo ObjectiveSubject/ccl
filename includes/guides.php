@@ -242,6 +242,7 @@ function add_guide( $guide ) {
 	update_post_meta( $post_id, 'guide_owner_email', $guide['owner']['email']);
 	update_post_meta( $post_id, 'guide_updated', $guide['updated']);
 	update_post_meta( $post_id, 'guide_description', $guide['description'] );
+	update_post_meta( $post_id, 'guide_type', $guide['type_label'] );	
 
 	// Raw data for development
 	update_post_meta( $post_id, 'guide_raw_data', $guide);
@@ -293,8 +294,9 @@ function render_guide_data_metabox() {
 	$guide_updated		= get_post_meta( $post->ID, 'guide_updated', true);
 	$guide_updated		= date( 'm/d/y', strtotime( $guide_updated ) );
 	$guide_description	= get_post_meta( $post->ID, 'guide_description', true );
+	$guide_type			= get_post_meta( $post->ID, 'guide_type', true );
 
-	$guide_description	= !empty( $guide_description ) ? $guide_description : 'No description yet'. '<br>';
+	$guide_description	= !empty( $guide_description ) ? $guide_description : 'No description yet';
 	$content = $post->post_content;
 	
 	echo '<p>';
@@ -305,6 +307,7 @@ function render_guide_data_metabox() {
 		echo '<strong>Friendly URL:</strong> <a href="' . $friendly_url . '" target="_blank">' . $friendly_url . '</a><br>';
 		echo '<strong>Updated:</strong> ' . $guide_updated . '<br>';
 		echo '<strong>Description:</strong> ' . $guide_description . '<br>';
+		echo '<strong>Guide Type:</strong> ' . $guide_type . '<br>';
 	}
 
 	// Find owner in Staff

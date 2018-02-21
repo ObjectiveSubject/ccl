@@ -10,13 +10,14 @@ get_header(); ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 
 			<?php
-			$thumb_url   	 = get_the_post_thumbnail_url( $post, 'full' );
-			$contextual_text = get_post_meta( get_the_ID(), 'hero_context_text', true );
-			$contextual_url  = get_post_meta( get_the_ID(), 'hero_context_url', true );
-			$custom_title 	 = get_post_meta( get_the_ID(), 'hero_custom_title', true );
-			$title       	 = $custom_title ? $custom_title : get_the_title();   // Could use 'the_title()' but this allows for override
-			$description 	 = ( $post->post_excerpt ) ? $post->post_excerpt: ''; // Could use 'the_excerpt()' but this allows for override
-			$hero_class  	 = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
+			$thumb_url   		= get_the_post_thumbnail_url( $post, 'full' );
+			$contextual_text	= get_post_meta( get_the_ID(), 'hero_context_text', true );
+			$contextual_url 	= get_post_meta( get_the_ID(), 'hero_context_url', true );
+			$custom_title 		= get_post_meta( get_the_ID(), 'hero_custom_title', true );
+			$additional_excerpt = get_post_meta( get_the_ID(), 'hero_2nd_excerpt', true );
+			$title       		= $custom_title ? $custom_title : get_the_title();   // Could use 'the_title()' but this allows for override
+			$description 		= ( $post->post_excerpt ) ? $post->post_excerpt: ''; // Could use 'the_excerpt()' but this allows for override
+			$hero_class  		= $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
 			?>
 
 			<article <?php post_class(); ?>>
@@ -51,7 +52,7 @@ get_header(); ?>
 									<?php 
 										$hide_blocks_nav = get_post_meta( get_the_ID(), 'hero_hide_blocks_nav' );
 
-										if ( ! $hide_blocks_nav ) {
+										if ( ! $hide_blocks_nav && empty( $additional_excerpt ) ) {
 											get_template_part( 'partials/block-anchors' );
 										} 
 									?>
@@ -59,6 +60,10 @@ get_header(); ?>
 									<?php if ( $description ) : ?>
 										<div class="ccl-h4 ccl-u-mt-0"><?php echo apply_filters( 'the_excerpt', $description ); ?></div>
 									<?php endif; ?>
+									
+									<?php if ( $additional_excerpt ) : ?>
+										<div class="ccl-u-mt-0"><?php echo apply_filters( 'the_content', $additional_excerpt ); ?></div>
+									<?php endif; ?>									
 									
 								</div>
 							</div>

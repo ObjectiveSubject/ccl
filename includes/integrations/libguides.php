@@ -182,7 +182,7 @@ function get_all_guides() {
 		'key'         => $site_key,
 		'group_ids'   => 15193,
 		'status'      => 1, // only retrieve published guides
-		'guide_types' => '3,4', // 1) General, 2) Course, 3) Subject, 4) Topic, 5) Internal, 6) Template
+		'guide_types' => '2,3,4', // 1) General, 2) Course, 3) Subject, 4) Topic, 5) Internal, 6) Template
 		'expand'      => 'owner,subjects,tags,group,pages.boxes,metadata,pages' // need to know who created the guide
 	);
 

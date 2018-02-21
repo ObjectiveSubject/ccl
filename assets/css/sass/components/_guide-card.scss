@@ -1,7 +1,20 @@
 .ccl-c-guide-card{
     border-top: 1px solid lightgray;
     padding-top: $spacer/2;
-    margin: $spacer/2 0 $spacer 0;
+    margin: $spacer 0 0 0;
+    
+    &.ccl-c-guide-card--course{
+        
+        .ccl-c-guide-card__meta{
+            //padding-top: $spacer/2;
+             margin: 0 0 0 $spacer/2;
+            
+            @include media( $md ){
+                margin: $spacer/2 0 0 $spacer/2;                
+            }
+        }
+    }
+    
     
 }
 

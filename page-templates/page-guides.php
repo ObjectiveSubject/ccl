@@ -17,9 +17,9 @@ get_header(); ?>
 			$title       	 = $custom_title ? $custom_title : get_the_title();   // Could use 'the_title()' but this allows for override
 			$description 	 = ( $post->post_excerpt ) ? $post->post_excerpt: ''; // Could use 'the_excerpt()' but this allows for override
 			$hero_class  	 = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
-			
-            // replace with get_terms()
-            $all_subjects  = get_terms( array( 'taxonomy' => 'subject' ) );
+            $is_subject_sort = ! array_key_exists( 'sort', $_GET ) || strpos( $_SERVER['QUERY_STRING'], 'sort=subject' ) > -1;
+            $is_course_sort = ( ! $is_subject_sort );
+
 
 			?>
 
@@ -82,93 +82,22 @@ get_header(); ?>
                                 <?php the_content(); ?>
                             </div>
                         </div>
+                        
+	                    <p>
+	                        <a href="?sort=subject" class="ccl-h4 ccl-u-mr-2 <?php echo ( ! $is_subject_sort ) ? 'ccl-u-faded' : 'ccl-u-color-school ccl-u-color-hover-black'; ?>">Guides by Subject</a>
+	                        <a href="?sort=course" class="ccl-h4 <?php echo ( ! $is_course_sort ) ? 'ccl-u-faded' : 'ccl-u-color-school ccl-u-color-hover-black'; ?>">Guides for Courses</a>
+	                    </p>    
 
                     </div>
 
                 <?php endif; ?>
 
 
-				<?php if ( empty( $all_subjects) ) : ?>
-						<div class="ccl-l-container">
-
-							<div class="ccl-l-row">
-								<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
-
-									<div class="ccl-c-alert ccl-is-error">No Libguides have been imported</div>
-
-								</div>
-							</div>
-
-						</div>
-				<?php endif; ?>
-
-                <?php 
-                /* @TODO
-                 * Create custom meta for an image on room type terms.
-                 * Display that image as the background-image of this ccl-c-hero element.
-                 */ ?>
-
-                <div class="ccl-l-container">
-                    <div class="ccl-l-row ccl-u-mt-2 ccl-u-mb-3">
-                        <?php
-                            //incase we want to use this for 2 rows
-                            $subject_first  = array();
-                            $subject_second = array();
-                            //divide list of subjects into two rows
-                            foreach( $all_subjects as $key => $subject ){
-                                if( $key % 2 == 0 ){
-                                    $subject_first[]    = $subject;
-                                }else{
-                                    $subject_second[]   = $subject; 
-                                }
-                            }
-                        
-                        ?>
-                        <?php foreach ( $all_subjects as $key => $subject ) : ?>  
-                                    
-                            <?php 
-                                $guides = new WP_Query(array(
-                                    'post_type' => 'guide',
-                                    'posts_per_page' => 20,
-                                    'order' => 'ASC',
-                                    'orderby'   => 'title',
-                                    'tax_query' => array(
-                                        array(
-                                            'taxonomy' => 'subject',
-                                            'field' => 'slug',
-                                            'terms' => array( $subject->slug )
-                                        )
-                                    )
-                                ));
-                                
-                                $subject_guides = $guides->posts;
-                                
-                                $subject_guide_len = count( $subject_guides );
-                            ?>
-                            
-                        <?php if( $guides->have_posts() ): ?>
-                        <div id="<?php echo $subject->slug; ?>" class="ccl-l-column ccl-l-span-6-md">                        
-                            <div class="ccl-c-accordion" role="list">
-                                <div class="ccl-c-accordion__toggle">
-                                    <span><?php echo $subject->name; ?></span>
-                                    <span class="ccl-c-guide-card__count">(<?php echo $subject_guide_len; ?>)</span>                                     
-                                </div>
-                                <div class="ccl-c-accordion__content">
-                                       
-                                    <?php foreach($subject_guides as $key => $post ): setup_postdata( $post ); ?>
-                                    
-                                        <?php get_template_part( 'partials/guide-card' );  ?>  
-                                    
-                                    <?php endforeach; ?>
-                                </div>
-                            </div> 
-                        </div>                                   
-                        <?php endif; ?>
-                                    
-                        <?php endforeach; wp_reset_postdata(); wp_reset_query();?>  
-                    
-                    </div>                        
-                </div>
+                <?php if ( $is_subject_sort ) {
+                    get_template_part( 'partials/subject-guide-card' );
+                } else {
+                    get_template_part( 'partials/course-guide-card' );
+                } ?>
 
 			</article>
 

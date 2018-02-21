@@ -64,10 +64,22 @@ function hero_fields() {
 
 	$cmb->add_field( array(
 		'name'	=> __( 'Content Blocks Nav', 'cmb2' ),
-		'desc'  => __( 'Hide the nav for content blocks', 'cmb2' ),
+		'desc'  => __( 'Hide the nav for content blocks, FYI - a second excerpt will OVERRIDE content blocks as well...', 'cmb2' ),
 		'id'  	=> $prefix . 'hide_blocks_nav',
         'type'	=> 'checkbox',
 	) );
+	
+	$cmb->add_field( array(
+		'name'	=> __( 'Second Excerpt Content', 'cmb2' ),
+		'desc'  => __( 'Instead of block navigation, add a second block of excerpt HTML', 'cmb2' ),
+		'id'  	=> $prefix . '2nd_excerpt',
+        'type'	=> 'wysiwyg',
+        'options' => array(
+        	'teeny' => true, //reduce the number of tools in editor
+        	'textarea_rows' => 5, //limit the default # of rows
+			'media_buttons' => false, // show insert/upload button(s)        	
+        	)
+	) );	
 
 	$quick_link_id = $cmb->add_field( array(
 		'id'          => $prefix . 'quick_links',
