@@ -59,8 +59,13 @@ $has_blocks = $blocks && count( $blocks ) > 1;
         <div class="ccl-c-dropdown ccl-c-quick-nav__item ccl-is-secondary">
             
             <a href="#dropdown-block-list" class="ccl-c-dropdown__toggle ccl-c-quick-nav__scrollspy ccl-c-quick-nav__item-text" data-toggle="dropdown" data-target="#dropdown-block-list" aria-expanded="false" aria-haspopup="true">
-                <?php foreach ( $blocks as $index => $block ) : 
-                    $title = empty( $block['block_title'] ) ? '(no title)' : $block['block_title']; ?>
+                <?php foreach ( $blocks as $index => $block ) :
+                    if( 'search' == $block['block_type'] ){
+                        $title = empty( $block['block_title'] ) ? 'Search' : $block['block_title'];
+                    }else{
+                        $title = empty( $block['block_title'] ) ? '(no title)' : $block['block_title'];                        
+                    }
+                ?>
                     <?php if ( $block['block_type'] != 'banner' ) : ?>
                         <span data-target="<?php echo '#block-' . $index; ?>">
                             <?php echo esc_html( $title ); ?>
@@ -72,7 +77,12 @@ $has_blocks = $blocks && count( $blocks ) > 1;
             <div id="dropdown-block-list" class="ccl-c-dropdown__content">
                 <ul class="ccl-c-quick-nav__menu ccl-is-primary">
                     <?php foreach ( $blocks as $index => $block ) : 
-                        $title = empty( $block['block_title'] ) ? '(no title)' : $block['block_title']; ?>
+                        if( 'search' == $block['block_type'] ){
+                            $title = empty( $block['block_title'] ) ? 'Search' : $block['block_title'];
+                        }else{
+                            $title = empty( $block['block_title'] ) ? '(no title)' : $block['block_title'];                        
+                        }
+                    ?>
                         <?php if ( $block['block_type'] != 'banner' ) : ?>
                             <li class="menu-item">
                                 <a href="<?php echo '#block-' . $index; ?>" class="js-smooth-scroll">

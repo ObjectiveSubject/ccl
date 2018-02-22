@@ -197,10 +197,14 @@ if ( $blocks ) : ?>
                                 <?php endif; ?>
 
                                 <?php foreach ( (array) $events as $i => $event ) : ?>
+                                
+                                    <?php if ( ! $event['image'] ) {
+                                        $event['image'] = CCL_TEMPLATE_URL . "/assets/images/ccl-exterior.jpg";
+                                    } ?>
 
                                     <article class="ccl-c-carousel__slide">
                                         <a href="<?php echo $event['url']; ?>">
-                                            <div class="ccl-u-mb-nudge"><img src="<?php echo $event['image'] ?>" alt="Event image" /></div>
+                                            <div class="ccl-u-mb-nudge"><img src="<?php echo $event['image'] ?>" alt="<?php echo $event['title']; ?>" /></div>
                                             <p class="ccl-h4 ccl-u-mt-0"><?php echo $event['title']; ?></p>
                                             <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo $event['date_time']; ?></p>
                                             <p class="ccl-h4 ccl-u-mt-0 ccl-u-faded"><?php echo $event['venue']; ?></p>
