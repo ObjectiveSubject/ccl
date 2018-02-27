@@ -20,6 +20,8 @@ function setup() {
 	add_shortcode( 'modal_toggle', $n( 'modal_toggle_fn' ) );
 	add_shortcode( 'scheduler', $n( 'scheduler_fn' ) );
 	add_shortcode( 'tooltip', $n( 'tooltip_fn' ) );
+	add_shortcode( 'libanswers_widget', $n( 'libanswers_widget_fn' ) );
+	
 }
 
 /**
@@ -51,8 +53,8 @@ function scheduler_fn( $attributes ) {
 
 $data = shortcode_atts( array(
 	'text' => 'Schedule Appointment',
-	'height' => 450,
-	'width'	=> 500,
+	'height' => 600,
+	'width'	=> 800,
 ), $attributes );
 
 $html = \CCL\Integrations\LibCal\schedule_widget( false, $data );
@@ -290,4 +292,24 @@ function icon_fn( $attributes = false, $content = null ) {
 	$html = '<i class="ccl-b-icon ' . esc_attr( $data['type'] ) . '" aria-hidden="true"></i> ' . $content;
 
 	return $html;
+}
+
+
+/**
+*
+* Insert an ask us form widget anywhere on the page
+* 
+* @param $attributes array List of attributes from the given shortcode
+*
+* @return mixed HTML output for the shortcode
+*/
+function libanswers_widget_fn( $attributes ){
+	
+$data = shortcode_atts( array(
+	'id'	=> 6412
+), $attributes );
+
+$html = \CCL\Integrations\LibAnswers\libAnswers_widget( false, $data );
+
+return $html;	
 }

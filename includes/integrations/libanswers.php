@@ -50,3 +50,43 @@ function get_all_faqs() {
 	}
 
 }
+
+/**
+ * 
+ * Helper for Ask Us form to be embedded in main content area
+ * 
+ * https://claremont.libanswers.com/admin_widgets.php
+ *
+ * @todo add args if any are needed from shortcode, etc.
+ * @param $args
+ * 
+ */
+ 
+ function libanswers_widget( $echo = true, $options = array() ){
+ 	
+	//setup defaults
+	$defaults = array(
+		'id'	=> 6412
+		
+	);
+	
+	$options = array_merge( $defaults, $options );
+	
+	ob_start();
+	?>
+	
+	<script src="https://api2.libanswers.com/1.0/widgets/<?php echo $options['id'];  ?>"></script>
+	
+	<div id="s-la-widget-<?php echo $options['id'];  ?>" class="ccl-u-mt-1 ccl-c-libwizard-widget"></div>
+ 	
+ 	<?php
+ 	$html = ob_get_contents();
+ 	ob_get_clean();
+ 	
+ 	if ( $echo ) {
+		echo $html;
+	} else {
+		return $html;
+	}
+ 	
+ }
