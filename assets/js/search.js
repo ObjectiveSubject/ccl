@@ -40,7 +40,7 @@
 			timeout;
 
 		this.$input
-			.keyup(function (event) {
+			.on('keyup keypress', function (event) {
 
 				// clear any previous set timeout
 				clearTimeout(timeout);
@@ -68,7 +68,7 @@
 						_this.$responseList.html('');
 					}
 
-				}, 500);
+				}, 300);
 
 			})
 			.focus(function(){

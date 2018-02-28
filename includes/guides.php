@@ -242,7 +242,11 @@ function add_guide( $guide ) {
 	update_post_meta( $post_id, 'guide_owner_email', $guide['owner']['email']);
 	update_post_meta( $post_id, 'guide_updated', $guide['updated']);
 	update_post_meta( $post_id, 'guide_description', $guide['description'] );
-	update_post_meta( $post_id, 'guide_type', $guide['type_label'] );	
+	update_post_meta( $post_id, 'guide_type', $guide['type_label'] );
+	
+	if( array_key_exists( 'metadata', $guide ) ){
+		update_post_meta( $post_id, 'guide_metadata', $guide['metadata'] );
+	}
 
 	// Raw data for development
 	update_post_meta( $post_id, 'guide_raw_data', $guide);
@@ -295,6 +299,7 @@ function render_guide_data_metabox() {
 	$guide_updated		= date( 'm/d/y', strtotime( $guide_updated ) );
 	$guide_description	= get_post_meta( $post->ID, 'guide_description', true );
 	$guide_type			= get_post_meta( $post->ID, 'guide_type', true );
+	$guide_metadata		= get_post_meta( $post->ID, 'guide_metadata', true );
 
 	$guide_description	= !empty( $guide_description ) ? $guide_description : 'No description yet';
 	$content = $post->post_content;
@@ -341,6 +346,13 @@ function render_guide_data_metabox() {
 	if ( $content ) {
 		echo '<h4>Content</h4>';
 		echo apply_filters( 'the_content', $content );
+	}
+	
+	if( $guide_metadata ){
+		echo '<strong>Guide Metadata:</strong><br>';
+		echo '<pre style="white-space:pre-wrap;font-family:monospace;">';
+		print_r( $guide_metadata );
+		echo '</pre>';
 	}
 
 	// Raw Data

@@ -73,7 +73,7 @@ function load_search_results() {
 		'posts_per_page'      => 4,
 		'meta_query' => array(
 			array(
-				'key'     => 'guide_raw_data',
+				'key'     => 'guide_metadata',
 				'value'   => $query,
 				'compare' => 'LIKE',
 			),
