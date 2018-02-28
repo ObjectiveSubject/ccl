@@ -35,7 +35,9 @@
             );
 
             $librarians = new WP_Query( $args );  ?>
-
+            
+            <?php if( empty( $librarians->have_posts() ) ) continue; ?>
+            
             <tr>
 
                 <td><?php echo $subject->name; ?></td>
