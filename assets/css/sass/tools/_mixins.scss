@@ -134,3 +134,22 @@
 	}
 
 }
+
+
+//background positioning
+// -------------------------------------- //
+@mixin custom-background-height{
+	$i: 10;
+	@while $i <= 100 {
+		$percentage : $i * 1%;
+		
+	    &.ccl-c-hero-custom-height{
+	    	&--#{$i}{
+	    		background-position: center $percentage;
+	    	}
+	    }		
+	  $i: $i + 10;
+	}
+
+
+}

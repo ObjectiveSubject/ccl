@@ -5,6 +5,8 @@
     background-repeat: no-repeat;
     padding: 1.5rem 0 2rem;
     @include school-style(background-color);
+    
+    @include custom-background-height;
 
     &.ccl-has-search {
         @include media($lg) {
