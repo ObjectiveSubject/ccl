@@ -62,6 +62,7 @@
 								<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today&#39;s hours</span>
 								<ul class="ccl-c-masthead__hours">
 									<?php foreach($hours->locations as $location): ?>
+										<?php if( empty( $location->rendered ) || $location->rendered == '' ) continue; ?>
 										<li class="ccl-u-font-size-sm"><span><?php echo $location->name; ?></span> <span><?php echo $location->rendered; ?></span></li>
 									<?php endforeach; ?>
 									<li><a class="ccl-u-font-size-sm ccl-c-masthead__more-hours" href="<?php echo esc_url( home_url('/hours/') ); ?>">More Hours <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a></li>
