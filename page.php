@@ -20,7 +20,7 @@ get_header(); ?>
 			$description 		= ( $post->post_excerpt ) ? $post->post_excerpt: ''; // Could use 'the_excerpt()' but this allows for override
 			//$hero_class  		= $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
 
-			if( $thumb_url && $hero_heigh_pos ){
+			if( $thumb_url && $hero_height_pos ){
 				$hero_class = 'ccl-c-hero ccl-c-hero-custom-height--'. $hero_height_pos .' ccl-has-image';
 			}elseif( $thumb_url) {
 				$hero_class = 'ccl-c-hero ccl-has-image';
