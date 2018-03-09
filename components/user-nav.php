@@ -16,9 +16,9 @@
             </li>
 
             <li class="ccl-c-user-nav__menu-item ccl-is-right" >
-                <a href="<?php echo site_url('contact-the-library/'); ?>" >
-                    <span class="ccl-u-hide-md ccl-h5" aria-hidden="true"><?php _e( 'Ask Us!', 'ccl' ); ?></span>
-                    <span class="ccl-u-show-md"><?php _e( 'Contact the Library', 'ccl' ); ?> <i class="ccl-b-icon person-open" aria-hidden="true"></i>
+                <a href="<?php echo site_url('ask-us/'); ?>" >
+                    <span class="ccl-u-hide-md ccl-h5" aria-hidden="true"><?php _e( 'Ask Us', 'ccl' ); ?></span>
+                    <span class="ccl-u-show-md"><?php _e( 'Ask Us', 'ccl' ); ?> <i class="ccl-b-icon person-open" aria-hidden="true"></i>
                     </span>
                 </a>
             </li>
