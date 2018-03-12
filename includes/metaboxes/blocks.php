@@ -129,15 +129,17 @@ function content_blocks() {
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
-		'name'        => __( 'Staff Member', 'cmb2' ),
+		'name'        => __( 'Staff Member(s)', 'cmb2' ),
 		'id'          => $prefix . 'staff_member',
-		'type'        => 'post_search_text', // This field type
-		// post type also as array
-		'post_type'   => 'staff',
-		// Default is 'checkbox', used in the modal view to select the post type
-		'select_type' => 'radio',
-		// Will replace any selection with selection from modal. Default is 'add'
-		'select_behavior' => 'replace',
+		'type'        => 'custom_attached_posts', // This field type
+		'options' => array(
+			'show_thumbnails' => false, // Show thumbnails on the left
+			'filter_boxes'    => true, // Show a text box for filtering the results
+			'query_args'      => array(
+				'posts_per_page' => 10,
+				'post_type'      => 'staff',
+			), // override the get_posts args
+		),	
 		'classes' => 'ccl-toggled-field show-on-staff'
 	) );
 

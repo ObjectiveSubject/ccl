@@ -285,16 +285,11 @@ if ( $blocks ) : ?>
 
         <?php elseif ( 'staff' == $block['block_type'] ) : ?>
 
-            <?php $staff_id = $block['block_staff_member']; ?>
+            <?php 
+            $staff_ids = $block['block_staff_member'];
+            $staff_ids = is_array( $staff_ids ) ? $staff_ids : array( $staff_ids ); ?>
             
-            <?php if ( $staff_id ) : ?>
-
-                <?php 
-                $subjects = get_the_terms( $staff_id, 'subject' );
-                $member_image = get_post_meta( $staff_id, 'member_image', true );
-                $name = get_the_title( $staff_id );
-                $first_name = explode( ' ', $name )[0];
-                $profile_url = get_post_meta( $staff_id, 'member_friendly_url', true ); ?>
+            <?php if ( ! empty( $staff_ids ) ) : ?>
 
                 <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
@@ -320,61 +315,80 @@ if ( $blocks ) : ?>
 
                         <div class="ccl-c-promo__content">
 
-                            <div class="ccl-c-profile-card">
+                            <div class="ccl-l-row">
 
-                                <div class="ccl-l-row">
+                                <?php foreach ( $staff_ids as $staff_id ) :
 
-                                    <div class="ccl-l-column ccl-l-span-half-md">
+                                $subjects = get_the_terms( $staff_id, 'subject' );
+                                $member_image = get_post_meta( $staff_id, 'member_image', true );
+                                $name = get_the_title( $staff_id );
+                                $first_name = explode( ' ', $name )[0];
+                                $profile_url = get_post_meta( $staff_id, 'member_friendly_url', true );
+                                $column_class = count( $staff_ids ) > 1 ? 'ccl-l-span-half-md' : ''; ?>
 
-                                        <div class="ccl-c-profile-card__header">
-                                            <div class="ccl-c-profile-card__title"><?php echo $name; ?></div>
-                                            
-                                            <?php if ( ! empty( $subjects ) ) : 
-                                                
-                                                $subjects_count = count( $subjects );
-                                                $max = 6;
-                                                $remaining = $subjects_count - $max; ?>  
-                                            
-                                                <div class="ccl-c-profile-card__list" role="list">
+                                    <div class="ccl-l-column <?php echo $column_class; ?>">
 
-                                                    <?php foreach( $subjects as $index => $subject ) {
+                                        <div class="ccl-c-profile-card">
+
+                                            <div class="ccl-l-row">
+
+                                                <div class="ccl-l-column ccl-l-span-half-md">
+
+                                                    <div class="ccl-c-profile-card__header">
+                                                        <div class="ccl-c-profile-card__title"><?php echo $name; ?></div>
                                                         
-                                                        if ( $index === $max ) {
-                                                            echo '<button class="ccl-b-btn ccl-is-naked ccl-b-more-toggle" role="listitem">+' . $remaining . ' more</button>';
-                                                        }
-                                                        if ( $index < $max ) {
-                                                            echo '<div class="ccl-u-faded" role="listitem">' . $subject->name . '</div>';
-                                                        } else {
-                                                            echo '<div class="ccl-u-faded ccl-b-more-toggled" role="listitem">' . $subject->name . '</div>';
-                                                        }
+                                                        <?php if ( ! empty( $subjects ) ) : 
+                                                            
+                                                            $subjects_count = count( $subjects );
+                                                            $max = 6;
+                                                            $remaining = $subjects_count - $max; ?>  
                                                         
-                                                    } ?>
+                                                            <div class="ccl-c-profile-card__list" role="list">
+
+                                                                <?php foreach( $subjects as $index => $subject ) {
+                                                                    
+                                                                    if ( $index === $max ) {
+                                                                        echo '<button class="ccl-b-btn ccl-is-naked ccl-b-more-toggle" role="listitem">+' . $remaining . ' more</button>';
+                                                                    }
+                                                                    if ( $index < $max ) {
+                                                                        echo '<div class="ccl-u-faded" role="listitem">' . $subject->name . '</div>';
+                                                                    } else {
+                                                                        echo '<div class="ccl-u-faded ccl-b-more-toggled" role="listitem">' . $subject->name . '</div>';
+                                                                    }
+                                                                    
+                                                                } ?>
+
+                                                            </div>
+                                                        
+                                                        <?php endif; ?>
+                                                        
+                                                        <ul class="ccl-c-profile-card__list">
+                                                            <?php if ( $profile_url ) : ?>
+                                                                <li><a href="<?php echo esc_url( $profile_url ); ?>" target="_blank">Contact <?php echo $first_name; ?></a></li>
+                                                            <?php endif; ?>
+                                                            <li><a href="https://claremont.libcal.com/appointments/?g=1372" target="_blank">Make an appointment with <?php echo $first_name; ?></a></li>
+                                                        </ul>
+                                                    </div>
 
                                                 </div>
-                                            
-                                            <?php endif; ?>
-                                            
-                                            <ul class="ccl-c-profile-card__list">
-                                                <?php if ( $profile_url ) : ?>
-                                                    <li><a href="<?php echo esc_url( $profile_url ); ?>" target="_blank">Contact <?php echo $first_name; ?></a></li>
-                                                <?php endif; ?>
-                                                <li><a href="https://claremont.libcal.com/appointments/?g=1372" target="_blank">Make an appointment with <?php echo $first_name; ?></a></li>
-                                            </ul>
+
+                                                <div class="ccl-l-column ccl-l-span-half-md">
+
+                                                    <?php if ( ! $member_image ) {
+                                                        $member_image = CCL_TEMPLATE_URL . "/assets/images/person.svg";
+                                                    } ?>
+
+                                                    <div class="ccl-c-profile-card__avatar" role="presentation" style="background-image:url(<?php echo $member_image; ?>)"></div>
+
+                                                </div>
+
+                                            </div>
+
                                         </div>
 
                                     </div>
 
-                                    <div class="ccl-l-column ccl-l-span-half-md">
-
-                                        <?php if ( ! $member_image ) {
-                                            $member_image = CCL_TEMPLATE_URL . "/assets/images/person.svg";
-                                        } ?>
-
-                                        <div class="ccl-c-profile-card__avatar" role="presentation" style="background-image:url(<?php echo $member_image; ?>)"></div>
-
-                                    </div>
-
-                                </div>
+                                <?php endforeach; ?>
 
                             </div>
 
