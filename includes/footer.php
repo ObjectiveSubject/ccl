@@ -120,7 +120,7 @@ function footer_content_cb( $args ) {
 function footer_column_1_cb( $args ) {
 	$options = get_option( 'footer-options' );
 	?>
-	<textarea id='footer-column-1' name='footer-options[footer-column-1]' rows='18' cols='40' type='textarea'><?php echo esc_textarea( $options['footer-column-1'] ); ?></textarea>
+	<pre><textarea id='footer-column-1' name='footer-options[footer-column-1]' rows='18' cols='80' type='textarea'><?php echo esc_textarea( $options['footer-column-1'] ); ?></textarea></pre>
 	<?php
 }
 
@@ -132,6 +132,6 @@ function footer_column_1_cb( $args ) {
 function footer_column_2_cb( $args ) {
 	$options = get_option( 'footer-options' );
 	?>
-	<textarea id='footer-column-2' name='footer-options[footer-column-2]' rows='18' cols='40' type='textarea'><?php echo esc_textarea( $options['footer-column-2'] ); ?></textarea>
+	<pre><textarea id='footer-column-2' name='footer-options[footer-column-2]' rows='18' cols='80' type='textarea'><?php echo esc_textarea( $options['footer-column-2'] ); ?></textarea></pre>
 	<?php
 }
