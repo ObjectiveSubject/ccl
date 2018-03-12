@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Librarian Archive
+ * Template Name: Staff Archive
  */
 
 get_header(); ?>
@@ -14,8 +14,6 @@ get_header(); ?>
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
 			$description = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
             $hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
-            $is_alpha_sort = strpos( $_SERVER['QUERY_STRING'], 'sort=alpha' ) > -1;
-            $is_subject_sort = ( ! $is_alpha_sort );
 			?>
 
 			<article <?php post_class(); ?>>
@@ -48,18 +46,13 @@ get_header(); ?>
 						</div>
                     </div>
                     
-                    <p>
-                        <a href="?sort=subject" class="ccl-h4 ccl-u-mr-2 <?php echo ( ! $is_subject_sort ) ? 'ccl-u-faded' : 'ccl-u-color-school ccl-u-color-hover-black'; ?>">Alphabetical by Subject</a>
-                        <a href="?sort=alpha" class="ccl-h4 <?php echo ( ! $is_alpha_sort ) ? 'ccl-u-faded' : 'ccl-u-color-school ccl-u-color-hover-black'; ?>">Alphabetical by Name</a>
+                    <p class="ccl-h4">
+                        Alphabetical by Name
                     </p>
 
                 </div> 
                 
-                <?php if ( $is_subject_sort ) {
-                    get_template_part( 'partials/librarian-subject-list' );
-                } else {
-                    get_template_part( 'partials/librarian-alpha-list' );
-                } ?>
+                <?php get_template_part( 'partials/staff-alpha-list' ); ?>
 
 				<?php get_template_part( 'partials/blocks' ); ?>
 
