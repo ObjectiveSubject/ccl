@@ -16,6 +16,12 @@
     .ccl-c-quick-nav__item & {
         align-items: flex-end;
     }
+
+    & > span {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }
 
 .ccl-c-dropdown__content {
