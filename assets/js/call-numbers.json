@@ -105,13 +105,13 @@
         "wing": "Mudd",
         "floor": "3rd floor, north",
         "floor_int": 3,
-        "subject": "Music"
+        "subject": "Music & Scores"
     },
     "N" : {
         "wing": "Mudd",
         "floor": "1st floor",
         "floor_int": 1,
-        "subject": "Art"
+        "subject": "Art & Oversized Art"
     },
     "P" : {
         "wing": "Multi-tier",

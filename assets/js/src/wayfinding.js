@@ -94,6 +94,8 @@
         this.$form.submit(function(e){
             e.preventDefault();
 
+            _this.reset();
+
             var query = _this.$input.val();
 
             $('.ccl-wayfinder__error').remove();
