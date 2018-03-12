@@ -1,6 +1,6 @@
 <div class="ccl-l-container">
             
-        <table class="ccl-b-table--striped ccl-is-hoverable">
+        <table class="ccl-b-table--striped ccl-is-hoverable ccl-is-responsive">
 
         <thead>
             <th>Subject</th>

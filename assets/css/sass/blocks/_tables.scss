@@ -64,3 +64,28 @@ th {
         }
     }
 }
+
+table.ccl-is-responsive {
+
+    @include media($md - 1, max){
+
+        thead {
+            display: none;
+        }
+        
+        tr {
+            display: block;
+            width: 100%;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        td,th {
+            display: block;
+            width: 100%;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+
+}
