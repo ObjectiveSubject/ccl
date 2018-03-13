@@ -21,6 +21,7 @@ function setup() {
 	add_shortcode( 'scheduler', $n( 'scheduler_fn' ) );
 	add_shortcode( 'tooltip', $n( 'tooltip_fn' ) );
 	add_shortcode( 'libanswers_widget', $n( 'libanswers_widget_fn' ) );
+	add_shortcode( 'chat_widget', $n( 'chat_widget_fn' ) );
 	
 }
 
@@ -313,3 +314,36 @@ $html = \CCL\Integrations\LibAnswers\libAnswers_widget( false, $data );
 
 return $html;	
 }
+
+/**
+ * 
+ * Insert a widget for library chat from LibraryH3lp
+ * 
+ * @param none
+ * 
+ * @return mixed HTML output in shortcode
+ * 
+ */
+ 
+ function chat_widget_fn(){
+ 	
+ 	ob_start();
+ 	?>
+ 	
+	<div class="needs-js">chat loading...</div>
+	
+	<script type="text/javascript">
+	  (function() {
+	    var x = document.createElement("script"); x.type = "text/javascript"; x.async = true;
+	    x.src = (document.location.protocol === "https:" ? "https://" : "http://") + "libraryh3lp.com/js/libraryh3lp.js?9486";
+	    var y = document.getElementsByTagName("script")[0]; y.parentNode.insertBefore(x, y);
+	  })();
+	</script> 	
+ 	
+ 	<?php
+ 	$html = ob_get_contents();
+ 	ob_get_clean();
+ 	
+ 	return $html;
+ 	
+ }
