@@ -324,11 +324,13 @@ if ( $blocks ) : ?>
                                 $name = get_the_title( $staff_id );
                                 $first_name = explode( ' ', $name )[0];
                                 $profile_url = get_post_meta( $staff_id, 'member_friendly_url', true );
-                                $column_class = count( $staff_ids ) > 1 ? 'ccl-l-span-half-md' : ''; ?>
+                                $column_class = count( $staff_ids ) > 1 ? 'ccl-l-span-half-md' : ''; 
+                                $member_title   = get_post_meta( $staff_id, 'member_title', true );
+                                ?>
 
                                     <div class="ccl-l-column <?php echo $column_class; ?>">
 
-                                        <div class="ccl-c-profile-card">
+                                        <div class="ccl-c-profile-card ccl-u-mt-1">
 
                                             <div class="ccl-l-row">
 
@@ -337,36 +339,16 @@ if ( $blocks ) : ?>
                                                     <div class="ccl-c-profile-card__header">
                                                         <div class="ccl-c-profile-card__title"><?php echo $name; ?></div>
                                                         
-                                                        <?php if ( ! empty( $subjects ) ) : 
-                                                            
-                                                            $subjects_count = count( $subjects );
-                                                            $max = 6;
-                                                            $remaining = $subjects_count - $max; ?>  
+                                                        <?php if( !empty( $member_title ) ): ?>
+                                                            <div class="ccl-c-profile-card__position"><?php echo $member_title; ?> </div>
+                                                        <?php endif; ?>                        
                                                         
-                                                            <div class="ccl-c-profile-card__list" role="list">
-
-                                                                <?php foreach( $subjects as $index => $subject ) {
-                                                                    
-                                                                    if ( $index === $max ) {
-                                                                        echo '<button class="ccl-b-btn ccl-is-naked ccl-b-more-toggle" role="listitem">+' . $remaining . ' more</button>';
-                                                                    }
-                                                                    if ( $index < $max ) {
-                                                                        echo '<div class="ccl-u-faded" role="listitem">' . $subject->name . '</div>';
-                                                                    } else {
-                                                                        echo '<div class="ccl-u-faded ccl-b-more-toggled" role="listitem">' . $subject->name . '</div>';
-                                                                    }
-                                                                    
-                                                                } ?>
-
-                                                            </div>
-                                                        
-                                                        <?php endif; ?>
                                                         
                                                         <ul class="ccl-c-profile-card__list">
-                                                            <?php if ( $profile_url ) : ?>
+                                                            <?php if ( !empty( $profile_url ) ) : ?>
                                                                 <li><a href="<?php echo esc_url( $profile_url ); ?>" target="_blank">Contact <?php echo $first_name; ?></a></li>
                                                             <?php endif; ?>
-                                                            <li><a href="https://claremont.libcal.com/appointments/?g=1372" target="_blank">Make an appointment with <?php echo $first_name; ?></a></li>
+
                                                         </ul>
                                                     </div>
 

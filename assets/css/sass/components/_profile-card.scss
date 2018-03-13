@@ -54,8 +54,24 @@
 }
 
 .ccl-c-profile-card__avatar {
-    @extend .ccl-b-media--1x1;
     background-size: cover;
     border-radius: 50%;
-    background-position-y: 50%;
+    background-position-y: 50%; 
+    
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    padding-top: 50%;
+    
+    @include media( $md ){
+        
+        position: relative;
+        overflow: hidden;
+        padding-top: 100%;
+        height: inherit;
+        width: inherit;
+        margin: initial;
+       
+        
+    }
 }
