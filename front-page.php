@@ -88,6 +88,7 @@ get_header(); ?>
 
 				</div>
 
+				<?php if( !empty($content) ): ?>
 				<div class="ccl-l-container">
 
 					<div class="ccl-l-row">
@@ -99,7 +100,8 @@ get_header(); ?>
 					</div>
 
 				</div>
-
+				<?php endif; ?>
+				
 				<?php get_template_part( 'partials/blocks' ); ?>
 
 			</article>
