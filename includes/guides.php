@@ -258,7 +258,7 @@ function add_guide( $guide ) {
 			$subjects_array[] = $subject['name'];
 		}
 		// Add subject name to subject taxonomy
-		wp_set_object_terms( $post_id, $subject['name'], 'subject' );
+		wp_set_object_terms( $post_id, $subjects_array, 'subject' );
 	}
 
 	if ( $duplicate_check->have_posts() ) {

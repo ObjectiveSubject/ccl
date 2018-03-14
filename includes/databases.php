@@ -167,6 +167,8 @@ function process_databases() {
 	foreach ( $databases as $database ) {
 		
 		$add_database = add_database( $database );
+		
+		//time_nanosleep(0, 100000000);
 
 		if ( 'added' == $add_database ) {
 			$results['added'] = $results['added'] + 1;
@@ -252,7 +254,7 @@ function add_database( $database ) {
 			$subjects_array[] = $subject['name'];
 		}
 		// Add subject name to subject taxonomy
-		wp_set_object_terms( $post_id, $subject['name'], 'subject' );
+		wp_set_object_terms( $post_id, $subjects_array, 'subject' );
 	}
 
 	if ( $duplicate_check->have_posts() ) {
