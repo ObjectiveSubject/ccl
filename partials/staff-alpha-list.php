@@ -6,8 +6,8 @@ $args = array(
         array(
             'taxonomy' => 'staff_role',
             'field' => 'slug',
-            'terms' => 'librarian',
-            'operator' => 'NOT IN'
+            'terms' => 'staff',
+            //'operator' => 'NOT IN'
         ) 
     )
 );

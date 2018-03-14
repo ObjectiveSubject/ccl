@@ -136,7 +136,7 @@ function content_blocks() {
 			'show_thumbnails' => false, // Show thumbnails on the left
 			'filter_boxes'    => true, // Show a text box for filtering the results
 			'query_args'      => array(
-				'posts_per_page' => 10,
+				//'posts_per_page' => 10,
 				'post_type'      => 'staff',
 			), // override the get_posts args
 		),	

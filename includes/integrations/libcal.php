@@ -452,6 +452,7 @@ function calendar_widget( $echo = true, $options = array() ) {
 	<style>
 		.s-lc-mhw-tb { width: 100%; border: 1px solid #ddd; border-collapse: collapse; border-spacing: 0; }
 		.s-lc-mhw-tb th, .s-lc-mhw-tb td { border: 1px solid #ddd; vertical-align: top; }
+		.s-lc-mhw-tb td>div:nth-child(even){ background-color: rgba(0,0,0,.1); }
 		.s-lc-mhw-tb thead { background-color: #F5F5F5; }
 		.s-lc-mhw-header { text-align: center; }
 		.s-lc-mhw-header-date { text-align: center; display: inline-block; margin-top: 5px; font-size: 130%; }
@@ -459,13 +460,13 @@ function calendar_widget( $echo = true, $options = array() ) {
 		.s-lc-mhw-day-l { color: #555; text-align: right; padding: 2px; font-size: 11px; }
 		.s-lc-mhw-cells { height: 50px; }
 		.s-lc-mhw-fnc { color: #555; }
-		.s-lc-mhw-loc { font-size: 11px; padding: 2px; margin-bottom: 1px; color: #fff;  }
+		.s-lc-mhw-loc { font-size: 11px; padding: 2px; margin-bottom: 1px;  }
 		.s-lc-mhw-subloc { margin-left: 5px;}
 		.s-lc-mhw-footnote-cal { font-size: 86%;}
-		.loc_4816 { background-color: #000000; }
-		.loc_4926 { background-color: #333333; }
-		.loc_4925 { background-color: #666666; }
-		.loc_4927 { background-color: #999999; }
+		/*.loc_4816 { background-color: rgba(0,0,0,.1); }*/
+		/*.loc_4926 { background-color: white; }*/
+		/*.loc_4925 { background-color: rgba(0,0,0,.1); }*/
+		/*.loc_4927 { background-color: white; }*/
 	</style>
 
 	<?php

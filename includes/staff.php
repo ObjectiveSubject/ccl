@@ -259,6 +259,12 @@ function add_staff_member( $member ) {
 
 	// Raw data for development
 	update_post_meta( $member_post_id, 'member_raw_data', $member );
+	
+	//check first and add title if exists, not all titles are set
+	if( array_key_exists( 'title', $member['profile']['box']) ){
+		update_post_meta( $member_post_id, 'member_title', $member['profile']['box']['title'] );
+		
+	}
 
 	// Add Subjects to custom taxonomy
 	if ( array_key_exists( 'subjects', $member ) ) {
@@ -305,6 +311,7 @@ function render_staff_data_metabox() {
 	echo '<strong>Member ID:</strong> ' . get_post_meta( $post->ID, 'member_id', true ) . '<br>';
 	echo '<strong>First Name:</strong> ' . get_post_meta( $post->ID, 'member_first_name', true ) . '<br>';
 	echo '<strong>Last Name:</strong> ' . get_post_meta( $post->ID, 'member_last_name', true ) . '<br>';
+	echo '<strong>Title:</strong> ' . get_post_meta( $post->ID, 'member_title', true ) . '<br>';
 	echo '<strong>Email:</strong> ' . get_post_meta( $post->ID, 'member_email', true ) . '<br>';
 	echo '<strong>Profile URL:</strong> ' . get_post_meta( $post->ID, 'member_friendly_url', true ) . '<br>';
 
