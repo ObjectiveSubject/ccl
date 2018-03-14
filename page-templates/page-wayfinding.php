@@ -47,20 +47,21 @@ get_header(); ?>
 
 				<div class="ccl-c-wayfinder ccl-js-wayfinder">
 
-					<div class="ccl-c-search ccl-u-px-3 ccl-u-py-3" style="background-color: #eee;">
+					<div class="ccl-u-py-2" style="background-color: #eee;">
 
 						<div class="ccl-l-container">
 
 							<div class="ccl-l-row">
-								<div class="ccl-l-column">
+								<div class="ccl-l-column ccl-l-span-half-lg">
 									<form id="call-number-search" class="ccl-c-search-form">
 										<input id="call-num-input" name="call-number" type="text" class="ccl-b-input" placeholder="Enter a call number to begin"/>
 										<button id="call-num-submit" type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid" disabled>
 											<i class="ccl-b-icon search" aria-hidden="true"></i>&nbsp;<span>Find</span>
 										</button>
 									</form>
+									<div class="ccl-u-mt-1 ccl-u-hide-lg" role="presentation"></div>
 								</div>
-								<div class="ccl-l-column">
+								<div class="ccl-l-column ccl-l-span-half-lg">
 									<div class="ccl-error-box"></div>
 									<div class="ccl-c-wayfinder__marquee">
 										<span class="ccl-h5">Location for call number &ldquo;<span class="ccl-c-wayfinder__call-num">&hellip;</span>&rdquo;</span><br/>
