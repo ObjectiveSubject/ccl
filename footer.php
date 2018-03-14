@@ -44,7 +44,7 @@ $footer_options = get_option( 'footer-options' );
 
 				<div class="ccl-l-column ccl-l-span-third-lg">
 
-					<a href="<?php echo site_url(); ?>" class="ccl-b-logo ccl-is-vert ccl-u-mt-1">
+					<a href="<?php echo site_url(); ?>" class="ccl-b-logo ccl-is-vert ccl-is-white ccl-u-mt-1">
 						<span class="ccl-u-display-none"><?php echo bloginfo( 'name' ); ?></span>
 					</a>
 

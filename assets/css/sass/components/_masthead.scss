@@ -13,7 +13,7 @@
     }
     
     .home .ccl-c-quick-nav.ccl-no-secondary ~ & {
-        margin-top: 64px;
+        margin-top: 70px;
         @include media($lg) {
             margin-top: 0;
         }
@@ -46,11 +46,14 @@
 
 .ccl-c-masthead__status {
     @extend .ccl-u-clean-list;
-    @extend .ccl-u-mt-1;
     border-top: 1px solid lightgray;    
     text-transform: uppercase;
     display: flex;
     flex-wrap: wrap;
+
+    @include media($lg) {
+        margin-top: $spacer;
+    }
 
     li {
         padding: rem(10) 0 0 0;
@@ -90,6 +93,15 @@
 
 .ccl-c-masthead__event,
 .ccl-c-masthead__notice{
+    margin-bottom: $spacer;
     border-top: 1px solid lightgray;
-    padding: rem(10) 0 rem(10);      
+    padding-top: rem(10);
+
+    &:first-child {
+        @include media($lg - 1, max) {
+            border: 0;
+            padding-top: 0;
+        }
+    }
+
 }

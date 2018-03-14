@@ -3,11 +3,14 @@
     background-repeat: no-repeat;
     background-position: 0 0;
     max-width: 100%;
-    background-size: 100%;
+    background-size: 100% auto;
 
     &.ccl-is-vert {
-        width: 220px;
-        height: 75px;
+        width: 180px;
+        height: 54px;
+        background-image: url(../images/tccl-vital_2-ln-B_blk@2x.png);
+    }
+    &.ccl-is-vert.ccl-is-white {
         background-image: url(../images/tccl-vital_2-ln-B_wht@2x.png);
     }
 

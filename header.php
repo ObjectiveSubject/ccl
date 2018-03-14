@@ -23,7 +23,9 @@
 			<div class="ccl-l-container">
 				<?php $aria_headers = is_front_page() ? 'role="heading" aria-level="1"' : ''; ?>
 				<div class="ccl-c-masthead__brand">
-					<a href="<?php echo get_home_url(); ?>" class="ccl-b-logo ccl-is-horz" <?php echo $aria_headers; ?> >
+					<a href="<?php echo get_home_url(); ?>" <?php echo $aria_headers; ?> >
+						<span class="ccl-b-logo ccl-is-vert ccl-u-hide-md" aria-hidden="true"></span>
+						<span class="ccl-b-logo ccl-is-horz ccl-u-show-md" aria-hidden="true"></span>
 						<span class="ccl-u-display-none" ><?php echo bloginfo( 'name' ); ?></span>
 					</a>
 				</div>
