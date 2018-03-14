@@ -3,240 +3,252 @@
         "wing": "Honnold",
         "floor": "3rd floor",
         "floor_int": 3,
+        "room_int": 1,
         "subject": "General works"
     },
     "B" : {
         "wing": "Honnold",
         "floor": "3rd floor",
         "floor_int": 3,
+        "room_int": 1,
         "subject": "Philosophy, Psychology, Religion"
     },
     "C" : {
         "wing": "Honnold",
         "floor": "3rd floor",
         "floor_int": 3,
+        "room_int": 1,
         "subject": "History (Auxiliary)"
     },
     "D" : {
         "wing": "Honnold",
         "floor": "3rd floor",
         "floor_int": 3,
+        "room_int": 1,
         "subject": "History (Except the Americas)"
     },
     "DS 326" : {
         "wing": "Honnold",
         "floor": "3rd floor",
         "floor_int": 3,
+        "room_int": 1,
         "subject": "History (Except the Americas)"
     },
     "DS 327" : {
         "wing": "Mudd",
         "floor": "3rd floor, south",
         "floor_int": 3,
+        "room_int": 3,
         "subject": "History (Except the Americas)"
     },
     "DX" : {
         "wing": "Mudd",
         "floor": "3rd floor, south",
         "floor_int": 3,
+        "room_int": 3,
         "subject": "History (Except the Americas)"
     },
     "E" : {
         "wing": "Honnold",
         "floor": "4th floor",
         "floor_int": 4,
+        "room_int": 1,
         "subject": "History (US, General)"
     },
     "F" : {
         "wing": "Honnold",
         "floor": "4th floor",
         "floor_int": 4,
+        "room_int": 1,
         "subject": "History (Local US; the Americas)"
     },
     "G" : {
         "wing": "Honnold",
         "floor": "4th floor",
         "floor_int": 4,
+        "room_int": 1,
         "subject": "Geography, Anthropology, Recreation"
+    },
+    "Government" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "floor_int": 1,
+        "room_int": 10,
+        "subject": "Government Documents"
     },
     "H" : {
         "wing": "Honnold",
         "floor": "4th floor",
         "floor_int": 4,
+        "room_int": 1,
         "subject": "Social Sciences"
     },
     "HJ" : {
         "wing": "Honnold",
         "floor": "4th floor",
         "floor_int": 4,
+        "room_int": 1,
         "subject": "Social Sciences"
     },
     "HM" : {
         "wing": "Mudd",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": 5,
         "subject": "Social Sciences"
     },
     "HX" : {
         "wing": "Mudd",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": 5,
         "subject": "Social Sciences"
     },
     "J" : {
         "wing": "Mudd",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": 5,
+        "subject": "Political Sciences"
+    },
+    "JN 6512" : {
+        "wing": "Mudd",
+        "floor": "1st floor",
+        "floor_int": 1,
+        "room_int": 6,
         "subject": "Political Sciences"
     },
     "K" : {
         "wing": "Mudd",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": 6,
         "subject": "Law"
     },
     "L" : {
         "wing": "Mudd",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": 6,
         "subject": "Education"
     },
     "M" : {
         "wing": "Mudd",
         "floor": "3rd floor, north",
         "floor_int": 3,
+        "room_int": 2,
         "subject": "Music & Scores"
     },
     "N" : {
         "wing": "Mudd",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": [1,7,9],
         "subject": "Art & Oversized Art"
     },
     "P" : {
         "wing": "Multi-tier",
         "floor": "Level 1",
-        "floor_int": 1,
-        "subject": "Literature"
-    },
-    "PL 4757" : {
-        "wing": "Multi-tier",
-        "floor": "Level 1",
-        "floor_int": 1,
+        "floor_int": 2,
+        "room_int": 2,
         "subject": "Literature"
     },
     "PL 4758" : {
         "wing": "Multi-tier",
         "floor": "Level 2",
         "floor_int": 2,
-        "subject": "Literature"
-    },
-    "PQ 2253" : {
-        "wing": "Multi-tier",
-        "floor": "Level 2",
-        "floor_int": 2,
+        "room_int": 2,
         "subject": "Literature"
     },
     "PQ 2254" : {
         "wing": "Multi-tier",
         "floor": "Level 4",
-        "floor_int": 4,
-        "subject": "Literature"
-    },
-    "PQ 7999" : {
-        "wing": "Multi-tier",
-        "floor": "Level 4",
-        "floor_int": 4,
+        "floor_int": 2,
+        "room_int": 2,
         "subject": "Literature"
     },
     "PQ 8000" : {
         "wing": "Multi-tier",
         "floor": "Level 5",
-        "floor_int": 5,
-        "subject": "Literature"
-    },
-    "PR 5299" : {
-        "wing": "Multi-tier",
-        "floor": "Level 5",
-        "floor_int": 5,
+        "floor_int": 2,
+        "room_int": 2,
         "subject": "Literature"
     },
     "PR 5300" : {
         "wing": "Multi-tier",
         "floor": "Level 6",
-        "floor_int": 6,
-        "subject": "Literature"
-    },
-    "PS 3511.AV" : {
-        "wing": "Multi-tier",
-        "floor": "Level 6",
-        "floor_int": 6,
+        "floor_int": 2,
+        "room_int": 2,
         "subject": "Literature"
     },
     "PS 3511.B" : {
         "wing": "Multi-tier",
         "floor": "Level 7",
-        "floor_int": 7,
-        "subject": "Literature"
-    },
-    "PZ" : {
-        "wing": "Multi-tier",
-        "floor": "Level 7",
-        "floor_int": 7,
+        "floor_int": 2,
+        "room_int": 2,
         "subject": "Literature"
     },
     "Q" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": [2,3,4],
         "subject": "Science"
     },
     "R" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": [2,3,4],
         "subject": "Medicine"
     },
     "S" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": [2,3,4],
         "subject": "Agriculture"
     },
     "T" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": [2,3,4],
         "subject": "Technology & Engineering"
     },
     "U" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": [2,3,4],
         "subject": "Military Science"
     },
     "V" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": [2,3,4],
         "subject": "Naval Science"
     },
     "Z" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": 1,
         "subject": "Bibliography & Library Science"
     },
     "REF A-V" : {
         "wing": "Multi-tier",
         "floor": "3rd Level",
         "floor_int": 3,
+        "room_int": 4,
         "subject": "Reference works"
     },
     "REF Z" : {
         "wing": "Honnold",
         "floor": "1st floor",
         "floor_int": 1,
+        "room_int": 1,
         "subject": "Bibliography & Library Science Reference"
     }
 }

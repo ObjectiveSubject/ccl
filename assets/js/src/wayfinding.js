@@ -108,6 +108,7 @@
 
     Wayfinder.prototype.getCallKey = function(callNum) {
         var key,
+            callNum = callNum.replace(/ /g, ''),
             callKeys = Object.keys(this.callNumbers);
 
         if ( callKeys.length === 0 ){
@@ -115,9 +116,11 @@
         }
 
         callKeys.forEach(function(k){
-          if ( callNum >= k ) {
-            key = k;
-          }
+            var k_noSpaces = k.replace(/ /g, '');
+
+            if ( callNum >= k_noSpaces ) {
+                key = k;
+            }
         });
 
         return key;
@@ -127,9 +130,10 @@
 
         query = query.toUpperCase();
         
-        var callKey = this.getCallKey(query),
+        var that = this,
+            callKey = this.getCallKey(query),
             callData = {},
-            floorId;
+            floorId, roomId;
 
         if ( ! callKey ) {
             this.throwFindError();
@@ -144,17 +148,24 @@
         this.$wing.text( callData.wing );
         this.$subject.text( callData.subject );
 
-        /* TODO:
-         * set ACTUAL room, not just the floor. still waiting on client 
-         * to provide data for which call numbers belong to which rooms
-         * ----------------------------------------------------------------- */
-
         floorId = callData.floor_int;
+        roomId = callData.room_int; // will be integer OR array
 
-        /* ----------------------------------------------------------------- */
+        // Make floor/room active
 
         this.$el.find('a[href="#floor-'+floorId+'"]').addClass('ccl-is-active');
-        this.$el.find('[id*="room-'+floorId+'-"]').addClass('ccl-is-active');
+
+        if ( typeof roomId !== 'number' ) {
+            // if roomId is array
+            roomId.forEach(function(id){
+                that.$el.find('#room-'+floorId+'-'+id).addClass('ccl-is-active');
+            });
+        } else {
+            // if roomId is number
+            this.$el.find('#room-'+floorId+'-'+roomId).addClass('ccl-is-active');
+        }
+
+        // Set corresponding active floor tab
 
         tabs.setActive( '#floor-' + floorId );
         
