@@ -10,9 +10,57 @@ function setup() {
 	$n = function ( $function ) {
 		return __NAMESPACE__ . "\\$function";
 	};
+	
+	add_action( 'init', $n( 'load_search_options' ) );
 	add_action( 'wp_enqueue_scripts', $n( 'scripts' ) );
 	add_action( 'wp_ajax_load_search_results', __NAMESPACE__ . '\\load_search_results' );
 	add_action( 'wp_ajax_nopriv_load_search_results', __NAMESPACE__ . '\\load_search_results' );
+
+}
+
+
+function load_search_options(){
+	
+	$search_locations = array(
+		array(
+			'id'		=> 'world',
+			'loc'		=> 'wms',
+			'name'		=> 'Libraries Worldwide',
+			'param'		=> '',
+			'primary'	=> true
+			),
+		array(
+			'id'		=> 'ccl',
+			'loc'		=> 'wms',
+			'name'		=> 'Claremont Colleges Library',
+			'param'		=> 'wz:519',
+			'primary'	=> ''
+			),				
+		array(
+			'id'		=> 'spcl',
+			'loc'		=> 'wms',
+			'name'		=> 'Special Collections',
+			'param'		=> 'wz:519::zs:36307',
+			'primary'	=> ''
+			),
+		array(
+			'id'		=> 'oac',
+			'loc'		=> 'oac',
+			'name'		=> 'Online Archive of California',
+			'param'		=> 'Claremont+Colleges',
+			'primary'	=> ''
+			),
+		array(
+			'id'		=> 'wp_ccl',
+			'loc'		=> 'wp_ccl',
+			'name'		=> 'Library Website',
+			'param'		=> '',
+			'primary'	=> ''
+			)			
+		
+		);
+
+	
 }
 
 /**
