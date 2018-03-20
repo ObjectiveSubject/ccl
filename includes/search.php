@@ -11,7 +11,7 @@ function setup() {
 		return __NAMESPACE__ . "\\$function";
 	};
 	
-	add_action( 'init', $n( 'load_search_options' ) );
+	add_action( 'admin_init', $n( 'load_search_options' ) );
 	add_action( 'wp_enqueue_scripts', $n( 'scripts' ) );
 	add_action( 'wp_ajax_load_search_results', __NAMESPACE__ . '\\load_search_results' );
 	add_action( 'wp_ajax_nopriv_load_search_results', __NAMESPACE__ . '\\load_search_results' );
@@ -22,43 +22,45 @@ function setup() {
 function load_search_options(){
 	
 	$search_locations = array(
-		array(
-			'id'		=> 'world',
+		'world'	=> array(
 			'loc'		=> 'wms',
 			'name'		=> 'Libraries Worldwide',
 			'param'		=> '',
-			'primary'	=> true
+			'on_front'	=> true,
+			'selected'	=> true
 			),
-		array(
-			'id'		=> 'ccl',
+		'ccl'	=> array(
 			'loc'		=> 'wms',
 			'name'		=> 'Claremont Colleges Library',
 			'param'		=> 'wz:519',
-			'primary'	=> ''
+			'on_front'	=> true			
+
 			),				
-		array(
-			'id'		=> 'spcl',
+		'spcl'	=> array(
 			'loc'		=> 'wms',
 			'name'		=> 'Special Collections',
 			'param'		=> 'wz:519::zs:36307',
-			'primary'	=> ''
+			'on_front'	=> true			
+
 			),
-		array(
-			'id'		=> 'oac',
+		'oac'	=> array(
 			'loc'		=> 'oac',
 			'name'		=> 'Online Archive of California',
 			'param'		=> 'Claremont+Colleges',
-			'primary'	=> ''
+			'on_front'	=> true		
+
 			),
-		array(
-			'id'		=> 'wp_ccl',
+		'wp_ccl' => array(
 			'loc'		=> 'wp_ccl',
 			'name'		=> 'Library Website',
-			'param'		=> '',
-			'primary'	=> ''
+			'param'		=> 's',
+			'on_front'	=> true		
+
 			)			
 		
 		);
+		
+	update_option( 'ccl-search-locations', $search_locations );
 
 	
 }
@@ -82,7 +84,13 @@ function scripts( $debug = false ) {
 
 	wp_enqueue_script( 'search' );
 
-	wp_localize_script( 'search', 'searchAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+	wp_localize_script( 'search', 'searchAjax', 
+		array( 
+			'ajaxurl'			=> admin_url( 'admin-ajax.php' ),
+			'searchLocations'	=> get_option( 'ccl-search-locations' ),
+			'site_url'			=> site_url()
+		) 
+	);
 }
 
 /**
@@ -104,32 +112,13 @@ function load_search_results() {
 
 	//query the regular stuff, like title, author, content, etc
 	$all_args   = array(
-		'post_type'           => array( 'guide', 'staff', 'page', 'faq', 'database', 'post' ), // see $sort_order below for results ordering
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
 		'posts_per_page'      => 7 // probably need to figure out how to do a limited number from each type
 	);
-	$all_search = new \WP_Query( $all_args );
+	$search = new \SWP_Query( $all_args );
 	
-	//query metabox data for 'guide_raw_data',
-	//@todo figure out what metabox query is the best for to query guides
-	$guide_meta_args   = array(
-		'post_type'           => array( 'guide' ), // see $sort_order below for results ordering
-		'post_status'         => 'publish',
-		'ignore_sticky_posts' => true,
-		'posts_per_page'      => 4,
-		'meta_query' => array(
-			array(
-				'key'     => 'guide_metadata',
-				'value'   => $query,
-				'compare' => 'LIKE',
-			),
-		)
-
-	);
-	
-	$guide_meta = new \WP_Query( $guide_meta_args );
 
 	// Sort order for the first set of results returned to live search
 	// Uses the "nice name", rather than adding an unused slug to each of the parameters
@@ -151,9 +140,6 @@ function load_search_results() {
 	// Add query details to array
 	$search_results['query'] = stripslashes( htmlspecialchars_decode($query, ENT_QUOTES) );
 
-	//instantiate a new WP_Query objec, merge queries together, and remove duplicates
-	$search = new \WP_Query();
-	$search->posts = array_unique( array_merge( $all_search->posts, $guide_meta->posts ), SORT_REGULAR );
 	
 	$search_results['count'] = count( $search->posts );
 

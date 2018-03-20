@@ -386,28 +386,18 @@ if ( $blocks ) : ?>
         <?php elseif ( 'search' == $block['block_type'] ) : ?>
 
             <?php 
-            $enable_live_results = isset( $block['block_search_is_live'] );
-            $search_js_class = ( $enable_live_results ) ? 'ccl-js-search-form' : '';
+            $enable_live_results = $block['block_search_is_live'];
+            $search_js_class = ( $enable_live_results ) ? 'true' : 'false';
             $search_label = ( $enable_live_results ) ? 'Start typing to search' : 'Search...';
+            
 
             // Databases added to the custom field in /includes/metaboxes/blocks.php need to be added here
-			$databases = array(
-				'all' => array(
-					'label' => 'Libraries Worldwide',
-					'value' => ''
-				),
-				'ccl' => array(
-					'label' => 'Claremont Colleges Library',
-					'value' => 'wz:519'
-				),
-				'sc'  => array(
-					'label' => 'Special Collections',
-					'value' => 'wz:519::zs:36307'
-				)
-			);
+			$ccl_locations = get_option( 'ccl-search-locations' );
 
-			$database_display = ( isset( $block['block_databases'] ) ) ? $block['block_databases'] : array( 'all' );
+			$db_ids = ( isset( $block['block_databases'] ) ) ? $block['block_databases'] : array( 'all' );
 			$database_selected = 'all';
+			
+			
             ?>
             
             <div id="block-<?php echo $index; ?>" class="ccl-l-container ccl-u-pb-2 ccl-u-clearfix">
@@ -418,15 +408,15 @@ if ( $blocks ) : ?>
 
                 <?php endif; ?>
 
-                <div class="ccl-c-search <?php echo $search_js_class; ?> ccl-u-mt-2">
+                <div class="ccl-c-search ccl-js-search-form ccl-u-mt-2" data-livesearch="<?php echo $search_js_class; ?>">
 
-                    <form class="ccl-c-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
-                        <label for="ccl-search" class="ccl-u-display-none">><?php echo $search_label; ?></label>
-                        <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="<?php echo $search_label; ?>"/>
-
-                        <div class="ccl-c-search-form__option">
+                <form class="ccl-c-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
+                        <label for="ccl-search" class="ccl-u-display-none">Start typing to search</label>
+                        <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search" aria-label="Search"/>
+                
+                        <div class="ccl-c-search-form__option ccl-c-search-index-container">
                             <strong>As:</strong>
-                            <select class="ccl-b-select ccl-c-search-index" name="index" title="Index">
+                            <select class="ccl-b-select ccl-c-search-index" name="index" title="Index" aria-label="Search Index">
                                 <option value="ti">Title</option>
                                 <option value="kw" selected="selected">Keyword</option>
                                 <option value="au">Author</option>
@@ -434,17 +424,16 @@ if ( $blocks ) : ?>
                             </select>
                         </div>
                         
-                        <div class="ccl-c-search-form__option">
+                        <div class="ccl-c-search-form__option ccl-c-search-location-container">
                             <strong>In:</strong>
-							<select class="ccl-b-select ccl-c-search-location" name="location" title="location">
-		                        <?php foreach ( $database_display as $slug ) : // replace with $database_order ?>
-
-									<option value="<?php echo esc_attr( $databases[ $slug ][ 'value' ] ); ?>" <?php if ( $slug == $database_selected ) { echo 'selected="selected"'; } ?>>
-										<?php echo esc_html( $databases[ $slug ][ 'label' ] ); ?>
-									</option>
-
-		                        <?php endforeach; ?>
-							</select>
+                            <select class="ccl-b-select ccl-c-search-location" name="location" title="Location" aria-label="Search Location">
+                                <?php foreach( $db_ids as $location ): ?>
+                                <?php $selected_location = ( array_key_exists( 'selected', $ccl_locations[$location] ) ) ? 'selected="selected"' : ''; ?>
+                                    
+                                        <option data-loc="<?php echo $ccl_locations[$location]['loc']; ?>" value="<?php echo $ccl_locations[$location]['param']; ?>" <?php echo $selected_location; ?> ><?php echo $ccl_locations[$location]['name']; ?></option>
+                                        
+                                <?php endforeach;?>
+                            </select>
                         </div>
                     
                         <button type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid" style="min-width: 8rem">
@@ -452,7 +441,7 @@ if ( $blocks ) : ?>
                             <span class="ccl-u-display-none">Search</span>
                         </button>
                     </form>
-
+                    
                     <?php if ( $enable_live_results ) : ?>
                         
                         <div class="ccl-c-search-results">

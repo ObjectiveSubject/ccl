@@ -168,9 +168,11 @@ function content_blocks() {
 		'type'    => 'multicheck',
 		'options' => array(
 			// Make sure the options here match those available in the block (/partials/blocks.php)
-			'all' => 'Libraries Worldwide',
-			'ccl' => 'Claremont Colleges Library',
-			'sc'  => 'Special Collections',
+			'world' 	=> 'Libraries Worldwide',
+			'ccl'		=> 'Claremont Colleges Library',
+			'spcl'  	=> 'Special Collections',
+			'oac'		=> 'Online Archive of California',
+			'wp_ccl'	=> 'Library Website'
 		),
 		'classes' => 'ccl-toggled-field show-on-search',
 	) );

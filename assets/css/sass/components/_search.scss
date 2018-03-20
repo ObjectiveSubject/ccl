@@ -97,6 +97,27 @@
             padding-left: $search-bar-padding;
         }
     }
+    
+    //special styling for quick-nav searchbox
+    .ccl-c-quick-nav__item.ccl-is-search-box & {
+        
+        .ccl-b-input[type="text"]{
+            @include media($md){
+                flex-basis: 100%;
+                width: auto;
+                flex-grow: 1;
+            }            
+        }
+        
+    
+        // .ccl-c-search-form__option {
+        //     @include media($md){
+        //         flex: 1;
+        //     }            
+            
+        // }
+        
+    }
 }
 
 .ccl-c-search-form__option {
@@ -114,7 +135,7 @@
     }
     
     @include media($sm){
-        flex-basis: 50%;
+        flex: 1;
         
         &:not(:last-of-type) {
             border-right: 1px solid $gray;
