@@ -73,13 +73,15 @@ get_header(); ?>
 
 				</div>
 
-                <?php if ( get_the_content() ) : ?>
+ 
 
                     <div class="ccl-l-container">
 
                         <div class="ccl-l-row">
                             <div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
+               				<?php if ( get_the_content() ) : ?>                            	
                                 <?php the_content(); ?>
+                			<?php endif; ?>                                
                             </div>
                         </div>
                         
@@ -89,9 +91,6 @@ get_header(); ?>
 	                    </p>    
 
                     </div>
-
-                <?php endif; ?>
-
 
                 <?php if ( $is_subject_sort ) {
                     get_template_part( 'partials/subject-guide-card' );
