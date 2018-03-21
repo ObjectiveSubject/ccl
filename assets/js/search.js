@@ -85,6 +85,7 @@
 		
 		this.toggleIndex();
 		
+		//keyboard events for sending query to database
 		this.$input
 			.on('keyup keypress', function (event) {
 
@@ -143,9 +144,11 @@
 
 		}		
 
+		//send query to database based on option change
 		this.$searchIndex.add(this.$searchScope).change(function(){
 			_this.onSearchIndexChange();
 		});
+		
 
 		//on submit fire off catalog search to WMS
 		this.$form.on('submit', function(event) {
@@ -260,14 +263,13 @@
 			posts = results.posts,
 			searchIndex =  $( _this.$indexContain ).is(':visible') ? _this.$searchIndex.val() : 'kw',
 			searchIndexNicename = indexNames[searchIndex],
-			searchScopeData = $( _this.$searchScope );
+			searchScopeData = $( _this.$searchScope ),
+			renderedResponse	= [];
 			
 		// wrap query
 		//var queryString = searchIndex + ':' + query;
 		
-		//console.log( _this.locationType );
-		
-		//get wms_url input_array = [queryString, searchScope]
+		//get wms_url input_array = [queryString, searchScope, locationType]
 		var input_array = [];
 		input_array['queryString']	= (_this.locationType === 'wms') ?  searchIndex + ":" + query : query;
 		input_array['searchScope']	= _this.$searchScope.val();
@@ -279,6 +281,13 @@
 		// Clear response area list items (update when Pattern Library view isn't necessary)
 		_this.$responseList.html('');
 		_this.$resultsLink.remove();
+		
+		//add the close button
+		var resultsClose = '<div class="ccl-c-search--close-results">' +
+							'<button type="button" class="ccl-b-close ccl-c-search--close__button" aria-label="Close">' +
+                            	'<span aria-hidden="true">×</span>' +
+                            '</button>' +
+                            '</div>';
 
 		// Create list item for Worldcat search.
 		var listItem =  '<a href="'+ wmsConstructedUrl +'" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank">' +
@@ -289,27 +298,26 @@
 							'<span class=\"ccl-c-search-item__title\">' +
 								'Search by ' + searchIndexNicename + ' for &ldquo;' + query + '&rdquo; in '+ searchScopeData.find('option:selected').text() +' ' +
 								'<i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i>' +
-							'</span>' +
-							'<span class="ccl-c-search-item__cta">' +
-								'<i class="ccl-b-icon search" aria-hidden="true" style="vertical-align:middle"></i>' +
-							'</span>' +
+							'</span>'+
 						'</a>';
 
-		_this.$responseList.append(listItem);
+		
+		//add HTML to the response array
+		renderedResponse.push( resultsClose, listItem );
 
 		// Create list items for each post in results
 		if ( count > 0 ) {
 
 			// Create a separator between worldcat and other results
 			var separator = '<span class="ccl-c-search-item ccl-is-separator" role="presentation">' +
-								'<span class="ccl-c-search-item__title\">' +
+								'<span class=\"ccl-c-search-item__title\">' +
 									'<i class="ccl-b-icon arrow-down" aria-hidden="true"></i>' +
 									' Other suggested resources for &ldquo;' + query + '&rdquo;' +
 								'</span>' +
 							'</span>';
 
-			_this.$responseList.append(separator);
-
+			//add HTML to response array
+			renderedResponse.push( separator );
 
 			// Build results list
 			posts.forEach(function (post) {
@@ -346,8 +354,9 @@
 									'<span>' + cta + ' <i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
 								'</span>' +
 							'</a>';
-
-				_this.$responseList.append(listItem);
+				
+				//add HTML to the response array
+				renderedResponse.push( listItem );
 			});
 
 			// Build results count/link
@@ -358,8 +367,26 @@
 								'</a>' +
 						'</div>';
 
-		_this.$responseList.append(listItem);
+		//add HTML to the response array
+		renderedResponse.push( listItem );
+		
 		}
+		
+		//append all response data all at once
+		_this.$responseList.append( renderedResponse );
+		
+		//cache the response button after its added to the DOM
+		_this.$responseClose	= _this.$el.find('.ccl-c-search--close__button');		
+		
+		//click event to close the results page
+		_this.$responseClose.on( 'click', function(event){
+				//hide
+				if( $( _this.$response ).is(':visible') ){
+					_this.$response.hide();					
+				}
+		});
+		
+		
 	};
 
 	SearchAutocomplete.prototype.onSearchIndexChange = function() {
@@ -369,6 +396,7 @@
 		if ( ! query.length ) {
 			return;
 		}
+		this.$response.show();		
 		this.fetchResults( query );
 	};
 	

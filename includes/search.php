@@ -31,7 +31,7 @@ function load_search_options(){
 			),
 		'ccl'	=> array(
 			'loc'		=> 'wms',
-			'name'		=> 'Claremont Colleges Library',
+			'name'		=> 'The Claremont Colleges Library',
 			'param'		=> 'wz:519',
 			'on_front'	=> true			
 
@@ -47,7 +47,7 @@ function load_search_options(){
 			'loc'		=> 'oac',
 			'name'		=> 'Online Archive of California',
 			'param'		=> 'Claremont+Colleges',
-			'on_front'	=> true		
+			'on_front'	=> false		
 
 			),
 		'wp_ccl' => array(
