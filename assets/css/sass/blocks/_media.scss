@@ -16,6 +16,9 @@
 	position: relative;
 	height: 0;
 	overflow: hidden;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 
 	iframe, video, object {
 		position: absolute;

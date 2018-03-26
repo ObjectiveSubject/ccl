@@ -12,19 +12,34 @@ function setup() {
 	};
 
 	// NOTE: Uncomment to activate post type
-	// add_action( 'init', $n( 'register_my_post_type' ) );
+	add_action( 'init', $n( 'register_news' ) );
 
 }
 
 /**
- * Register the 'my_post_type' post type
+ * Register the 'news' post type
  *
  * See https://github.com/johnbillion/extended-cpts for more information
  * on registering post types with the extended-cpts library.
  */
-function register_my_post_type() {
-	register_extended_post_type( 'my_post_type', array(
-		'menu_icon' 		=> 'dashicons-layout',
+function register_news() {
+	register_extended_post_type( 'news', array(
+
 		'supports' 			=> array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+		'admin_cols' => [
+			'category' => [
+				'taxonomy' => 'category'
+			],
+			'date' => [
+				'title' => 'Published',
+			]
+		],
+
+	), array(
+
+		# Override the base names used for labels:
+		'singular'  => 'News Post',
+		'plural'    => 'News',
+
 	) );
 }

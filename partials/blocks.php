@@ -223,6 +223,112 @@ if ( $blocks ) : ?>
 
             <?php endif; ?>
 
+        <?php elseif ( 'news-events' == $block['block_type'] ) : ?>
+
+            <?php
+            date_default_timezone_set('America/Los_Angeles');
+
+            if ( isset( $block['block_news_events'] ) ) {
+
+                $news_events = new WP_Query( array(
+                    'post_type' => array( 'news', 'event' ),
+                    'posts_per_page' => 500,
+                    'post__in' => array_map( 'intval', $block['block_news_events'] ),
+                    'orderby' => 'post__in'
+                ) );
+
+            } else { 
+                $news_events = null;
+            };
+
+            $has_block_items = ( isset ( $news_events ) && $news_events->have_posts() );
+            $block_item_count = ( $has_block_items && is_array( $news_events->posts ) ) ? count( $news_events->posts ) : 0;
+            $enable_carousel = $block_item_count > 3;
+
+            if ( $has_block_items ) : ?>
+
+                <div id="block-<?php echo $index; ?>" class="ccl-l-container">
+
+                    <div class="ccl-c-promo">
+
+                        <header class="ccl-c-promo__header">
+
+                            <?php if ( isset( $block['block_title'] ) && $block['block_title'] ) : ?>
+
+                                <div class="ccl-c-promo__title"><?php echo $block['block_title']; ?></div>
+
+                            <?php endif; ?>
+
+                            <?php if ( isset( $block['block_cta'] ) && $block['block_cta'] ) : ?>
+
+                                <div class="ccl-c-promo__cta">
+                                    <?php echo apply_filters( 'the_content', $block['block_cta'] ); ?>
+                                </div>
+
+                            <?php endif; ?>
+                            
+                            <?php if ( $enable_carousel ) : ?>
+
+                                <div class="ccl-c-promo__action">
+                                    <button id="carousel-<?php echo $index; ?>-prev" class="ccl-b-btn--circular prev" aria-label="previous slide">&larr;</button>
+                                    <button id="carousel-<?php echo $index; ?>-next" class="ccl-b-btn--circular next" aria-label="next slide">&rarr;</button>
+                                </div>
+
+                            <?php endif; ?>
+
+                        </header>
+
+                        <?php $carousel_class = ( $enable_carousel ) ? 'js-promo-carousel' : 'ccl-is-static'; ?>
+
+                        <div class="ccl-c-promo__content">
+
+                            <div class="ccl-c-carousel <?php echo $carousel_class; ?>" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
+
+                                <?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
+
+                                    <article class="ccl-c-promo__description ccl-c-carousel__slide">
+                                        <div style="max-width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
+                                    </article>
+
+                                <?php endif; ?>
+
+                                <?php while ( $news_events->have_posts() ) : $news_events->the_post(); ?>
+                                
+                                    <article class="ccl-c-carousel__slide">
+
+                                        <a href="<?php the_permalink(); ?>" title="Read <?php the_title() ?>">
+
+                                            <?php the_post_thumbnail( 'medium', array( 'class' => 'ccl-u-display-block ccl-u-mb-nudge' ) ) ?>
+
+                                            <?php if ( 'event' === get_post_type() ) : ?>
+                                            
+                                                <p class="<?php echo has_post_thumbnail() ? 'ccl-h4' : 'ccl-h3' ?> ccl-u-mt-nudge"><?php the_title(); ?></p>
+                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">[Date & Time]</p>
+                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">[Venue]</p>
+                                            
+                                            <?php else : ?>
+
+                                                <div class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">News - <?php echo get_the_date() ?></div>
+                                                <p class="ccl-h4 ccl-u-mt-nudge"><?php the_title(); ?></p>
+                                                
+                                            <?php endif; ?>
+
+                                        </a>
+                                    
+                                    </article>
+
+                                <?php endwhile; wp_reset_query(); ?>
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <?php endif; ?>
+
         <?php elseif ( 'banner' == $block['block_type'] ) : ?>
 
             <?php if ( isset( $block['block_items'] ) ) : ?>
@@ -240,7 +346,7 @@ if ( $blocks ) : ?>
 
                 </div>
 
-        <?php endif; ?>
+            <?php endif; ?>
 
         <?php elseif ( 'feature_item' == $block['block_type'] ) : ?>
 

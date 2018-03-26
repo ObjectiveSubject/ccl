@@ -42,9 +42,12 @@ function register_events_post_type() {
 		),
 		'map_meta_cap' => true, // Allows created posts to be edited
 		'admin_cols' => array(
-			'Whatever' => array(
-				// 'taxonomy' => 'subject'
-			),
+			'category' => [
+				'taxonomy' => 'category'
+			],
+			'date' => [
+				'title' => 'Published',
+			]
 		),
 	) );
 

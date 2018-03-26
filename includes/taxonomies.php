@@ -12,15 +12,28 @@ function setup() {
 	};
 
 	// NOTE: Uncomment to activate taxonomy
-	//add_action( 'init', $n( 'register_taxonomy' ) );
+	add_action( 'init', $n( 'register_category' ) );
 
 }
 
 /**
- * Register the my_taxo taxonomy and assign it to posts.
- *
  * See https://github.com/johnbillion/extended-taxos for more info on using the extended-taxos library
  */
-function register_taxonomy() {
-	register_extended_taxonomy( 'my_taxo', 'post' );
+function register_category() {
+	register_extended_taxonomy( 'category', array(
+		
+		# post types
+		'post', 'event', 'news'
+	
+	), array(
+
+		# options...
+
+	), array(
+
+		# Override the base names used for labels:
+		'singular'  => 'Category',
+		'plural'    => 'Categories',
+
+	) );
 }

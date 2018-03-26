@@ -28,8 +28,9 @@ $has_blocks = $blocks && count( $blocks ) > 1;
                     }
                     elseif ( is_archive() ) {
                         echo get_queried_object()->name;
-                    }
-                    else {
+                    } elseif ( is_singular( array( 'news' ) ) ) {
+                        _e( 'News', 'ccl' );
+                    } else {
                         the_title();
                     } 
                 ?>

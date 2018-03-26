@@ -55,6 +55,7 @@ function content_blocks() {
 			'banner'             => __( 'Banner Image(s)', 'cmb2' ),
 			'carousel'           => __( 'Carousel/Feature Items', 'cmb2' ),
 			'events'          	 => __( 'Events', 'cmb2' ),
+			'news-events'		 => __( 'News & Events', 'cmb2' ),
 			'feature_item'       => __( 'Single Featured Item', 'cmb2' ),
 			'search'       		 => __( 'Search Box', 'cmb2' ),
 			'staff'       		 => __( 'Staff Profile', 'cmb2' ),
@@ -81,7 +82,7 @@ function content_blocks() {
 		// 'default' => 'standard value (optional)',
 		'id'      => $prefix . 'title',
 		'type'    => 'text',
-		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel show-on-search show-on-events show-on-feature_item'
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel show-on-search show-on-events show-on-news-events show-on-feature_item'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
@@ -103,7 +104,7 @@ function content_blocks() {
 			'editor_class' => $prefix . 'description_wysiwyg',
 			'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'
 		),
-		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel show-on-events'
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-staff show-on-carousel show-on-events show-on-news-events'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
@@ -112,7 +113,7 @@ function content_blocks() {
 		// 'default' => 'standard value (optional)',
 		'id'      => $prefix . 'description',
 		'type'    => 'wysiwyg',
-		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-carousel show-on-feature_item show-on-search show-on-events'
+		'classes' => 'ccl-toggled-field show-on-wysiwyg show-on-carousel show-on-feature_item show-on-search show-on-events show-on-news-events'
 		// 'options' => array(
 			// 'editor_class' => $prefix . 'description_wysiwyg',
 			// 'editor_css' => '<style> .' . $prefix . 'description_wysiwyg { height: 200px; }</style>'
@@ -126,6 +127,21 @@ function content_blocks() {
 		'id'      => $prefix . 'category_id',
 		'type'    => 'text',
 		'classes' => 'ccl-toggled-field show-on-events'
+	) );
+
+	$cmb->add_group_field( $block_group_id, array(
+		'name'        => __( 'News & Event Posts', 'cmb2' ),
+		'id'          => $prefix . 'news_events',
+		'type'        => 'custom_attached_posts', // This field type
+		'options' => array(
+			'show_thumbnails' => false, // Show thumbnails on the left
+			'filter_boxes'    => true, // Show a text box for filtering the results
+			'query_args'      => array(
+				//'posts_per_page' => 10,
+				'post_type'      => array( 'news', 'event' ),
+			), // override the get_posts args
+		),	
+		'classes' => 'ccl-toggled-field show-on-news-events'
 	) );
 
 	$cmb->add_group_field( $block_group_id, array(
