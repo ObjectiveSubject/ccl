@@ -119,6 +119,8 @@ function modify_queries( $query ) {
 
 					// Instead we just return all the databases and use a conditional in the template (see archive-database.php).
 					$query->set( 'posts_per_page', 1000 );
+				}else{
+					$query->set( 'posts_per_page', 20 );
 				}
 			}
 

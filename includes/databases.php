@@ -12,6 +12,10 @@ function setup() {
 	};
 
 	add_action( 'init', $n( 'register_databases_post_type' ) );
+	
+	add_action( 'init', $n( 'register_format_taxonomy' ) );
+
+	add_action( 'init', $n( 'register_trial_taxonomy' ) );	
 
 	add_action( 'admin_enqueue_scripts', $n( 'load_admin_script' ), 20 );
 
@@ -41,15 +45,79 @@ function register_databases_post_type() {
 			'create_posts' => 'do_not_allow', // Remove support for "Add New" (can also change to a role, rather than false)
 		),
 		'map_meta_cap' => true, // Allows created posts to be edited
-		'admin_cols' => array(
+		'admin_cols'	=> array(
 			'subjects' => array(
 				'taxonomy' => 'subject'
 			),
-		),
+			'format'	=> array(
+				'title'		=> 'Format/Type',
+				'taxonomy'	=> 'format'
+			),
+			'is_trial'	=> array(
+				'title'		=> 'Database Trial',
+				'taxonomy'	=> 'trial'
+			),
+			'best_bets'	=> array(
+				'title'		=> 'Best Bets',
+				'function'	=> function(){
+					global $post;
+					$best_bets	= get_post_meta( $post->ID, 'database_best_bets', true );
+					
+					if( $best_bets ){
+						//turn best bets into string
+						$best_bets = implode( ', ', $best_bets );
+						echo $best_bets;
+					}					
+					
+				}
+			)
+		)
 	) );
 
 }
 
+
+/**
+ * 
+ * Add custom taxonomy for format and type, using extended post taxonomies
+ * 
+ */
+ function register_format_taxonomy(){
+ 	
+ 	register_extended_taxonomy(
+		'format', // taxonomy name
+		array(
+			// post types
+			'database'
+		),
+		array(
+			// parameters
+			'meta_box' => 'simple',
+		)
+
+	);	
+ }
+ 
+ /**
+ * 
+ * Add custom taxonomy for format and type, using extended post taxonomies
+ * 
+ */
+ function register_trial_taxonomy(){
+ 	
+ 	register_extended_taxonomy(
+		'trial', // taxonomy name
+		array(
+			// post types
+			'database'
+		),
+		array(
+			// parameters
+			'meta_box' => 'radio',
+		)
+
+	);	
+ }
 
 /**
  * Add option page to the Databases menu
@@ -240,8 +308,12 @@ function add_database( $database ) {
 	// Raw data for development
 	update_post_meta( $post_id, 'database_raw_data', $database );
 
+
+	//check if friendly URL exist, if not then replace with ugly url
+	$database_url_check = !empty( $database['friendly_url'] ) ? $database['friendly_url'] : $database['url'];
+	
 	// Database friendly URL
-	update_post_meta( $post_id, 'database_friendly_url', $database['friendly_url'] );
+	update_post_meta( $post_id, 'database_friendly_url', $database_url_check );
 
 	// @todo use this for subject?
 	// Set category in XX taxonomy and create if it doesn't exist
@@ -249,13 +321,47 @@ function add_database( $database ) {
 	// wp_set_object_terms( $database_id, $category, 'XX' );
 	// Add Subjects to custom taxonomy
 	if ( array_key_exists( 'subjects', $database ) ) {
-		$subjects_array = array();
+		//setup empty arrays for data
+		$subjects_array 	= array();
+		$best_bet_subjects	= array();
 		foreach ( $database['subjects'] as $subject ) {
+			
+			//add this subject to the list of subjects related to this database
 			$subjects_array[] = $subject['name'];
+			
+			//if subject has 'featured' enabled, then add the Subject name to the list of best bets
+			if( $subject['featured'] == 1 ){
+				$best_bet_subjects[] = $subject['name'];
+			}
 		}
 		// Add subject name to subject taxonomy
 		wp_set_object_terms( $post_id, $subjects_array, 'subject' );
+		
+		//add best bet custom field from array of databases
+		update_post_meta( $post_id, 'database_best_bets', $best_bet_subjects );
 	}
+	
+	//set Format types and set taxonomy to the format, create if it doesn't exist
+	//create an array and then add them all at same time
+	if ( array_key_exists( 'az_types', $database ) ) {
+		$format_array = array();
+		foreach ( $database['az_types'] as $format ) {
+			$format_array[] = $format['name'];
+		}
+		// Add subject name to subject taxonomy
+		wp_set_object_terms( $post_id, $format_array, 'format' );
+	}
+	
+	//if the database trial exists as 1 (or boolean) then add this to the trial taxonomy
+	//has_term( $term, $taxonomy, $post )
+	//wp_remove_object_terms( $id, $terms, $taxonomy )
+	if ( array_key_exists( 'enable_trial', $database ) ) {
+		if( $database['enable_trial'] == 1 ){
+			wp_set_object_terms( $post_id, 'trial', 'trial' );			
+		}
+		
+	}
+	
 
 	if ( $duplicate_check->have_posts() ) {
 		return "added";
@@ -287,8 +393,14 @@ function add_database_meta_box( $post ) {
 function render_database_data_metabox() {
 	global $post;
 
-	$raw_data = get_post_meta( $post->ID, 'database_raw_data', true );
-
+	$raw_data	= get_post_meta( $post->ID, 'database_raw_data', true );
+	$best_bets	= get_post_meta( $post->ID, 'database_best_bets', true );
+	
+	if( $best_bets ){
+		//turn best bets into string
+		$best_bets = implode( ', ', $best_bets );
+	}
+	
 	$content = $post->post_content;
 
 	echo '<p>';
@@ -302,9 +414,19 @@ function render_database_data_metabox() {
 		echo '<strong>Database URL:</strong> ' . get_post_meta( $post->ID, 'database_friendly_url', true ) . '<br>';
 	
 	echo '</p>';
+	
+	//echo best bets if any
+	if( $best_bets ){
+		echo '<p>';
+	
+			echo '<strong>Database Best Bets:</strong> ' . $best_bets . '<br>';
+	
+		echo '</p>';
+	}
+	
 
 	if ( $content ) {
-		echo '<h4>Content</h4>';
+		echo '<strong>Content:</strong><br>';
 		echo apply_filters( 'the_content', $content );
 	}
 

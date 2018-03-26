@@ -37,7 +37,12 @@
     
     a{
         line-height: 1.3em;
-        border-bottom: 1px solid black;
+        //border-bottom: 1px solid black;
+        
+        &:hover,
+        &:focus{
+
+        }
     }
 }
 
