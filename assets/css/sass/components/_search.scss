@@ -72,11 +72,13 @@
     .ccl-b-input[type='text']{
         
         @include media( #{$lg - 1}, max ){
-        flex-basis: 100%;
+            flex-basis: 100%;
+
+            // quick nav temp edit - 2018-03-27
+            padding: 1rem;
         }
             
     }
-
 
     .ccl-c-hero & {
         @include media( #{$lg - 1}, max) {
@@ -114,6 +116,10 @@
                 flex-basis: 100%;
                 width: auto;
                 flex-grow: 1;
+                
+                // quick nav temp edit - 2018-03-27
+                border-bottom: 1px solid;
+
             }            
         }
         
@@ -128,7 +134,11 @@
     align-items: center;
     flex-shrink: 0;
     flex-basis: 100%;
-    padding: $search-bar-padding 0;
+
+    // quick nav temp edit - 2018-03-27
+    // padding: $search-bar-padding 0;
+    padding: $search-bar-padding;
+
     border-top: 1px solid $gray;
 
     @include media( #{$md - 1}, max ) {

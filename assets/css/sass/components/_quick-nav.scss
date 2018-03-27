@@ -78,9 +78,14 @@
 
     &.ccl-is-brand {
         display: none;
-        flex-basis: 20%;
+
+        // quick nav temp edit - 2018-03-27
+        // flex-basis: 20%;
+        // flex-grow: 0;
+        flex-basis: 10%;
+        flex-grow: 1;
+
         flex-shrink: 0;
-        flex-grow: 0;
         @include media($lg) {
             display: flex;
         }
@@ -91,21 +96,42 @@
 
         .ccl-no-secondary & {
             flex-basis: calc(100% - 72px);
-            border-right: 1px solid;
+
+            // quick nav temp edit - 2018-03-27
+            // border-right: 1px solid;
+
             border-bottom: 0;
         }
 
         @include media($md) {
-            border-right: 1px solid;
+            
+            // quick nav temp edit - 2018-03-27
+            // --------------------------------
+            // border-right: 1px solid;
+            // --------------------------------
+
             flex-basis: auto !important;
             flex-grow: 0 !important;
             flex-shrink: 0 !important;
             border-bottom: 0 !important;
         }
+
+        // quick nav temp edit - 2018-03-27
+        // --------------------------------
+        @include media(#{$lg - 1}, max) {
+            padding-left: 0;
+        }
+        @include media($lg) {
+            border-left: 1px solid #ddd;
+        }
+        // --------------------------------
+
     }
 
     &.ccl-is-secondary {
-        border-right: 1px solid;
+        // quick nav temp edit - 2018-03-27
+        // border-right: 1px solid;
+
         flex-basis: calc(100% - 72px);
         
         @include media($md - 1, max) {
@@ -115,37 +141,71 @@
 
     &.ccl-is-search-toggle {
         justify-content: flex-end;
-        flex-basis: 72px;
         flex-grow: 0;
         justify-content: center;
+        
+        // quick nav temp edit - 2018-03-27
+        // flex-basis: 72px;
+        flex-basis: auto;
+        padding: 0;
 
         @include media($md - 1, max) {
             min-height: rem(48);
-        }
-        @include media($md) {
-            border-right: 1px solid;
-        }
 
-        &:hover {
-            background: rgba(black, 0.2);
-            border-color: black;
+            // quick nav temp edit - 2018-03-27
+            position: absolute;
+            right: $gutter;
+            top: 0.5rem;
+            // --------------------------------
+
         }
+        
+        // quick nav temp edit - 2018-03-27
+        // @include media($md) {
+        //     border-right: 1px solid;
+        // }
+
+        // quick nav temp edit - 2018-03-27
+        // &:hover {
+        //     background: rgba(black, 0.2);
+        //     border-color: black;
+        // }
 
         .ccl-b-icon {
-            font-size: 1.5rem;
+            // quick nav temp edit - 2018-03-27
+            // font-size: 1.5rem;
+            font-size: 1.25rem;
+
             transition: transform $duration-short $easing;
-            @include media($md) {
-                font-size: 2rem;
-            }
+            
+            // quick nav temp edit - 2018-03-27
+            // @include media($md) {
+            //     font-size: 2rem;
+            // }
         }
 
         .ccl-search-active & {
             display: flex;
-            margin: 0;
+
+            // quick nav temp edit - 2018-03-27
+            // --------------------------------
+            // margin: 0;
+            margin: 1.6em 0;
+            align-items: flex-start;
+
+            @include media($md - 1, max) {
+                position: relative;
+                right: auto;
+                top: auto;
+            }
+            // ---------------------------------
 
             .ccl-b-icon {
                 transform: rotate(90deg);
-                font-size: 2rem;
+
+                // quick nav temp edit - 2018-03-27
+                // font-size: 2rem;
+
                 &:before {
                     content: $ccl-b-icon-close;
                 }
@@ -157,7 +217,10 @@
         display: none;
         padding: 0;
         margin-top: 0;
-        border-right: 1px solid;
+        
+        // quick nav temp edit - 2018-03-27
+        // border-right: 1px solid;
+
         .ccl-search-active & {
             display: flex;
             flex-direction: column;
@@ -292,6 +355,13 @@
     width: 100%;
     height: rem(20);
     position: relative;
+   
+    // quick nav temp edit - 2018-03-27
+    opacity: 0.5;
+    &:hover, &:focus {
+        opacity: 1;
+    }
+
 
     @include media($lg) {
         height: rem(24);
