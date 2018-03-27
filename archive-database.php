@@ -148,7 +148,7 @@ $pagination_args = array(
                                         //if best bet is detected in array, then append HTML
                                         if( array_key_exists( 'has_best_bet', $article )  ): ?>
                                         
-                                            <li style="display:inline-block;" class="ccl-u-faded ccl-u-weight-bold ccl-u-mr-1">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></li>
+                                            <li style="display:inline-block;" class="ccl-u-faded ccl-u-weight-bold ccl-u-mr-1 ccl-u-best-bet">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></li>
                                         <?php endif; ?>
                                         
                                         <?php 

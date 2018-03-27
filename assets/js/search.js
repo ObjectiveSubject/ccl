@@ -290,7 +290,7 @@
                             '</div>';
 
 		// Create list item for Worldcat search.
-		var listItem =  '<a href="'+ wmsConstructedUrl +'" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank">' +
+		var listItem =  '<a href="'+ wmsConstructedUrl +'" class="ccl-c-search-item ccl-is-large" role="listitem" target="_blank" style="border:none;">' +
 							'<span class="ccl-c-search-item__type">' +
 								'<i class="ccl-b-icon book" aria-hidden="true"></i>' +
 								'<span class="ccl-c-search-item__type-text">WorldCat</span>' +

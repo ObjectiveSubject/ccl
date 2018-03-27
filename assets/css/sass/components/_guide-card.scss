@@ -7,10 +7,12 @@
         @extend .ccl-u-faded;
         @extend .ccl-u-weight-bold;         
         margin: $spacer/2 0 0 $spacer/2; 
+        display: flex;
+        align-items: center;
 
-        & > * {
-            margin-bottom: .5em;
-        }
+        // & > * {
+        //     margin-bottom: .5em;
+        // }
             
         @include media( $md ){
             margin: 0;                
