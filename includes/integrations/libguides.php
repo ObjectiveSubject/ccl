@@ -134,7 +134,7 @@ function get_all_databases() {
 	$token = get_token();
 
 	$params = array(
-		'expand' => 'subjects,friendly_url,az_types,permitted_uses' // need to know who created the guide
+		'expand' => 'subjects,friendly_url,az_types,permitted_uses,az_props' // need to know who created the guide
 	);
 
 	$query_string = urldecode_deep( http_build_query( $params ) ); // urldecode is necessary to prevent the comma from being encoded

@@ -44,6 +44,11 @@ get_header(); ?>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
                                         </li>
                                         <li>
+                                            <a href="#block-format"><?php _e( 'Databases by Format', 'ccl' ); ?></a>
+                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                                        </li>                                        
+                                        
+                                        <li>
                                             <a href="#block-subject"><?php _e( 'Databases by Subject', 'ccl' ); ?></a>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
                                         </li>
@@ -79,7 +84,7 @@ get_header(); ?>
 
                 <div class="ccl-l-container ccl-u-mb-3">
                     
-                    <div id="block-title" class="ccl-c-promo">
+                    <div id="block-title" class="ccl-c-promo ccl-u-mt-4">
 
                         <h2 class="ccl-u-mt-0"><?php _e('Databases by Title','ccl'); ?></h2>
 
@@ -95,7 +100,32 @@ get_header(); ?>
 
                     </div>
 
-                    <div id="block-subject" class="ccl-c-promo">
+
+                    <div id="block-format" class="ccl-c-promo ccl-u-mt-4">
+                        
+                        <h2 class="ccl-u-mt-0"><?php _e('Databases by Format/Type','ccl'); ?></h2>
+
+                        <?php $formats = get_terms( array( 
+                            'taxonomy' => 'format',
+                        ) );
+                        
+                        if ( $formats ) : ?>
+                            
+                            <ul class="ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
+
+                            <?php foreach ( $formats as $format ) : ?>
+
+                                    <li style="line-height:2"><a class="ccl-h4" href="<?php echo get_term_link( $format, 'format' ) . '?post_type=database'; ?>"><?php echo $format->name; ?></a></li>
+                            <?php endforeach; ?>
+
+                            </ul>
+
+                        <?php endif; ?>
+
+                    </div>
+
+
+                    <div id="block-subject" class="ccl-c-promo ccl-u-mt-4">
                         
                         <h2 class="ccl-u-mt-0"><?php _e('Databases by Subject','ccl'); ?></h2>
 
@@ -108,7 +138,7 @@ get_header(); ?>
                             <ul class="ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
 
                             <?php foreach ( $subjects as $subject ) : ?>
-                                <li style="line-height:2"><a class="ccl-h4" href="<?php echo get_term_link( $subject, 'subject' ) . '?post_type=database'; ?>"><?php echo $subject->name; ?></a></li>
+                                    <li style="line-height:2"><a class="ccl-h4" href="<?php echo get_term_link( $subject, 'subject' ) . '?post_type=database'; ?>"><?php echo $subject->name; ?></a></li>
                             <?php endforeach; ?>
 
                             </ul>
