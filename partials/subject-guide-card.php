@@ -74,18 +74,13 @@ if ( empty( $all_subjects) ) : ?>
                         <div class="ccl-c-guide-card" role="listitem" aria-label="<?php echo 'Information about the ' . $guide_title . ' guide'; ?>">
                             <div class="ccl-l-row">
                                 
-                                <div class="ccl-l-column ccl-l-span-4-md ccl-c-guide-card__title">
+                                <div class="ccl-l-column ccl-l-span-7-md ccl-c-guide-card__title">
                                     <a href="<?php echo esc_url( $guide_url ); ?>" target="_blank"><?php echo $guide_title; ?></a>
                                 </div>
-                                <div class="ccl-l-column ccl-l-span-8-md ccl-c-guide-card__content">
-                                    <div class="ccl-c-guide-card__meta">
-                                        <a href="<?php echo $owner_pofile; ?>" target="_blank">
+                                <div class="ccl-l-column ccl-l-span-5-md ccl-c-guide-card__meta">
+                                    <a href="<?php echo $owner_pofile; ?>" target="_blank">
                                         <i class="ccl-b-icon person-open" aria-hidden="true"></i> <span><?php echo $guide_author; ?></span>
-                                        </a>
-                                    </div>
-                                    <div class="ccl-c-guide-card__desc">
-                                        <?php echo $guide_descr; ?>
-                                    </div>
+                                    </a>
                                 </div>        
                             </div>
                         </div>
