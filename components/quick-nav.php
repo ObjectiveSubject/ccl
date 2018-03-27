@@ -1,6 +1,9 @@
 <?php
+global $post;
 $blocks = \CCL\Helpers\get_blocks(); 
 $has_blocks = $blocks && count( $blocks ) > 1;
+$page_options = (array) get_post_meta( $post->ID, 'page_options', true );
+$is_spc = in_array( 'is_spc', $page_options ); // is special collections page
 ?>
 
 <nav class="ccl-c-quick-nav <?php echo (! $has_blocks) ? 'ccl-no-secondary' : ''; ?>">
@@ -39,17 +42,29 @@ $has_blocks = $blocks && count( $blocks ) > 1;
             
             <div id="dropdown-site-menus" class="ccl-c-dropdown__content">
 
-                <?php wp_nav_menu( array(
-                    'theme_location' => 'header_1',
-                    'container' => '',
-                    'menu_class' => 'ccl-c-quick-nav__menu ccl-is-primary'
-                    ) ); ?>
+                <?php if ( $is_spc && has_nav_menu( 'special_collections' ) ) {
 
-                    <?php wp_nav_menu( array(
-                    'theme_location' => 'header_2',
-                    'container' => '',
-                    'menu_class' => 'ccl-c-quick-nav__menu ccl-is-secondary'
-                    ) ); ?>
+                    wp_nav_menu( array(
+                        'theme_location' => 'special_collections',
+                        'container' => '',
+                        'menu_class' => 'ccl-c-quick-nav__menu ccl-is-primary'
+                    ) );
+
+                } else {
+
+                    wp_nav_menu( array(
+                        'theme_location' => 'header_1',
+                        'container' => '',
+                        'menu_class' => 'ccl-c-quick-nav__menu ccl-is-primary'
+                    ) );
+    
+                    wp_nav_menu( array(
+                        'theme_location' => 'header_2',
+                        'container' => '',
+                        'menu_class' => 'ccl-c-quick-nav__menu ccl-is-secondary'
+                    ) ); 
+
+                } ?>
 
             </div>
 

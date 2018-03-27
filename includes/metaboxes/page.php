@@ -13,6 +13,7 @@ function setup() {
 
 	add_action( 'cmb2_init',  $n( 'page_related' ) );
 	add_action( 'cmb2_init',  $n( 'page_sidebar' ) );
+	add_action( 'cmb2_init',  $n( 'page_options' ) );
 }
 
 /**
@@ -69,6 +70,37 @@ function page_sidebar() {
 		'type'        => 'wysiwyg',
 		'description' => '',
 		// 'repeatable'  => false, // use false if you want non-repeatable group
+	) );
+
+}
+
+
+/**
+ * Add page options box/fields
+ */
+function page_options() {
+
+	$prefix = 'page_';
+
+	$cmb = new_cmb2_box( array(
+		'id'           => $prefix . 'options_metabox',
+		'title'        => __( 'Page Options', 'cmb2' ),
+		'context'      => 'side',
+		'priority'	   => 'low',
+		'object_types' => array( 'page' )	
+	) );
+
+	$cmb->add_field( array(
+		'id'          => $prefix . 'options',
+		// 'name'		  => __( 'Options', 'cmb2' ),
+		// 'desc'    => 'field description (optional)',
+		'type'    => 'multicheck',
+		'options' => array(
+			'is_spc' => 'Special Collections Page',
+		),
+		'attributes' => array(
+			'select_all_button' => false
+		)
 	) );
 
 }

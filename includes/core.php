@@ -137,7 +137,8 @@ function add_menus() {
 		array(
 			'header_1' => 'Header 1',
 			'header_2' => 'Header 2',
-			'footer_1' => 'Footer 1'
+			'footer_1' => 'Footer 1',
+			'special_collections' => 'Special Collections'
 		)
 	);
 
