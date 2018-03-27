@@ -140,9 +140,11 @@
     }
 
     &.ccl-is-search-toggle {
-        justify-content: flex-end;
+        @extend .ccl-u-transition;
+        //justify-content: flex-end;
         flex-grow: 0;
         justify-content: center;
+        align-items: center;
         
         // quick nav temp edit - 2018-03-27
         // flex-basis: 72px;
@@ -190,7 +192,7 @@
             // quick nav temp edit - 2018-03-27
             // --------------------------------
             // margin: 0;
-            margin: 1.6em 0;
+
             align-items: flex-start;
 
             @include media($md - 1, max) {
@@ -202,6 +204,7 @@
 
             .ccl-b-icon {
                 transform: rotate(90deg);
+                margin-top: 1.6rem;
 
                 // quick nav temp edit - 2018-03-27
                 // font-size: 2rem;

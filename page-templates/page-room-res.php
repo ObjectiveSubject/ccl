@@ -157,7 +157,7 @@ get_header(); ?>
                                         <?php if ( $room_description ) : ?>
                                             
                                             <article class="ccl-c-promo__description ccl-c-carousel__slide">
-                                                <div style="max-width:300px"><?php echo  $room_description; ?></div>
+                                                <div style="width:300px"><?php echo  $room_description; ?></div>
                                             </article>
 
                                         <?php endif; ?>

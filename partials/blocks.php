@@ -56,7 +56,7 @@ if ( $blocks ) : ?>
                                 <?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
 
                                     <article class="ccl-c-promo__description ccl-c-carousel__slide">
-                                        <div style="max-width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
+                                        <div style="width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
                                     </article>
 
                                 <?php endif; ?>
@@ -191,7 +191,7 @@ if ( $blocks ) : ?>
                                 <?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
 
                                     <article class="ccl-c-promo__description ccl-c-carousel__slide">
-                                        <div style="max-width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
+                                        <div style="width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
                                     </article>
 
                                 <?php endif; ?>
@@ -287,7 +287,7 @@ if ( $blocks ) : ?>
                                 <?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
 
                                     <article class="ccl-c-promo__description ccl-c-carousel__slide">
-                                        <div style="max-width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
+                                        <div style="width:300px"><?php echo apply_filters( 'the_content', $block['block_description'] ); ?></div>
                                     </article>
 
                                 <?php endif; ?>
