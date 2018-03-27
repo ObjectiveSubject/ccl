@@ -436,7 +436,7 @@ if ( $blocks ) : ?>
 
                                     <div class="ccl-l-column <?php echo $column_class; ?>">
 
-                                        <div class="ccl-c-profile-card ccl-u-mt-1">
+                                        <div class="ccl-c-profile-card ccl-u-mb-1">
 
                                             <div class="ccl-l-row">
 
