@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js" data-school="default">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<?php wp_head(); ?>
 	<link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7861216/7459392/css/fonts.css" />
 </head>
