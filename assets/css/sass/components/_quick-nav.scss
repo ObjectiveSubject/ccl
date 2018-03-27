@@ -281,6 +281,8 @@
             background: white;
             padding-bottom: 0.6rem;
             min-width: 17.5rem;
+            max-height: calc(100vh - 135px);
+            overflow: auto;
             box-shadow: $box-shadow;
         }
     }
