@@ -12,6 +12,14 @@
             display: block;
         }
     }
+    
+    .home & li.ccl-c-hide-from-home {
+        display: none;
+        
+        + li{
+            margin-top: 0 !important;
+        }
+    }
 }
 
 .ccl-c-sub-menu {    

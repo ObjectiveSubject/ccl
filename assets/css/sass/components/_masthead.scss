@@ -82,6 +82,10 @@
             padding: 0 0 rem(4) rem(10);            
         }
         
+        span:not(:first-of-type){
+            text-align: right;
+        }
+        
         .ccl-c-masthead__more-hours{
             margin-left: auto;
             text-transform: capitalize;

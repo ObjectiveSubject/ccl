@@ -1,4 +1,4 @@
-<?php $search_description = 'Before going to Library Search, this searchbox will show helpful resources like LibGuides, staff, web pages, databases and more.';?>
+<?php $search_description = 'Before going to Library Search, this searchbox will show helpful resources like research guides, staff, web pages, databases and more';?>
 <div class="ccl-c-slideToggle" >
     <ul class="ccl-c-slideToggle__links">
         <li>

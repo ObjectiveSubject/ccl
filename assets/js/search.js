@@ -119,7 +119,7 @@
 						_this.$responseList.html('');
 					}
 
-				}, 300);
+				}, 200);
 
 			})
 			.focus(function(){

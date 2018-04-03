@@ -13,12 +13,12 @@
         }
     }    
     @include media( $md ) {
-        margin: 1.5rem $gutter/2 0 $gutter/2;
+        margin: rem(12) $gutter/2 0 $gutter/2;
         justify-content: flex-end;
     }
     
     .ccl-c-search__description-content{
-        @extend .ccl-u-mt-nudge;
+        padding: rem(8) 0;
         
         @include media( $lg ){
             font-size: 1rem;
@@ -34,6 +34,11 @@
     
 }
 
+//styling for description on quick nav
+.ccl-c-search__quick-desc{
+    
+}
+
 //search bar description for all other pages
 
 
@@ -43,7 +48,6 @@
     background: white;
     color: black;
     box-shadow: 0 1px 5px 0px rgba(black, 0.2);
-    @extend .ccl-u-mt-nudge;
 
     .ccl-c-quick-nav & {
         width: 100%;
@@ -51,12 +55,15 @@
     }
 
     .ccl-c-hero & {
-        @include media( #{$lg - 1}, max) {
+        @include media( #{$sm - 1}, max) {
             box-shadow: none;
-            margin-left: -$gutter;
-            margin-right: -$gutter;
+            //we want the users to see there is a layer below
+            // margin-left: -$gutter;
+            // margin-right: -$gutter;
             padding-left: $gutter;
             padding-right: $gutter;
+            //margin-bottom: $gutter;
+            border-bottom: $gutter/2 solid white;
         }
         @include media($lg) {
             margin-bottom: 3rem;
@@ -80,10 +87,11 @@
             
     }
 
+    //#{$md - 1}, max
     .ccl-c-hero & {
-        @include media( #{$lg - 1}, max) {
-            border-top: 1px solid black;
-        }
+        // @include media( $lg ) {
+        //     border-top: 1px solid black;
+        // }
     }
 
     &:after {
@@ -165,10 +173,10 @@
 
 .ccl-c-search-form__submit {
     width: 100%;
-    @include media($md) {
+    @include media($sm) {
         width: auto;
     }
-    @include media($lg) {
+    @include media($md) {
         min-width: rem(128);
     }
 }
@@ -179,15 +187,22 @@
     border-top: 1px solid;
     display: none;
     
+    padding: 0 $search-bar-padding;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;  
+    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.2);
+    z-index: 900;
+    width: 100%;  
+    
+    .ccl-c-quick-nav & {
+        max-height: calc(100vh - 315px);
+        overflow: auto;        
+    }
+    
     @include media($lg) {
-        padding: 0 $search-bar-padding;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: white;
-        width: 100%;
-        box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.2);
-        z-index: 900;
+
     }
 }
 
@@ -208,7 +223,7 @@
     .ccl-c-search--close-results{
         display: flex;
         justify-content: flex-end;
-        margin: rem(12);
+        margin: rem(10);
     }
     
 }

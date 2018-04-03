@@ -41,6 +41,24 @@
     }
 }
 
+//hide from home menu item from home page and show from default and small viewports
+.ccl-c-hide-from-home {
+    
+    .home & {
+        display: none;
+    }
+    
+    // .page-template-default & {
+    //     @include media( $md, min ){
+    //         display: none;
+            
+    //         & + li {
+    //             border-top: 0 !important;
+    //         }
+    //     }
+    // }
+}
+
 .ccl-c-quick-nav__bar {
     display: flex;
     flex-wrap: wrap;
@@ -77,16 +95,17 @@
     }
 
     &.ccl-is-brand {
+
         display: none;
 
         // quick nav temp edit - 2018-03-27
         // flex-basis: 20%;
         // flex-grow: 0;
         flex-basis: 10%;
-        flex-grow: 1;
+        //flex-grow: 1;
 
         flex-shrink: 0;
-        @include media($lg) {
+        @include media($md) {
             display: flex;
         }
     }
@@ -242,6 +261,7 @@
     .ccl-search-active & {
         display: none;
     }
+    
 }
 
 .ccl-c-quick-nav__item-text {

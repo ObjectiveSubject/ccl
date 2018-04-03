@@ -26,14 +26,15 @@
             <li class="ccl-c-user-nav__menu-item ccl-is-right ccl-u-show-md">
                 <select class="ccl-b-select ccl-is-inverse" data-toggle="school" aria-label="Select School" >
                     <option value="default">Select School</option>
-                    <option value="cgu">CGU</option>
-                    <option value="claremont-mckenna">Claremont McKenna</option>
-                    <option value="cuc">CUC</option>
-                    <option value="harvey-mudd">Harvey Mudd</option>
-                    <option value="kgi">KGI</option>
-                    <option value="pitzer">Pitzer</option>
-                    <option value="pomona">Pomona</option>
-                    <option value="scripps">Scripps</option>
+                    <option value="pomona">Pomona College</option>
+                    <option value="cgu">Claremont Graduate University</option>
+                    <option value="cuc">The Claremont Colleges Services</option>    
+                    <option value="scripps">Scripps College</option>                    
+                    <option value="claremont-mckenna">Claremont McKenna College</option>
+                    <option value="harvey-mudd">Harvey Mudd College</option>
+                    <option value="pitzer">Pitzer College</option>
+                    <option value="kgi">Keck Graduate Institute</option>
+
                 </select>
             </li>
 

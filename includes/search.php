@@ -115,7 +115,7 @@ function load_search_results() {
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
-		'posts_per_page'      => 7 // probably need to figure out how to do a limited number from each type
+		'posts_per_page'	  => 175
 	);
 	$search = new \SWP_Query( $all_args );
 	
@@ -144,8 +144,9 @@ function load_search_results() {
 	$search_results['count'] = count( $search->posts );
 
 	if ( $search->posts ) {
+		//array_slice($search->posts, 0, 3)
 		// Loop through returned posts and push into the array
-		foreach ( $search->posts as $post ) {
+		foreach ( array_slice($search->posts, 0, 7 ) as $post ) {
 
 			switch ( $post->post_type ) {
 				case 'book':
@@ -200,14 +201,15 @@ function load_search_results() {
 			$posts[] = $post;
 
 		}
-
+		
+		//right now let's work without a sort order 4/3/18
 		// sort $posts by ['type'] for given order
-		usort( $posts, function ( $a, $b ) use ( $sort_order ) {
-			$pos_a = array_search( $a['type'], $sort_order );
-			$pos_b = array_search( $b['type'], $sort_order );
+		// usort( $posts, function ( $a, $b ) use ( $sort_order ) {
+		// 	$pos_a = array_search( $a['type'], $sort_order );
+		// 	$pos_b = array_search( $b['type'], $sort_order );
 
-			return $pos_a - $pos_b;
-		} );
+		// 	return $pos_a - $pos_b;
+		// } );
 
 		$search_results['posts'] = $posts;
 	}

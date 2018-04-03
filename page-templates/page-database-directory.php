@@ -89,9 +89,9 @@ get_header(); ?>
                         <h2 class="ccl-u-mt-0"><?php _e('Databases by Title','ccl'); ?></h2>
 
                         <?php $letters = array( 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' ); ?>
-                        <ul class="ccl-u-clean-list ccl-u-mt-1">
+                        <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1">
                             <?php foreach ( $letters as $letter ) :?> 
-                                <li class="ccl-h4 ccl-u-mt-nudge ccl-u-display-inline-block">
+                                <li class=" ccl-h4 ccl-u-mt-nudge ccl-u-display-inline-block">
                                     <a href="<?php echo get_post_type_archive_link( 'database' ) . '?begins_with=' . $letter; ?>" style="padding:0 0.5em"><?php echo $letter; ?></a>
                                     <span class="ccl-u-weight-medium ccl-u-faded">|</span>
                                 </li>
@@ -111,7 +111,7 @@ get_header(); ?>
                         
                         if ( $formats ) : ?>
                             
-                            <ul class="ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
+                            <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
 
                             <?php foreach ( $formats as $format ) : ?>
 
@@ -135,7 +135,7 @@ get_header(); ?>
                         
                         if ( $subjects ) : ?>
                             
-                            <ul class="ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
+                            <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
 
                             <?php foreach ( $subjects as $subject ) : ?>
                                     <li style="line-height:2"><a class="ccl-h4" href="<?php echo get_term_link( $subject, 'subject' ) . '?post_type=database'; ?>"><?php echo $subject->name; ?></a></li>

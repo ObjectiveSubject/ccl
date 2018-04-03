@@ -11,7 +11,7 @@ $search_locations = get_option( 'ccl-search-locations' );
         <a class="ccl-c-search__description-content" href="https://ccl.on.worldcat.org/advancedsearch" target="_blank">Advanced search <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a> 
     </div>        
 <?php else: ?>
-    <div class="ccl-c-search__quick-desc">
+    <div class="ccl-u-show-lg ccl-c-search__quick-desc">
         
         <?php get_template_part('components/slidetoggle'); ?>
 
@@ -48,7 +48,7 @@ $search_locations = get_option( 'ccl-search-locations' );
             </select>
         </div>
     
-        <button type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid" style="min-width: 8rem">
+        <button type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid">
             <i class="ccl-b-icon search" aria-hidden="true"></i>
             <span class="ccl-u-display-none">Search</span>
         </button>

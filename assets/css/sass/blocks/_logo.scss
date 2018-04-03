@@ -16,11 +16,11 @@
 
     &.ccl-is-horz {
         width: 100%;
-        height: 30px;
+        height: 25px;
         background-image: url(../images/tccl-vital_1-ln@2x.png);
         
         @include media( $md ) {
-            width: 75%;
+            width: 66.66%;
         }        
         
     }

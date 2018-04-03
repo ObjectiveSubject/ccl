@@ -291,6 +291,7 @@ function header_menu( $menu_id, $classname = '' ) {
 	if ( empty( $menu_items ) ) {
 		return;
 	}
+	
 
 	$classname = is_string( $classname ) ? $classname : '';
 
@@ -300,7 +301,9 @@ function header_menu( $menu_id, $classname = '' ) {
 									
 		<?php foreach( $menu_items as $item ) : 
 			
-			$menu_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" );
+			$item_classes = ( !empty( $item->classes ) ) ? implode( ' ', (array) $item->classes ) : '';
+			
+			$menu_item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}", $item_classes );
 			$link_class = '';
 			
 			if ( isset( $item->children ) && count( $item->children ) ) {
