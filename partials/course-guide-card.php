@@ -1,8 +1,9 @@
 <?php
-    $guides = new WP_Query(array(
-        'post_type' => 'guide',
-        'order' => 'ASC',
-        'orderby'   => 'title',
+    $guides = new \WP_Query(array(
+        'post_type'         => 'guide',
+        'order'             => 'ASC',
+        'orderby'           => 'title',
+        'posts_per_page'    => -1,
         'meta_query' => array(
             array(
                 'key'       => 'guide_type',
