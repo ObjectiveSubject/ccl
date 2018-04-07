@@ -104,7 +104,7 @@ function modify_queries( $query ) {
 		// Perform query modifications here
 		if( is_search() ){
 		   
-		   	$query->set( 'posts_per_page', 50 );
+		   	$query->set( 'posts_per_page', 150 );
 		}
 
 		if ( ! is_admin() && $query->is_main_query() ) {

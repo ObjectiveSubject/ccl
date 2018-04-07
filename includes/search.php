@@ -15,6 +15,7 @@ function setup() {
 	add_action( 'wp_enqueue_scripts', $n( 'scripts' ) );
 	add_action( 'wp_ajax_load_search_results', __NAMESPACE__ . '\\load_search_results' );
 	add_action( 'wp_ajax_nopriv_load_search_results', __NAMESPACE__ . '\\load_search_results' );
+	add_filter( 'searchwp_common_words', $n( 'ccl_searchwp_common_words' ) );
 
 }
 
@@ -220,4 +221,14 @@ function load_search_results() {
 
 	wp_die();
 
+}
+
+function ccl_searchwp_common_words( $terms ) {
+  
+  // we DO NOT want to ignore 'first' so remove it from the list of common words
+  $words_to_keep = array( 'web' );
+  
+  $terms = array_diff( $terms, $words_to_keep );
+  
+  return $terms;
 }
