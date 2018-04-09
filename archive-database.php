@@ -75,7 +75,7 @@ $pagination_args = array(
                                 
                             case 'guide':
                                 $temp_guide_array = array(
-                                    'name'  => $post->post_title . ' Subject Guide',
+                                    'name'  => $post->post_title . '<br /><div class="ccl-u-weight-bold ccl-u-font-size-sm">Subject Guide</div>',
                                     'url'   => get_post_meta( $post->ID, 'guide_friendly_url', true ) ?: site_url('/research-guides/'),
                                     'profile'  => CCL_TEMPLATE_URL . "/assets/images/ccl-exterior.jpg"
                                     );

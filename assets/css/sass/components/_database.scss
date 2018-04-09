@@ -25,7 +25,7 @@
             background-size: cover;
             border-radius: 50%;
             background-position-y: 50%; 
-            margin-right: $spacer;
+            //margin-right: $spacer;
             
             //margin: 0 auto;
             width: 25%;
@@ -44,7 +44,12 @@
                 
             // }    
             
-        }         
+        }
+        
+        .ccl-c-database-related__name{
+            width: 60%;
+            margin-left: $spacer;
+        }
         
     }
     
