@@ -362,6 +362,10 @@ function add_database( $database ) {
 		
 	}
 	
+	//check if an alt_name exists
+	if( !empty( $database['alt_names'] ) ){
+		update_post_meta( $post_id, 'db_alt_names', $database['alt_names']  );
+	}
 
 	if ( $duplicate_check->have_posts() ) {
 		return "added";
@@ -395,6 +399,7 @@ function render_database_data_metabox() {
 
 	$raw_data	= get_post_meta( $post->ID, 'database_raw_data', true );
 	$best_bets	= get_post_meta( $post->ID, 'database_best_bets', true );
+	$alt_names	= get_post_meta( $post->ID, 'db_alt_names', true );
 	
 	if( $best_bets ){
 		//turn best bets into string
@@ -414,6 +419,16 @@ function render_database_data_metabox() {
 		echo '<strong>Database URL:</strong> ' . get_post_meta( $post->ID, 'database_friendly_url', true ) . '<br>';
 	
 	echo '</p>';
+	
+	
+	//echo alternate names if any
+	if( $alt_names ){
+		echo '<p>';
+	
+			echo '<strong>Database Alternate Names:</strong> ' . $alt_names . '<br>';
+	
+		echo '</p>';
+	}
 	
 	//echo best bets if any
 	if( $best_bets ){

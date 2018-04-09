@@ -16,6 +16,8 @@ function setup() {
 	add_action( 'after_setup_theme', $n( 'features' ) );
 	add_action( 'pre_get_posts', $n( 'modify_queries' ) );
 	add_action( 'init', $n( 'add_menus' ) );
+	
+	add_filter('terms_clauses', $n( 'my_terms_clauses' ), 99999, 3);    
 
 	// Remove WordPress header cruft
 	remove_action( 'wp_head', 'feed_links_extra', 3 );
@@ -146,4 +148,33 @@ function add_menus() {
 		)
 	);
 
+}
+
+/**
+ * my_terms_clauses
+ *
+ * filter the terms clauses
+ *
+ * @param $clauses array
+ * @param $taxonomy string
+ * @param $args array
+ * @return array
+ * @link http://wordpress.stackexchange.com/a/183200/45728
+ **/
+
+
+function my_terms_clauses( $clauses, $taxonomy, $args ) {
+
+	global $wpdb;
+	if ( isset( $args['post_types'] ) ) {
+		
+		$post_types = $args['post_types'];
+		// allow for arrays
+		if ( is_array($args['post_types']) ) {
+		  $post_types = implode("','", $args['post_types']);
+		}
+		$clauses['join'] .= " INNER JOIN $wpdb->term_relationships AS r ON r.term_taxonomy_id = tt.term_taxonomy_id INNER JOIN $wpdb->posts AS p ON p.ID = r.object_id";
+		$clauses['where'] .= " AND p.post_type IN ('". esc_sql( $post_types ). "') GROUP BY t.term_id";
+	}
+	return $clauses;
 }

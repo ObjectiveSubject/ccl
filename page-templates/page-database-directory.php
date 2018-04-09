@@ -129,8 +129,10 @@ get_header(); ?>
                         
                         <h2 class="ccl-u-mt-0"><?php _e('Databases by Subject','ccl'); ?></h2>
 
+
                         <?php $subjects = get_terms( array( 
-                            'taxonomy' => 'subject',
+                            'post_types'    => 'database',
+                            'taxonomy'      => 'subject',
                         ) );
                         
                         if ( $subjects ) : ?>

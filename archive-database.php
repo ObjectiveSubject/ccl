@@ -30,6 +30,72 @@ $pagination_args = array(
 
         <header class="ccl-c-hero ccl-is-naked">
             
+            <?php
+            //get supplementary content on data related to thisis subject
+            
+            if( $is_subject ){
+            
+                $args = array(
+                    'post_type' => array( 'staff', 'guide' ),
+                    'tax_query' => array(
+                            array(
+                                'taxonomy'  => 'subject',
+                                'field'     => 'slug',
+                                'terms'     => $taxonomy->slug
+                                )
+                        )
+                    
+                    );
+                
+                $related_subject_data = new \WP_Query( $args );
+                
+                // echo '<pre>';
+                // print_r( $related_subject_data->posts );
+                // echo '</pre>';
+                
+                if( !empty( $related_subject_data->posts ) ){
+                    
+                    $temp_guide_array   =  array();
+                    $temp_staff_array   = array();
+                    $sorted_results     = array();
+                    
+                    foreach( $related_subject_data->posts as $post ){
+                        
+                        switch ( $post->post_type ) {
+                            case 'staff':
+                                
+                                $temp_staff_array = array(
+                                    'name'      => $post->post_title . '<br /> ' . '<div class="ccl-u-weight-bold ccl-u-font-size-sm">' . get_post_meta( $post->ID, 'member_title', true ) . '</div>',
+                                    'url'       => get_post_meta( $post->ID, 'member_friendly_url', true ) ?: site_url('/staff-directory/'),
+                                    'profile'   => $member_image = get_post_meta( $post->ID, 'member_image', true ) ?: CCL_TEMPLATE_URL . "/assets/images/person.svg",
+
+                                    );
+                                
+                                break;
+                                
+                            case 'guide':
+                                $temp_guide_array = array(
+                                    'name'  => $post->post_title . ' Subject Guide',
+                                    'url'   => get_post_meta( $post->ID, 'guide_friendly_url', true ) ?: site_url('/research-guides/'),
+                                    'profile'  => CCL_TEMPLATE_URL . "/assets/images/ccl-exterior.jpg"
+                                    );
+                                break;    
+
+                        }//end switch
+                        
+                    }//end foreach
+                    
+                    //merge all data together
+                    array_push( $sorted_results, $temp_staff_array, $temp_guide_array );
+                    
+                }//end if
+            
+            }//end if
+            
+            
+            ?>
+            
+            
             <div class="ccl-l-container">
                 <div><a href="<?php echo site_url('database-directory/'); ?>" class="ccl-c-hero__action">&laquo; Back to Database Directory</a></div>
 				<div class="ccl-l-row">
@@ -46,6 +112,26 @@ $pagination_args = array(
 					<div class="ccl-l-column ccl-l-span-two-thirds-lg">
 						<div class="ccl-c-hero__content">
 							<div class="ccl-h4 ccl-u-mt-0"><?php echo the_archive_description(); ?></div>
+							
+							<?php
+							    if( !empty( $sorted_results ) ):
+							 ?>
+						        <div class="ccl-c-database-related">
+						            <div class="ccl-h3 ccl-u-mt-0">Related Help</div>
+						            
+						            <?php foreach( $sorted_results as $result ): ?>
+						                <a class="ccl-c-database-related__item" href="<?php echo $result['url']; ?>" target="_blank">
+    						                <div class="ccl-c-database-related__profile" role="presentation" style="background-image:url(<?php echo $result['profile'] ?>)"></div>
+    						                <div class="ccl-c-database-related__name"><?php echo $result['name']; ?></div>						                    
+						                </a>
+
+						            
+						            <?php endforeach; ?>
+						            
+						        </div>    
+
+							<?php endif;?>
+							
 						</div>
 					</div>
 					
@@ -55,7 +141,7 @@ $pagination_args = array(
 
         </header>
 
-        <div class="ccl-l-container ccl-u-my-3">
+        <div class="ccl-l-container ccl-u-my-2">
             
             <?php
                 //Ok let's process some data!

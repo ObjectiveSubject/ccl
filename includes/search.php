@@ -226,7 +226,7 @@ function load_search_results() {
 function ccl_searchwp_common_words( $terms ) {
   
   // we DO NOT want to ignore 'first' so remove it from the list of common words
-  $words_to_keep = array( 'web' );
+  $words_to_keep = array( 'web', 'full' );
   
   $terms = array_diff( $terms, $words_to_keep );
   
