@@ -77,7 +77,7 @@ $pagination_args = array(
                                 $temp_guide_array = array(
                                     'name'  => $post->post_title . '<br /><div class="ccl-u-weight-bold ccl-u-font-size-sm">Subject Guide</div>',
                                     'url'   => get_post_meta( $post->ID, 'guide_friendly_url', true ) ?: site_url('/research-guides/'),
-                                    'profile'  => CCL_TEMPLATE_URL . "/assets/images/ccl-exterior.jpg"
+                                    'profile'  => CCL_TEMPLATE_URL . "/assets/images/ccl-compass.svg"
                                     );
                                 break;    
 
@@ -99,7 +99,7 @@ $pagination_args = array(
             <div class="ccl-l-container">
                 <div><a href="<?php echo site_url('database-directory/'); ?>" class="ccl-c-hero__action">&laquo; Back to Database Directory</a></div>
 				<div class="ccl-l-row">
-					<div class="ccl-l-column ccl-l-span-third-lg">
+					<div class="ccl-l-column ccl-l-span-two-thirds-lg">
 						<div class="ccl-c-hero__header">
 							<h1 class="ccl-c-hero__title">
                                 <?php _e( 'Databases', 'ccl' ); ?>
@@ -109,10 +109,7 @@ $pagination_args = array(
 						</div>
 					</div>
 
-					<div class="ccl-l-column ccl-l-span-two-thirds-lg">
-						<div class="ccl-c-hero__content">
-							<div class="ccl-h4 ccl-u-mt-0"><?php echo the_archive_description(); ?></div>
-							
+					<div class="ccl-l-column ccl-l-span-third-lg">
 							<?php
 							    if( !empty( $sorted_results ) ):
 							 ?>
@@ -126,13 +123,13 @@ $pagination_args = array(
 						                </a>
 
 						            
-						            <?php endforeach; ?>
+						            <?php endforeach; wp_reset_query(); ?>
 						            
 						        </div>    
 
 							<?php endif;?>
 							
-						</div>
+
 					</div>
 					
 				</div>
@@ -218,6 +215,7 @@ $pagination_args = array(
                         $url                    = $database_friendly_url ? $database_friendly_url : get_permalink();
                         //check for the trial tax
                         $database_trial         = has_term( 'trial', 'trial', $article['ID'] );
+                        $db_alt_name            = get_post_meta( $article['ID'], 'db_alt_names', true );
                         ?>
 
                         <article id="post-<?php $article['ID']; ?>" <?php post_class('ccl-c-database ccl-u-mt-1'); ?>>
@@ -225,7 +223,16 @@ $pagination_args = array(
                             <div class="ccl-l-row">
 
                                 <header class="ccl-l-column ccl-l-span-12 ccl-l-span-6-md ccl-l-span-4-lg">
-                                    <?php echo '<h2 class="ccl-h4 ccl-u-weight-bold"><a href="' . esc_url(  $url )  . '" target="_blank" rel="bookmark">'. $article['post_title'] .'</a></h2>'; ?>
+                                    
+                                    <a href="<?php esc_url( $url ); ?>" target="_blank" rel="bookmark">
+                                       <h2 class="ccl-h4 ccl-u-weight-bold"> <?php echo $article['post_title']; ?></h2>
+                                        
+                                        <?php if( $db_alt_name ): ?>
+                                            <div class="ccl-c-database__alt-name ccl-u-mt-nudge">(<?php echo $db_alt_name; ?>)</div>
+                                        <?php endif; ?>                                            
+                                    </a>
+                                    
+
                                 </header>
 
                                 <div class="ccl-l-column">
@@ -234,13 +241,13 @@ $pagination_args = array(
                                         //if best bet is detected in array, then append HTML
                                         if( array_key_exists( 'has_best_bet', $article )  ): ?>
                                         
-                                            <li style="display:inline-block;" class="ccl-u-faded ccl-u-weight-bold ccl-u-mr-1 ccl-u-best-bet">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></li>
+                                            <li style="display:inline-block;" class="ccl-u-weight-bold ccl-u-mr-1 ccl-u-best-bet">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></li>
                                         <?php endif; ?>
                                         
                                         <?php 
                                         //if trial is set, then append to HTML
                                         if( $database_trial ): ?>
-                                            <li style="display:inline-block;" class="ccl-u-faded ccl-u-weight-bold ccl-u-mr-1">Trial <i class="ccl-b-icon clock" aria-hidden="true"></i></li>
+                                            <li style="display:inline-block;" class="ccl-c-database--trial ccl-u-weight-bold ccl-u-mr-1">Trial <i class="ccl-b-icon clock" aria-hidden="true"></i></li>
                                         <?php endif; ?>
                                     
                                         <?php 
@@ -249,9 +256,9 @@ $pagination_args = array(
                                                 //get terms, filter for all term names, implode and append HTML
                                                 $format_types   = wp_get_post_terms( $article['ID'], 'format' );
                                                 $db_formats     = array_map( function($array){return $array->name; }, $format_types );
-                                                $format_list = implode( ' | ' , $db_formats  );
+                                                $format_list = implode( '&nbsp;&nbsp;|&nbsp;&nbsp;' , $db_formats  );
                                             ?>
-                                            <li style="display:inline-block;" class="ccl-u-faded ccl-u-weight-bold"><?php echo $format_list;?></li>
+                                            <li style="display:inline;" class="ccl-u-weight-bold"><?php echo $format_list;?></li>
                                         <?php endif; ?>                                    
                                     
                                     </ul>

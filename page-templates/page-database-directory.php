@@ -40,6 +40,10 @@ get_header(); ?>
                                     <ul class="ccl-c-hero__menu">
                                         
                                         <li>
+                                            <a href="#block-subject"><?php _e( 'Databases by Subject', 'ccl' ); ?></a>
+                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                                        </li>                                        
+                                        <li>
                                             <a href="#block-title"><?php _e( 'Databases by Title', 'ccl' ); ?></a>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
                                         </li>
@@ -48,10 +52,6 @@ get_header(); ?>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
                                         </li>                                        
                                         
-                                        <li>
-                                            <a href="#block-subject"><?php _e( 'Databases by Subject', 'ccl' ); ?></a>
-                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
-                                        </li>
                                         <!-- <li>
                                             <a href="#block-format"><?php //_e( 'Databases by Type & Format', 'ccl' ); ?></a>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
@@ -83,6 +83,30 @@ get_header(); ?>
                 <?php endif; ?>
 
                 <div class="ccl-l-container ccl-u-mb-3">
+                    
+                    <div id="block-subject" class="ccl-c-promo ccl-u-mt-4">
+                        
+                        <h2 class="ccl-u-mt-0"><?php _e('Databases by Subject','ccl'); ?></h2>
+
+
+                        <?php $subjects = get_terms( array( 
+                            'post_types'    => 'database',
+                            'taxonomy'      => 'subject',
+                        ) );
+                        
+                        if ( $subjects ) : ?>
+                            
+                            <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
+
+                            <?php foreach ( $subjects as $subject ) : ?>
+                                    <li style="line-height:2"><a class="ccl-h4" href="<?php echo get_term_link( $subject, 'subject' ) . '?post_type=database'; ?>"><?php echo $subject->name; ?></a></li>
+                            <?php endforeach; ?>
+
+                            </ul>
+
+                        <?php endif; ?>
+
+                    </div>                    
                     
                     <div id="block-title" class="ccl-c-promo ccl-u-mt-4">
 
@@ -125,29 +149,7 @@ get_header(); ?>
                     </div>
 
 
-                    <div id="block-subject" class="ccl-c-promo ccl-u-mt-4">
-                        
-                        <h2 class="ccl-u-mt-0"><?php _e('Databases by Subject','ccl'); ?></h2>
 
-
-                        <?php $subjects = get_terms( array( 
-                            'post_types'    => 'database',
-                            'taxonomy'      => 'subject',
-                        ) );
-                        
-                        if ( $subjects ) : ?>
-                            
-                            <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
-
-                            <?php foreach ( $subjects as $subject ) : ?>
-                                    <li style="line-height:2"><a class="ccl-h4" href="<?php echo get_term_link( $subject, 'subject' ) . '?post_type=database'; ?>"><?php echo $subject->name; ?></a></li>
-                            <?php endforeach; ?>
-
-                            </ul>
-
-                        <?php endif; ?>
-
-                    </div>
 
                     <!-- <div id="block-format" class="ccl-c-promo">
                         <h2 class="ccl-h3"><?php //_e('Databases by Type & Format','ccl'); ?></h2>

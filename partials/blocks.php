@@ -12,7 +12,10 @@ if ( $blocks ) : ?>
             <?php 
             $has_block_items = ( isset ( $block['block_items'] ) && $block['block_items'] );
             $block_item_count = ( $has_block_items && is_array( $block['block_items'] ) ) ? count( $block['block_items'] ) : 0;
-            $enable_carousel = $block_item_count > 3; ?>
+            
+            $block_item_count = ( isset( $block['block_description'] ) && $block['block_description'] ) ? $block_item_count + 1 : $block_item_count + 0;
+            
+            $enable_carousel = $block_item_count > 2; ?>
 
             <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
