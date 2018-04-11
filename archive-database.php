@@ -104,7 +104,7 @@ $pagination_args = array(
 							<h1 class="ccl-c-hero__title">
                                 <?php _e( 'Databases', 'ccl' ); ?>
                                 <?php echo $filter_by_letter ? ': "' . strtoupper( $begins_with ) . '"' : ''; ?>
-                                <?php echo $filter_by_subject ? ':<br/>' . $taxonomy->name : ''; ?>
+                                <?php echo $filter_by_subject ? ':<br/>' . '<strong>'.$taxonomy->name .'</strong>' : ''; ?>
                             </h1>
 						</div>
 					</div>
@@ -117,7 +117,7 @@ $pagination_args = array(
 						            <div class="ccl-h3 ccl-u-mt-0">Related Help</div>
 						            
 						            <?php foreach( $sorted_results as $result ): ?>
-						                <a class="ccl-c-database-related__item" href="<?php echo $result['url']; ?>" target="_blank">
+						                <a class="ccl-c-database-related__item ccl-u-font-size-lg" href="<?php echo $result['url']; ?>" target="_blank">
     						                <div class="ccl-c-database-related__profile" role="presentation" style="background-image:url(<?php echo $result['profile'] ?>)"></div>
     						                <div class="ccl-c-database-related__name"><?php echo $result['name']; ?></div>						                    
 						                </a>
