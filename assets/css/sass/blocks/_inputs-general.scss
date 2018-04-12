@@ -45,11 +45,12 @@ textarea.ccl-b-input {
         }
         
         @include placeholder {
-            color: black;
+            color: rgba( black, .6 )
         }
         &:focus {
             @include placeholder {
-                color: $gray;
+                color: rgba( black, .3 );
+                
             }
         }
         
