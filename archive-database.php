@@ -236,18 +236,22 @@ $pagination_args = array(
                                 </header>
 
                                 <div class="ccl-l-column">
-                                    <ul class="ccl-u-clean-list ccl-u-mt-1">
+                                    <ul class="ccl-u-clean-list ccl-u-mt-1 ccl-c-database__meta">
                                         <?php 
                                         //if best bet is detected in array, then append HTML
                                         if( array_key_exists( 'has_best_bet', $article )  ): ?>
                                         
-                                            <li style="display:inline-block;" class="ccl-u-weight-bold ccl-u-mr-1 ccl-u-best-bet">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></li>
+                                            <li>
+                                                <div class="ccl-u-weight-bold ccl-u-mr-1 ccl-u-best-bet">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></div>
+                                            </li>
                                         <?php endif; ?>
                                         
                                         <?php 
                                         //if trial is set, then append to HTML
                                         if( $database_trial ): ?>
-                                            <li style="display:inline-block;" class="ccl-c-database--trial ccl-u-weight-bold ccl-u-mr-1">Trial <i class="ccl-b-icon clock" aria-hidden="true"></i></li>
+                                            <li class="ccl-c-database--trial">
+                                                <div class="ccl-u-weight-bold ccl-u-mr-1">Trial <i class="ccl-b-icon clock" aria-hidden="true"></i></div>
+                                            </li>
                                         <?php endif; ?>
                                     
                                         <?php 
@@ -258,7 +262,9 @@ $pagination_args = array(
                                                 $db_formats     = array_map( function($array){return $array->name; }, $format_types );
                                                 $format_list = implode( '&nbsp;&nbsp;|&nbsp;&nbsp;' , $db_formats  );
                                             ?>
-                                            <li style="display:inline;" class="ccl-u-weight-bold"><?php echo $format_list;?></li>
+                                            <li class="ccl-c-database__formats">
+                                                <div class="ccl-u-weight-bold "><?php echo $format_list;?></div>
+                                            </li>
                                         <?php endif; ?>                                    
                                     
                                     </ul>

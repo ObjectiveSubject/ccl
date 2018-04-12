@@ -1,5 +1,32 @@
 .ccl-c-database {
     border-top: 1px solid black;
+    
+    .ccl-c-database__meta{
+        display: flex;
+        flex-direction: column;
+        
+        @include media( #{$lg - 1}, max ){
+            
+            & > li {
+                 &:not(:first-of-type){
+                    margin-top: $spacer/3;                
+                }           
+            }            
+        }
+        
+        @include media($lg){
+            flex-direction: row;
+        }
+    
+        & > li {
+            flex: 0 0 auto;
+
+        }
+        
+        .ccl-c-database__formats{
+            flex: 0 1 auto;
+        }
+    }
 
     
 }
@@ -10,6 +37,7 @@
     background-color: rgba( black, .3 );
     color: white;
     letter-spacing: .03em;
+    display: inline-block;
 }
 
 
