@@ -16,6 +16,8 @@ function setup() {
 	add_action( 'init', $n( 'register_format_taxonomy' ) );
 
 	add_action( 'init', $n( 'register_trial_taxonomy' ) );	
+	
+	add_action( 'init', $n( 'register_vendor_taxonomy' ) );
 
 	add_action( 'admin_enqueue_scripts', $n( 'load_admin_script' ), 20 );
 
@@ -57,6 +59,10 @@ function register_databases_post_type() {
 				'title'		=> 'Database Trial',
 				'taxonomy'	=> 'trial'
 			),
+			'db_vendor'	=> array(
+				'title'		=> 'Database Vendor',
+				'taxonomy'	=> 'database_vendor'
+			),			
 			'best_bets'	=> array(
 				'title'		=> 'Best Bets',
 				'function'	=> function(){
@@ -118,6 +124,29 @@ function register_databases_post_type() {
 
 	);	
  }
+ 
+  /**
+ * 
+ * Add custom taxonomy for format and type, using extended post taxonomies
+ * 
+ */
+ function register_vendor_taxonomy(){
+ 	
+ 	register_extended_taxonomy(
+		'database_vendor', // taxonomy name
+		array(
+			// post types
+			'database'
+		),
+		array(
+			// parameters
+			'meta_box'		=> 'radio',
+			'show_ui'		=> false,
+		)
+
+	);	
+ }
+
 
 /**
  * Add option page to the Databases menu
@@ -314,6 +343,9 @@ function add_database( $database ) {
 	
 	// Database friendly URL
 	update_post_meta( $post_id, 'database_friendly_url', $database_url_check );
+	
+	//add the vendor taxonomy
+	wp_set_object_terms( $post_id, $database['az_vendor_name'], 'database_vendor' );	
 
 	// @todo use this for subject?
 	// Set category in XX taxonomy and create if it doesn't exist

@@ -20,6 +20,10 @@
     
         & > li {
             flex: 0 0 auto;
+            
+            &:not(:last-of-type){
+                margin-right: $spacer;
+            }
 
         }
         
@@ -61,6 +65,7 @@
             //margin: 0 auto;
             width: 80px;
             height: 80px;
+            flex: 0 1 auto;
             //padding-top: 25%;
             
             // @include media( $md ){
@@ -79,6 +84,7 @@
         
         .ccl-c-database-related__name{
             margin-left: $spacer;
+            flex: 2;
         }
         
     }

@@ -17,6 +17,7 @@ $filter_by_subject  = isset( $_GET['post_type'] ) && '' !== $_GET['post_type'];
 $taxonomy   = get_queried_object();
 $is_subject = isset( $taxonomy->taxonomy ) && $taxonomy->taxonomy === 'subject' ? true : false;
 $is_format  = isset( $taxonomy->taxonomy ) && $taxonomy->taxonomy === 'format' ? true : false;
+$is_vendor  = isset( $taxonomy->taxonomy ) && $taxonomy->taxonomy === 'database_vendor' ? true : false;
 
 $pagination_args = array(
     'prev_text' => '<span class="ccl-h3 ccl-u-mr-1">&#8249; ' . __( 'Previous page', 'ccl' ) . '</span>',
@@ -29,6 +30,11 @@ $pagination_args = array(
 	<div class="site-content">
 
         <header class="ccl-c-hero ccl-is-naked">
+            <?php
+            // echo '<pre>';
+            // print_r( $taxonomy );
+            // echo '</pre>';
+            ?>
             
             <?php
             //get supplementary content on data related to thisis subject
@@ -36,12 +42,13 @@ $pagination_args = array(
             if( $is_subject ){
             
                 $args = array(
-                    'post_type' => array( 'staff', 'guide' ),
+                    'post_type' => array( 'staff', 'guide'),
+                    'orderby'   => 'type',
                     'tax_query' => array(
                             array(
                                 'taxonomy'  => 'subject',
-                                'field'     => 'slug',
-                                'terms'     => $taxonomy->slug
+                                'field'     => 'term_id',
+                                'terms'     => $taxonomy->term_id,
                                 )
                         )
                     
@@ -49,33 +56,30 @@ $pagination_args = array(
                 
                 $related_subject_data = new \WP_Query( $args );
                 
-                // echo '<pre>';
-                // print_r( $related_subject_data->posts );
-                // echo '</pre>';
-                
-                if( !empty( $related_subject_data->posts ) ){
-                    
                     $temp_guide_array   =  array();
                     $temp_staff_array   = array();
-                    $sorted_results     = array();
+                    $sorted_results     = array();                
+                
+                if( !empty( $related_subject_data->posts ) ){
                     
                     foreach( $related_subject_data->posts as $post ){
                         
                         switch ( $post->post_type ) {
                             case 'staff':
                                 
-                                $temp_staff_array = array(
-                                    'name'      => $post->post_title . '<br /> ' . '<div class="ccl-u-weight-bold ccl-u-font-size-sm">' . get_post_meta( $post->ID, 'member_title', true ) . '</div>',
+                                $temp_staff_array[] = array(
+                                    'name'      => $post->post_title . '<br /> ' . '<span class="ccl-u-weight-bold ccl-u-font-size-sm">' . get_post_meta( $post->ID, 'member_title', true ) . '</span>',
                                     'url'       => get_post_meta( $post->ID, 'member_friendly_url', true ) ?: site_url('/staff-directory/'),
-                                    'profile'   => $member_image = get_post_meta( $post->ID, 'member_image', true ) ?: CCL_TEMPLATE_URL . "/assets/images/person.svg",
+                                    'profile'   => get_post_meta( $post->ID, 'member_image', true ) ?: CCL_TEMPLATE_URL . "/assets/images/person.svg",
 
                                     );
-                                
+                                    
+                                    
                                 break;
                                 
                             case 'guide':
-                                $temp_guide_array = array(
-                                    'name'  => $post->post_title . '<br /><div class="ccl-u-weight-bold ccl-u-font-size-sm">Subject Guide</div>',
+                                $temp_guide_array[] = array(
+                                    'name'  => $post->post_title . '<br /><span class="ccl-u-weight-bold ccl-u-font-size-sm">Subject Guide</span>',
                                     'url'   => get_post_meta( $post->ID, 'guide_friendly_url', true ) ?: site_url('/research-guides/'),
                                     'profile'  => CCL_TEMPLATE_URL . "/assets/images/ccl-compass.svg"
                                     );
@@ -86,7 +90,7 @@ $pagination_args = array(
                     }//end foreach
                     
                     //merge all data together
-                    array_push( $sorted_results, $temp_staff_array, $temp_guide_array );
+                    $sorted_results = array_merge( $temp_staff_array,  $temp_guide_array );
                     
                 }//end if
             
@@ -99,7 +103,7 @@ $pagination_args = array(
             <div class="ccl-l-container">
                 <div><a href="<?php echo site_url('database-directory/'); ?>" class="ccl-c-hero__action">&laquo; Back to Database Directory</a></div>
 				<div class="ccl-l-row">
-					<div class="ccl-l-column ccl-l-span-two-thirds-lg">
+					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-half-md ccl-l-span-two-thirds-lg">
 						<div class="ccl-c-hero__header">
 							<h1 class="ccl-c-hero__title">
                                 <?php _e( 'Databases', 'ccl' ); ?>
@@ -109,20 +113,22 @@ $pagination_args = array(
 						</div>
 					</div>
 
-					<div class="ccl-l-column ccl-l-span-third-lg">
+					<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-half-md ccl-l-span-third-lg">
 							<?php
 							    if( !empty( $sorted_results ) ):
+							     //   echo '<pre>';
+							     //   print_r($sorted_results);
+							     //   echo '</pre>';
+							        
 							 ?>
 						        <div class="ccl-c-database-related">
 						            <div class="ccl-h3 ccl-u-mt-0">Related Help</div>
 						            
-						            <?php foreach( $sorted_results as $result ): ?>
+						            <?php foreach( array_slice( $sorted_results, 0, 3)  as $key => $result ): ?>
 						                <a class="ccl-c-database-related__item ccl-u-font-size-lg" href="<?php echo $result['url']; ?>" target="_blank">
     						                <div class="ccl-c-database-related__profile" role="presentation" style="background-image:url(<?php echo $result['profile'] ?>)"></div>
     						                <div class="ccl-c-database-related__name"><?php echo $result['name']; ?></div>						                    
 						                </a>
-
-						            
 						            <?php endforeach; wp_reset_query(); ?>
 						            
 						        </div>    
@@ -199,7 +205,7 @@ $pagination_args = array(
                     if ( $show_article ) : 
                     
                         //we don't want the best bet tooltip showing up for formats
-                        if( !$is_format && !$filter_by_letter ): ?>
+                        if( !$is_format && !$filter_by_letter && !$is_vendor ): ?>
                         <div class="ccl-l-row" style="justify-content:flex-end;">
                             <?php $best_best_desc = 'This indicates go-to, best-of-the-best resources in ' . $taxonomy->name; ?>
                             <a style="text-decoration: underline;" class="ccl-u-weight-bold" href="#" data-toggle="tooltip" title="<?php echo $best_best_desc;  ?>">What is a Best Bet?</a>
@@ -216,6 +222,7 @@ $pagination_args = array(
                         //check for the trial tax
                         $database_trial         = has_term( 'trial', 'trial', $article['ID'] );
                         $db_alt_name            = get_post_meta( $article['ID'], 'db_alt_names', true );
+                        $az_vendor              = get_the_terms( $article['ID'], 'database_vendor' );
                         ?>
 
                         <article id="post-<?php $article['ID']; ?>" <?php post_class('ccl-c-database ccl-u-mt-1'); ?>>
@@ -242,7 +249,7 @@ $pagination_args = array(
                                         if( array_key_exists( 'has_best_bet', $article )  ): ?>
                                         
                                             <li>
-                                                <div class="ccl-u-weight-bold ccl-u-mr-1 ccl-u-best-bet">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></div>
+                                                <div class="ccl-u-weight-bold ccl-u-best-bet">Best Bet <i class="ccl-b-icon alert" aria-hidden="true"></i></div>
                                             </li>
                                         <?php endif; ?>
                                         
@@ -250,26 +257,38 @@ $pagination_args = array(
                                         //if trial is set, then append to HTML
                                         if( $database_trial ): ?>
                                             <li class="ccl-c-database--trial">
-                                                <div class="ccl-u-weight-bold ccl-u-mr-1">Trial <i class="ccl-b-icon clock" aria-hidden="true"></i></div>
+                                                <div class="ccl-u-weight-bold ">Trial <i class="ccl-b-icon clock" aria-hidden="true"></i></div>
                                             </li>
                                         <?php endif; ?>
                                     
                                         <?php 
-                                        //if this is subject, or letter (not format), then append each format type
-                                        if( $is_subject || $filter_by_letter ):
+                                        //if this is subject, or letter (not format), then append each format type, or vendor
+                                        if( $is_subject || $filter_by_letter || $is_vendor  ):
                                                 //get terms, filter for all term names, implode and append HTML
+                                                
                                                 $format_types   = wp_get_post_terms( $article['ID'], 'format' );
                                                 $db_formats     = array_map( function($array){return $array->name; }, $format_types );
-                                                $format_list = implode( '&nbsp;&nbsp;|&nbsp;&nbsp;' , $db_formats  );
+                                                $format_list = implode( ' | ' , $db_formats  );
                                             ?>
-                                            <li class="ccl-c-database__formats">
-                                                <div class="ccl-u-weight-bold "><?php echo $format_list;?></div>
-                                            </li>
-                                        <?php endif; ?>                                    
+                                                <?php if( $format_types ): ?>
+                                                <li class="ccl-c-database__formats">
+                                                    <div class="ccl-u-weight-bold "><?php echo $format_list;?></div>
+                                                </li>
+                                                <?php endif; ?>
+                                        <?php endif; ?>
+                                        
+                                        <?php 
+                                        //if vendor is present, and this is not the vendor page - show vendor
+                                        if(!$is_vendor && $az_vendor): ?>
+                                            <li>Vendor: <a href="<?php echo get_term_link( $az_vendor[0], 'database_vendor' ) . '?post_type=database'; ?>"><?php echo $az_vendor[0]->name; ?></a></li>
+                                        <?php endif; ?>                                         
                                     
                                     </ul>
-
+                                    
                                     <p><?php echo $article['post_content']; ?></p>
+
+                                    
+                                    
                                 </div>
 
                             </div>

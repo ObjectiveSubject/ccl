@@ -40,17 +40,21 @@ get_header(); ?>
                                     <ul class="ccl-c-hero__menu">
                                         
                                         <li>
-                                            <a href="#block-subject"><?php _e( 'Databases by Subject', 'ccl' ); ?></a>
+                                            <a href="#block-subject" class="js-smooth-scroll"><?php _e( 'Databases by Subject', 'ccl' ); ?></a>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
                                         </li>                                        
                                         <li>
-                                            <a href="#block-title"><?php _e( 'Databases by Title', 'ccl' ); ?></a>
+                                            <a href="#block-title" class="js-smooth-scroll"><?php _e( 'Databases by Title', 'ccl' ); ?></a>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
                                         </li>
                                         <li>
-                                            <a href="#block-format"><?php _e( 'Databases by Format', 'ccl' ); ?></a>
+                                            <a href="#block-format" class="js-smooth-scroll"><?php _e( 'Databases by Format', 'ccl' ); ?></a>
                                             <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
-                                        </li>                                        
+                                        </li>
+                                        <li>
+                                            <a href="#block-vendor" class="js-smooth-scroll"><?php _e( 'Databases by Vendor', 'ccl' ); ?></a>
+                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                                        </li>                                         
                                         
                                         <!-- <li>
                                             <a href="#block-format"><?php //_e( 'Databases by Type & Format', 'ccl' ); ?></a>
@@ -148,6 +152,29 @@ get_header(); ?>
 
                     </div>
 
+
+                    <div id="block-vendor" class="ccl-c-promo ccl-u-mt-4">
+                        
+                        <h2 class="ccl-u-mt-0"><?php _e('Databases by Vendor','ccl'); ?></h2>
+
+                        <?php $vendors = get_terms( array( 
+                            'taxonomy' => 'database_vendor',
+                        ) );
+                        
+                        if ( $vendors ) : ?>
+                            
+                            <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
+
+                            <?php foreach ( $vendors as $vendor ) : ?>
+
+                                    <li style="line-height:2"><a class="ccl-h4" href="<?php echo get_term_link( $vendor, 'database_vendor' ) . '?post_type=database'; ?>"><?php echo $vendor->name; ?></a></li>
+                            <?php endforeach; ?>
+
+                            </ul>
+
+                        <?php endif; ?>
+
+                    </div>
 
 
 
