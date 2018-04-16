@@ -421,7 +421,7 @@
 				}
 	            //build the URL
 	            var wms_params = {
-	                sortKey         : 'BEST_MATCH',
+	                sortKey         : 'LIBRARY',
 	                databaseList    : '',
 	                queryString     : queryString,
 	                Facet           : '',
