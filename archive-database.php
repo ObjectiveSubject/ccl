@@ -219,6 +219,8 @@ $pagination_args = array(
                         //get relevant metadata
                         $database_friendly_url  = get_post_meta( $article['ID'], 'database_friendly_url', true );
                         $url                    = $database_friendly_url ? $database_friendly_url : get_permalink();
+                        
+                        //print_r( $database_friendly_url );
                         //check for the trial tax
                         $database_trial         = has_term( 'trial', 'trial', $article['ID'] );
                         $db_alt_name            = get_post_meta( $article['ID'], 'db_alt_names', true );
@@ -231,7 +233,7 @@ $pagination_args = array(
 
                                 <header class="ccl-l-column ccl-l-span-12 ccl-l-span-6-md ccl-l-span-4-lg">
                                     
-                                    <a href="<?php esc_url( $url ); ?>" target="_blank" rel="bookmark">
+                                    <a href="<?php echo esc_url( $database_friendly_url ); ?>" target="_blank" rel="bookmark">
                                        <h2 class="ccl-h4 ccl-u-weight-bold"> <?php echo $article['post_title']; ?></h2>
                                         
                                         <?php if( $db_alt_name ): ?>
