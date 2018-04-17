@@ -19,9 +19,13 @@
 // --------------------------------------- /
 .ccl-u-mt-nudge { margin-top: $spacer/3 !important; }
 .ccl-u-mb-nudge { margin-bottom: $spacer/3 !important; }
+.ccl-u-ml-nudge { margin-left: $spacer/3 !important; }
+.ccl-u-mr-nudge { margin-right: $spacer/3 !important; }
 .ccl-u-my-nudge { margin-top: $spacer/3 !important; margin-bottom: $spacer/3 !important; }
 .ccl-u-pt-nudge { padding-top: $spacer/3 !important; }
 .ccl-u-pb-nudge { padding-bottom: $spacer/3 !important; }
+.ccl-u-pr-nudge { padding-right: $spacer/3 !important; }
+.ccl-u-pl-nudge { padding-left: $spacer/3 !important; }
 .ccl-u-py-nudge { padding-top: $spacer/3 !important; padding-bottom: $spacer/3 !important; }
 @for $i from 0 through 6 {
     $val: $spacer * $i;

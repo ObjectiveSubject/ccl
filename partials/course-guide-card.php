@@ -55,12 +55,10 @@ if ( empty(  $course_guides ) ) : ?>
         <div class="ccl-l-column ccl-l-span-6-md">
             <div class="ccl-l-row ccl-c-guide-card ccl-c-guide-card--course">
                 <div class="ccl-l-column ccl-l-span-7-md ccl-c-guide-card__title ">
-                    <a href="<?php echo esc_url( $guide_url ); ?>" target="_blank"><?php echo $guide_title; ?></a>
+                    <a class="ccl-h4 ccl-u-weight-bold" href="<?php echo esc_url( $guide_url ); ?>" target="_blank"><?php echo $guide_title; ?></a>
                 </div>
                 <div class="ccl-l-column ccl-l-span-5-md ccl-c-guide-card__meta">
-                    <a href="<?php echo $owner_pofile; ?>" target="_blank">
-                    <i class="ccl-b-icon person-open" aria-hidden="true"></i> <span><?php echo $guide_author; ?></span>
-                    </a>
+                    <i class="ccl-b-icon person-open ccl-u-mr-nudge" aria-hidden="true"></i> <span><?php echo $guide_author; ?></span>
                 </div>                 
                 
             </div>
