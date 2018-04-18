@@ -40,6 +40,10 @@ function register_guides_post_type() {
 			'create_posts' => 'do_not_allow', // Remove support for "Add New" (can also change to a role, rather than false)
 		),
 		'map_meta_cap'    => true, // Allows created posts to be edited
+		'public'				=> false,
+		'exclude_from_search'	=> false,
+		'publicly_queryable'	=> true,
+		'show_ui'				=> true,
 	) );
 
 }
