@@ -63,9 +63,14 @@
 			_this.locationType = _this.getLocID();				
 			
 			if( _this.locationType != 'wms' ){
-				_this.$indexContain.fadeOut('fast');
+				_this.$indexContain
+					.addClass('ccl-search-index-fade')
+					.fadeOut(250);
 			}else if( _this.locationType == 'wms' ){
-				_this.$indexContain.fadeIn('fast');
+				_this.$indexContain
+					.fadeIn(250)
+					.removeClass('ccl-search-index-fade');
+
 			}
 			
 		} );

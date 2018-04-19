@@ -169,6 +169,7 @@
         //flex-basis: auto;
         border: 0 !important;
     }
+    
 }
 
 .ccl-c-search-form__submit {
@@ -318,4 +319,9 @@
     .ccl-c-search-item:hover & {
         opacity: 1;
     }
+}
+
+.ccl-search-index-fade {
+    transform: translate3d(0,30%,0);
+    // opacity: .7;
 }

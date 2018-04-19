@@ -201,8 +201,8 @@ get_header();
 				
 	        	<div id="<?php echo $key; ?>" class="ccl-l-row ccl-u-mt-2  ccl-c-search-page <?php //echo ( $post_type_count % 2 === 0 ) ? '' : 'ccl-l-offset-2-lg'; ?>">				
 					<div class="ccl-l-column ccl-l-span-12 ccl-l-span-6-md ccl-l-span-4-lg ccl-c-search-page__header">
-						<h2 class="ccl-c-search-page__title"><?php echo $result['title']; ?></h2>
-						<div class="ccl-u-faded ccl-u-weight-bold ccl-c-search-page__slug">
+						<h3 class="ccl-c-search-page__title"><?php echo $result['title']; ?></h3>
+						<div class="ccl-u-faded ccl-c-search-page__slug">
 							<?php echo $result['slug']; ?>
 						</div>								
 					</div>
@@ -211,7 +211,7 @@ get_header();
 						<ul class="ccl-c-search-page__items ccl-u-clean-list">
 							<?php foreach( $result['posts'] as $key => $post): ?>
 								<li class="ccl-c-search-page__list-links"><a href="<?php echo $post['post_url']; ?>" target="_blank">
-									<span><?php echo $post['post_title']; ?></span>
+									<span class="ccl-u-weight-bold"><?php echo $post['post_title']; ?></span>
 									<span>View  <i class="ccl-b-icon arrow-right" aria-hidden="true"></i></span></a>
 								</li>
 							<?php endforeach; ?>
