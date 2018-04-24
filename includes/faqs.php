@@ -243,7 +243,7 @@ function add_faq( $faq ) {
 
 	$args['post_title']   = $faq['question']; // post_title
 	$args['post_content'] = $faq['answer']; // post_content
-	// $args['post_status'] = 'draft'; // default is draft
+	$args['post_status'] = 'publish'; // default is draft
 	$args['post_type']    = 'faq';
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
