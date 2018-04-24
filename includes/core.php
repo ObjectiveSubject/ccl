@@ -19,7 +19,7 @@ function setup() {
 	add_action( 'init', $n( 'add_menus' ) );
 	
 	add_filter('terms_clauses', $n( 'my_terms_clauses' ), 99999, 3);    
-
+	
 	// Remove WordPress header cruft
 	remove_action( 'wp_head', 'feed_links_extra', 3 );
 	remove_action( 'wp_head', 'rsd_link' );
@@ -125,7 +125,7 @@ function modify_queries( $query ) {
 		// Perform query modifications here
 		if( is_search() ){
 		   
-		   	$query->set( 'posts_per_page', 150 );
+		   	$query->set( 'posts_per_page', -1 );
 		}
 
 		if ( ! is_admin() && $query->is_main_query() ) {
@@ -134,19 +134,21 @@ function modify_queries( $query ) {
 				
 				$query->set( 'orderby', 'title' );
 				$query->set( 'order', 'ASC' );
+				$query->set( 'posts_per_page', -1 );
 
-				$is_filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'];
+				// $is_filter_by_letter = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'];
 
-				if ( $is_filter_by_letter ) {
+				// if ( $is_filter_by_letter ) {
 
-					// The best thing to do here would probably be to perform a custom query for databases beginning with the appropriate letter.
-					// But it seems you have to use SQL queries to do that, which are more complicated and possibly less performant.
+				// 	// The best thing to do here would probably be to perform a custom query for databases beginning with the appropriate letter.
+				// 	// But it seems you have to use SQL queries to do that, which are more complicated and possibly less performant.
 
-					// Instead we just return all the databases and use a conditional in the template (see archive-database.php).
-					$query->set( 'posts_per_page', 1000 );
-				}else{
-					$query->set( 'posts_per_page', 75 );
-				}
+				// 	// Instead we just return all the databases and use a conditional in the template (see archive-database.php).
+				// 	$query->set( 'posts_per_page', 1000 );
+				// }
+				// else{
+				// 	$query->set( 'posts_per_page', -1 );
+				// }
 			}
 
 		}

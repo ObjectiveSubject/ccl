@@ -120,7 +120,7 @@ get_header(); ?>
                         <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1">
                             <?php foreach ( $letters as $letter ) :?> 
                                 <li class=" ccl-h4 ccl-u-mt-nudge ccl-u-display-inline-block">
-                                    <a href="<?php echo get_post_type_archive_link( 'database' ) . '?begins_with=' . $letter; ?>" style="padding:0 0.5em"><?php echo $letter; ?></a>
+                                    <a href="<?php echo get_post_type_archive_link( 'database' ) . '&begins_with=' . $letter; ?>" style="padding:0 0.5em"><?php echo $letter; ?></a>
                                     <span class="ccl-u-weight-medium ccl-u-faded">|</span>
                                 </li>
                             <?php endforeach; ?>

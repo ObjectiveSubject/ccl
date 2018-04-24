@@ -50,6 +50,7 @@ function register_databases_post_type() {
 		'exclude_from_search'	=> false,
 		'publicly_queryable'	=> true,
 		'show_ui'				=> true,
+		'has_archive'			=> true,
 		'map_meta_cap' => true, // Allows created posts to be edited
 		'admin_cols'	=> array(
 			'subjects' => array(
