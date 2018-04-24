@@ -150,6 +150,7 @@ function retrieve_faqs() {
 		$response .= '<ul>';
 		$response .= '<li><strong>Imported:</strong> ' . $faqs['added'] . '</li>';
 		$response .= '<li><strong>Updated:</strong> ' . $faqs['updated'] . '</li>';
+		$response .= '<li><strong>Deleted:</strong> ' . $faqs['deleted'] . '</li>';		
 		$response .= '</ul>';
 	}
 
@@ -163,12 +164,18 @@ function retrieve_faqs() {
  */
 function process_faqs() {
 
-	$faqs = \CCL\Integrations\LibAnswers\get_all_faqs();
+	//convert json object into an array
+	$faqs = json_decode( json_encode( \CCL\Integrations\LibAnswers\get_all_faqs() ), true );
+	
+	//compare two data fields and delete entries that are no longer in the API.
+	//not - insert array for API data, however this functio will convert to array
+	$deleted_from_WP = \CCL\Helpers\check_import_for_deletions( $meta_key = 'faq_id', $post_type = 'faq', $api_data = $faqs ); 
 
-	$results               = array();
+	$results            	= array();
 	// $results['retrieved']  = count( $faqs );
-	$results['added']      = 0;
-	$results['updated'] = 0;
+	$results['added']   	= 0;
+	$results['updated'] 	= 0;
+	$results['deleted']		= $deleted_from_WP;
 
 	// @todo check if this is a Faqs array or an error object
 
@@ -202,7 +209,7 @@ function process_faqs() {
 function add_faq( $faq ) {
 
 	// quick and dirty way to convert multi-dimensional object to array
-	$faq = json_decode( json_encode( $faq ), true );
+	//$faq = json_decode( json_encode( $faq ), true );
 
 	// check against custom id field to see if post already exists
 	$libanswer_id = $faq['faqid'];
@@ -222,11 +229,15 @@ function add_faq( $faq ) {
 	 * Construct arguments to use for wp_insert_post()
 	 */
 	$args = array();
-
+	$post_updated = false;
+	
 	if ( $duplicate_check->have_posts() ) {
 
 		$duplicate_check->the_post();
 		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
+		
+		//dont know why but it's easier to update this post with true
+		$post_updated = true;
 
 	}
 
@@ -252,10 +263,10 @@ function add_faq( $faq ) {
 	// Raw data for development
 	update_post_meta( $post_id, 'faq_raw_data', $faq );
 
-	if ( $duplicate_check->have_posts() ) {
-		return "added";
-	} else {
+	if ( $post_updated ) {
 		return "updated";
+	} else {
+		return "added";
 	}
 }
 

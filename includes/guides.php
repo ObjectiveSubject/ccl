@@ -145,6 +145,7 @@ function retrieve_guides() {
 		$response .= '<li><strong>Retrieved:</strong> ' . $guides['retrieved'] . ' guides</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $guides['added'] . '</li>';
 		$response .= '<li><strong>Updated:</strong> ' . $guides['updated'] . '</li>';
+		$response .= '<li><strong>Deleted:</strong> ' . $guides['deleted'] . '</li>';		
 		$response .= '</ul>';
 	}
 
@@ -158,12 +159,18 @@ function retrieve_guides() {
  */
 function process_guides() {
 
-	$guides = \CCL\Integrations\LibGuides\get_all_guides();
+	//convert json object into array
+	$guides = json_decode( json_encode( \CCL\Integrations\LibGuides\get_all_guides() ), true );
+	
+	//compare two data fields and delete entries that are no longer in the API.
+	//not - insert array for API data, however this functio will convert to array
+	$deleted_from_WP = \CCL\Helpers\check_import_for_deletions( $meta_key = 'guide_id', $post_type = 'guide', $api_data = $guides ); 	
 
 	$results               = array();
 	$results['retrieved']  = count( $guides );
 	$results['added']      = 0;
-	$results['updated'] = 0;
+	$results['updated'] 	= 0;
+	$results['deleted']		= $deleted_from_WP;
 
 	// @todo check if this is a Guides array or an error object
 
@@ -193,7 +200,7 @@ function process_guides() {
 function add_guide( $guide ) {
 
 	// quick and dirty way to convert multi-dimensional object to array
-	$guide = json_decode( json_encode( $guide ), true );
+	//$guide = json_decode( json_encode( $guide ), true );
 
 	// check against custom id field to see if post already exists
 	$libguide_id = $guide['id'];
@@ -213,12 +220,15 @@ function add_guide( $guide ) {
 	 * Construct arguments to use for wp_insert_post()
 	 */
 	$args = array();
+	$post_updated = false;
 
 	if ( $duplicate_check->have_posts() ) {
 
 		$duplicate_check->the_post();
 		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
 
+		//don't know why but it's easier to set a variable here if updated
+		$post_updated = true;
 	}
 
 	$args['post_title']   = $guide['name']; // post_title
@@ -265,10 +275,10 @@ function add_guide( $guide ) {
 		wp_set_object_terms( $post_id, $subjects_array, 'subject' );
 	}
 
-	if ( $duplicate_check->have_posts() ) {
-		return "added";
-	} else {
+	if ( $post_updated ) {
 		return "updated";
+	} else {
+		return "added";
 	}
 }
 

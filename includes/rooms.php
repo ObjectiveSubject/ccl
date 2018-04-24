@@ -161,6 +161,7 @@ function retrieve_rooms() {
 		$response .= '<li><strong>Retrieved:</strong> ' . $rooms['retrieved'] . ' rooms</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $rooms['added'] . '</li>';
 		$response .= '<li><strong>Updated:</strong> ' . $rooms['updated'] . '</li>';
+		$response .= '<li><strong>Deleted:</strong> ' . $rooms['deleted'] . '</li>';		
 		$response .= '</ul>';
 	}
 
@@ -174,18 +175,27 @@ function retrieve_rooms() {
  */
 function process_rooms() {
 
+	//note this is still an object, we will be using an object 
 	$rooms = \CCL\Integrations\LibCal\get_space_category( 2314 );
 
 	// @todo check if this is a Rooms array or an error object
 	// @todo sort out a cleaner way to do the following me (object/array nesting mess)
 	$rooms = array( $rooms[0] );
 	$rooms = $rooms[0]->items;
+	
+	//converting to array, even though the function will check for us
+	$rooms_for_deletion = json_decode( json_encode( $rooms ), true );
+	
+	//compare two data fields and delete entries that are no longer in the API.
+	//not - insert array for API data, however this functio will convert to array
+	$deleted_from_WP = \CCL\Helpers\check_import_for_deletions( $meta_key = 'room_id', $post_type = 'room', $api_data = $rooms_for_deletion );	
 
 	// set up the results
 	$results               = array();
 	$results['retrieved']  = count( $rooms );
 	$results['added']      = 0;
 	$results['updated']    = 0;
+	$results['deleted']		= $deleted_from_WP;
 
 	// Rooms are stored in an array related to their room's space id
 	foreach ( $rooms as $room ) {
@@ -236,12 +246,15 @@ function add_room( $room ) {
 	 * Construct arguments to use for wp_insert_post()
 	 */
 	$args = array();
+	$post_updated = false;	
 
 	if ( $duplicate_check->have_posts() ) {
 
 		$duplicate_check->the_post();
 		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
 
+		//don't know why but it's easier to set a varibale here if we are dealing with an update
+		$post_updated = true;
 	}
 
 	$args['post_title']   = $room['name']; // post_title
@@ -269,10 +282,10 @@ function add_room( $room ) {
 	// $category = $room['category'];
 	// wp_set_object_terms( $room_id, $category, 'XX' );
 
-	if ( $duplicate_check->have_posts() ) {
-		return "added";
-	} else {
+	if ( $post_updated ) {
 		return "updated";
+	} else {
+		return "added";
 	}
 }
 

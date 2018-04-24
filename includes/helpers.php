@@ -565,3 +565,175 @@ function get_header_notices() {
 
 	return $notice_data;
 }
+
+/**
+ * Get all meta_values by meta_key
+ * 
+ * @param $meta_key, $post_type, $status (publish)
+ *
+ * @return array|null
+ */
+function get_meta_values( $key = '', $type = '', $status = 'publish' ) {
+
+    global $wpdb;
+
+    if( empty( $key ) )
+        return;
+
+    $r = $wpdb->get_col( $wpdb->prepare( "
+        SELECT pm.meta_value FROM {$wpdb->postmeta} pm
+        LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+        WHERE pm.meta_key = '%s' 
+        AND p.post_status = '%s' 
+        AND p.post_type = '%s'
+    ", $key, $status, $type ) );
+
+    return $r;
+}
+
+
+/**
+ * Delete post types and post meta by meta key and meta value
+ * 
+ * @param $meta_key, $meta_value
+ *
+ * @return array|null
+ */
+function delete_post_by_meta( $meta_key= '', $meta_value = '' ){
+    
+    global $wpdb;
+    
+    if( empty( $meta_key ) ) return;
+    
+    $result = $wpdb->get_results( 
+            $wpdb->prepare("
+                DELETE p, pm
+                FROM {$wpdb->posts} p
+                INNER JOIN
+                {$wpdb->postmeta} pm
+                ON pm.post_id = p.ID
+                WHERE pm.meta_key = '%s'
+                AND pm.meta_value = '%s'
+            ", $meta_key, $meta_value
+            )
+        
+        );
+    
+    return $result;
+}
+
+/**
+ * Retrieves post ID by the meta value
+ * 
+ * @param $meta_key, $meta_value
+ *
+ * @return array|null
+ */
+function get_post_id_by_meta_key_value( $key= '', $value = '' ){
+    global $wpdb;
+    
+    $result = $wpdb->get_results(
+            $wpdb->prepare(
+                    "SELECT *
+                    FROM {$wpdb->postmeta} pm
+                    WHERE meta_key = '%s'
+                    AND meta_value = '%s'
+                    ", $key, $value
+                )
+        );
+        
+    return $result;
+}
+
+/**
+ * Converts and console logs data from PHP on the front end
+ * 
+ * @param $data to log, $title
+ * 
+ * @todo - set up hook for displaying on admin side
+ *
+ * @return array|mixed|string|\WP_Error
+ */
+function debug_to_console( $data, $title = null) {
+	
+	//check for title and localize arguments
+	$fn_title = !empty( $title ) ? $title : 'From WP';
+	$fn_data = $data;
+	
+	add_action( 'wp_footer', function() use ($fn_title, $fn_data){
+		
+	    if( is_array($fn_data) || is_object($fn_data) ) {
+			echo "<script>
+					if(console.debug!='undefined'){
+						console.log('{$fn_title}:' , ". json_encode($fn_data) .");
+					}</script>" ;
+		} else {
+			echo "<script>
+					if(console.debug!='undefined'){	
+						console.log('{$fn_title}: ".$fn_data."');
+					}</script>" ;
+		}		
+		
+	} );
+}
+
+/**
+ * On import - this function checks for 3rd party IDs that exist in WP, that don't exist in the canonical source
+ * If there are IDs found in WP, create an array and delete these posts and post meta from WP database
+ * 
+ * @param $meta_key, $post_type, $api_data (array)
+ *
+ * @return mixed|string|int
+ */
+function check_import_for_deletions( $meta_key = '', $post_type = '', $api_data = '' ){
+    
+        //console log the API data for debugging
+        //debug_to_console( $api_data, $post_type . ' API' );
+    
+    //check if object or array - if object convert to array
+    $api_data		= is_object( $api_data ) ? json_decode( json_encode( $api_data ), true ) : $api_data;
+    
+    //get all wp posts by post type, make sure we are casting as strings because it's easier
+    $wp_post_ids    =  array_map( 'strval', get_meta_values( $meta_key, $post_type ) );
+    
+        //console log the WP ids for debugging
+        //debug_to_console( $wp_post_ids,  'WP IDs' );
+    
+    //get all id's of import accounts, make sure we are casting as strings because it's easier
+    $api_ids        =   array_map( 'strval', array_column( $api_data, 'id' ) ) ;
+    
+        //console log the API data for debugging
+        //debug_to_console( $api_ids,  'API IDs' );
+    
+    //let's check to make sure there are values, especially for the api_ids
+    //aborts if either of them don't have data from the API
+    if( empty( $wp_post_ids ) || empty( $api_ids ) ){
+        
+        //console log the abort message
+        debug_to_console( 'No Ids found -- aborting' );
+        return 'No Ids found -- aborting';
+    }
+    
+    //compare the two arrays and produce a list of results, remove all the array_diff keys
+    $diff_ids       =  array_values( array_diff( $wp_post_ids, $api_ids ) );
+    
+    if(  !empty( $diff_ids) ){
+        
+        //foreach outlying post type, delete post and post_meta
+        foreach( $diff_ids as $key => $meta_id  ){
+            
+            //delete posts and postmeta
+            delete_post_by_meta( $meta_key, $meta_id );
+        }
+        
+        //return the cound of posts deleted
+        return count( $diff_ids );
+        
+    }else{
+        //if everything runs correctly, but there are still no updates
+        debug_to_console( 'Nothing to delete' );
+        return  'Nothing to delete';
+    }
+    
+    
+}

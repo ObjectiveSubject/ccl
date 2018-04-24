@@ -166,6 +166,7 @@ function retrieve_staff() {
 		$response .= '<li><strong>Retrieved:</strong> ' . $staff['retrieved'] . ' staff</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $staff['added'] . '</li>';
 		$response .= '<li><strong>Updated:</strong> ' . $staff['updated'] . '</li>';
+		$response .= '<li><strong>Deleted:</strong> ' . $staff['deleted'] . '</li>';		
 		$response .= '</ul>';
 	}
 
@@ -179,12 +180,18 @@ function retrieve_staff() {
  */
 function process_staff() {
 
-	$members = \CCL\Integrations\Libguides\get_all_staff();
+	//convert json object into array
+	$members = json_decode( json_encode( \CCL\Integrations\Libguides\get_all_staff() ), true );
+	
+	//compare two data fields and delete entries that are no longer in the API.
+	//not - insert array for API data, however this functio will convert to array
+	$deleted_from_WP = \CCL\Helpers\check_import_for_deletions( 'member_id', 'staff', $members );  
 
-	$results               = array();
-	$results['retrieved']  = count( $members );
-	$results['added']      = 0;
-	$results['updated'] = 0;
+	$results    			= array();
+	$results['retrieved']	= count( $members );
+	$results['added']   	= 0;
+	$results['updated'] 	= 0;
+	$results['deleted']		= $deleted_from_WP;
 
 	foreach ( $members as $member ) {
 		$add_member = add_staff_member( $member );
@@ -201,6 +208,7 @@ function process_staff() {
 	return $results;
 }
 
+
 /**
  * Create or update staff member
  *
@@ -211,7 +219,7 @@ function process_staff() {
 function add_staff_member( $member ) {
 
 	// quick and dirty way to convert multi-dimensional object to array
-	$member = json_decode( json_encode( $member ), true );
+	//$member = json_decode( json_encode( $member ), true );
 
 	// check against custom id field to see if post already exists
 	$member_id = $member['id'];
@@ -231,11 +239,15 @@ function add_staff_member( $member ) {
 	 * Construct arguments to use for wp_insert_post()
 	 */
 	$args = array();
+	$post_updated = false;	
 
 	if ( $duplicate_check->have_posts() ) {
 
 		$duplicate_check->the_post();
 		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
+		
+		//don't know why but it's easier to set a varibale here if we are dealing with an update
+		$post_updated = true;
 
 	}
 
@@ -265,7 +277,7 @@ function add_staff_member( $member ) {
 	update_post_meta( $member_post_id, 'member_raw_data', $member );
 	
 	//check first and add title if exists, not all titles are set
-	if( array_key_exists( 'title', $member['profile']['box']) ){
+	if( array_key_exists( 'title', (array) $member['profile']['box'] ) ){
 		update_post_meta( $member_post_id, 'member_title', $member['profile']['box']['title'] );
 		
 	}
@@ -280,10 +292,10 @@ function add_staff_member( $member ) {
 		wp_set_object_terms( $member_post_id, $subjects_array, 'subject' );
 	}
 
-	if ( $duplicate_check->have_posts() ) {
-		return "added";
-	} else {
+	if ( $post_updated ) {
 		return "updated";
+	} else {
+		return "added";
 	}
 
 }

@@ -242,6 +242,7 @@ function retrieve_databases() {
 		$response .= '<li><strong>Retrieved:</strong> ' . $databases['retrieved'] . ' databases</li>';
 		$response .= '<li><strong>Imported:</strong> ' . $databases['added'] . '</li>';
 		$response .= '<li><strong>Updated:</strong> ' . $databases['updated'] . '</li>';
+		$response .= '<li><strong>Deleted:</strong> ' . $databases['deleted'] . '</li>';		
 		$response .= '</ul>';
 	}
 
@@ -255,12 +256,18 @@ function retrieve_databases() {
  */
 function process_databases() {
 
-	$databases = \CCL\Integrations\LibGuides\get_all_databases();
+	//convert json object into array
+	$databases = json_decode( json_encode( \CCL\Integrations\LibGuides\get_all_databases() ), true );
+	
+	//compare two data fields and delete entries that are no longer in the API.
+	//not - insert array for API data, however this functio will convert to array
+	$deleted_from_WP = \CCL\Helpers\check_import_for_deletions( $meta_key = 'database_id', $post_type = 'database', $api_data = $databases ); 
 
 	$results               = array();
 	$results['retrieved']  = count( $databases );
 	$results['added']      = 0;
 	$results['updated']    = 0;
+	$results['deleted']		= $deleted_from_WP;
 
 	// @todo check if this is a Databases array or an error object
 
@@ -268,8 +275,6 @@ function process_databases() {
 	foreach ( $databases as $database ) {
 		
 		$add_database = add_database( $database );
-		
-		//time_nanosleep(0, 100000000);
 
 		if ( 'added' == $add_database ) {
 			$results['added'] = $results['added'] + 1;
@@ -293,7 +298,7 @@ function process_databases() {
 function add_database( $database ) {
 
 	// quick and dirty way to convert multi-dimensional object to array
-	$database = json_decode( json_encode( $database ), true );
+	//$database = json_decode( json_encode( $database ), true );
 
 	// check against custom id field to see if post already exists
 	$database_id = $database['id'];
@@ -310,15 +315,18 @@ function add_database( $database ) {
 	) );
 
 	/*
-		 * Construct arguments to use for wp_insert_post()
-		 */
+	 * Construct arguments to use for wp_insert_post()
+	 */
 	$args = array();
+	$post_updated = false;	
 
 	if ( $duplicate_check->have_posts() ) {
 
 		$duplicate_check->the_post();
 		$args['ID'] = get_the_ID(); // existing post ID (otherwise will insert new)
 
+		//don't know why but it's easier to set a varibale here if we are dealing with an update
+		$post_updated = true;
 	}
 
 	$args['post_title']   = $database['name']; // post_title
@@ -403,10 +411,10 @@ function add_database( $database ) {
 		update_post_meta( $post_id, 'db_alt_names', $database['alt_names']  );
 	}
 
-	if ( $duplicate_check->have_posts() ) {
-		return "added";
-	} else {
+	if ( $post_updated ) {
 		return "updated";
+	} else {
+		return "added";
 	}
 }
 

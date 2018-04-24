@@ -38,6 +38,7 @@ require_once CCL_INC . 'staff-roles.php';
 require_once CCL_INC . 'subjects.php';
 require_once CCL_INC . 'taxonomies.php';
 require_once CCL_INC . 'template-tags.php';
+require_once CCL_INC . 'crons.php';
 
 // Include integrations
 require_once CCL_INC . 'integrations/libanswers.php';
@@ -73,3 +74,4 @@ CCL\StaffRoles\setup();
 CCL\Subjects\setup();
 CCL\PostTypes\setup();
 CCL\Taxonomies\setup();
+CCL\Crons\setup();
