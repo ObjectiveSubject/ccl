@@ -7,7 +7,7 @@
     
     .ccl-b-input[type="radio"] + &,
     .ccl-b-input[type="checkbox"] + & {
-        $radio-size: 24px;
+        $radio-size: 20px;
         $radio-size-big: 40px;
 
         padding-left: $radio-size + $gutter;
@@ -34,7 +34,7 @@
             left: 0;
             width: $radio-size;
             height: $radio-size;
-            border: 3px solid black;
+            border: 2px solid black;
             cursor: pointer;
             transform: translateY(-50%);
             

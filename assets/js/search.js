@@ -248,6 +248,7 @@
 				//function for processing results
 				_this.fetchResultsDONE(response);
 
+
 			})
 			.always(function(){
 

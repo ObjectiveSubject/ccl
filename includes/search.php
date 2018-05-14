@@ -16,6 +16,9 @@ function setup() {
 	add_action( 'wp_ajax_load_search_results', __NAMESPACE__ . '\\load_search_results' );
 	add_action( 'wp_ajax_nopriv_load_search_results', __NAMESPACE__ . '\\load_search_results' );
 	add_filter( 'searchwp_common_words', $n( 'ccl_searchwp_common_words' ) );
+	
+	add_action( 'wp_ajax_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );
+	add_action( 'wp_ajax_nopriv_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );	
 
 }
 
@@ -116,7 +119,7 @@ function load_search_results() {
 		'post_status'         => 'publish',
 		'ignore_sticky_posts' => true,
 		's'                   => $query,
-		'posts_per_page'	  => 175
+		'posts_per_page'	  => -1
 	);
 	$search = new \SWP_Query( $all_args );
 	
@@ -231,4 +234,60 @@ function ccl_searchwp_common_words( $terms ) {
   $terms = array_diff( $terms, $words_to_keep );
   
   return $terms;
+}
+
+function retrieve_post_search_results(){
+	//sanitize and prepare the query
+	$query		= apply_filters( 'get_search_query', $_POST['query'] );	
+	$query		= sanitize_text_field( $query );
+	//get the swarchwp engine we will be using
+	$post_types	= $_POST['postType'];
+	
+		//query the regular stuff, like title, author, content, etc
+	$all_args   = array(
+		'engine'			=> $post_types,
+		's'                   => $query,
+		'posts_per_page'	  => -1
+	);
+	$search = new \SWP_Query( $all_args );
+	
+	//creates arrays
+	$search_results = array();
+	$posts = array();
+	
+	if( $search->posts ){
+		
+		$search_results['count'] = count( $search->posts );
+		
+		// usort( $search->posts, function ( $a, $b ) {
+
+		// 	return $a->post_title > $b->post_title;
+		// } );
+		
+		foreach( $search->posts as $key => $post){
+			
+			switch ( $post->post_type ) {
+				case 'database':
+					
+					$posts[] = array(
+						'post_link'		=> get_post_meta( $post->ID , 'database_friendly_url', true ),				
+						'post_title'	=> wp_specialchars_decode( $post->post_title ),
+						'post_content'	=> wp_specialchars_decode( $post->post_content ),
+						'post_alt_name'	=> get_post_meta( $post->ID, 'db_alt_names', true )
+					);
+					
+					break;
+			}
+			
+		}
+		
+	}
+	
+	$search_results['posts'] = $posts;
+	
+	// Encode array as JSON and return
+	wp_send_json( wp_json_encode( $search_results ) );
+
+	wp_die();	
+	
 }

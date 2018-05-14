@@ -62,11 +62,12 @@ function scripts( $debug = false ) {
 		CCL_VERSION, 
 		true 
 	);
-
-	wp_enqueue_script(
-		'main',
-		CCL_TEMPLATE_URL . "/assets/js/main{$min}.js",
-		array('jquery', 'slick'),
+	
+	//register scripts for filtering
+	wp_register_script(
+		'jplist',
+		CCL_TEMPLATE_URL . '/assets/js/vendor/jplist.js',
+		array('jquery'),
 		CCL_VERSION,
 		true
 	);
@@ -77,6 +78,19 @@ function scripts( $debug = false ) {
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
 		'nonce'    => wp_create_nonce( 'ccl_nonce' )
 	) );
+	
+	//enqueue jplist if we are working with the database post type
+	if( in_array( get_post_type(), array( 'database', 'guide' ) ) ){
+		wp_enqueue_script( 'jplist' );	
+	}
+	
+	wp_enqueue_script(
+		'main',
+		CCL_TEMPLATE_URL . "/assets/js/main{$min}.js",
+		array('jquery', 'slick'),
+		filemtime(get_template_directory() . "/assets/js/main{$min}.js"),
+		true
+	);	
 }
 
 function siteimprove_init(){
@@ -111,7 +125,7 @@ function styles( $debug = false ) {
 		'style',
 		CCL_URL . "/assets/css/style{$min}.css",
 		array(),
-		CCL_VERSION
+		filemtime(get_template_directory() . "/assets/css/style{$min}.css")
 	);
 }
 

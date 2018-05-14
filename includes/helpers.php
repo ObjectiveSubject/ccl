@@ -737,3 +737,72 @@ function check_import_for_deletions( $meta_key = '', $post_type = '', $api_data 
     
     
 }
+
+/**
+ * Retrieves related posts to be inserted into related contexts by subject
+ * 
+ * @params $subject ID to be searched, $post_types (array) to search
+ * 
+ * @return mixed|array|null
+ * 
+ */
+function get_related_data( $subject_id = '', $post_types  ){
+	//$taxonomy->term_id
+    $args = array(
+        'post_type' => $post_types,
+        'orderby'   => 'type',
+        'tax_query' => array(
+                array(
+                    'taxonomy'  => 'subject',
+                    'field'     => 'term_id',
+                    'terms'     => $subject_id,
+                    )
+            )
+        
+        );
+    
+    $related_subject_data = new \WP_Query( $args );
+    
+        $temp_guide_array   =  array();
+        $temp_staff_array   = array();
+        $sorted_results     = array();                
+    
+    if( !empty( $related_subject_data->posts ) ){
+        
+        foreach( $related_subject_data->posts as $post ){
+            
+            /**
+             * @todo
+             *  Right now we are filtering for staff and guides, but we will need to generalize this for any cases
+             */
+            switch ( $post->post_type ) {
+                case 'staff':
+                    
+                    $temp_staff_array[] = array(
+                        'name'      => $post->post_title . '<br /> ' . '<span class="ccl-u-weight-bold ccl-u-font-size-sm">' . get_post_meta( $post->ID, 'member_title', true ) . '</span>',
+                        'url'       => get_post_meta( $post->ID, 'member_friendly_url', true ) ?: site_url('/staff-directory/'),
+                        'profile'   => get_post_meta( $post->ID, 'member_image', true ) ?: CCL_TEMPLATE_URL . "/assets/images/person.svg",
+
+                        );
+                        
+                        
+                    break;
+                    
+                case 'guide':
+                    $temp_guide_array[] = array(
+                        'name'  => $post->post_title . '<br /><span class="ccl-u-weight-bold ccl-u-font-size-sm">'. get_post_meta( $post->ID, 'guide_type', true ) .'</span>',
+                        'url'   => get_post_meta( $post->ID, 'guide_friendly_url', true ) ?: site_url('/research-guides/'),
+                        'profile'  => CCL_TEMPLATE_URL . "/assets/images/ccl-compass.svg"
+                        );
+                    break;    
+
+            }//end switch
+            
+        }//end foreach
+        
+        //merge all data together
+        return array_merge( $temp_staff_array,  $temp_guide_array );
+        
+    }//end if	
+	
+}
