@@ -45,6 +45,8 @@ if( $show_article ) :
         $post_metadata      = get_metadata( 'post', $article['ID'], '', false);
         $database_trial     = has_term( 'trial', 'trial', $article['ID'] );
         $db_alt_name        = get_post_meta( $article['ID'], 'db_alt_names', true );
+        $vendor_name        = get_the_terms( $article['ID'], 'database_vendor' );
+        
         
         $db_formats         = wp_get_post_terms( $article['ID'], 'format' );                       
         $db_formats         = array_map( function($array){return $array->name; }, $db_formats );
@@ -52,12 +54,14 @@ if( $show_article ) :
         $format_list        = implode( ' | ' , $db_formats  );
         
         //add to article array
-        $article['database_vendor_name']    = isset( $post_metadata['database_vendor_name'][0] ) ? $post_metadata['database_vendor_name'][0] : false;
+        $article['database_vendor_name']    = isset( $vendor_name[0]->name ) ? $vendor_name[0]->name : false;
         $article['database_friendly_url']   = isset( $post_metadata['database_friendly_url'][0] ) ? $post_metadata['database_friendly_url'][0] : false;
         $article['db_alt_names']            = $db_alt_name;
         $article['database_trial']          = $database_trial;
         $article['serialized_classes']      = implode( ' ', $db_formats_serial ) . ' ' . sanitize_title( $article['database_vendor_name'] );
         $article['formats']                 = $format_list;
+        
+ 
         
         //if subject, get best bet
         if( $is_subject ){
@@ -117,6 +121,9 @@ if( $show_article ) :
             'vendor_name'   => $array
             );
     }, $vendor_filters);
+
+    \CCL\Helpers\debug_to_console( $format_filters );   
+    \CCL\Helpers\debug_to_console( $vendor_filters );   
     
 endif;
 ?>
