@@ -6,7 +6,7 @@ $page_options = (array) get_post_meta( $post->ID, 'page_options', true );
 $is_spc = in_array( 'is_spc', $page_options ); // is special collections page
 ?>
 
-<nav class="ccl-c-quick-nav <?php echo (! $has_blocks) ? 'ccl-no-secondary' : ''; ?>">
+<nav aria-label="Main Navigation" class="ccl-c-quick-nav <?php echo (! $has_blocks) ? 'ccl-no-secondary' : ''; ?>">
 
     <div class="ccl-c-quick-nav__bar">
             

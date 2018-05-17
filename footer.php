@@ -6,7 +6,7 @@
 $footer_options = get_option( 'footer-options' );
 ?>
 
-	<div class="ccl-c-school-band ccl-u-py-2" style="background-color:#F5F5F5" role="contentinfo" aria-label="Claremont Colleges Schools">
+	<aside class="ccl-c-school-band ccl-u-py-2" style="background-color:#F5F5F5" role="complementary" aria-label="Claremont Colleges Schools">
 		<div class="ccl-l-container">
 			<ul class="ccl-l-row ccl-l-align-center ccl-u-clean-list">
 				<?php
@@ -34,7 +34,7 @@ $footer_options = get_option( 'footer-options' );
 				<?php endforeach; ?>
 			</ul>
 		</div>
-	</div>
+	</aside>
 
 	<footer id="colophon" class="ccl-c-footer ccl-u-pt-2 ccl-u-pb-3" role="contentinfo">
 		
@@ -48,15 +48,22 @@ $footer_options = get_option( 'footer-options' );
 						<span class="ccl-u-display-none"><?php echo bloginfo( 'name' ); ?></span>
 					</a>
 
-					<?php if ( has_nav_menu( 'footer_1' ) ) {
-						wp_nav_menu( array(
-							'theme_location' => 'footer_1',
-							'menu_class' => 'ccl-c-menu ccl-is-primary',
-							'container' => 'nav',
-						) );
-					} else {
-						echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small ccl-is-inverse">Add a footer menu</a></div>';
-					} ?>
+					<?php if ( has_nav_menu( 'footer_1' ) ): ?>
+						
+						<nav aria-label="Footer Navigation">
+							<?php
+								wp_nav_menu( array(
+									'theme_location' => 'footer_1',
+									'menu_class' => 'ccl-c-menu ccl-is-primary',
+									'container' => 'div',
+								) );
+							?>
+						</nav>
+						
+					<?php else: ?>
+					
+						<?php	echo '<div class="ccl-u-mt-1"><a href="' . admin_url( 'nav-menus.php' ) . '" class="ccl-b-btn ccl-is-small ccl-is-inverse">Add a footer menu</a></div>'; ?>
+					<?php endif; ?>
 
 				</div>
 

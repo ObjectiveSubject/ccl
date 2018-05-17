@@ -1,4 +1,4 @@
-<nav class="ccl-c-user-nav">
+<nav aria-label="User Navigation" class="ccl-c-user-nav">
 
     <div class="ccl-l-container">
         

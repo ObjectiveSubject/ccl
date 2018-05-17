@@ -30,7 +30,7 @@ get_header(); ?>
 			
 			?>
 
-			<article <?php post_class(); ?>>
+			<main <?php post_class(); ?> aria-label="<?php echo $title; ?>">
 
 				<div class="<?php echo esc_attr( $hero_class ); ?>" style="background-image:url(<?php echo esc_url( $thumb_url ); ?>)">
 
@@ -102,21 +102,21 @@ get_header(); ?>
 
 				<?php get_template_part( 'partials/blocks' ); ?>
 
-			</article>
+			</main>
 
 			<?php $related_posts = \CCL\Helpers\get_ccl_related_posts(); ?>
 
 			<?php if ( $related_posts && $related_posts->have_posts() ) : ?>
 				<div class="ccl-u-bg-school ccl-u-py-2">
 
-					<div class="ccl-l-container">
+					<aside class="ccl-l-container" role="complementary" aria-labelledby="related">
 
-						<h2 class="ccl-u-mt-0">Related</h2>
+						<h2 id="related" class="ccl-u-mt-0">Related</h2>
 
 						<div class="ccl-l-row ccl-u-mt-1">
 
 							<?php while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
-								<article class="ccl-l-column ccl-l-span-4-md ccl-u-mb-1">
+								<article class="ccl-l-column ccl-l-span-4-md ccl-u-mb-1" aria-label="Related Article: <?php echo get_the_title(); ?>">
 
 									<?php if ( has_post_thumbnail() ) : ?>
 										<div class="ccl-u-mb-nudge">
@@ -135,7 +135,7 @@ get_header(); ?>
 
 						</div>
 						
-					</div>
+					</aside>
 
 				</div>
 
