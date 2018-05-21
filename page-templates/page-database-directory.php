@@ -127,7 +127,7 @@ get_header(); ?>
                             <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1 ccl-u-columns-2-md ccl-u-columns-3-lg">
 
                             <?php foreach ( $subjects as $subject ) : ?>
-                                    <li style="line-height:2"><a title="Subject databases for: <?php echo $subject->name; ?>" class="ccl-h4" href="<?php echo  esc_url( get_term_link( $subject, 'subject' ) . '?post_type=database' ); ?>"><?php echo $subject->name; ?></a></li>
+                                    <li style="line-height:2"><a title="Find databases with resources on '<?php echo $subject->name; ?>'" class="ccl-h4" href="<?php echo  esc_url( get_term_link( $subject, 'subject' ) . '?post_type=database' ); ?>"><?php echo $subject->name; ?></a></li>
                             <?php endforeach; ?>
 
                             </ul>
@@ -177,7 +177,7 @@ get_header(); ?>
                             
                                 <?php if( in_array( $letter, $get_letters ) ):    ?>
                                     <li class="ccl-c-database__letter">
-                                        <a title="Search for databases that begin with: <?php echo $letter; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'database' ) . '&begins_with=' . $letter ); ?>"><?php echo $letter; ?></a>
+                                        <a title="Find databases that begin with '<?php echo $letter; ?>'" href="<?php echo esc_url( get_post_type_archive_link( 'database' ) . '&begins_with=' . $letter ); ?>"><?php echo $letter; ?></a>
                                     </li>                              
                                 <?php else: ?>
                                     <li class="ccl-c-database__letter">
@@ -205,7 +205,7 @@ get_header(); ?>
     
                                 <?php foreach ( $formats as $format ) : ?>
     
-                                        <li style="line-height:2"><a title="Format of databases by: <?php echo $format->name; ?>" class="ccl-h4" href="<?php echo  esc_url( get_term_link( $format, 'format' ) . '?post_type=database' ); ?>"><?php echo $format->name; ?></a></li>
+                                        <li style="line-height:2"><a title="Find databases that contain '<?php echo $format->name; ?>'" class="ccl-h4" href="<?php echo  esc_url( get_term_link( $format, 'format' ) . '?post_type=database' ); ?>"><?php echo $format->name; ?></a></li>
                                 <?php endforeach; ?>
     
                                 </ul>
