@@ -400,17 +400,25 @@ function add_database( $database ) {
 	//if the database trial exists as 1 (or boolean) then add this to the trial taxonomy
 	//has_term( $term, $taxonomy, $post )
 	//wp_remove_object_terms( $id, $terms, $taxonomy )
+	$database_trial     = has_term( 'trial', 'trial', $post_id );
+	
 	if ( array_key_exists( 'enable_trial', $database ) ) {
 		if( $database['enable_trial'] == 1 ){
 			wp_set_object_terms( $post_id, 'trial', 'trial' );			
+		}elseif( $database_trial ){
+			wp_remove_object_terms(  $post_id, 'trial', 'trial' );
 		}
-		
 	}
 	
 	//check if an alt_name exists
+	$test_alt_names = get_post_meta( $post_id, 'db_alt_names', true );
+	
 	if( !empty( $database['alt_names'] ) ){
-		update_post_meta( $post_id, 'db_alt_names', $database['alt_names']  );
+		update_post_meta( $post_id, 'db_alt_names', $database['alt_names']  );		
+	}elseif( $test_alt_names ){
+		delete_post_meta( $post_id, 'db_alt_names' );
 	}
+
 
 	if ( $post_updated ) {
 		return "updated";

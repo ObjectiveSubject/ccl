@@ -1,3 +1,4 @@
+
 .ccl-c-database {
     border-top: 1px solid black;
     
@@ -226,4 +227,31 @@
         
         
     }
+}
+
+/**
+* Styles for database by letter
+*
+*///////////////////////////////////////
+
+.ccl-c-database__by-alpha{
+    
+    .ccl-c-database__letter{
+        @extend .ccl-h4; 
+        //@extend .ccl-u-mt-nudge; 
+        @extend .ccl-u-display-inline-block;
+        @extend .ccl-u-weight-bold;
+        border-right: 2px solid rgba( black, 0.6 );
+        
+        &:last-of-type{
+            border-right: none;
+        }
+        
+        a,span{
+            padding: $spacer/4 rem(16);
+            display: inline-block;
+        }
+        
+    }
+
 }

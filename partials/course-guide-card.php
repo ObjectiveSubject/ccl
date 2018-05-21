@@ -20,7 +20,7 @@ if ( empty(  $course_guides ) ) : ?>
 			<div class="ccl-l-row">
 				<div class="ccl-c-entry-content ccl-l-column ccl-l-span-9-md ccl-u-my-2">
 
-					<div class="ccl-c-alert ccl-is-error">No Libguides have been imported</div>
+					<div class="ccl-c-alert ccl-is-error ccl-h4">No course guides are available at this time</div>
 
 				</div>
 			</div>

@@ -7,7 +7,8 @@ get_header();
 
 //check if letter
 if( isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'] ){
-    $begins_with =   substr( sanitize_text_field( $_GET['begins_with'] ), 0, 1 ); // Sanitize and reduce to one character, technically could be validated against A-Z
+    $begins_with        =  substr( sanitize_text_field( $_GET['begins_with'] ), 0, 1 ); // Sanitize and reduce to one character, technically could be validated against A-Z
+    $begins_with_string = sanitize_text_field( $_GET['begins_with'] );
 }
 
 $filter_by_letter   = isset( $_GET['begins_with'] ) && '' !== $_GET['begins_with'];
@@ -35,9 +36,18 @@ if( $show_article ) :
 	
     //if we are using a page by alphabet, set posts filtered by letter
     if ( $filter_by_letter ) {
-        $show_article = array_filter( $show_article , function ($db) use ( $begins_with ) {
-            return substr($db['post_title'], 0, 1) === $begins_with;
-        });
+        
+        if( ctype_digit( $begins_with ) ){
+            $show_article = array_filter( $show_article , function ($db) use ( $begins_with ) {
+                return ctype_digit( substr($db['post_title'], 0, 1) );
+            });           
+        }else{
+            $show_article = array_filter( $show_article , function ($db) use ( $begins_with ) {
+                return substr($db['post_title'], 0, 1) === $begins_with;
+            });            
+        }
+        
+
 	}  					
     
     foreach( $show_article as $key => $article ){
@@ -60,6 +70,7 @@ if( $show_article ) :
         $article['database_trial']          = $database_trial;
         $article['serialized_classes']      = implode( ' ', $db_formats_serial ) . ' ' . sanitize_title( $article['database_vendor_name'] );
         $article['formats']                 = $format_list;
+        $article['has_best_bet']            = false ; 
         
  
         
@@ -69,18 +80,27 @@ if( $show_article ) :
             
             $best_bets_array = isset( $post_metadata['database_best_bets'][0] ) ? unserialize( $post_metadata['database_best_bets'][0]) : false;
             
-            $has_best_bet    =  is_array( $best_bets_array )? in_array( $taxonomy->name, $best_bets_array , true ) : false; 
+            //$best_bets_array = get_post_meta( $article['ID'], 'database_best_bets', true );
+        
+            $best_bets_array = array_map( function($array){
+                return (string)sanitize_title( $array );
+            }, $best_bets_array );
+            
+            $has_best_bet    =  in_array( (string)sanitize_title( $taxonomy->name ), $best_bets_array, true );
+            
             if( $has_best_bet ){
                 $article['database_best_bets']  = $best_bets_array ; 
                 //if there is a best bet, then assign it to the best bet temporary array
-                $article['has_best_bet']        = 'Best Bet'; 
+                $article['has_best_bet']        = true ; 
                 array_push( $sort_array_best_bets, $article );
             }else{
                 //else, assign it to the regular array
+
                 array_push( $sort_array_others, $article );
             }
             
         }else{
+            
             array_push( $sort_array_others, $article );    
         }                       
         
@@ -122,8 +142,8 @@ if( $show_article ) :
             );
     }, $vendor_filters);
 
-    \CCL\Helpers\debug_to_console( $format_filters );   
-    \CCL\Helpers\debug_to_console( $vendor_filters );   
+    //\CCL\Helpers\debug_to_console( $format_filters );   
+    //\CCL\Helpers\debug_to_console( $vendor_filters );   
     
 endif;
 ?>
@@ -143,14 +163,14 @@ endif;
         <div class="ccl-l-container">
             <div><a href="<?php echo site_url('database-directory/'); ?>" class="ccl-c-hero__action">&laquo; Back to Database Directory</a></div>
 			<div class="ccl-l-row">
-				<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-half-md ccl-l-span-two-thirds-lg">
+				<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-half-md ccl-l-span-two-thirds-lg <?php echo ($is_subject) ? 'ccl-c-database__slug-container': ''; ?>">
 					<div class="ccl-c-hero__header">
 						<h1 class="ccl-c-hero__title">
                             <?php _e( 'Databases', 'ccl' ); ?>
                             <?php
                                 //set up the right display
                                 if( $filter_by_letter ): ?>
-                                    <?php echo $filter_by_letter ? ': "<strong>' . strtoupper( $begins_with ) . '</strong>"' : ''; ?>                                    
+                                    <?php echo $filter_by_letter ? ': "<strong>' . strtoupper( $begins_with_string ) . '</strong>"' : ''; ?>                                    
                                 <?php else: ?>
                                     <?php echo $filter_by_subject ? ':<br/>' . '<strong>'.$taxonomy->name .'</strong>' : ''; ?>                                    
                                 <?php endif; ?>
@@ -266,7 +286,7 @@ endif;
 				
 				</div>
 
-				<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-half-md ccl-l-span-third-lg">
+				<div class="ccl-l-column ccl-l-span-half-sm ccl-l-span-half-md ccl-l-span-third-lg ccl-u-show-sm">
 						<?php
 						    if( !empty( $sorted_results ) ): ?>
 					        <div class="ccl-c-database-related">
@@ -299,7 +319,7 @@ endif;
                 //we don't want the best bet tooltip showing up for formats
                 if( !$is_format && !$filter_by_letter && !$is_vendor ): ?>
                 <div class="ccl-l-row" style="justify-content:flex-end;">
-                    <?php $best_best_desc = 'This indicates go-to, best-of-the-best resources in ' . $taxonomy->name; ?>
+                    <?php $best_best_desc = 'Start your research with these recommended databases'; ?>
                     <a style="text-decoration: underline;" class="ccl-u-weight-bold" href="#" data-toggle="tooltip" title="<?php echo $best_best_desc;  ?>">What is a Best Bet?</a>
                 </div>
                 <?php endif; ?>                        
@@ -329,7 +349,7 @@ endif;
                             <ul class="ccl-u-clean-list ccl-u-mt-1 ccl-c-database__meta">
                                 <?php 
                                 //if best bet is detected in array, then append HTML
-                                if( array_key_exists( 'has_best_bet', $article )  ): ?>
+                                if(  $article['has_best_bet'] ): ?>
                                 
                                     <li>
                                         <div class="ccl-u-weight-bold ccl-c-best-bet"><i class="ccl-b-icon alert" aria-hidden="true"></i>  Best Bet</div>

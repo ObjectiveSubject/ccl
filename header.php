@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<?php wp_head(); ?>
 	<link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7861216/7459392/css/fonts.css" />
+	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.png" />	
 </head>
 <body <?php body_class(); ?>>
 

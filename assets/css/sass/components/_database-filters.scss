@@ -3,6 +3,15 @@
 Filtering styles for the database by subjects page
 
 */
+
+.ccl-c-database__slug-container{
+    @include media( $sm ){
+        border-right: 1px solid rgba( black, 0.3 );
+        padding-right: $spacer;
+        box-sizing: border-box;
+    }
+}
+
 .ccl-c-database-filter__title{
     display: flex;
     justify-content: space-between;
