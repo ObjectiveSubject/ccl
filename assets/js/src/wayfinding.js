@@ -107,8 +107,9 @@
     };
 
     Wayfinder.prototype.getCallKey = function(callNum) {
+        callNum = callNum.replace(/ /g, '');
+        
         var key,
-            callNum = callNum.replace(/ /g, ''),
             callKeys = Object.keys(this.callNumbers);
 
         if ( callKeys.length === 0 ){
