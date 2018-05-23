@@ -541,21 +541,11 @@
         var maxMinutes = this.maxSlots * this.slotMinutes,
             maxText;
 
-        switch(maxMinutes) {
-            case 240:
-                maxText = maxMinutes / 60 + ' hours';
-                break;
-            case 180:
-                maxText = maxMinutes / 60 + ' hours';
-                break;
-            case 120:
-                maxText = maxMinutes / 60 + ' hours';
-                break;
-            case 60:
-                maxText = maxMinutes / 60 + ' hours';
-                break;
-            default:
-                maxText = maxMinutes + 'mins';
+        if ( maxMinutes > 60 ) {
+            maxText = maxMinutes / 60 + ' hours';    
+        } 
+        else {
+            maxText = maxMinutes + ' minutes';
         }
 
         this.$maxTime.text( maxText );
