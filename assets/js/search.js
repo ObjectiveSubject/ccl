@@ -97,7 +97,7 @@
 			.on('keyup keypress', function (event) {
 
 				// clear any previous set timeout
-				clearTimeout(timeout);
+				clearTimeout(_this.timeout);
 
 				// if key is forbidden, return
 				if ( forbiddenKeys.indexOf( event.keyCode ) > -1 ) {
