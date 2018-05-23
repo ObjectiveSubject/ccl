@@ -222,6 +222,16 @@
         }
     }
 
+    .ccl-is-between & {
+        &:before {
+            background-color: black;
+            @include school-style(background-color);
+        }
+        &:after {
+            content: "";
+        }
+    }
+
 }
 
 .ccl-c-room__current-duration {
