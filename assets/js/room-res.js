@@ -264,7 +264,7 @@
                     .prop('checked',false)
                     .change();
             });
-            $('.ccl-c-room__slot').removeClass('ccl-is-disabled');
+            $('.ccl-c-room__slot').removeClass('ccl-is-disabled ccl-has-potential');
         });
 
         this.$el.submit(function(event){
@@ -303,8 +303,19 @@
         var that = this;
         
         if ( this.$roomSlotInputs && this.$roomSlotInputs.length ){
+
+            // this.$el.find('.ccl-c-room__slot').hover(function(){
+            //     that.onSlotMouseIn(this);
+            // }, function(){
+            //     that.onSlotMouseOut(this);
+            // });
+
+            // click event fires BEFORE change event
+            this.$roomSlotInputs.click(function(event){
+                var input = this;
+                that.onSlotClick(input, event);
+            });
             
-            // input change event handler
             this.$roomSlotInputs.change(function(){
                 var input = this;
                 that.onSlotChange(input);
@@ -312,9 +323,131 @@
             
         }
     };
-    
+
+    // RoomResForm.prototype.onSlotMouseIn = function(hoveredSlot) {
+
+    //     // if you're not selecting your 2nd slot, return
+    //     if ( this.selectedSlotInputs.length !== 1 ) {
+    //         return;
+    //     }
+
+    //     var hoveredInput = $(hoveredSlot).find('[type="checkbox"]');
+
+    //     var hoveredInputIndex = this.$roomSlotInputs.index(hoveredInput),
+    //         selectedInputIndex = this.$roomSlotInputs.index( this.selectedSlotInputs[0] ),
+    //         inputIndexSet = [hoveredInputIndex, selectedInputIndex].sort();
+
+    //     // if you're hovering the already selected slot, return
+    //     if ( inputIndexSet[0] === inputIndexSet[1] ) {
+    //         return;
+    //     }
+
+    //     // if the first or last input indexes are beyond boundaries, return
+    //     if ( inputIndexSet[0] <= selectedInputIndex - this.maxSlots || inputIndexSet[1] >= selectedInputIndex + this.maxSlots ) {
+    //         return;
+    //     }
+
+    //     // get first/last slot elements
+    //     var $firstSlot = this.$roomSlotInputs.eq(inputIndexSet[0]).parent('.ccl-c-room__slot'),
+    //         $lastSlot = this.$roomSlotInputs.eq(inputIndexSet[1]).parent('.ccl-c-room__slot');
+
+    //     // select slots in between first and last
+    //     $firstSlot.nextUntil($lastSlot).each(function(){
+    //         var $this = $(this);
+    //         if ( ! $this.hasClass('ccl-is-disabled') ) {
+    //             $this.addClass('ccl-has-potential');
+    //         }
+    //     });
+
+    // };
+
+    // RoomResForm.prototype.onSlotMouseOut = function(hoveredInput) {
+
+    //     if ( this.selectedSlotInputs.length !== 1 ) {
+    //         return;
+    //     }
+
+    //     $('.ccl-c-room__slot').removeClass('ccl-has-potential');
+
+    // };
+
+    RoomResForm.prototype.onSlotClick = function(clickedInput, event){
+        
+        var that = this,
+            clickedInputIndex = that.$roomSlotInputs.index(clickedInput),
+            minIndex = clickedInputIndex - that.maxSlots,
+            maxIndex = clickedInputIndex + that.maxSlots;
+
+        // disables slots that are outside of max selectable area
+        function _isolateSelectableSlots() {
+
+            // occupied slots will affect what nearby slots can be selected
+            // Loop through any occupied slots, if they exist
+            $('.ccl-c-room__slot.ccl-is-occupied').each(function(i,slot){
+
+                // get occupied slot's input, find it's index amoung all slot inputs
+                var slotInput = $(slot).find('[type="checkbox"]'),
+                    occupiedIndex = that.$roomSlotInputs.index(slotInput);
+
+                // if occupied slot falls in the selectable area
+                if ( minIndex < occupiedIndex && occupiedIndex < maxIndex ) {
+
+                    // if occupied slot is BEFORE clicked slot, set it as the min
+                    if ( occupiedIndex < clickedInputIndex ) {
+                        minIndex = occupiedIndex;
+                    }
+                    // if occupied slot is AFTER clicked slot, set it as the max
+                    if ( occupiedIndex > clickedInputIndex ) {
+                        maxIndex = occupiedIndex;
+                    }
+
+                }
+            });
+
+            // loop through slots, disable ones that fall outside of min/max indexes
+            that.$roomSlotInputs.each(function(i,input){
+                if ( i <= minIndex || i >= maxIndex ) {
+                    $(input).parent('.ccl-c-room__slot').addClass('ccl-is-disabled');
+                }
+            });
+
+        }
+
+        console.log('selectedSlotInputs: ', that.selectedSlotInputs.length);
+
+        /* -------------------------------------------------------------
+         * if no inputs yet selected, this is the first
+         * ------------------------------------------------------------- */
+        if ( that.selectedSlotInputs.length === 0 ) {
+
+            _isolateSelectableSlots();
+            
+        }
+
+        /* -------------------------------------------------------------
+         * if 1 input selected, selecting 2nd slot
+         * ------------------------------------------------------------- */
+        if ( that.selectedSlotInputs.length === 1 ) {
+
+            _isolateSelectableSlots();
+
+        }
+
+        /* -------------------------------------------------------------
+         * if 2 or more slots already selected
+         * ------------------------------------------------------------- */
+        if ( that.selectedSlotInputs.length >= 2 ) {
+
+            
+
+        }
+        
+    };
+
     RoomResForm.prototype.onSlotChange = function(changedInput){
         
+        var that = this;
+
         // if input checked, add it to selected set
         if ( $(changedInput).prop('checked') ) {
 
@@ -334,78 +467,27 @@
             $(changedInput).parent('.ccl-c-room__slot').removeClass('ccl-is-checked');
 
         }
-        
-        // update the slots which can now be clickable
-        this.updateSelectableSlots();
-        
-        // update button states
+
+        // // if highlight slots between two ends
+        // if ( this.selectedSlotInputs.length === 2 ) {
+
+        //     that.$el.find('.ccl-is-checked').first().nextUntil('.ccl-is-checked').each(function(i,slot){
+        //         var slotInput = $(slot).find('input[type="checkbox"]');
+        //         that.selectedSlotInputs.push(slotInput[0]);
+        //         that.activateSlot(slot);
+        //     });
+
+        // }
+
+        // toggle reset button
         if ( this.selectedSlotInputs.length > 0 ) {
             this.$resetSelectionBtn.show();
-            this.$formSubmit.attr('disabled',false);
-        }
-        else {
-            this.$formSubmit.attr('disabled',true);
-            this.$resetSelectionBtn.hide(); 
+        } else {
+            this.$resetSelectionBtn.hide();
         }
 
-        // update text
         this.setCurrentDurationText();
 
-    };
-
-    RoomResForm.prototype.updateSelectableSlots = function() {
-
-        var that = this;
-
-        // IF there are selected slots
-        if ( that.selectedSlotInputs.length ){
-        
-            // first, sort the selected slots
-            that.selectedSlotInputs.sort(function(a,b){
-                return a.getAttribute('value') > b.getAttribute('value');
-            });
-
-            // grab the first and last selected slots
-            var minInput = that.selectedSlotInputs[0],
-                maxInput = that.selectedSlotInputs[that.selectedSlotInputs.length - 1];
-            
-            // get the indexes of the first and last slots from the $roomSlotInputs jQuery object
-            var minIndex = that.$roomSlotInputs.index(minInput),
-                maxIndex = that.$roomSlotInputs.index(maxInput);
-            
-            // calculate the min and max slot indexes which are selectable
-            var minAllowable = maxIndex - that.maxSlots,
-                maxAllowable = minIndex + that.maxSlots;
-    
-            // loop through room slots and update them accordingly
-            that.$roomSlotInputs.each(function(i, input){
-                
-                // enables or disables depending on whether slot falls within range
-                if ( minAllowable < i && i < maxAllowable ) {
-                    that.enableSlot(input);
-                } else {
-                    that.disableSlot(input);
-                }
-                
-                // add a class to the slots that fall between the min and max selected slots
-                if ( minIndex < i && i < maxIndex ) {
-                    $(input).parent().addClass('ccl-is-between');
-                } else {
-                    $(input).parent().removeClass('ccl-is-between');
-                }
-            });
-        
-        } 
-        // ELSE no selected slots
-        else {
-
-            // enable all slots
-            that.$roomSlotInputs.each(function(i, input){
-                that.enableSlot(input);
-            });
-
-        }
-        
     };
 
     RoomResForm.prototype.clearSlot = function(slot) {
@@ -416,7 +498,10 @@
         // if it's the checkbox.
         if ( $(slot).is('[type="checkbox"]') ) {
          
-            this.enableSlot(slot);
+            $(slot)
+                .prop('checked',false)
+                .parent('.ccl-c-room__slot')
+                    .removeClass('ccl-is-checked ccl-has-potential');
 
             // get index of the input from selected set
             inputIndex = this.selectedSlotInputs.indexOf(slot);
@@ -426,7 +511,8 @@
 
             var $input = $(slot).find('[type="checkbox"]');
 
-            this.enableSlot($input[0]);
+            $(slot).removeClass('ccl-is-checked ccl-has-potential');
+            $input.prop('checked',false);
 
             // get index of the input from selected set
             inputIndex = this.selectedSlotInputs.indexOf( $input[0] );
@@ -483,20 +569,6 @@
                     .prop('checked',true);
 
         }
-    };
-
-    RoomResForm.prototype.enableSlot = function(slot) {
-        $(slot)
-            .prop('disabled', false)
-            .parent('.ccl-c-room__slot')
-                .removeClass('ccl-is-disabled');
-    };
-
-    RoomResForm.prototype.disableSlot = function(slot) {
-        $(slot)
-            .prop('disabled', true)
-            .parent('.ccl-c-room__slot')
-                .addClass('ccl-is-disabled');
     };
 
     RoomResForm.prototype.setLoading = function(){

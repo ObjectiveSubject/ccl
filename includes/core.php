@@ -71,13 +71,6 @@ function scripts( $debug = false ) {
 		CCL_VERSION,
 		true
 	);
-
-	wp_localize_script( 'main', 'CCL', array(
-		'site_url' => site_url('/'),
-		'assets' => CCL_ASSETS,
-		'ajax_url' => admin_url( 'admin-ajax.php' ),
-		'nonce'    => wp_create_nonce( 'ccl_nonce' )
-	) );
 	
 	//enqueue jplist if we are working with the database post type
 	if( in_array( get_post_type(), array( 'database', 'guide' ) ) ){
@@ -90,11 +83,18 @@ function scripts( $debug = false ) {
 		array('jquery', 'slick'),
 		filemtime(get_template_directory() . "/assets/js/main{$min}.js"),
 		true
-	);	
+	);
+
+	wp_localize_script( 'main', 'CCL', array(
+		'site_url' => site_url('/'),
+		'assets' => CCL_ASSETS,
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'nonce'    => wp_create_nonce( 'ccl_nonce' )
+	) );
 }
 
 function siteimprove_init(){
-	if(  DB_NAME == 'wp_libraryweb' ){
+	if( defined('DB_NAME') && DB_NAME == 'wp_libraryweb' ){
 	
 		?>
 			<script type="text/javascript">

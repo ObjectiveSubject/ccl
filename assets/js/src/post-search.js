@@ -67,7 +67,7 @@
 
 			})
 			.focus(function(){
-				if ( _this.$input.val() != '' ) {
+				if ( _this.$input.val() !== '' ) {
 					_this.$resultsList.show();
 				}
 				
@@ -158,7 +158,7 @@
 
 
 		    
-		    if( results.posts.length == 0 ){
+		    if( results.posts.length === 0 ){
 		    	this.$resultsList.html('');		    	
 		        this.$resultsList.show().append( $('<div />').addClass('ccl-u-py-nudge ccl-u-weight-bold ccl-u-faded').html('Sorry, no databases found - try another search') );
 

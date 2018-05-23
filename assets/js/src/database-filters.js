@@ -35,7 +35,7 @@
             redrawCallback  : function( collection, $dataview, statuses ){
                 
                 //check for initial load
-                if( _this.runTimes == 0 ){
+                if( _this.runTimes === 0 ){
                     _this.runTimes++;
                     return;                    
                 }

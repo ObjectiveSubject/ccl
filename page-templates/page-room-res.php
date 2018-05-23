@@ -283,7 +283,7 @@ get_header(); ?>
                                                 </p>
                                                 
                                                 <p class="ccl-h5 ccl-u-mt-0">
-                                                    <span class="ccl-u-faded">Max: <span class="js-max-time"></span></span>
+                                                    Max: <span class="js-max-time"></span>
                                                 </p>
                                                     
                                                 <div class="ccl-c-room__schedule js-room-schedule">
@@ -315,7 +315,7 @@ get_header(); ?>
 
                                         <div class="ccl-c-modal__footer">
                                             <button type="button" class="ccl-b-btn js-room-res-form-cancel" data-toggle="modal"><?php _e( 'Cancel', 'ccl' ); ?></button>
-                                            <button type="submit" class="ccl-b-btn ccl-is-solid js-room-res-form-submit" ><?php _e( 'Submit', 'ccl' ); ?></button>
+                                            <button id="room-res-submit" type="submit" class="ccl-b-btn ccl-is-solid js-room-res-form-submit" disabled><?php _e( 'Submit', 'ccl' ); ?></button>
                                             <button type="submit" class="ccl-b-btn ccl-is-solid js-room-res-form-reload" style="display:none"><?php _e( 'Make another booking', 'ccl' ); ?></button>
                                         </div>
 
