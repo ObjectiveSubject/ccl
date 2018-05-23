@@ -185,7 +185,7 @@ function load_search_results() {
 					break;
 				case 'staff':
 					$post_type_icon      = 'person';
-					$post_type_nice_name = 'Librarian';
+					$post_type_nice_name = ( has_term( 'librarian', 'staff_role', $post->ID ) ) ? 'Librarian' : 'Staff'   ;
 					$post_link           = get_post_meta( $post->ID , 'member_friendly_url', true );
 					break;
 				default:

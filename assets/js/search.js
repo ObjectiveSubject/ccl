@@ -34,7 +34,7 @@
 		this.$worldCatLink	= null;
 		//check to see if this searchbox has livesearch enabled
 		this.$activateLiveSearch	= $(this.$el).data('livesearch');
-		
+		this.locationType	=  $( this.$searchScope ).find('option:selected').data('loc');
 
         this.init();
         
@@ -60,7 +60,7 @@
 		
 		this.$searchScope.on( 'change', function(){
 			
-			_this.locationType = _this.getLocID();				
+			_this.getLocID();				
 			
 			if( _this.locationType != 'wms' ){
 				_this.$indexContain
@@ -80,7 +80,9 @@
 	SearchAutocomplete.prototype.getLocID	= function(){
 		//function to get the ID of location
 		var _this = this;
-		return $( _this.$searchScope ).find('option:selected').data('loc');
+		_this.locationType = $( _this.$searchScope ).find('option:selected').attr('data-loc');
+		
+		//console.log( _this.locationType );
 	};
 
 	SearchAutocomplete.prototype.isLiveSearch = function(){
@@ -109,12 +111,12 @@
 				//console.log(query);
 
 				// set a timeout function to update results once 600ms passes
-				timeout = setTimeout(function () {
+				_this.timeout = setTimeout(function () {
 
 					if ( query.length > 1 ) {
 
 						//set this veriable here cuz we are going to need it later
-						_this.locationType = _this.getLocID();						
+						_this.getLocID();						
 						_this.$response.show();
 					 	_this.fetchResults( query );
 					 	
@@ -154,42 +156,8 @@
 			_this.onSearchIndexChange();
 		});
 		
-
 		//on submit fire off catalog search to WMS
-		this.$form.on('submit', function(event) {
-
-			event.preventDefault();
-			clearTimeout(timeout);
-			
-			//get search index and input value
-			var searchIndex = _this.$searchIndex.val();
-			var queryString = _this.$input.val();
-			
-			//check location type
-			_this.locationType = _this.getLocID();		
-			
-			
-			//setup array for constructSearchURL()
-			var input_array = [];
-			input_array['queryString']	= (_this.locationType === 'wms') ?  searchIndex + ":" + queryString : queryString;
-			input_array['searchScope']	= _this.$searchScope.val();
-			input_array['locationType']	= _this.locationType;
-
-			//if query string has content, then run
-			if ( queryString.length > 1 ) {
-				_this.$response.show();
-				//_this.fetchResults( queryString );
-
-				var wmsConstructedUrl = _this.constructSearchURL(input_array);
-				
-				//console.log( wmsConstructedUrl );
-				
-				window.open(wmsConstructedUrl, '_blank');
-		   }else{
-		   	return;
-		   }
-		   
-		});		
+		this.$form.on('submit',  {_this: this } , _this.handleSubmit );
 			
 	};
 	
@@ -200,23 +168,30 @@
 		this.toggleIndex();
 		
 		//on submit fire off catalog search to WMS
-		this.$form.on('submit', function(event) {
-
+		this.$form.on('submit',  {_this: this } , _this.handleSubmit );		
+		
+	};
+	
+	SearchAutocomplete.prototype.handleSubmit = function(event){
+		var _this = event.data._this;
 			event.preventDefault();
+			
+			if(_this.$activateLiveSearch){
+				clearTimeout(_this.timeout);				
+			}
 			
 			//get search index and input value
 			var searchIndex = _this.$searchIndex.val();
 			var queryString = _this.$input.val();
 			
 			//check location type
-			_this.locationType = _this.getLocID();
+			_this.getLocID();
 			
 			//if this URL is for WMS, then append the searchindex to it, if not, then sent queryString only
 			//setup array for constructSearchURL()
 			var input_array = [];
 			input_array['queryString']	= (_this.locationType === 'wms') ?  searchIndex + ":" + queryString : queryString;
 			input_array['searchScope']	= _this.$searchScope.val();
-			input_array['locationType']	= _this.locationType;
 
 			//if query string has content, then run
 			if ( queryString.length > 1 ) {
@@ -225,12 +200,25 @@
 				
 				//console.log( wmsConstructedUrl );
 				
-				window.open(wmsConstructedUrl, '_blank');
+				if( _this.locationType === 'wp_ccl' ){
+					
+					window.open(wmsConstructedUrl, '_self');
+					
+					$(window).unload( function(){
+
+						_this.$searchScope.prop( 'selectedIndex', 0 );
+					});					
+					
+				}else{
+					
+					window.open(wmsConstructedUrl, '_blank');					
+				}
+				
 		   }else{
+		   	
 		   	return;
-		   }
-		   
-		});			
+		   	
+		   }		
 	};
 
 	SearchAutocomplete.prototype.fetchResults = function( query ) {
@@ -279,7 +267,6 @@
 		var input_array = [];
 		input_array['queryString']	= (_this.locationType === 'wms') ?  searchIndex + ":" + query : query;
 		input_array['searchScope']	= _this.$searchScope.val();
-		input_array['locationType']	= _this.locationType;
 		
 		//URL created!
 		var wmsConstructedUrl = _this.constructSearchURL(input_array);
@@ -342,6 +329,7 @@
 						target = '_blank';
 						break;
 					case 'Librarian':
+					case 'Staff':
 						cta = 'Contact';
 						target = '_blank';
 						break;
@@ -408,16 +396,16 @@
 	
 	SearchAutocomplete.prototype.constructSearchURL = function(input_array){
 		//constructs URL with parameters from
-		//input_array = [queryString, searchScope, locationType]
+		//input_array = [queryString, searchScope, SearchLocation]
 		
 		//define variables
-		var queryString, searchSrc, searchScopeKey, renderedURL, locationType;
+		var queryString, searchSrc, searchScopeKey, renderedURL;
 		
 		queryString 	= input_array['queryString'];
 		searchSrc		= input_array['searchScope'];
-		locationType	= input_array['locationType'];
+
 		
-		switch (locationType) {
+		switch ( this.locationType) {
 			case 'wms':
 				//check if search location is a scoped search location
 				if( searchSrc.match(/::zs:/) ){
@@ -463,21 +451,6 @@
         return renderedURL;
 
     };
-
-	// If the user hits return or presses submit, the query will go directly to WorldCat. 
-	// This function wraps the string in the specified index value (keyword, author, title, etc)
-	SearchAutocomplete.prototype.wrapQuery = function() {
-		// event.preventDefault();
-
-		var wrappedQuery = this.$searchIndex.val() + ':(' + this.$input.val() + ')';
-		
-		this.$input.val(wrappedQuery); // wrap the query in the two-letter code provided by the index dropdown
-
-		/* TODO:
-		 * FIX: Currently document.catalogSearch.submit() this is not a function ...
-		 * ---------------------------------------- */
-		// document.catalogSearch.submit(); // direct search to WorldCat on return
-	};
 
      $(document).ready(function(){
 		// .each() will fail gracefully if no elements are found
