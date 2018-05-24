@@ -6,7 +6,7 @@
 $footer_options = get_option( 'footer-options' );
 ?>
 
-	<aside class="ccl-c-school-band ccl-u-py-2" style="background-color:#F5F5F5" role="complementary" aria-label="Claremont Colleges Schools">
+	<aside class="ccl-c-school-band ccl-u-py-2" style="background-color:#F5F5F5" role="complementary" aria-label="Claremont Colleges School Logos">
 		<div class="ccl-l-container">
 			<ul class="ccl-l-row ccl-l-align-center ccl-u-clean-list">
 				<?php
