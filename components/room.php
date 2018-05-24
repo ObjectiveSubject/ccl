@@ -35,15 +35,15 @@
 
     <ul class="ccl-c-room__legend ccl-u-mt-2">
         <li class="ccl-c-room__key ccl-is-available">
-            <i class="ccl-b-icon close" aria-hidden="true"></i>
+            <span class="ccl-b-icon close" aria-hidden="true"></span>
             <span>Available</span>
         </li>
         <li class="ccl-c-room__key ccl-is-occupied">
-            <i class="ccl-b-icon close" aria-hidden="true"></i>
+            <span class="ccl-b-icon close" aria-hidden="true"></span>
             <span>Occupied</span>
         </li>
         <li class="ccl-c-room__key ccl-is-selected">
-            <i class="ccl-b-icon clock" aria-hidden="true"></i>
+            <span class="ccl-b-icon clock" aria-hidden="true"></span>
             <span>Selected</span>
         </li>
     </ul>

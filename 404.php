@@ -21,7 +21,7 @@ get_header(); ?>
 						<input type="text" class="ccl-c-search-form-item ccl-b-input" name="s" placeholder="Maybe try a search?"/>
 									
 						<button type="submit" class="ccl-c-search-form__submit">
-							<i class="ccl-b-icon search" aria-hidden="true"></i>
+							<span class="ccl-b-icon search" aria-hidden="true"></span>
 							<span class="ccl-u-display-none">Search</span>
 						</button>
 

@@ -79,7 +79,7 @@ if ( empty( $all_subjects) ) : ?>
                                 </div>
                                 <div class="ccl-l-column ccl-l-span-5-md ccl-c-guide-card__meta">
 
-                                    <i class="ccl-b-icon person-open ccl-u-mr-nudge" aria-hidden="true"></i><span><?php echo $guide_author; ?></span>
+                                    <span class="ccl-b-icon person-open ccl-u-mr-nudge" aria-hidden="true"></span><span><?php echo $guide_author; ?></span>
 
                                 </div>        
                             </div>

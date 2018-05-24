@@ -14,7 +14,7 @@
         this.target = this.$el.data('target');
         this.$target = $(this.target);
         this.$parentMenu = this.$el.closest('.ccl-c-menu');
-        this.$closeIcon = $('<i class="ccl-b-icon close" aria-hidden="true"></i>');
+        this.$closeIcon = $('<span class="ccl-b-icon close" aria-hidden="true"></span>');
 
         this.init();
     };

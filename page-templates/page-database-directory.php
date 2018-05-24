@@ -41,19 +41,19 @@ get_header(); ?>
                                     <ul class="ccl-c-hero__menu">
                                          <li>
                                             <a href="#block-database-search" class="js-smooth-scroll"><?php _e( 'Find a Specific Database by Name or Description', 'ccl' ); ?></a>
-                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                                            <span class="ccl-b-icon arrow-down" aria-hidden="true"></span>
                                         </li>                                       
                                         <li>
                                             <a href="#block-subject" class="js-smooth-scroll"><?php _e( 'Databases by Subject', 'ccl' ); ?></a>
-                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                                            <span class="ccl-b-icon arrow-down" aria-hidden="true"></span>
                                         </li>                                        
                                         <li>
                                             <a href="#block-title" class="js-smooth-scroll"><?php _e( 'Databases by Name', 'ccl' ); ?></a>
-                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                                            <span class="ccl-b-icon arrow-down" aria-hidden="true"></span>
                                         </li>
                                         <li>
                                             <a href="#block-format" class="js-smooth-scroll"><?php _e( 'Databases by Format', 'ccl' ); ?></a>
-                                            <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                                            <span class="ccl-b-icon arrow-down" aria-hidden="true"></span>
                                         </li>
                                     </ul>
         

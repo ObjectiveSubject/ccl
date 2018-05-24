@@ -7,8 +7,8 @@ $search_locations = get_option( 'ccl-search-locations' );
 
 <?php if( is_front_page() ): ?>
     <div class="ccl-c-search__description ccl-l-row">    
-        <a class="ccl-c-search__description-content" href="#" data-toggle="tooltip" title="<?php echo $search_description; ?>">About this search box <i class="ccl-b-icon alert" aria-hidden="true"></i></a>
-        <a class="ccl-c-search__description-content" href="https://ccl.on.worldcat.org/advancedsearch" target="_blank">Advanced search <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a> 
+        <a class="ccl-c-search__description-content" href="#" data-toggle="tooltip" title="<?php echo $search_description; ?>">About this search box <span class="ccl-b-icon alert" aria-hidden="true"></span></a>
+        <a class="ccl-c-search__description-content" href="https://ccl.on.worldcat.org/advancedsearch" target="_blank">Advanced search <span class="ccl-b-icon pointer-right-open" aria-hidden="true"></span></a> 
     </div>        
 <?php else: ?>
     <div class="ccl-u-show-lg ccl-c-search__quick-desc">
@@ -49,7 +49,7 @@ $search_locations = get_option( 'ccl-search-locations' );
         </div>
     
         <button type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid">
-            <i class="ccl-b-icon search" aria-hidden="true"></i>
+            <span class="ccl-b-icon search" aria-hidden="true"></span>
             <span class="ccl-u-display-none">Search</span>
         </button>
     </form>

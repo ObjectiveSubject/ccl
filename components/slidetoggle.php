@@ -5,7 +5,7 @@
             <a class="ccl-c-slideToggle__title" data-toggleTitle="search-description"  aria-expanded="false" aria-controls="SerchDescription">About this search box</a>                   
         </li>
         <li>
-            <a href="https://ccl.on.worldcat.org/advancedsearch" target="_blank">Advanced Search <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a>              
+            <a href="https://ccl.on.worldcat.org/advancedsearch" target="_blank">Advanced Search <span class="ccl-b-icon pointer-right-open" aria-hidden="true"></span></a>              
         </li>
     </ul>
 

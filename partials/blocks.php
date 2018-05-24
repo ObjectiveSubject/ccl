@@ -546,7 +546,7 @@ if ( $blocks ) : ?>
                         </div>
                     
                         <button type="submit" class="ccl-c-search-form__submit ccl-b-btn ccl-is-solid" style="min-width: 8rem">
-                            <i class="ccl-b-icon search" aria-hidden="true"></i>
+                            <span class="ccl-b-icon search" aria-hidden="true"></span>
                             <span class="ccl-u-display-none">Search</span>
                         </button>
                     </form>

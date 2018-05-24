@@ -32,7 +32,7 @@
 <!--this is extra modal code removed from user-nav-->
                 <a href="#" data-toggle="modal" data-target="#modal-librarian-chat">
                     <span class="ccl-u-hide-md ccl-h5" aria-hidden="true"><?php _e( 'Ask Us!', 'ccl' ); ?></span>
-                    <span class="ccl-u-show-md"><?php _e( 'Contact the Library', 'ccl' ); ?> <i class="ccl-b-icon person-open" aria-hidden="true"></i>
+                    <span class="ccl-u-show-md"><?php _e( 'Contact the Library', 'ccl' ); ?> <span class="ccl-b-icon person-open" aria-hidden="true"></span>
                     </span>
                 </a>
                 

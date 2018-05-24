@@ -120,7 +120,7 @@ $is_spc = in_array( 'is_spc', $page_options ); // is special collections page
 
         <a href="#" class="ccl-c-quick-nav__item ccl-is-search-toggle">
             <span class="ccl-u-display-none">Search</span>
-            <i class="ccl-b-icon search" aria-hidden="true"></i>
+            <span class="ccl-b-icon search" aria-hidden="true"></span>
         </a>
     
     </div>

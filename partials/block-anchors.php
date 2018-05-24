@@ -15,7 +15,7 @@ if ( $blocks ) : ?>
             <?php if ( $block['block_type'] != 'banner' ) : ?>
                 <li>
                     <a href="<?php echo '#block-' . $index; ?>"><?php echo esc_html( $title ); ?></a>
-                    <i class="ccl-b-icon arrow-down" aria-hidden="true"></i>
+                    <span class="ccl-b-icon arrow-down" aria-hidden="true"></span>
                 </li>
             <?php endif; ?>
 

@@ -11,14 +11,14 @@
             <li class="ccl-c-user-nav__menu-item ccl-is-right" style="margin-left: auto">
                 <a href="https://ccl.on.worldcat.org/myaccount" target="_blank">
                 <span class="ccl-u-hide-md ccl-h5">Library Account</span>
-                <span class="ccl-u-show-md">View Library Account <i class="ccl-b-icon list" aria-hidden="true"></i></span> 
+                <span class="ccl-u-show-md">View Library Account <span class="ccl-b-icon list" aria-hidden="true"></span></span> 
                 </a>
             </li>
 
             <li class="ccl-c-user-nav__menu-item ccl-is-right" >
                 <a href="<?php echo site_url('ask-us/'); ?>" >
                     <span class="ccl-u-hide-md ccl-h5" aria-hidden="true"><?php _e( 'Ask Us', 'ccl' ); ?></span>
-                    <span class="ccl-u-show-md"><?php _e( 'Ask Us', 'ccl' ); ?> <i class="ccl-b-icon person-open" aria-hidden="true"></i>
+                    <span class="ccl-u-show-md"><?php _e( 'Ask Us', 'ccl' ); ?> <span class="ccl-b-icon person-open" aria-hidden="true"></span>
                     </span>
                 </a>
             </li>

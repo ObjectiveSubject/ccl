@@ -187,14 +187,14 @@ endif;
                             <button 
                                 type="button" 
                                 class="jplist-reset-btn ccl-c-database-filter--reset">
-                                <i class="ccl-b-icon close"></i>  Reset
+                                <span class="ccl-b-icon close" aria-hidden="true"></span>  Reset
                             </button>                             
                         </div>
 
                     </div>
                     
 				    <div class="ccl-l-column ccl-l-span-two-thirds-lg ccl-c-database-filter__textbox ccl-u-mt-1">
-                        <i class="ccl-b-icon search" aria-hidden="true"></i>				        
+                        <span class="ccl-b-icon search" aria-hidden="true"></span>				        
                         <div class="text-filter-box">
                            <input
                             class="ccl-b-input"
@@ -352,7 +352,7 @@ endif;
                                 if(  $article['has_best_bet'] ): ?>
                                 
                                     <li>
-                                        <div class="ccl-u-weight-bold ccl-c-best-bet"><i class="ccl-b-icon alert" aria-hidden="true"></i>  Best Bet</div>
+                                        <div class="ccl-u-weight-bold ccl-c-best-bet"><span class="ccl-b-icon alert" aria-hidden="true"></span>  Best Bet</div>
                                     </li>
                                 <?php endif; ?>
                                 
@@ -360,7 +360,7 @@ endif;
                                 //if trial is set, then append to HTML
                                 if( $article['database_trial'] ): ?>
                                     <li class="ccl-c-database--trial">
-                                        <div class="ccl-u-weight-bold ">Trial <i class="ccl-b-icon clock" aria-hidden="true"></i></div>
+                                        <div class="ccl-u-weight-bold ">Trial <span class="ccl-b-icon clock" aria-hidden="true"></span></div>
                                     </li>
                                 <?php endif; ?>
                             

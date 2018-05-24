@@ -290,7 +290,7 @@ function icon_fn( $attributes = false, $content = null ) {
 		return null;
 	}
 
-	$html = '<i class="ccl-b-icon ' . esc_attr( $data['type'] ) . '" aria-hidden="true"></i> ' . $content;
+	$html = '<span class="ccl-b-icon ' . esc_attr( $data['type'] ) . '" aria-hidden="true"></span> ' . $content;
 
 	return $html;
 }

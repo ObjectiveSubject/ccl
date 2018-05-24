@@ -18,31 +18,31 @@ get_header();
 		//each primary array key will be a post type, ie guide, page, staff, etc
 		$sorted_search_results = array(
 				'guide' 	=> array(
-					'title'		=> '<i class="ccl-b-icon compass" aria-hidden="true"></i>  Guides',
+					'title'		=> '<span class="ccl-b-icon compass" aria-hidden="true"></span>  Guides',
 					'slug'		=> 'Curated list of the best research tools and resources for a discipline or subject',
 					),
 				'faq'		=> array(
-					'title'		=> '<i class="ccl-b-icon question" aria-hidden="true"></i>  FAQs',
+					'title'		=> '<span class="ccl-b-icon question" aria-hidden="true"></span>  FAQs',
 					'slug'		=> 'Quick answers to frequently asked questions about the library and our services',
 					),						
 				'webpage'		=> array(
-					'title'		=> '<i class="ccl-b-icon clip" aria-hidden="true"></i>  Library Website',
+					'title'		=> '<span class="ccl-b-icon clip" aria-hidden="true"></span>  Library Website',
 					'slug'		=> 'Content from the library website',
 					),
 				'staff'		=> array(
-					'title'		=> '<i class="ccl-b-icon person" aria-hidden="true"></i>  Staff',
+					'title'		=> '<span class="ccl-b-icon person" aria-hidden="true"></span>  Staff',
 					'slug'		=> 'Library staff',
 					),
 				'news'		=> array(
-					'title'		=> '<i class="ccl-b-icon calendar" aria-hidden="true"></i>  News',
+					'title'		=> '<span class="ccl-b-icon calendar" aria-hidden="true"></span>  News',
 					'slug'		=> 'Information about new things happening at the library',
 					),						
 				'database'	=> array(
-					'title'		=> '<i class="ccl-b-icon pointer-right" aria-hidden="true"></i>  Databases',
+					'title'		=> '<span class="ccl-b-icon pointer-right" aria-hidden="true"></span>  Databases',
 					'slug'		=> 'Electronic resources offered through the library',
 					),
 				'room'		=> array(
-					'title'		=> '<i class="ccl-b-icon home" aria-hidden="true"></i>  Rooms',
+					'title'		=> '<span class="ccl-b-icon home" aria-hidden="true"></span>  Rooms',
 					'slug'		=> 'Spaces throughout the library',
 					)						
 
@@ -212,7 +212,7 @@ get_header();
 							<?php foreach( $result['posts'] as $key => $post): ?>
 								<li class="ccl-c-search-page__list-links"><a href="<?php echo $post['post_url']; ?>" target="_blank">
 									<span class="ccl-u-weight-bold"><?php echo $post['post_title']; ?></span>
-									<span>View  <i class="ccl-b-icon arrow-right" aria-hidden="true"></i></span></a>
+									<span>View  <span class="ccl-b-icon arrow-right" aria-hidden="true"></span></span></a>
 								</li>
 							<?php endforeach; ?>
 						</ul>

@@ -62,13 +62,13 @@
 					<ul class="ccl-c-masthead__status ccl-c-masthead__nav-item">
 						<?php if ( $hours ) : ?>
 							<li>
-								<span class="ccl-h5"><i class="ccl-b-icon clock" aria-hidden="true"></i> Today&#39;s hours</span>
+								<span class="ccl-h5"><span class="ccl-b-icon clock" aria-hidden="true"></span> Today&#39;s hours</span>
 								<ul class="ccl-c-masthead__hours">
 									<?php foreach($hours->locations as $location): ?>
 										<?php if( empty( $location->rendered ) || $location->rendered == '' ) continue; ?>
 										<li class="ccl-u-font-size-sm"><span><?php echo $location->name; ?></span> <span><?php echo $location->rendered; ?></span></li>
 									<?php endforeach; ?>
-									<li><a class="ccl-u-font-size-sm ccl-c-masthead__more-hours" href="<?php echo esc_url( home_url('/hours/') ); ?>">More Hours <i class="ccl-b-icon pointer-right-open" aria-hidden="true"></i></a></li>
+									<li><a class="ccl-u-font-size-sm ccl-c-masthead__more-hours" href="<?php echo esc_url( home_url('/hours/') ); ?>">More Hours <span class="ccl-b-icon pointer-right-open" aria-hidden="true"></span></a></li>
 								</ul>
 
 							</li>
@@ -77,7 +77,7 @@
 						<li>
 							<?php if ( $events && ! empty( $events->events ) ) : ?>
 								<div class="ccl-c-masthead__event">
-									<span class="ccl-h5"><i class="ccl-b-icon calendar" aria-hidden="true"></i>
+									<span class="ccl-h5"><span class="ccl-b-icon calendar" aria-hidden="true"></span>
 									
 										<?php date_default_timezone_set('America/Los_Angeles'); ?>
 										<a href="<?php echo esc_url( $events->events[0]->url->public ); ?>" target="_blank">
@@ -94,7 +94,7 @@
 								<div class="ccl-c-masthead__notice">
 									<span class="ccl-h5">
 										<span class="ccl-u-color-red">
-											<i class="ccl-b-icon alert" aria-hidden="true"></i> Notice:
+											<span class="ccl-b-icon alert" aria-hidden="true"></span> Notice:
 										</span>
 										<?php $notice = shuffle( $notices ); // Return a random notice ?>
 										<?php echo apply_filters( 'the_title', $notices[0] ); ?>
