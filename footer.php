@@ -36,7 +36,7 @@ $footer_options = get_option( 'footer-options' );
 		</div>
 	</aside>
 
-	<footer id="colophon" class="ccl-c-footer ccl-u-pt-2 ccl-u-pb-3" role="contentinfo">
+	<footer id="colophon" class="ccl-c-footer ccl-u-pt-2 ccl-u-pb-3">
 		
 		<div class="ccl-l-container">
 			
