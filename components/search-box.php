@@ -55,7 +55,7 @@ $search_locations = get_option( 'ccl-search-locations' );
     </form>
 
     <div class="ccl-c-search-results">
-        <div class="ccl-c-search-results__list" role="list">
+        <div class="ccl-c-search-results__list">
 
         </div>
     </div>
