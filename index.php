@@ -8,7 +8,7 @@
 
 get_header(); ?>
 
-	<div class="site-content">
+	<div id="content" class="site-content">
 
 		<div class="ccl-l-container">
 

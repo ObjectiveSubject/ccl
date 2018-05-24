@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-	<div class="site-content">
+	<div id="content" class="site-content">
 
 		<style>
 			.ccl-b-icon {

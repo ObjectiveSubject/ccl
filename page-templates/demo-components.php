@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-	<div class="site-content">
+	<div id="content" class="site-content">
 
 		<div class="">
 			<?php get_template_part( 'components/hero' ); ?>

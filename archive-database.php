@@ -148,7 +148,7 @@ if( $show_article ) :
 endif;
 ?>
 
-<div class="site-content ccl-database-filter">
+<div id="content" class="site-content ccl-database-filter">
 
     <header class="ccl-c-hero ccl-is-naked">
         

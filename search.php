@@ -156,7 +156,7 @@ get_header();
 	endif;		
 
 ?>
-<div class="site-content">
+<div id="content" class="site-content">
 
 	<header class="ccl-c-hero">
 		<div class="ccl-l-container">

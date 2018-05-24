@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-	<div class="site-content">
+	<div id="content" class="site-content">
 
         <header class="ccl-c-hero">
             

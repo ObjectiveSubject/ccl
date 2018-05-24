@@ -13,6 +13,8 @@
 </head>
 <body <?php body_class(); ?>>
 
+	<a href="#content" class="screen-reader-text">Skip to main content</a>
+
 	<div id="page">
 
 		<?php \CCL\Helpers\get_component( 'user-nav' ); ?>
