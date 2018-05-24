@@ -311,7 +311,7 @@ function header_menu( $menu_id, $classname = '' ) {
 				$link_class = 'js-toggle-header-menu';
 			} ?>
 
-			<li id="menu-item-<?php echo $item->ID; ?>" class="<?php echo implode( ' ', $menu_item_class ); ?>">
+			<li class="<?php echo implode( ' ', $menu_item_class ); ?>">
 				<a href="<?php echo $item->url; ?>" class="<?php echo $link_class; ?>" data-target="#sub-menu-<?php echo $item->ID; ?>"><?php echo $item->title; ?></a>
 			</li>
 
@@ -341,7 +341,7 @@ function build_sub_menu_items( $items ) {
 		$item_class = array( "menu-item", "menu-item-type-{$item->type}", "menu-item-object-{$item->object}", "menu-item-{$item->ID}" ); 
 		?>
 
-		<li id="menu-item-<?php echo $item->ID; ?>" class="<?php echo implode( ' ', $item_class ); ?>">
+		<li class="<?php echo implode( ' ', $item_class ); ?>">
 			
 			<?php if ( $item->url == '#' ) : ?>
 				<span class="ccl-non-link"><?php echo $item->title; ?></span>
