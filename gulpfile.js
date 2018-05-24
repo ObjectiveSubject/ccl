@@ -21,7 +21,7 @@ var pkg	   = require('./package.json'),
 
 // Styles
 gulp.task('styles', function() {
-	return sass('assets/css/sass/style.scss', { style: 'expanded', sourcemap: true })
+	return sass(['assets/css/sass/third-party.scss', 'assets/css/sass/style.scss'], { style: 'expanded', sourcemap: true })
 		.pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false

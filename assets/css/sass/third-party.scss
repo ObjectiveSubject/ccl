@@ -1,0 +1,37 @@
+/**
+ * Stylesheet for third-party apps/environments outside of WP Theme.
+ */
+
+ 
+/* ----------------------------------------------
+ * Import baseline stuff that can be used outside
+ * of this theme.
+ */
+
+@import "tools/all";              // tools: functions, mixins, etc
+@import "settings/all";           // variables: colors, layout, etc
+
+@import "base/document";          // general document styles
+@import "base/media";             // iframes, images, etc
+@import "base/typography";        // typography
+@import "base/utility";           // utility classes
+
+@import "layout/all";             // grid system
+@import "blocks/buttons";         // buttons
+@import "blocks/icons";           // icons
+@import "blocks/inputs-general";  // text-based form fields
+@import "blocks/inputs-radios-checkboxes";  // radio and checkbox inputs
+@import "blocks/labels";          // form field labels
+@import "blocks/lists";           // lists ul,ol
+@import "blocks/media";           // responsive media classes
+@import "blocks/select";          // select fields
+@import "blocks/tables";          // tables
+
+
+/* ----------------------------------------------
+ * Add styles for specific third party environments here...
+ */
+
+.example {
+    color: black;
+}
