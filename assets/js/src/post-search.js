@@ -125,7 +125,7 @@
 		
 		//console.log( _this );
 
-		$.post(searchAjax.ajaxurl, data)
+		$.post(CCL.ajax_url, data)
 			.done(function (response) {
 			    
 				//function for processing results
