@@ -2,6 +2,10 @@
  * Specific styles for Springshare
  */
  
+ body{
+    font-family: "Gotham Narrow A","Gotham Narrow B",Arial,sans-serif;        
+ }
+ 
 //body
 .s-lg-guide-body{
     padding: 0;
@@ -165,7 +169,8 @@
  
  //guide title
  #s-lg-guide-header-info h1, 
- .s-lib-header h1{
+ .s-lib-header h1,
+ .s-lc-public-app-pt{
     font-size: $spacer*2;
     font-weight: 300;
     margin: $spacer 0;
@@ -280,3 +285,32 @@
         
     }
  }
+ 
+ //mySched buttons
+ button[id^="mySched"] {
+    background: black !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    font-family: "Gotham Narrow A","Gotham Narrow B", Arial, sans-serif !important;
+    font-size: 100% !important;
+    
+ }
+ 
+ .s-lg-gtitle.s-lib-color-lt-grey{
+    @extend .ccl-u-transition;
+
+    a{
+        &:hover,
+        &:focus{
+            text-decoration: none;
+            opacity: 0.6;
+        }
+    }
+ }
+ 
+ //text styles
+ .bold{
+    letter-spacing: 0.2px;
+ }
+ 
+ 

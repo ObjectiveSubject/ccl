@@ -64,7 +64,7 @@
     SpringShare.prototype.prependHome = function(){
         //this function preprends a cute little home icon to be beginning of the library breadcrumb
         var _this = this;
-        _this.$libHome      = _this.$el.find( '#s-lib-bc-customer a' );
+        _this.$libHome      = _this.$el.find( '#s-lib-bc-customer a, .breadcrumb li:first-of-type a' );
         _this.$libHomeText  = _this.$libHome.text();
         _this.homeIcon      = $('<span />').addClass('fa fa-home ccl-u-mr-nudge').attr('aria-hidden', true); 
         
