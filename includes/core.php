@@ -86,10 +86,13 @@ function scripts( $debug = false ) {
 	);
 
 	wp_localize_script( 'main', 'CCL', array(
-		'site_url' => site_url('/'),
-		'assets' => CCL_ASSETS,
-		'ajax_url' => admin_url( 'admin-ajax.php' ),
-		'nonce'    => wp_create_nonce( 'ccl_nonce' )
+		'site_url' 	=> site_url('/'),
+		'assets' 	=> CCL_ASSETS,
+		'ajax_url' 	=> admin_url( 'admin-ajax.php' ),
+		'api'		=> array(
+			'search' => get_rest_url( null, 'ccl/v1/search')
+		),
+		'nonce'    	=> wp_create_nonce( 'ccl_nonce' ),
 	) );
 }
 

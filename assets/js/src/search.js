@@ -225,33 +225,27 @@
 		//send AJAX request to PHP file in WP
 		var _this = this,
 			data = {
-				action: 'load_search_results', // this should probably be able to do people & assets too (maybe DBs)
-				query : query
+				s : query,
 			};
 
 		_this.$el.addClass('ccl-is-loading');
 
-		$.post(searchAjax.ajaxurl, data)
+		$.get(CCL.api.search, data)
 			.done(function (response) {
-				//function for processing results
-				_this.fetchResultsDONE(response);
-
-
+				_this.handleResponse(response);
 			})
 			.always(function(){
-
 				_this.$el.removeClass('ccl-is-loading');
-
 			});
 
 	};
 
-	SearchAutocomplete.prototype.fetchResultsDONE = function( response ) {
+	SearchAutocomplete.prototype.handleResponse = function( response ) {
 		
 		//Process the results from the API query and generate HTML for dispplay
 		
 		var _this = this,
-			results = $.parseJSON(response),
+			results = response,
 			count = results.count,
 			query = results.query,
 			posts = results.posts,
@@ -443,7 +437,7 @@
 				break;
 				
 			default:
-				renderedURL = searchAjax.site_url + '/?s=' + queryString;
+				renderedURL = CCL.site_url + '?s=' + queryString;
 		}
             
             //console.log(wms_url);

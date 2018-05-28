@@ -12,9 +12,9 @@ function setup() {
 	};
 	
 	add_action( 'admin_init', $n( 'load_search_options' ) );
-	add_action( 'wp_enqueue_scripts', $n( 'scripts' ) );
-	add_action( 'wp_ajax_load_search_results', __NAMESPACE__ . '\\load_search_results' );
-	add_action( 'wp_ajax_nopriv_load_search_results', __NAMESPACE__ . '\\load_search_results' );
+
+	add_action( 'rest_api_init', $n('register_search_route'));
+	
 	add_filter( 'searchwp_common_words', $n( 'ccl_searchwp_common_words' ) );
 	
 	add_action( 'wp_ajax_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );
@@ -67,163 +67,6 @@ function load_search_options(){
 	update_option( 'ccl-search-locations', $search_locations );
 
 	
-}
-
-/**
- * Add script to get functioning search lookahead
- *
- * @param bool $debug
- */
-function scripts( $debug = false ) {
-	$min = ( $debug || defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-	wp_register_script(
-		'search',
-		//CCL_TEMPLATE_URL . "/assets/js/search{$min}.js", // not currently minified
-		CCL_TEMPLATE_URL . "/assets/js/search.js",
-		array( 'jquery' ),
-		CCL_VERSION,
-		true
-	);
-
-	wp_enqueue_script( 'search' );
-
-	wp_localize_script( 'search', 'searchAjax', 
-		array( 
-			'ajaxurl'			=> admin_url( 'admin-ajax.php' ),
-			'searchLocations'	=> get_option( 'ccl-search-locations' ),
-			'site_url'			=> site_url()
-		) 
-	);
-}
-
-/**
- * Load search results from WordPress
- *
- * @todo error trapping for no results
- * 
- * @todo - rewrite this using wpdb class. This would reduce queries to be one
- * https://codex.wordpress.org/Class_Reference/wpdb
- */
-function load_search_results() {
-
-	$query = apply_filters( 'get_search_query', $_POST['query'] );
-	$query = sanitize_text_field( $query );
-	
-	//not sure why.. but WP will search with apostrophes if slashes are stripped.
-	//this might be a security issue...
-	$query = stripslashes( $query );	
-
-	//query the regular stuff, like title, author, content, etc
-	$all_args   = array(
-		'post_status'         => 'publish',
-		'ignore_sticky_posts' => true,
-		's'                   => $query,
-		'posts_per_page'	  => -1
-	);
-	$search = new \SWP_Query( $all_args );
-	
-
-	// Sort order for the first set of results returned to live search
-	// Uses the "nice name", rather than adding an unused slug to each of the parameters
-	$sort_order = array(
-		'Librarian',
-		'Research Guide',
-		'Page',
-		'FAQ',
-		'Database',
-		'Post'
-	);
-	
-	//creates arrays
-	$search_results = array();
-	$posts = array();
-	
-	$search_results['query_sent'] = $query;
-	
-	// Add query details to array
-	$search_results['query'] = stripslashes( htmlspecialchars_decode($query, ENT_QUOTES) );
-
-	
-	$search_results['count'] = count( $search->posts );
-
-	if ( $search->posts ) {
-		//array_slice($search->posts, 0, 3)
-		// Loop through returned posts and push into the array
-		foreach ( array_slice($search->posts, 0, 7 ) as $post ) {
-
-			switch ( $post->post_type ) {
-				case 'book':
-					$post_type_icon      = 'book';
-					$post_type_nice_name = 'Book';
-					$post_link           = get_the_permalink( $post->ID );
-					break;
-				case 'database':
-					$post_type_icon      = 'pointer-right';
-					$post_type_nice_name = 'Database';
-					$post_link           = get_post_meta( $post->ID , 'database_friendly_url', true );
-					break;
-				case 'faq':
-					$post_type_icon      = 'question';
-					$post_type_nice_name = 'FAQ';
-					$post_link           = get_the_permalink( $post->ID );
-					break;
-				case 'guide':
-					$post_type_icon      = 'clip';
-					$post_type_nice_name = 'Research Guide';
-					$post_link           = get_post_meta( $post->ID , 'guide_friendly_url', true );
-					break;
-				case 'journal':
-					$post_type_icon      = 'asterisk';
-					$post_type_nice_name = 'Journal';
-					$post_link           = get_the_permalink( $post->ID );
-					break;
-				case 'page':
-					$post_type_icon      = 'clip';
-					$post_type_nice_name = 'Page';
-					$post_link           = get_the_permalink( $post->ID );
-					break;
-				case 'staff':
-					$post_type_icon      = 'person';
-					$post_type_nice_name = ( has_term( 'librarian', 'staff_role', $post->ID ) ) ? 'Librarian' : 'Staff'   ;
-					$post_link           = get_post_meta( $post->ID , 'member_friendly_url', true );
-					break;
-				default:
-					$post_type_icon      = 'clip'; // do we have a default icon?
-					$post_type_nice_name = 'Post';
-					$post_link           = get_the_permalink( $post->ID );
-					break;
-			}
-
-			$post = array(
-				'type'  => $post_type_nice_name,
-				'icon'  => $post_type_icon,
-				'title' => get_the_title( $post->ID ),
-				'link'  => $post_link
-			);
-
-			$posts[] = $post;
-
-		}
-		
-		//right now let's work without a sort order 4/3/18
-		// sort $posts by ['type'] for given order
-		// usort( $posts, function ( $a, $b ) use ( $sort_order ) {
-		// 	$pos_a = array_search( $a['type'], $sort_order );
-		// 	$pos_b = array_search( $b['type'], $sort_order );
-
-		// 	return $pos_a - $pos_b;
-		// } );
-
-		$search_results['posts'] = $posts;
-	}
-	
-	
-	// Encode array as JSON and return
-	wp_send_json( wp_json_encode( $search_results ) );
-
-	wp_die();
-
 }
 
 function ccl_searchwp_common_words( $terms ) {
@@ -290,4 +133,166 @@ function retrieve_post_search_results(){
 
 	wp_die();	
 	
+}
+
+/**
+ * Register our custom route.
+ */
+function register_search_route() {
+    register_rest_route('ccl/v1', '/search', [
+        'methods' => \WP_REST_Server::READABLE,
+        'callback' => __NAMESPACE__ . '\\ajax_search',
+        'args' => get_search_args()
+    ]);
+}
+
+/**
+ * Define the arguments our endpoint receives.
+ */
+function get_search_args() {
+    $args = [];
+    $args['s'] = [
+       'description' => esc_html__( 'The search term.', 'namespace' ),
+       'type'        => 'string',
+   ];
+
+   return $args;
+}
+
+/**
+ * Use the request data to find the posts we
+ * are looking for and prepare them for use
+ * on the front end.
+ */
+function ajax_search( $request ) {
+
+	$query = sanitize_text_field( $request['s'] );
+    
+    // check for a search term
+    if( ! isset( $request['s'] ) ) {
+		return rest_ensure_response( array() );
+	}
+	
+	$args = array(
+		'post_status'         => 'publish',
+		'ignore_sticky_posts' => true,
+		's'                   => $query,
+		'posts_per_page'	  => 500,
+		'post_type' => array(
+			'staff',
+			'guide',
+			'page',
+			'faq',
+			'database',
+			'post'
+		),
+	);
+
+	if ( class_exists('SWP_Query') ) :
+		$search = new \SWP_Query( $args );
+	else : 
+		$search = new \WP_Query( $args );
+	endif;
+
+	// Sort order for the first set of results returned to live search
+	// Uses the "nice name", rather than adding an unused slug to each of the parameters
+	$sort_order = array(
+		'Librarian',
+		'Research Guide',
+		'Page',
+		'FAQ',
+		'Database',
+		'Post'
+	);
+
+	//creates arrays
+	$search_results = array();
+	$posts = array();
+	
+	$search_results['query_sent'] = $query;
+
+	// Add query details to array
+	$search_results['query'] = stripslashes( htmlspecialchars_decode($query, ENT_QUOTES) );
+	$search_results['count'] = count( $search->posts );
+
+	if ( $search->posts ) :
+
+		//array_slice($search->posts, 0, 3)
+		// Loop through returned posts and push into the array
+		foreach ( array_slice($search->posts, 0, 7 ) as $post ) :
+
+			switch ( $post->post_type ) :
+
+				case 'book':
+					$post_type_icon      = 'book';
+					$post_type_nice_name = 'Book';
+					$post_link           = get_the_permalink( $post->ID );
+					break;
+				case 'database':
+					$post_type_icon      = 'pointer-right';
+					$post_type_nice_name = 'Database';
+					$post_link           = get_post_meta( $post->ID , 'database_friendly_url', true );
+					break;
+				case 'faq':
+					$post_type_icon      = 'question';
+					$post_type_nice_name = 'FAQ';
+					$post_link           = get_the_permalink( $post->ID );
+					break;
+				case 'guide':
+					$post_type_icon      = 'clip';
+					$post_type_nice_name = 'Research Guide';
+					$post_link           = get_post_meta( $post->ID , 'guide_friendly_url', true );
+					break;
+				case 'journal':
+					$post_type_icon      = 'asterisk';
+					$post_type_nice_name = 'Journal';
+					$post_link           = get_the_permalink( $post->ID );
+					break;
+				case 'page':
+					$post_type_icon      = 'clip';
+					$post_type_nice_name = 'Page';
+					$post_link           = get_the_permalink( $post->ID );
+					break;
+				case 'staff':
+					$post_type_icon      = 'person';
+					$post_type_nice_name = ( has_term( 'librarian', 'staff_role', $post->ID ) ) ? 'Librarian' : 'Staff'   ;
+					$post_link           = get_post_meta( $post->ID , 'member_friendly_url', true );
+					break;
+				default:
+					$post_type_icon      = 'clip'; // do we have a default icon?
+					$post_type_nice_name = 'Post';
+					$post_link           = get_the_permalink( $post->ID );
+					break;
+			
+			endswitch;
+
+			$post = array(
+				'type'  => $post_type_nice_name,
+				'icon'  => $post_type_icon,
+				'title' => get_the_title( $post->ID ),
+				'link'  => $post_link
+			);
+
+			$posts[] = $post;
+
+		endforeach;
+	
+		// right now let's work without a sort order 4/3/18
+		// sort $posts by ['type'] for given order
+		// usort( $posts, function ( $a, $b ) use ( $sort_order ) {
+		// 	$pos_a = array_search( $a['type'], $sort_order );
+		// 	$pos_b = array_search( $b['type'], $sort_order );
+
+		// 	return $pos_a - $pos_b;
+		// } );
+
+		$search_results['posts'] = $posts;
+	
+	else :
+
+		return new WP_Error( 'front_end_ajax_search', 'No results');
+
+	endif;
+
+    return rest_ensure_response( $search_results );
 }
