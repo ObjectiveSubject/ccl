@@ -3,11 +3,12 @@
  */
  
  body{
-    font-family: "Gotham Narrow A","Gotham Narrow B",Arial,sans-serif;        
+    font:  100% "Gotham Narrow A","Gotham Narrow B",Arial,sans-serif;        
  }
  
 //body
-.s-lg-guide-body{
+.s-lg-guide-body,
+.s-lib-public-body{
     padding: 0;
 }
  
@@ -152,9 +153,10 @@
  //Breadcrumbs: ;
  
 #s-lib-admin-bc .breadcrumb, 
-#s-lib-bc .breadcrumb {
-     font-size: 1rem;
-     margin-top: $spacer;
+#s-lib-bc .breadcrumb,
+.breadcrumb{
+     font-size: 1rem !important;
+     margin-top: $spacer !important;
      
      a{
         @extend .ccl-u-transition;
@@ -296,21 +298,39 @@
     
  }
  
- .s-lg-gtitle.s-lib-color-lt-grey{
-    @extend .ccl-u-transition;
-
-    a{
-        &:hover,
-        &:focus{
-            text-decoration: none;
-            opacity: 0.6;
+ //These are panels where subjects are listed for subject guides
+ .panel.panel-default{
+    .panel-heading{
+        @extend .ccl-u-transition;
+        
+        a{
+            &:hover,
+            &:focus{
+                text-decoration: none;
+                opacity: 0.6;                   
+            }
         }
-    }
+    }    
+ 
+    .panel-body{
+        a{
+            &:hover,
+            &:focus{
+                text-decoration: none;
+                opacity: 0.6;
+            }
+        }        
+    }     
+     
  }
+
  
  //text styles
  .bold{
     letter-spacing: 0.2px;
  }
  
- 
+ //weird title bar border-top:
+ #s-lg-guide-tabs-title-bar{
+     border-top: 0;
+ }

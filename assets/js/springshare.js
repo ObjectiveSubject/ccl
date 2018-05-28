@@ -24,7 +24,7 @@
     SpringShare.prototype.updateBanner = function(){
         //this function updates the title of the page based on the breadcrumb of the page
         var _this = this;
-        _this.$serviceBreadCrumb   = _this.$el.find( '.breadcrumb li:nth-of-type(2) a' );
+        _this.$serviceBreadCrumb   = _this.$el.find( '.breadcrumb li:nth-of-type(2) a, .breadcrumb li:nth-of-type(2)' ).eq(0);
         _this.$bannerTitle       = _this.$el.find( '.ccl-c-libguide__title div' );
         
         if( _this.$serviceBreadCrumb.length ){
@@ -64,7 +64,7 @@
     SpringShare.prototype.prependHome = function(){
         //this function preprends a cute little home icon to be beginning of the library breadcrumb
         var _this = this;
-        _this.$libHome      = _this.$el.find( '#s-lib-bc-customer a, .breadcrumb li:first-of-type a' );
+        _this.$libHome      = _this.$el.find( '#s-lib-bc-customer a, .breadcrumb li:first-of-type a' ).eq(0);
         _this.$libHomeText  = _this.$libHome.text();
         _this.homeIcon      = $('<span />').addClass('fa fa-home ccl-u-mr-nudge').attr('aria-hidden', true); 
         
