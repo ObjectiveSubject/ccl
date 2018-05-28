@@ -34,6 +34,7 @@
 		this.$worldCatLink	= null;
 		//check to see if this searchbox has livesearch enabled
 		this.$activateLiveSearch	= $(this.$el).data('livesearch');
+		this.$lightbox = null;
 		this.locationType	=  $( this.$searchScope ).find('option:selected').data('loc');
 
         this.init();
@@ -133,12 +134,10 @@
 				if ( _this.$input.val() != '' ) {
 					_this.$response.show();
 				}
-				
+				_this.createLightBox();
 			})
 			.blur(function(event){
-				//console.log(' input blurred');
 				$(document).on('click', _onBlurredClick);
-
 			});
 		
 		function _onBlurredClick(event) {
@@ -146,6 +145,8 @@
 			if ( ! $.contains( _this.$el[0], event.target ) ) {
 				_this.$response.hide();
 			}
+			
+			_this.destroyLightBox();
 			
 			$(document).off('click', _onBlurredClick);
 
@@ -444,7 +445,21 @@
             
         return renderedURL;
 
-    };
+	};
+	
+	SearchAutocomplete.prototype.createLightBox = function() {
+		this.$el.addClass('is-box-lit');
+		this.$lightbox = $('<div class="ccl-c-lightbox">').appendTo('body');
+		$('html, body').animate({ scrollTop: this.$el.offset().top - 128 + 'px' });
+	};
+
+	SearchAutocomplete.prototype.destroyLightBox = function() {
+		if ( this.$lightbox ) {
+			this.$lightbox.remove();
+			this.$lightbox = null;
+			this.$el.removeClass('is-box-lit');
+		}
+	};
 
      $(document).ready(function(){
 		// .each() will fail gracefully if no elements are found
