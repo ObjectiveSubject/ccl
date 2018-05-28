@@ -133,9 +133,13 @@
                 animation: pulse 1s infinite;
             }        
             
-            i {
+            .ccl-b-icon.search {
                 @extend .ccl-u-weight-bold;
                 @extend .ccl-u-font-size-lg;
+                padding: 0 $spacer/2;
+                opacity: $faded;
+                position: absolute;
+                z-index: 10;
                 
             }
             

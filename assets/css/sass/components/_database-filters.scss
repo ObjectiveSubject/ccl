@@ -32,7 +32,7 @@ Filtering styles for the database by subjects page
     align-items: center;
     position: relative;
     
-    & i {
+    .ccl-b-icon.search {
         padding: 0 $spacer/2;
         opacity: $faded;
         position: absolute;
