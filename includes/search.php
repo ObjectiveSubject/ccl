@@ -288,9 +288,9 @@ function ajax_search( $request ) {
 
 		$search_results['posts'] = $posts;
 	
-	else :
+	// else :
 
-		return new WP_Error( 'front_end_ajax_search', 'No results');
+	// 	return new WP_Error( 'front_end_ajax_search', 'No results');
 
 	endif;
 
