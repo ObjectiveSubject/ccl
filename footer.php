@@ -89,7 +89,7 @@ $footer_options = get_option( 'footer-options' );
 
 			</div>
 
-			<p class="ccl-u-font-size-sm ccl-u-faded">&copy; <?php echo date('Y'); ?> The Claremont Colleges Library</p> <span id="ccl-c-footer-intranet" class="ccl-u-font-size-sm"><a href="http://libguides.libraries.claremont.edu/intranet" target="_self">Staff Intranet Login</a> </span>
+			<p class="ccl-u-font-size-sm ccl-u-faded">&copy; <?php echo date('Y'); ?> The Claremont Colleges Library</p> <span id="ccl-c-footer-intranet" class="ccl-u-font-size-md"><a href="http://libguides.libraries.claremont.edu/intranet" target="_self">Staff Intranet Login</a> </span>
 
 
 		</div>
