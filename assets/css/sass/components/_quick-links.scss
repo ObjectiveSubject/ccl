@@ -17,22 +17,26 @@
     margin-right: $gutter/2;
     flex: ccl-span( 6 );
     max-width: ccl-span( 6 );
+    width: ccl-span( 6 );    
     flex-grow: 0;
     flex-shrink: 0;
 
     @include media($sm) {
         flex: ccl-span( 4 );
         max-width: ccl-span( 4 );
+        width: ccl-span( 4 );        
     }
 
     @include media($md) {
         flex: ccl-span( 3 );
         max-width: ccl-span( 3 );
+        width: ccl-span( 3 );        
     }
 
     @include media($lg) {
         flex: ccl-span( 1, 10 );
         max-width: ccl-span( 1, 10 );
+        width: ccl-span( 1, 10 );        
     }
 
     a {
