@@ -157,7 +157,8 @@
 }
 
 //minor accessibility tweak
-#menu-footer-menu  a {
+#menu-footer-menu  a,
+#ccl-c-footer-intranet a{
     color: white;
     
     &:hover,
