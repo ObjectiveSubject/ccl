@@ -700,7 +700,8 @@ function check_import_for_deletions( $meta_key = '', $post_type = '', $api_data 
         //debug_to_console( $wp_post_ids,  'WP IDs' );
     
     //get all id's of import accounts, make sure we are casting as strings because it's easier
-    $api_ids        =   array_map( 'strval', array_column( $api_data, 'id' ) ) ;
+    $id_check = ( $post_type == 'faq' ) ? 'faqid' : 'id';
+    $api_ids        =   array_map( 'strval', array_column( $api_data, $id_check ) ) ;
     
         //console log the API data for debugging
         //debug_to_console( $api_ids,  'API IDs' );

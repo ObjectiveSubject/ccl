@@ -144,8 +144,6 @@ function retrieve_faqs() {
 	// @todo sort out actual error response here
 	if ( $faqs == 'error' ) {
 		$response .= '<p>Error</p>';
-	} if ( 0 == ( $faqs['added'] && $faqs['updated'] ) ) {
-		$response .= '<p>No FAQs imported</p>';
 	} else {
 		$response .= '<ul>';
 		$response .= '<li><strong>Imported:</strong> ' . $faqs['added'] . '</li>';
@@ -153,6 +151,11 @@ function retrieve_faqs() {
 		$response .= '<li><strong>Deleted:</strong> ' . $faqs['deleted'] . '</li>';		
 		$response .= '</ul>';
 	}
+	
+	echo "<script>
+			if(console.debug!='undefined'){
+				console.log( " . json_encode($faqs) . ");
+			}</script>" ;
 
 	wp_die( $response );
 }
@@ -166,6 +169,7 @@ function process_faqs() {
 
 	//convert json object into an array
 	$faqs = json_decode( json_encode( \CCL\Integrations\LibAnswers\get_all_faqs() ), true );
+	//$faqs = \CCL\Integrations\LibAnswers\get_all_faqs();
 	
 	//compare two data fields and delete entries that are no longer in the API.
 	//not - insert array for API data, however this functio will convert to array
@@ -176,15 +180,18 @@ function process_faqs() {
 	$results['added']   	= 0;
 	$results['updated'] 	= 0;
 	$results['deleted']		= $deleted_from_WP;
+	$results['raw']			=  $faqs;
+	$results['ids']			= array_column( $faqs, 'faqid' );
 
+	//return $results; //this is for testing
 	// @todo check if this is a Faqs array or an error object
 
 	// Events are stored as an indexed array under Event
 	foreach ( $faqs as $faq_group ) {
-		foreach ( $faq_group as $faq ) {
+		//foreach ( $faq_group as $faq ) {
 			// error_log( var_dump( $faq ) );
 
-			$add_faq = add_faq( $faq );
+			$add_faq = add_faq( $faq_group );
 
 			if ( 'added' == $add_faq ) {
 				$results['added'] = $results['added'] + 1;
@@ -193,7 +200,7 @@ function process_faqs() {
 			} else {
 				//
 			}
-		}
+		//}
 	}
 
 	return $results;
