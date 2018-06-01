@@ -34,14 +34,20 @@
 		this.$worldCatLink	= null;
 		//check to see if this searchbox has livesearch enabled
 		this.$activateLiveSearch	= $(this.$el).data('livesearch');
+		this.locationType	=  $( this.$searchScope ).find('option:selected').data('loc');	
+		
+		//lightbox elements
 		this.$lightbox = null;
-		this.locationType	=  $( this.$searchScope ).find('option:selected').data('loc');
+		this.lightboxIsOn = false;
+    	this.helpers();
+    	this.$focusable = this.$el.find( ':focusable' );
 
         this.init();
         
      };
 
     SearchAutocomplete.prototype.init = function () {
+    	
     	
     	if( this.$activateLiveSearch ){
 			//if livesearch is enabled, then run the AJAX results
@@ -91,6 +97,7 @@
 		var _this = this,
 			timeout;
 		
+		this.createLightBox();
 		this.toggleIndex();
 		
 		//keyboard events for sending query to database
@@ -134,7 +141,7 @@
 				if ( _this.$input.val() != '' ) {
 					_this.$response.show();
 				}
-				_this.createLightBox();
+				//_this.createLightBox();
 			})
 			.blur(function(event){
 				$(document).on('click', _onBlurredClick);
@@ -146,7 +153,7 @@
 				_this.$response.hide();
 			}
 			
-			_this.destroyLightBox();
+			//_this.destroyLightBox();
 			
 			$(document).off('click', _onBlurredClick);
 
@@ -371,10 +378,14 @@
 		_this.$responseClose.on( 'click', function(event){
 				//hide
 				if( $( _this.$response ).is(':visible') ){
-					_this.$response.hide();					
+					_this.$response.hide();	
+					_this.destroyLightBox();
 				}
 		});
 		
+		
+		 _this.$focusable = this.$el.find( ':focusable' );
+
 		
 	};
 
@@ -448,9 +459,41 @@
 	};
 	
 	SearchAutocomplete.prototype.createLightBox = function() {
-		this.$el.addClass('is-box-lit');
-		this.$lightbox = $('<div class="ccl-c-lightbox">').appendTo('body');
-		$('html, body').animate({ scrollTop: this.$el.offset().top - 128 + 'px' });
+		var _this = this;
+
+		
+		this.$el
+			.on( 'focusin', ':focusable', function(event){
+
+				if(  ! _this.lightboxIsOn ){
+					_this.lightboxIsOn = true;
+					
+					_this.$el.addClass('is-box-lit');
+					_this.$lightbox = $('<div class="ccl-c-lightbox">').appendTo('body');
+					var searchBoxTop = _this.$el.offset().top - 128 + 'px';
+					var targetTop = $(event.target).offset().top - 128 + 'px';
+					
+					//prevents the scrollbar from jumping if the user is tabbing below the fold
+					//if the searchbox and the target are the same - then it will jump, if not, 
+					//then it won't jump
+					if( searchBoxTop == targetTop ){
+
+						$('html, body').animate({ scrollTop: searchBoxTop } );						
+					}
+
+				}else{
+					return;
+				}
+				
+				event.stopPropagation();
+			})
+
+			.on( 'focusout', function(event){
+				_this.destroyLightBox();
+
+			} );		
+		
+
 	};
 
 	SearchAutocomplete.prototype.destroyLightBox = function() {
@@ -458,7 +501,17 @@
 			this.$lightbox.remove();
 			this.$lightbox = null;
 			this.$el.removeClass('is-box-lit');
+			this.lightboxIsOn = false;
+			
 		}
+	};
+	
+	SearchAutocomplete.prototype.helpers = function(){
+		$.extend($.expr[':'], {
+		    focusable: function(el, index, selector){
+				return $(el).is('a, button, :input, [tabindex], select');
+		    }
+		});		
 	};
 
      $(document).ready(function(){
