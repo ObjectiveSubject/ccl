@@ -24,18 +24,37 @@
     SpringShare.prototype.updateBanner = function(){
         //this function updates the title of the page based on the breadcrumb of the page
         var _this = this;
-        _this.$serviceBreadCrumb   = _this.$el.find( '.breadcrumb li:nth-of-type(2) a, .breadcrumb li:nth-of-type(2)' ).eq(0);
+        _this.$serviceBreadCrumb = _this.$el.find( '.breadcrumb li:nth-of-type(2) a, .breadcrumb li:nth-of-type(2), #s-lib-bc-site' ).eq(0);
         _this.$bannerTitle       = _this.$el.find( '.ccl-c-libguide__title div' );
+        _this.groupHome         = _this.$el.find( '#s-lib-bc-group' );
+        
+        console.log(_this.$serviceBreadCrumb);
         
         if( _this.$serviceBreadCrumb.length ){
             
-           _this.$serviceBreadCrumb = _this.$serviceBreadCrumb.text();
-
-            $( _this.$bannerTitle ).text( _this.$serviceBreadCrumb );         
+            //grab the text of the element
+           _this.$serviceBreadCrumbText = _this.$serviceBreadCrumb.text();
+            
+            //assign the text to the banner
+            $( _this.$bannerTitle ).text( _this.$serviceBreadCrumbText );
+            
+            //find the link and update the href if the text matches "Research Guides"
+            _this.$serviceBreadCrumb
+                .find('a')
+                .filter( function(){
+                    return $(this).text().indexOf('Research Guides') >= 0;
+                } )
+                .attr('href', 'https://library.claremont.edu/research-guides/');
+                
         }else{
             $( _this.$bannerTitle ).text( 'Library Services' );            
         }
         
+        //remove the home
+        if( _this.groupHome.length ){
+            
+            $(_this.groupHome).remove();
+        }
     };
     
     SpringShare.prototype.getLibHours = function(){
