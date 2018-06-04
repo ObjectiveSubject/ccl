@@ -44,7 +44,6 @@
 		//lightbox elements
 		this.$lightbox = null;
 		this.lightboxIsOn = false;
-    	this.$focusable = this.$el.find( ':focusable' );
 
         this.init();
         
@@ -55,30 +54,30 @@
     	
     	if( this.$activateLiveSearch ){
 			//if livesearch is enabled, then run the AJAX results
-			this.isLiveSearch();
+			this.initLiveSearch();
 		
     	}else{
 			//then simple generate generic search box requests
-			this.isStaticSearch();
+			this.initStaticSearch();
     	}
     	
 	};
 	
-	SearchAutocomplete.prototype.toggleIndex	= function(){
+	SearchAutocomplete.prototype.toggleIndex = function(){
 		
 		//watch for changes to the location - if not a WMS site, the remove index attribute
-		var _this = this;
+		var that = this;
 		
 		this.$searchScope.on( 'change', function(){
 			
-			_this.getLocID();				
+			that.getLocID();				
 			
-			if( _this.locationType != 'wms' ){
-				_this.$indexContain
+			if( that.locationType != 'wms' ){
+				that.$indexContain
 					.addClass('ccl-search-index-fade')
 					.fadeOut(250);
-			}else if( _this.locationType == 'wms' ){
-				_this.$indexContain
+			}else if( that.locationType == 'wms' ){
+				that.$indexContain
 					.fadeIn(250)
 					.removeClass('ccl-search-index-fade');
 
@@ -88,28 +87,29 @@
 			
 	};
 	
-	SearchAutocomplete.prototype.getLocID	= function(){
+	SearchAutocomplete.prototype.getLocID = function(){
 		//function to get the ID of location
-		var _this = this;
-		_this.locationType = $( _this.$searchScope ).find('option:selected').attr('data-loc');
+		var that = this;
+		that.locationType = $( that.$searchScope ).find('option:selected').attr('data-loc');
 		
-		//console.log( _this.locationType );
+		//console.log( that.locationType );
 	};
 
-	SearchAutocomplete.prototype.isLiveSearch = function(){
+	SearchAutocomplete.prototype.initLiveSearch = function(){
+
 		//AJAX event watching for user input and outputting suggested results
-		var _this = this,
+		var that = this,
 			timeout;
 		
-		this.createLightBox();
+		this.initLightBox();
 		this.toggleIndex();
 		
 		//keyboard events for sending query to database
 		this.$input
-			.on('keyup keypress', function (event) {
+			.on('keyup', function (event) {
 
 				// clear any previous set timeout
-				clearTimeout(_this.timeout);
+				clearTimeout(that.timeout);
 
 				// if key is forbidden, return
 				if ( forbiddenKeys.indexOf( event.keyCode ) > -1 ) {
@@ -117,35 +117,34 @@
 				}
 
 				// get value of search input
-				var query = _this.$input.val();
+				var query = that.$input.val();
 				//remove double quotations and other characters from string
 				query = query.replace(/[^a-zA-Z0-9 -'.,]/g, "");
 				//console.log(query);
 
 				// set a timeout function to update results once 600ms passes
-				_this.timeout = setTimeout(function () {
+				that.timeout = setTimeout(function () {
 
 					if ( query.length > 1 ) {
-
+						
 						//set this veriable here cuz we are going to need it later
-						_this.getLocID();						
-						_this.$response.show();
-					 	_this.fetchResults( query );
+						that.getLocID();						
+						that.$response.show();
+					 	that.fetchResults( query );
 					 	
 					 	
 					}
 					else {
-						_this.$responseList.html('');
+						that.$responseList.html('');
 					}
 
 				}, 200);
 
 			})
 			.focus(function(){
-				if ( _this.$input.val() !== '' ) {
-					_this.$response.show();
+				if ( that.$input.val() !== '' ) {
+					that.$response.show();
 				}
-				//_this.createLightBox();
 			})
 			.blur(function(event){
 				$(document).on('click', _onBlurredClick);
@@ -153,72 +152,70 @@
 		
 		function _onBlurredClick(event) {
 			
-			if ( ! $.contains( _this.$el[0], event.target ) ) {
-				_this.$response.hide();
+			if ( ! $.contains( that.$el[0], event.target ) ) {
+				that.$response.hide();
 			}
-			
-			//_this.destroyLightBox();
-			
+						
 			$(document).off('click', _onBlurredClick);
 
 		}		
 
 		//send query to database based on option change
 		this.$searchIndex.add(this.$searchScope).change(function(){
-			_this.onSearchIndexChange();
+			that.onSearchIndexChange();
 		});
 		
 		//on submit fire off catalog search to WMS
-		this.$form.on('submit',  {_this: this } , _this.handleSubmit );
+		this.$form.on('submit',  {that: this } , that.handleSubmit );
 			
 	};
 	
-	SearchAutocomplete.prototype.isStaticSearch = function(){
+	SearchAutocomplete.prototype.initStaticSearch = function(){
 		//if static, no AJAX watching, in this case - just looking for submissions
-		var _this = this;
+		var that = this;
 		
 		this.toggleIndex();
 		
 		//on submit fire off catalog search to WMS
-		this.$form.on('submit',  {_this: this } , _this.handleSubmit );		
+		this.$form.on('submit',  {that: this } , that.handleSubmit );		
 		
 	};
 	
 	SearchAutocomplete.prototype.handleSubmit = function(event){
-		var _this = event.data._this;
+		var that = event.data.that;
 			event.preventDefault();
 			
-			if(_this.$activateLiveSearch){
-				clearTimeout(_this.timeout);				
+			if(that.$activateLiveSearch){
+				clearTimeout(that.timeout);				
 			}
 			
 			//get search index and input value
-			var searchIndex = _this.$searchIndex.val();
-			var queryString = _this.$input.val();
+			var searchIndex = that.$searchIndex.val();
+			var queryString = that.$input.val();
 			
 			//check location type
-			_this.getLocID();
+			that.getLocID();
 			
 			//if this URL is for WMS, then append the searchindex to it, if not, then sent queryString only
 			//setup array for constructSearchURL()
 			var inputObject = {};
-			inputObject.queryString	= (_this.locationType === 'wms') ?  searchIndex + ":" + queryString : queryString;
-			inputObject.searchScope	= _this.$searchScope.val();
+			inputObject.queryString	= (that.locationType === 'wms') ?  searchIndex + ":" + queryString : queryString;
+			inputObject.searchScope	= that.$searchScope.val();
 
 			//if query string has content, then run
 			if ( queryString.length > 1 ) {
 
-				var wmsConstructedUrl = _this.constructSearchURL(inputObject);
+				var wmsConstructedUrl = that.constructSearchURL(inputObject);
 				
 				//console.log( wmsConstructedUrl );
 				
-				if( _this.locationType === 'wp_ccl' ){
+				if( that.locationType === 'wp_ccl' ){
 					
 					window.open(wmsConstructedUrl, '_self');
 					
 					$(window).unload( function(){
 
-						_this.$searchScope.prop( 'selectedIndex', 0 );
+						that.$searchScope.prop( 'selectedIndex', 0 );
 					});					
 					
 				}else{
@@ -235,19 +232,19 @@
 
 	SearchAutocomplete.prototype.fetchResults = function( query ) {
 		//send AJAX request to PHP file in WP
-		var _this = this,
+		var that = this,
 			data = {
 				s : query,
 			};
 
-		_this.$el.addClass('ccl-is-loading');
+		that.$el.addClass('ccl-is-loading');
 
 		$.get(CCL.api.search, data)
 			.done(function (response) {
-				_this.handleResponse(response);
+				that.handleResponse(response);
 			})
 			.always(function(){
-				_this.$el.removeClass('ccl-is-loading');
+				that.$el.removeClass('ccl-is-loading');
 			});
 
 	};
@@ -256,14 +253,14 @@
 		
 		//Process the results from the API query and generate HTML for dispplay
 		
-		var _this = this,
+		var that = this,
 			results = response,
 			count = results.count,
 			query = results.query,
 			posts = results.posts,
-			searchIndex =  $( _this.$indexContain ).is(':visible') ? _this.$searchIndex.val() : 'kw',
+			searchIndex =  $( that.$indexContain ).is(':visible') ? that.$searchIndex.val() : 'kw',
 			searchIndexNicename = indexNames[searchIndex],
-			searchScopeData = $( _this.$searchScope ),
+			searchScopeData = $( that.$searchScope ),
 			renderedResponse	= [];
 			
 		// wrap query
@@ -271,15 +268,15 @@
 		
 		//get wms_url inputObject = {queryString, searchScope, locationType}
 		var inputObject = {};
-		inputObject.queryString	= (_this.locationType === 'wms') ?  searchIndex + ":" + query : query;
-		inputObject.searchScope	= _this.$searchScope.val();
+		inputObject.queryString	= (that.locationType === 'wms') ?  searchIndex + ":" + query : query;
+		inputObject.searchScope	= that.$searchScope.val();
 		
 		//URL created!
-		var wmsConstructedUrl = _this.constructSearchURL(inputObject);
+		var wmsConstructedUrl = that.constructSearchURL(inputObject);
 
 		// Clear response area list items (update when Pattern Library view isn't necessary)
-		_this.$responseList.html('');
-		_this.$resultsLink.remove();
+		that.$responseList.html('');
+		that.$resultsLink.remove();
 		
 		//add the close button
 		var resultsClose = '<div class="ccl-c-search--close-results">' +
@@ -373,23 +370,20 @@
 		}
 		
 		//append all response data all at once
-		_this.$responseList.append( renderedResponse );
+		that.$responseList.append( renderedResponse );
 		
 		//cache the response button after its added to the DOM
-		_this.$responseClose	= _this.$el.find('.ccl-c-search--close__button');		
+		that.$responseClose	= that.$el.find('.ccl-c-search--close__button');		
 		
 		//click event to close the results page
-		_this.$responseClose.on( 'click', function(event){
+		that.$responseClose.on( 'click', function(event){
 				//hide
-				if( $( _this.$response ).is(':visible') ){
-					_this.$response.hide();	
-					_this.destroyLightBox();
+				if( $( that.$response ).is(':visible') ){
+					that.$response.hide();	
+					that.destroyLightBox();
 				}
 		});
 		
-		
-		 _this.$focusable = this.$el.find( ':focusable' );
-
 		
 	};
 
@@ -462,41 +456,67 @@
 
 	};
 	
-	SearchAutocomplete.prototype.createLightBox = function() {
-		var _this = this;
+	SearchAutocomplete.prototype.initLightBox = function() {
 
+		var that = this,
+			destroyTimeout = 0;
 		
 		this.$el
 			.on( 'focusin', ':focusable', function(event){
 
 				event.stopPropagation();
 
-				if ( ! _this.lightboxIsOn ){
-					
-					_this.lightboxIsOn = true;
-					
-					_this.$el.addClass('is-lightboxed');
-					_this.$lightbox = $('<div class="ccl-c-lightbox">').appendTo('body');
-					var searchBoxTop = _this.$el.offset().top - 128 + 'px';
-					var targetTop = $(event.target).offset().top - 128 + 'px';
-					
-					// prevents the scrollbar from jumping if the user is tabbing below the fold
-					// if the searchbox and the target are the same - then it will jump, if not, 
-					// then it won't jump
-					if ( searchBoxTop == targetTop ){
+				// clear timeout because we're still inside the searchbox
+				if ( destroyTimeout ) {
+					clearTimeout(destroyTimeout);
+				}
 
-						$('html, body').animate({ scrollTop: searchBoxTop } );						
-					}
+				if ( ! that.lightboxIsOn ){
+
+					that.createLightBox();
 
 				}
 				
 			})
+			.on( 'focusout', ':focusable', function(event){
+				
+				// set a short timeout so that other functions can check and clear if need be
+				destroyTimeout = setTimeout(function(){
 
-			.on( 'focusout', function(event){
-				_this.destroyLightBox();
+					that.destroyLightBox();
+					that.$response.hide();
 
-			} );		
+				}, 100);
+
+			});
+
+		this.$response
+			.on( 'click', function(event){
+
+				// clear destroy timeout because we're still inside the searchbox
+				if ( destroyTimeout ) {
+					clearTimeout(destroyTimeout);
+				}
+
+			});
+
+	};
+
+	SearchAutocomplete.prototype.createLightBox = function() {
+
+		this.lightboxIsOn = true;
+					
+		this.$el.addClass('is-lightboxed');
+		this.$lightbox = $('<div class="ccl-c-lightbox">').appendTo('body');
+		var searchBoxTop = this.$el.offset().top - 128 + 'px';
+		var targetTop = $(event.target).offset().top - 128 + 'px';
 		
+		// prevents the scrollbar from jumping if the user is tabbing below the fold
+		// if the searchbox and the target are the same - then it will jump, if not, 
+		// then it won't jump
+		if ( searchBoxTop == targetTop ){
+			$('html, body').animate({ scrollTop: searchBoxTop } );						
+		}		
 
 	};
 
