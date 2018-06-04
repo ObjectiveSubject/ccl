@@ -142,7 +142,7 @@
 
 			})
 			.focus(function(){
-				if ( _this.$input.val() != '' ) {
+				if ( _this.$input.val() !== '' ) {
 					_this.$response.show();
 				}
 				//_this.createLightBox();
@@ -201,14 +201,14 @@
 			
 			//if this URL is for WMS, then append the searchindex to it, if not, then sent queryString only
 			//setup array for constructSearchURL()
-			var input_array = [];
-			input_array['queryString']	= (_this.locationType === 'wms') ?  searchIndex + ":" + queryString : queryString;
-			input_array['searchScope']	= _this.$searchScope.val();
+			var inputObject = {};
+			inputObject.queryString	= (_this.locationType === 'wms') ?  searchIndex + ":" + queryString : queryString;
+			inputObject.searchScope	= _this.$searchScope.val();
 
 			//if query string has content, then run
 			if ( queryString.length > 1 ) {
 
-				var wmsConstructedUrl = _this.constructSearchURL(input_array);
+				var wmsConstructedUrl = _this.constructSearchURL(inputObject);
 				
 				//console.log( wmsConstructedUrl );
 				
@@ -269,13 +269,13 @@
 		// wrap query
 		//var queryString = searchIndex + ':' + query;
 		
-		//get wms_url input_array = [queryString, searchScope, locationType]
-		var input_array = [];
-		input_array['queryString']	= (_this.locationType === 'wms') ?  searchIndex + ":" + query : query;
-		input_array['searchScope']	= _this.$searchScope.val();
+		//get wms_url inputObject = {queryString, searchScope, locationType}
+		var inputObject = {};
+		inputObject.queryString	= (_this.locationType === 'wms') ?  searchIndex + ":" + query : query;
+		inputObject.searchScope	= _this.$searchScope.val();
 		
 		//URL created!
-		var wmsConstructedUrl = _this.constructSearchURL(input_array);
+		var wmsConstructedUrl = _this.constructSearchURL(inputObject);
 
 		// Clear response area list items (update when Pattern Library view isn't necessary)
 		_this.$responseList.html('');
@@ -325,7 +325,7 @@
 				var cta,
 					target;
 
-				switch( post["type"] ) {
+				switch( post.type ) {
 					case 'Book':
 					case 'FAQ':
 					case 'Research Guide':
@@ -344,12 +344,12 @@
 						target = '_self';
 				}
 
-				listItem =  '<a href="' + post["link"] + '" class="ccl-c-search-item" role="listitem" target="' + target + '">' +
+				listItem =  '<a href="' + post.link + '" class="ccl-c-search-item" role="listitem" target="' + target + '">' +
 								'<span class=\"ccl-c-search-item__type\">' +
-									'<i class="ccl-b-icon ' + post["icon"] + '" aria-hidden="true"></i>' +
-									'<span class="ccl-c-search-item__type-text">' + post["type"] + '</span>' +
+									'<i class="ccl-b-icon ' + post.icon + '" aria-hidden="true"></i>' +
+									'<span class="ccl-c-search-item__type-text">' + post.type + '</span>' +
 								'</span>' +
-								'<span class="ccl-c-search-item__title">' + post["title"] + '</span>' +
+								'<span class="ccl-c-search-item__title">' + post.title + '</span>' +
 								'<span class="ccl-c-search-item__cta">' +
 									'<span>' + cta + ' <i class="ccl-b-icon arrow-right" aria-hidden="true" style="vertical-align:middle"></i></span>' +
 								'</span>' +
@@ -404,15 +404,15 @@
 		this.fetchResults( query );
 	};
 	
-	SearchAutocomplete.prototype.constructSearchURL = function(input_array){
+	SearchAutocomplete.prototype.constructSearchURL = function(inputObject){
 		//constructs URL with parameters from
-		//input_array = [queryString, searchScope, SearchLocation]
+		//inputObject = { queryString, searchScope, SearchLocation }
 		
 		//define variables
 		var queryString, searchSrc, searchScopeKey, renderedURL;
 		
-		queryString 	= input_array['queryString'];
-		searchSrc		= input_array['searchScope'];
+		queryString 	= inputObject.queryString;
+		searchSrc		= inputObject.searchScope;
 
 		
 		switch ( this.locationType) {
