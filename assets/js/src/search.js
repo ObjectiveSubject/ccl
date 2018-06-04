@@ -1,14 +1,11 @@
 /**
- * Home
- *
- * JavaScript unique to the home page
- *
- * @todo gulpify so we get linting, mininfication, remove console.logs
- * @todo rename home to search (reflect the nature of the file)
+ * Searchbox Behavior
  */
 
 ( function( window, $ ) {
- 	'use strict';
+	'use strict';
+	 
+	// Global variables
 	var document = window.document,
 		ENTER = 13, TAB = 9, SHIFT = 16, CTRL = 17, ALT = 18, CAPS = 20, ESC = 27, LCMD = 91, RCMD = 92, LARR = 37, UARR = 38, RARR = 39, DARR = 40,
 		forbiddenKeys = [ENTER, TAB, SHIFT, CTRL, ALT, CAPS, ESC, LCMD, RCMD, LARR, UARR, RARR, DARR],
@@ -18,8 +15,15 @@
 			au: 'Author',
 			su: 'Subject'
 		};
+
+	// Extend jQuery selector
+	$.extend($.expr[':'], {
+		focusable: function(el, index, selector){
+			return $(el).is('a, button, :input, [tabindex], select');
+		}
+	});
 		
-     var SearchAutocomplete = function(elem){
+    var SearchAutocomplete = function(elem){
 		
 		this.$el			= $(elem);
 		this.$form			= this.$el.find('form');
@@ -32,6 +36,7 @@
 		this.$indexContain	= this.$el.find('.ccl-c-search-index-container' );
 		this.$searchScope	= this.$el.find('.ccl-c-search-location');
 		this.$worldCatLink	= null;
+		
 		//check to see if this searchbox has livesearch enabled
 		this.$activateLiveSearch	= $(this.$el).data('livesearch');
 		this.locationType	=  $( this.$searchScope ).find('option:selected').data('loc');	
@@ -39,12 +44,11 @@
 		//lightbox elements
 		this.$lightbox = null;
 		this.lightboxIsOn = false;
-    	this.helpers();
     	this.$focusable = this.$el.find( ':focusable' );
 
         this.init();
         
-     };
+    };
 
     SearchAutocomplete.prototype.init = function () {
     	
@@ -363,8 +367,8 @@
 								'</a>' +
 						'</div>';
 
-		//add HTML to the response array
-		renderedResponse.push( listItem );
+			//add HTML to the response array
+			renderedResponse.push( listItem );
 		
 		}
 		
@@ -465,27 +469,27 @@
 		this.$el
 			.on( 'focusin', ':focusable', function(event){
 
-				if(  ! _this.lightboxIsOn ){
+				event.stopPropagation();
+
+				if ( ! _this.lightboxIsOn ){
+					
 					_this.lightboxIsOn = true;
 					
-					_this.$el.addClass('is-box-lit');
+					_this.$el.addClass('is-lightboxed');
 					_this.$lightbox = $('<div class="ccl-c-lightbox">').appendTo('body');
 					var searchBoxTop = _this.$el.offset().top - 128 + 'px';
 					var targetTop = $(event.target).offset().top - 128 + 'px';
 					
-					//prevents the scrollbar from jumping if the user is tabbing below the fold
-					//if the searchbox and the target are the same - then it will jump, if not, 
-					//then it won't jump
-					if( searchBoxTop == targetTop ){
+					// prevents the scrollbar from jumping if the user is tabbing below the fold
+					// if the searchbox and the target are the same - then it will jump, if not, 
+					// then it won't jump
+					if ( searchBoxTop == targetTop ){
 
 						$('html, body').animate({ scrollTop: searchBoxTop } );						
 					}
 
-				}else{
-					return;
 				}
 				
-				event.stopPropagation();
 			})
 
 			.on( 'focusout', function(event){
@@ -500,25 +504,17 @@
 		if ( this.$lightbox ) {
 			this.$lightbox.remove();
 			this.$lightbox = null;
-			this.$el.removeClass('is-box-lit');
+			this.$el.removeClass('is-lightboxed');
 			this.lightboxIsOn = false;
 			
 		}
 	};
-	
-	SearchAutocomplete.prototype.helpers = function(){
-		$.extend($.expr[':'], {
-		    focusable: function(el, index, selector){
-				return $(el).is('a, button, :input, [tabindex], select');
-		    }
-		});		
-	};
 
-     $(document).ready(function(){
+    $(document).ready(function(){
 		// .each() will fail gracefully if no elements are found
 		$('.ccl-js-search-form').each(function(){
 			new SearchAutocomplete(this);
-		 });
-     });
+		});
+    });
 
 } )( this, jQuery );
