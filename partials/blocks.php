@@ -189,7 +189,7 @@ if ( $blocks ) : ?>
 
                         <div class="ccl-c-promo__content">
 
-                            <div class="ccl-c-carousel <?php echo $carousel_class; ?>" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
+                            <div class="ccl-c-carousel <?php echo $carousel_class; ?>" data-slick='{ "slidesToShow": 1, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
 
                                 <?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
 
@@ -285,7 +285,7 @@ if ( $blocks ) : ?>
 
                         <div class="ccl-c-promo__content">
 
-                            <div class="ccl-c-carousel <?php echo $carousel_class; ?>" data-slick='{ "slidesToShow": 2, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
+                            <div class="ccl-c-carousel <?php echo $carousel_class; ?>" data-slick='{ "slidesToShow": 1, "prevArrow": "#carousel-<?php echo $index; ?>-prev", "nextArrow": "#carousel-<?php echo $index; ?>-next" }'>
 
                                 <?php if ( isset( $block['block_description'] ) && $block['block_description'] ) : ?>
 
