@@ -20,7 +20,7 @@ $search_locations = get_option( 'ccl-search-locations' );
     
 
 <div class="ccl-c-search ccl-js-search-form" data-livesearch="true">
-    <form class="ccl-c-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
+    <form class="ccl-c-search-form" name="catalogSearch" action="" target="_blank">
 
         <input type="text" aria-label="Start typing to search" class="ccl-b-input ccl-search" name="queryString" placeholder="Start typing to search" autocomplete="off"/>
 
