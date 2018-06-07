@@ -27,7 +27,7 @@
 		
 		this.$el			= $(elem);
 		this.$form			= this.$el.find('form');
-		this.$input 		= $(elem).find('#ccl-search');
+		this.$input 		= $(elem).find('.ccl-search');
 		this.$response		= this.$el.find('.ccl-c-search-results');
 		this.$responseList	= this.$el.find('.ccl-c-search-results__list');
 		this.$responseItems = this.$el.find('.ccl-c-search-item');
@@ -120,7 +120,6 @@
 				var query = that.$input.val();
 				//remove double quotations and other characters from string
 				query = query.replace(/[^a-zA-Z0-9 -'.,]/g, "");
-				//console.log(query);
 
 				// set a timeout function to update results once 600ms passes
 				that.timeout = setTimeout(function () {
