@@ -473,7 +473,7 @@
 
 				if ( ! that.lightboxIsOn ){
 
-					that.createLightBox();
+					that.createLightBox(event);
 
 				}
 				
@@ -502,7 +502,7 @@
 
 	};
 
-	SearchAutocomplete.prototype.createLightBox = function() {
+	SearchAutocomplete.prototype.createLightBox = function(event) {
 
 		this.lightboxIsOn = true;
 					
