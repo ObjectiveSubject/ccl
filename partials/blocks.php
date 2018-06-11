@@ -519,9 +519,8 @@ if ( $blocks ) : ?>
 
                 <div class="ccl-c-search ccl-js-search-form ccl-u-mt-2" data-livesearch="<?php echo $search_js_class; ?>">
 
-                <form class="ccl-c-search-form" name="catalogSearch" action="http://ccl.on.worldcat.org/search" target="_blank">
-                        <label for="ccl-search" class="ccl-u-display-none">Start typing to search</label>
-                        <input type="text" id="ccl-search" class="ccl-b-input" name="queryString" placeholder="Start typing to search" aria-label="Search"/>
+                <form class="ccl-c-search-form" name="catalogSearch" action="" target="_blank">
+                        <input type="text" class="ccl-b-input ccl-search" name="queryString" placeholder="Start typing to search" aria-label="Search" autocomplete="off"/>
                 
                         <div class="ccl-c-search-form__option ccl-c-search-index-container">
                             <strong>As:</strong>
