@@ -112,6 +112,10 @@ get_header(); ?>
 				</div>
 
 			</article>
+			
+			<?php 
+			//get the related posts from template part
+			get_template_part( 'partials/related-posts' ); ?>			
 
 		<?php endwhile; ?>
 
