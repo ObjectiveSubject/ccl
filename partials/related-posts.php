@@ -10,11 +10,11 @@
 			<div class="ccl-l-row ccl-u-mt-1">
 
 				<?php while ( $related_posts->have_posts() ) : $related_posts->the_post(); ?>
-					<article class="ccl-l-column ccl-l-span-4-md ccl-u-mb-1" aria-label="Related Article: <?php echo get_the_title(); ?>">
+					<article class="ccl-l-column ccl-l-span-4-md ccl-u-mb-1">
 
 						<?php if ( has_post_thumbnail() ) : ?>
 							<div class="ccl-u-mb-nudge">
-								<a href="<?php echo get_the_permalink(); ?>">
+								<a href="<?php echo get_the_permalink(); ?>" aria-label="<?php echo 'Learn more about ' . get_the_title(); ?>">
 									<?php echo get_the_post_thumbnail( get_the_ID(), 'small', array( 'class' => 'ccl-c-image' ) ); ?>
 								</a>
 							</div>
