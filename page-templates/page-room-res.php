@@ -143,7 +143,7 @@ get_header(); ?>
                                         <!-- <a href="#" class="ccl-h4 ccl-u-mt-0" data-toggle="modal" data-target="#<?php //echo 'room-' . $room_id . '-map'; ?>">Show on Map</a> -->
                                         
                                         <?php if( $room_id ): ?>    
-                                        <a href="#" class="ccl-b-btn" data-toggle="modal" data-target="#<?php echo 'room-' . $room_id . '-reserve'; ?>">
+                                        <a href="#" class="ccl-b-btn" data-toggle="modal" data-target="#<?php echo 'room-' . $room_id . '-reserve'; ?>" aria-label="Book <?php the_title(); ?>">
                                             <?php _e( 'Book Room', 'ccl' ); ?>
                                         </a>
                                         <?php endif; ?>
