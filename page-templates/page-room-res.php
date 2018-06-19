@@ -270,7 +270,7 @@ get_header(); ?>
                                                                     ?>
                                                                     <option value="<?php echo $date_value; ?>"><?php echo $date_readable; ?></option>
                                                                 
-                                                                <?php $i++; } while ( $i < 9 ); ?>
+                                                                <?php $i++; } while ( $i < 3 ); ?>
 
                                                             </select>
                                                         </label>

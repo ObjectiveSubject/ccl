@@ -27,7 +27,7 @@
         this.$resetSelectionBtn = this.$el.find('.js-reset-selection'); 
         this.$roomSlotInputs = null;
         this.selectedSlotInputs = [];
-        this.maxSlots = 4;
+        this.maxSlots = 6;
         this.$maxTime = this.$el.find('.js-max-time');
         this.slotMinutes = 30;
         this.locale = "en-US";
