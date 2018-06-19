@@ -1,10 +1,11 @@
 .ccl-c-menu {
     @extend .ccl-u-clean-list;
     @extend .ccl-u-mt-1;
-
-    a:focus {
-        outline: 0;
-    }
+    
+    //edit 6/19/2018 need focus change for accessibility
+    // a:focus {
+    //     outline: 0;
+    // }
 
     .home .ccl-c-masthead & {
         display: none;
@@ -69,6 +70,7 @@
 
         & > a {
             font-size: rem(20);
+            display: inline-block;
             @include media($lg) {
                 font-size: rem(24);
             }
@@ -83,6 +85,7 @@
 
         & > a {
             font-size: rem(18);
+            display: inline-block;            
             @include media($lg) {
                 font-size: rem(20);
             }
@@ -158,6 +161,7 @@
 
 //minor accessibility tweak
 #menu-footer-menu  a,
+#footer-context a,
 #ccl-c-footer-intranet a{
     color: white;
     

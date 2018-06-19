@@ -9,6 +9,7 @@
     opacity: 1;
     transition: transform $duration $easing, opacity $duration $easing;
     background-color: white;
+    display: block;
 
     .admin-bar & {
         top: 85px;
@@ -21,6 +22,7 @@
         @include media($lg) {
             opacity: 0;
             transform: translate3d(0,-150%,0);
+            display: none;
         }
     }
 

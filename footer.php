@@ -67,7 +67,7 @@ $footer_options = get_option( 'footer-options' );
 
 				</div>
 
-				<div class="ccl-l-column ccl-l-span-third-lg">
+				<div  id="footer-context" class="ccl-l-column ccl-l-span-third-lg">
 					<?php if ( array_key_exists( 'footer-column-1', $footer_options ) && $footer_options['footer-column-1'] ) : ?>
 
 						<?php echo apply_filters( 'the_content', $footer_options['footer-column-1'] ); ?>

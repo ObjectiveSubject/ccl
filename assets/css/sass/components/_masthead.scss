@@ -27,6 +27,15 @@
     @include media($lg){
         border-bottom: 1px solid;    
     }
+
+    
+    a{
+        display: inline;
+        
+        span{
+            display: inline-block;
+        }
+    }
 }
 
 .ccl-c-masthead__nav {

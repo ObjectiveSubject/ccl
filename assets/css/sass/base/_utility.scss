@@ -182,3 +182,10 @@ a.ccl-u-faded:focus {
 .ccl-u-transition-long {
 	transition: all $duration-long $easing;
 }
+
+
+// Outline style
+// ------------------------------------------- /
+.ccl-u-focus-outline{
+	outline: 1px dotted black;
+}
