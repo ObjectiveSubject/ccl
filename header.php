@@ -92,7 +92,7 @@
 							<?php endif; ?>						
 
 							<?php //temporarily remove the notices until we build an options page ?>
-							<?php if ( ! $notices ) : ?>
+							<?php if ( $notices ) : ?>
 								<div class="ccl-c-masthead__notice">
 									<span class="ccl-h5">
 										<span class="ccl-u-color-red">

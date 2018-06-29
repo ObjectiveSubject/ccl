@@ -553,9 +553,7 @@ function get_header_notices() {
 	} else {
 
 		$notice_data = array(
-			"All books must be returned",
-			"Cake is available on the second floor",
-			"Pure Science is 500"
+			"Library Search is experiencing intermittent issues. We are aware of the problems and working with our vendor to resolve them as soon as possible"
 		);
 
 		if ( ! is_wp_error ( $notice_data ) ) {
