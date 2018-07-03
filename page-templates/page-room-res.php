@@ -203,6 +203,7 @@ get_header(); ?>
                                 </div>
                             </div> -->
 
+                            <?php if( empty( $room_id ) ) continue; ?>
                             
                             <!-- Room Reservation Modal -->
                             <div id="<?php echo 'room-' . $room_id . '-reserve'; ?>" class="ccl-c-modal ccl-is-large" tabindex="-1" role="dialog" aria-labelledby="<?php echo 'room-' . $room_id . '-reserve-label'; ?>" aria-hidden="true">
