@@ -169,7 +169,7 @@ get_header(); ?>
                     
                     <div id="block-title" class="ccl-c-promo ccl-u-mt-4">
 
-                        <h2 class="ccl-u-mt-0"><?php _e('Databases by Title','ccl'); ?></h2>
+                        <h2 class="ccl-u-mt-0"><?php _e('Databases by Name','ccl'); ?></h2>
 
                         <?php $letters = array( '0 - 9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' ); ?>
                         <ul class="ccl-u-ml-2 ccl-u-clean-list ccl-u-mt-1 ccl-c-database__by-alpha">
