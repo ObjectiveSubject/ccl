@@ -104,7 +104,7 @@ get_header(); ?>
                     <?php 
                         $rooms = new WP_Query(array(
                             'post_type' => 'room',
-                            'posts_per_page' => 20,
+                            'posts_per_page' => 1,
                             'tax_query' => array(
                                 array(
                                     'taxonomy' => 'room_type',
@@ -271,7 +271,7 @@ get_header(); ?>
                                                                     ?>
                                                                     <option value="<?php echo $date_value; ?>"><?php echo $date_readable; ?></option>
                                                                 
-                                                                <?php $i++; } while ( $i < 3 ); ?>
+                                                                <?php $i++; } while ( $i < 7 ); ?>
 
                                                             </select>
                                                         </label>

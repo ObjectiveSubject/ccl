@@ -30,6 +30,9 @@ function setup() {
 
 	add_action( 'wp_ajax_get_room_info', __NAMESPACE__ . '\\get_space_item' );
 	add_action( 'wp_ajax_nopriv_get_room_info', __NAMESPACE__ . '\\get_space_item' );
+	
+	add_action( 'wp_ajax_get_main_library_hours', __NAMESPACE__ . '\\get_main_library_hours' );
+	add_action( 'wp_ajax_nopriv_get_main_library_hours', __NAMESPACE__ . '\\get_main_library_hours' );	
 
 	add_action( 'add_meta_boxes_room', $n('add_room_meta_box' ) );
 }
@@ -428,3 +431,16 @@ function get_space_item() {
 	die();
 	// wp_die( $response );
 }
+
+
+/**
+ * AJAX function to retrieve hours data from main library to be used in comparing the timeslots for the day
+ */
+ function get_main_library_hours(){
+ 	
+ 	$main_hours = \CCL\Helpers\get_main_library_weekly_hours();
+
+ 	echo $main_hours = json_encode($main_hours);
+ 	die();
+ 	
+ }

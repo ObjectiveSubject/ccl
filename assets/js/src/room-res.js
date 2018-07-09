@@ -32,6 +32,9 @@
         this.slotMinutes = 30;
         this.locale = "en-US";
         this.timeZone = {timeZone: "America/Los_Angeles"};
+        this.lid        = 4816;
+        this.openTime = null;
+        this.closingTime = null;
 
         this.init();
 
@@ -82,18 +85,33 @@
         });
 
     };
+    
+    RoomResForm.prototype.getMainLibraryHours = function(){
+        //get the hours for the main library via AJAX
+        var data = {
+            action: 'get_main_library_hours',
+            ccl_nonce: CCL.nonce           
+        };
+        
+        return $.post({
+            url: CCL.ajax_url,
+            data: data
+        });        
+    };
 
     RoomResForm.prototype.updateScheduleData = function() {
         
         var getSpacejqXHR = this.getSpaceAvailability(this.dateYmd);
         var getBookingsjqXHR = this.getSpaceBookings(this.dateYmd);
+        var getMainHoursjqXHR = this.getMainLibraryHours();
         var that = this;
-
-        $.when(getSpacejqXHR, getBookingsjqXHR)
-            .done(function(getSpace,getBookings){
-
+        
+        $.when(getSpacejqXHR, getBookingsjqXHR, getMainHoursjqXHR)
+            .done(function(getSpace,getBookings, getMainHours){
+                
                 var spaceData = getSpace[0],
                     bookingsData = getBookings[0],
+                    mainHoursData = getMainHours[0],
                     spacejqXHR = getSpace[2],
                     bookingsjqXHR = getBookings[2],
                     timeSlotsArray;
@@ -101,6 +119,21 @@
                 // parse data to JSON if it's a string
                 spaceData = ( typeof spaceData === 'string' ) ? JSON.parse( spaceData )[0] : spaceData[0];
                 bookingsData = ( typeof bookingsData === 'string' ) ? JSON.parse( bookingsData ) : bookingsData;
+                mainHoursData = ( typeof mainHoursData === 'string' ) ? JSON.parse( mainHoursData ) : mainHoursData;
+                
+                //get the open hours of the library and return these times as variables
+                that.getOpenHours( mainHoursData );   
+                
+                if( !that.openTime && !that.closingTime ){
+                    //if the library is closed, then the openTime and closingTime will still be null
+                    //then we exit out of the function
+                    that.$roomSchedule.html( 'No reservations are available' );
+                    that.unsetLoading();
+                    that.$currentDurationText.text('Library Closed');
+                    that.$resetSelectionBtn.hide();                    
+                    return;
+                }
+                
 
                 // merge bookings with availability
                 if ( bookingsData.length ){
@@ -126,6 +159,8 @@
                     _sortByKey( spaceData.availability, 'from' );
 
                 }
+                
+
 
                 // parse time slots and return an appropriate subset (only open to close hours)
                 timeSlotsArray = that.parseSchedule(spaceData.availability);
@@ -225,32 +260,105 @@
         // returns the appropriate schedule for a given array of time slots
         
         var to = null,
+            that = this,
             startEndIndexes = [], 
             start, end;
+            
+            console.log( scheduleArray );
+
+        $.each( scheduleArray, function( i, item ){
+            start = new Date( item.from ).getTime();
+            end = new Date( item.to ).getTime();
+            
+            if( that.openTime <= start && that.closingTime >= end){
+
+                startEndIndexes.push( item );              
+            }else{
+                console.log( 'this didn\'t match' );
+            }
+
+        } );
+        
+        console.log( startEndIndexes );
+
+        //reset this variable incase we use this script for other days
+        that.openTime = null;
+        that.closingTime = null;
+        
+        return startEndIndexes;
 
         // loop through array and pick out time gaps
-        scheduleArray.forEach(function(item,i){
-            if ( to && to !== item.from ) {
-                startEndIndexes.push(i);
-            }
-            to = item.to;
-        });
+        // scheduleArray.forEach(function(item,i){
+        //     if ( to && to !== item.from ) {
+        //         startEndIndexes.push(i);
+        //     }
+        //     to = item.to;
+        // });
 
-        // depending on number of gaps found, determine start and end indexes
-        if ( startEndIndexes.length >= 2 ) {
-            start = startEndIndexes[0];
-            end = startEndIndexes[1];
-        } else {
-            start = 0;
-            if ( startEndIndexes.length === 1 ) {
-                end = startEndIndexes[0];
-            } else {
-                end = scheduleArray.length;
-            }
-        }
+        // // depending on number of gaps found, determine start and end indexes
+        // if ( startEndIndexes.length >= 2 ) {
+        //     start = startEndIndexes[0];
+        //     end = startEndIndexes[1];
+        // } else {
+        //     start = 0;
+        //     if ( startEndIndexes.length === 1 ) {
+        //         end = startEndIndexes[0];
+        //     } else {
+        //         end = scheduleArray.length;
+        //     }
+        // }
         
         // returned sliced portion of original schedule
-        return scheduleArray.slice(start,end);
+        //return scheduleArray.slice(start,end);
+    };
+    
+    RoomResForm.prototype.getOpenHours = function(hoursData){
+        //returns the opening and closing hours for the main library
+        var hoursObj,
+            that = this;
+        
+        console.log( hoursData );
+        
+        //filter object for the main library and the current date passed in
+        //@todo turn the lid into a global variable
+        hoursObj = $.grep( hoursData.locations, function(library){
+            return library.lid == that.lid ;
+        } );
+        //use this recirsive function to locate the day's hours for the date passed
+        hoursObj = _findObjectByKeyVal( hoursObj[0].weeks, 'date', that.dateYmd );
+        
+        //identify the date situation and create global variables
+        if( 'hours' in hoursObj.times ){
+            //use the function to convert a series of strings into an actual Date Object
+            that.openTime    = _convertToDateObj( hoursObj, 'from' );
+            that.closingTime = _convertToDateObj( hoursObj, 'to');
+            
+            //if this day closes at 1am, then we need to kick the closing time to the next day
+            if( (hoursObj.times.hours[0].to).indexOf( 'am' ) != -1 ){
+                that.closingTime.setDate(that.closingTime.getDate() + 1 );
+            }
+            
+            that.openTime   = that.openTime.getTime();
+            that.closingTime = that.closingTime.getTime();
+            
+            console.log( 'custom hours', that.openTime, that.closingTime );
+    
+        }else if( hoursObj.times.status == '24hours' ){
+            //if the status is 24 hours, we need to set the beginning end of this day
+            var date = new Date( hoursObj.date );
+
+            that.openTime    = date.getTime();            
+
+            //could be end.setHours(23,59,59,999);
+            //that.closingTime = that.openTime.setDate(that.openTime.getDate() + 1 );
+            that.closingTime =   new Date( that.openTime + ( 1*24*60*60*1000 ) ).getTime();
+            
+            //console.log( '24 hour closing time',  new Date (that.openTime).toString() , new Date (that.closingTime ).toString() );
+            
+            //console.log( '24 hour closing time', that.openTime, that.closingTime  );
+        }
+        
+
     };
 
     RoomResForm.prototype.initFormEvents = function(){
@@ -736,6 +844,46 @@
             arr.sort(sortASC);
         }
     }
+
+function _findObjectByKeyVal (obj, key, val) {
+    if (!obj || (typeof obj === 'string')) {
+        return null;
+    }
+    if (obj[key] === val) {
+        return obj;
+    }
+    
+    for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+          var found = _findObjectByKeyVal(obj[i], key, val);
+          if (found) {
+            return found;
+          }
+        }
+    }
+    return null;
+}
+
+function _convertToDateObj( hoursObj, startEnd ){
+    //need to create a date object in Javascript, but the date formats from LibCal are gross
+    //gets the hours and minutes and splits into array
+    var hoursMinutes = $.map(hoursObj.times.hours[0][startEnd].split(':'), function( val, i ){
+        return parseInt(val);
+    });
+    //checks whether it is Am or Pm
+    if( hoursObj.times.hours[0][startEnd].indexOf( 'pm' ) != -1 ){
+        hoursMinutes[0] += 12;
+    }
+    //get the day objects and splits into  array
+    var caldate = $.map( hoursObj.date.split("-"), function( val, i ){
+        return val - (i === 1);
+    }  );
+    
+    //ideally we could use apply - but it's throwing some error 
+    //var date = new ( Function.prototype.bind.apply( Date , [null].concat( caldate ) ) );
+    return new Date(  caldate[0], caldate[1], caldate[2], hoursMinutes[0], hoursMinutes[1] ); 
+}
+        
 
     // ------------------------------------------------------- //
 
