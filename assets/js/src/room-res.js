@@ -32,7 +32,7 @@
         this.slotMinutes = 30;
         this.locale = "en-US";
         this.timeZone = {timeZone: "America/Los_Angeles"};
-        this.lid        = 4816;
+        this.lid        = 4816; // 4816 8739
         this.openTime = null;
         this.closingTime = null;
 
@@ -262,24 +262,26 @@
         var to = null,
             that = this,
             startEndIndexes = [], 
-            start, end;
+            start, end,
+            now = new Date().getTime();
             
-            console.log( scheduleArray );
+        //console.log( scheduleArray );
 
         $.each( scheduleArray, function( i, item ){
             start = new Date( item.from ).getTime();
             end = new Date( item.to ).getTime();
             
-            if( that.openTime <= start && that.closingTime >= end){
+            //add to schedule array if
+            //beginning is after opening and end if before closing and end is greater than right now
+            if( that.openTime <= start && that.closingTime >= end && end > now ){
+                
+                    startEndIndexes.push( item );                    
 
-                startEndIndexes.push( item );              
-            }else{
-                console.log( 'this didn\'t match' );
             }
 
         } );
         
-        console.log( startEndIndexes );
+        console.log( 'Schedule Array slots: ', startEndIndexes.length +'/' + scheduleArray.length );
 
         //reset this variable incase we use this script for other days
         that.openTime = null;
@@ -316,15 +318,14 @@
         //returns the opening and closing hours for the main library
         var hoursObj,
             that = this;
-        
-        console.log( hoursData );
+            
+            //console.log( hoursData );
         
         //filter object for the main library and the current date passed in
-        //@todo turn the lid into a global variable
         hoursObj = $.grep( hoursData.locations, function(library){
             return library.lid == that.lid ;
         } );
-        //use this recirsive function to locate the day's hours for the date passed
+        //use this recursive function to locate the day's hours for the date passed
         hoursObj = _findObjectByKeyVal( hoursObj[0].weeks, 'date', that.dateYmd );
         
         //identify the date situation and create global variables
@@ -335,13 +336,16 @@
             
             //if this day closes at 1am, then we need to kick the closing time to the next day
             if( (hoursObj.times.hours[0].to).indexOf( 'am' ) != -1 ){
-                that.closingTime.setDate(that.closingTime.getDate() + 1 );
+                //that.closingTime = that.closingTime.setDate(that.closingTime.getDate() + 1 );
+                that.closingTime = new Date( that.closingTime.getTime() + ( 1*24*60*60*1000 ) );
+                //console.log( that.closingTime.toString() );
             }
             
+            //cast into milliseconds
             that.openTime   = that.openTime.getTime();
             that.closingTime = that.closingTime.getTime();
             
-            console.log( 'custom hours', that.openTime, that.closingTime );
+            //console.log( hoursObj.date, ': custom Hours difference ', Math.abs(that.closingTime - that.openTime) / 36e5 );
     
         }else if( hoursObj.times.status == '24hours' ){
             //if the status is 24 hours, we need to set the beginning end of this day
@@ -352,6 +356,8 @@
             //could be end.setHours(23,59,59,999);
             //that.closingTime = that.openTime.setDate(that.openTime.getDate() + 1 );
             that.closingTime =   new Date( that.openTime + ( 1*24*60*60*1000 ) ).getTime();
+            
+            //console.log( hoursObj.date,  ': 24 hours difference ', Math.abs(that.closingTime - that.openTime) / 36e5 );
             
             //console.log( '24 hour closing time',  new Date (that.openTime).toString() , new Date (that.closingTime ).toString() );
             

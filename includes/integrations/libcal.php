@@ -357,6 +357,7 @@ function get_weekly_hours() {
 
 	// systemTime=1 formats the hour as system rather than short (9:00pm vs 9pm)
 	//NOTE: this is the sandbox libcal hours
+	//https://api3.libcal.com/api_hours_grid.php?iid=333&format=json&weeks=3&systemTime=1
 	$request = wp_remote_get( 'https://api3.libcal.com/api_hours_grid.php?iid=333&format=json&weeks=3&systemTime=1' );
 
 	if ( is_wp_error ( $request ) ) {

@@ -14,7 +14,8 @@ get_header(); ?>
 			$title       = get_the_title();   // Could use 'the_title()' but this allows for override
 			$description = ( $post->post_excerpt ) ? get_the_excerpt(): ''; // Could use 'the_excerpt()' but this allows for override
             $hero_class  = $thumb_url ? 'ccl-c-hero ccl-has-image':     'ccl-c-hero';
-
+            date_default_timezone_set('America/Los_Angeles');
+            
             // replace with get_terms()
             $room_types  = get_terms( array( 'taxonomy' => 'room_type' ) );
 
@@ -104,7 +105,7 @@ get_header(); ?>
                     <?php 
                         $rooms = new WP_Query(array(
                             'post_type' => 'room',
-                            'posts_per_page' => 1,
+                            'posts_per_page' => -1,
                             'tax_query' => array(
                                 array(
                                     'taxonomy' => 'room_type',
@@ -271,7 +272,7 @@ get_header(); ?>
                                                                     ?>
                                                                     <option value="<?php echo $date_value; ?>"><?php echo $date_readable; ?></option>
                                                                 
-                                                                <?php $i++; } while ( $i < 7 ); ?>
+                                                                <?php $i++; } while ( $i < 3 ); ?>
 
                                                             </select>
                                                         </label>

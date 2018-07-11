@@ -120,6 +120,12 @@
     &.ccl-duration-4 {
         min-width: rem(200);
     }
+    &.ccl-duration-5 {
+        min-width: rem(225);
+    }
+    &.ccl-duration-6 {
+        min-width: rem(250);
+    }     
 
     [type="checkbox"] {
         @extend .ccl-u-display-none;
