@@ -98,20 +98,11 @@ $footer_options = get_option( 'footer-options' );
 
 </div><!-- #page -->
 
+<?php //get_template_part( 'partials/ux-feedback' ); ?>
+
 <span class="media-size"></span>
 
 <?php wp_footer(); ?>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121110899-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-121110899-1');
-</script>
-
 
 </body>
 </html>

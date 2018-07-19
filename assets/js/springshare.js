@@ -27,8 +27,15 @@
         _this.$serviceBreadCrumb = _this.$el.find( '.breadcrumb li:nth-of-type(2) a, .breadcrumb li:nth-of-type(2), #s-lib-bc-site' ).eq(0);
         _this.$bannerTitle       = _this.$el.find( '.ccl-c-libguide__title div' );
         _this.groupHome         = _this.$el.find( '#s-lib-bc-group' );
+        var hostName            = window.location.hostname;
         
-        console.log(_this.$serviceBreadCrumb);
+        //console.log(hostName);
+        
+        //cancel this function if we are in illiad
+        if( hostName === "claremont-illiad-oclc-org.ccl.idm.oclc.org" ){
+            
+            return;
+        }
         
         if( _this.$serviceBreadCrumb.length ){
             
@@ -92,9 +99,11 @@
     };
 
     $(document).ready(function(){
-        $('.s-la-page-public, .s-lg-guide-body, .s-lc-public, .s-lib-public-body').each( function(){
+        $('.s-la-page-public, .s-lg-guide-body, .s-lc-public, .s-lib-public-body, #wrap').each( function(){
             new SpringShare(this);
         });
+        
+        
     });
 
 } )( this, jQuery );

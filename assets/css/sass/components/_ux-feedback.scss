@@ -1,0 +1,55 @@
+.ccl-c-feedback__btn {
+    @extend .ccl-u-transition;
+    position: fixed;
+    bottom: -1px;
+    background: black;
+    border: 1px solid white;
+    color: white;
+    padding: $spacer/2;
+    right: 2%;
+    font-size: 85%;
+    cursor: pointer;
+    z-index: 10;
+    
+    &:hover,
+    &:focus{
+        @extend .ccl-u-bg-school;
+        padding-bottom: $spacer;
+        box-shadow: $focus-box-shadow-lg black;        
+    }
+}
+
+
+
+#feedback-modal{
+    height: 100%;
+    
+    .ccl-c-modal__dialog{
+        height: calc( 100vh - #{rem(20)} );
+        display: flex;
+        flex-direction: column;
+        
+        @include media($sm){
+            width: calc( 100% - 20px );            
+            height: calc( 100vh - #{rem(100)} );         
+        }
+        
+        @include media( $lg ){
+            max-width: rem(850);
+        }
+    
+        .ccl-c-modal__content{
+            flex: 1;
+        
+            .ccl-c-modal__body{
+                height: 100%;
+                
+                iframe{
+                    height: 100%
+                }
+            }
+            
+        }
+        
+    }
+}
