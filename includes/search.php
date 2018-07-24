@@ -17,6 +17,8 @@ function setup() {
 	
 	add_filter( 'searchwp_common_words', $n( 'ccl_searchwp_common_words' ) );
 	
+	add_filter( 'searchwp_term_pattern_whitelist', $n('ccl_searchwp_term_pattern_whitelist') );	
+	
 	add_action( 'wp_ajax_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );
 	add_action( 'wp_ajax_nopriv_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );	
 
@@ -78,6 +80,25 @@ function ccl_searchwp_common_words( $terms ) {
   
   return $terms;
 }
+
+
+function ccl_searchwp_term_pattern_whitelist( $whitelist ) {
+    $my_whitelist = array(
+        "/\\bS@C\\b/ui",
+        "/\\bScholarship@claremont\\b/ui",
+         "/\\bdh@cc\\b/ui",
+         "/\\bDH@CC\\b/ui",
+         "/\\gis\\b/ui",          
+    );
+
+    // we want our pattern to be considered the most specific
+    // so that false positive matches do not interfere
+    $whitelist = array_merge( $my_whitelist, $whitelist );
+
+    return $whitelist;
+}
+
+
 
 function retrieve_post_search_results(){
 	//sanitize and prepare the query
@@ -184,7 +205,8 @@ function ajax_search( $request ) {
 			'page',
 			'faq',
 			'database',
-			'post'
+			'post',
+			'general'
 		),
 	);
 

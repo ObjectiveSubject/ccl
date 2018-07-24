@@ -8,7 +8,7 @@
 	// Global variables
 	var document = window.document,
 		ENTER = 13, TAB = 9, SHIFT = 16, CTRL = 17, ALT = 18, CAPS = 20, ESC = 27, LCMD = 91, RCMD = 92, LARR = 37, UARR = 38, RARR = 39, DARR = 40,
-		forbiddenKeys = [ENTER, TAB, SHIFT, CTRL, ALT, CAPS, ESC, LCMD, RCMD, LARR, UARR, RARR, DARR],
+		forbiddenKeys = [ENTER, TAB, CTRL, ALT, CAPS, ESC, LCMD, RCMD, LARR, UARR, RARR, DARR],
 		indexNames = {
 			ti: 'Title',
 			kw: 'Keyword',
@@ -119,7 +119,7 @@
 				// get value of search input
 				var query = that.$input.val();
 				//remove double quotations and other characters from string
-				query = query.replace(/[^a-zA-Z0-9 -'.,]/g, "");
+				query = query.replace(/[^a-zA-Z0-9 -'.,@:]/g, "");
 
 				// set a timeout function to update results once 600ms passes
 				that.timeout = setTimeout(function () {
@@ -137,7 +137,7 @@
 						that.$responseList.html('');
 					}
 
-				}, 200);
+				}, 300);
 
 			})
 			.focus(function(){
@@ -251,6 +251,8 @@
 	SearchAutocomplete.prototype.handleResponse = function( response ) {
 		
 		//Process the results from the API query and generate HTML for dispplay
+		
+		console.log( response );
 		
 		var that = this,
 			results = response,
