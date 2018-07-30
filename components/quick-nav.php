@@ -2,8 +2,14 @@
 global $post;
 $blocks = \CCL\Helpers\get_blocks(); 
 $has_blocks = $blocks && count( $blocks ) > 1;
-$page_options = (array) get_post_meta( $post->ID, 'page_options', true );
-$is_spc = in_array( 'is_spc', $page_options ); // is special collections page
+$is_spc = false;
+if( is_singular() ){
+    $page_options = (array) get_post_meta( $post->ID, 'page_options', true );
+    $is_spc = in_array( 'is_spc', $page_options ); // is special collections page
+   
+}
+
+
 ?>
 
 <nav aria-label="Main Navigation" class="ccl-c-quick-nav <?php echo (! $has_blocks) ? 'ccl-no-secondary' : ''; ?>">

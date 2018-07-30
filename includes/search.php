@@ -17,7 +17,7 @@ function setup() {
 	
 	add_filter( 'searchwp_common_words', $n( 'ccl_searchwp_common_words' ) );
 	
-	add_filter( 'searchwp_term_pattern_whitelist', $n('ccl_searchwp_term_pattern_whitelist') );	
+	add_filter( 'searchwp_term_pattern_whitelist', $n( 'ccl_searchwp_term_pattern_whitelist') );	
 	
 	add_action( 'wp_ajax_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );
 	add_action( 'wp_ajax_nopriv_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );	
@@ -74,7 +74,7 @@ function load_search_options(){
 function ccl_searchwp_common_words( $terms ) {
   
   // we DO NOT want to ignore 'first' so remove it from the list of common words
-  $words_to_keep = array( 'web', 'full' );
+  $words_to_keep = array( 'web', 'full', 'gis' );
   
   $terms = array_diff( $terms, $words_to_keep );
   
@@ -86,9 +86,8 @@ function ccl_searchwp_term_pattern_whitelist( $whitelist ) {
     $my_whitelist = array(
         "/\\bS@C\\b/ui",
         "/\\bScholarship@claremont\\b/ui",
-         "/\\bdh@cc\\b/ui",
-         "/\\bDH@CC\\b/ui",
-         "/\\gis\\b/ui",          
+        "/\\bdh@cc\\b/ui",
+        "/\\Digital Humanities @ Claremont Colleges\\b/ui"
     );
 
     // we want our pattern to be considered the most specific
@@ -280,6 +279,11 @@ function ajax_search( $request ) {
 					$post_type_nice_name = ( has_term( 'librarian', 'staff_role', $post->ID ) ) ? 'Librarian' : 'Staff'   ;
 					$post_link           = get_post_meta( $post->ID , 'member_friendly_url', true );
 					break;
+				case 'general':
+					$post_type_icon      = 'clip';
+					$post_type_nice_name = 'Resource';
+					$post_link           = get_post_meta( $post->ID , 'general_url', true );
+					break;					
 				default:
 					$post_type_icon      = 'clip'; // do we have a default icon?
 					$post_type_nice_name = 'Post';
