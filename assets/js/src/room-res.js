@@ -137,8 +137,13 @@
 
                 // merge bookings with availability
                 if ( bookingsData.length ){
-
+                        var checkStatuses = ['Available', 'Confirmed'];
                     bookingsData.forEach(function(booking,i){
+                        
+                        if(  $.inArray( booking.status, checkStatuses ) == -1 ){
+                            console.log( booking.status );
+                            return;   
+                        }
 
                         // calculate number of slots based on booking duration
                         var fromTime = new Date(booking.fromDate).getTime(),
