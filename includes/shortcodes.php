@@ -6,6 +6,30 @@ namespace CCL\Shortcodes;
  *
  * @return void
  */
+ 
+ 
+ //Shortcode template
+ /**
+ function shortcode_item($attributes = false, $content = null ){
+ //extend default attrs with values passed in
+ $data = shortcode_atts( array(
+	), $attributes );	
+	
+	//output buffering start
+	ob_start();
+	//then HTML goes here
+	?>
+	
+	<?php
+	
+	$html = ob_get_contents();
+	ob_get_clean();
+
+	return $html;	
+	
+ }
+ */
+ 
 function setup() {
 	$n = function ( $function ) {
 		return __NAMESPACE__ . "\\$function";
@@ -22,6 +46,7 @@ function setup() {
 	add_shortcode( 'tooltip', $n( 'tooltip_fn' ) );
 	add_shortcode( 'libanswers_widget', $n( 'libanswers_widget_fn' ) );
 	add_shortcode( 'chat_widget', $n( 'chat_widget_fn' ) );
+	add_shortcode( 'youtube_video', $n( 'youtube_video_fn' ) );
 	
 }
 
@@ -346,4 +371,41 @@ return $html;
  	
  	return $html;
  	
+ }
+ 
+ function youtube_video_fn($attributes = false, $content = null ){
+ 	//Define variables
+ 	$url = 'https://www.youtube.com/embed/';
+ 	
+ //extend default attrs with values passed in
+ $data = shortcode_atts( array(
+ 		'id'		=> '',
+ 		'height'	=> '360px', //we don't need these values but keeping it anyway
+ 		'width'		=> '100%'
+	), $attributes );	
+	
+	//return function if there is no ID
+	if( empty( $data['id'] ) ){
+		return;
+	}
+	
+	//create URL Params
+	$url .= $data['id'];
+	
+	//output buffering start
+	ob_start();
+	//then HTML goes here
+	?>
+	
+		<div class="ccl-b-media--16x9 ccl-u-mt-1">
+			<iframe src="<?php echo $url ?>" frameborder="0" allowfullscreen ></iframe>
+		</div>
+	
+	<?php
+	
+	$html = ob_get_contents();
+	ob_get_clean();
+
+	return $html;	
+	
  }
