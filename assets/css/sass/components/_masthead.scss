@@ -118,3 +118,12 @@
     }
 
 }
+
+.ccl-c-masthead__notice{
+    .ccl-c-masthead__status-content{
+         @include media($lg){
+            padding: 0 rem(10) rem(10);
+            margin: 0;
+        }       
+    }
+}

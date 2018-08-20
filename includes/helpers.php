@@ -564,28 +564,28 @@ function get_header_events() {
 }
 
 /**
- * Header notices
+ * Header notices - get header notifications from options and filter for messages that are enabled and are before exp date
  *
- * @return array|mixed|string|\WP_Error
+ * @return array|mixed|string|null
  */
 function get_header_notices() {
+	
+	//set timezone - just to be on the safe side
+	date_default_timezone_set('America/Los_Angeles');
+	$today = strtotime("today");
 
-	$notice_cache  = get_transient( 'header_notices' );
+	//get notice data
+	$notice_data =  \CCL\MetaBoxes\Notifications\notices_get_options('header_notices_items');
 
-	if ( $notice_cache ) {
-		$notice_data = $notice_cache;
-	} else {
-
-		$notice_data = array(
-			"Library Search is experiencing intermittent issues. We are aware of the problems and working with our vendor to resolve them as soon as possible"
-		);
-
-		if ( ! is_wp_error ( $notice_data ) ) {
-			set_transient( 'header_notices', $notice_data, 15 * MINUTE_IN_SECONDS ); // maybe cache for 15 minutes
+	//filter out messages that are not enabled, and that are after the expiration date	
+	$notice_data = array_filter( $notice_data, function( $array ) use( &$today )  {
+		if(  array_key_exists( 'enable_message', $array ) && $array['enable_message'] != false  && $array['notice_expiration'] > $today && !empty( $array['notices_message'] ) ){
+			return $array;
 		}
-	}
+	} );
 
-	return $notice_data;
+	//return values to be printed and reset keys
+	return $notice_data = array_values( $notice_data );
 }
 
 /**
@@ -682,7 +682,7 @@ function debug_to_console( $data, $title = null) {
 	$fn_title = !empty( $title ) ? $title : 'From WP';
 	$fn_data = $data;
 	
-	add_action( 'wp_footer', function() use ($fn_title, $fn_data){
+	add_action( (is_admin() ? 'admin_footer' : 'wp_footer'), function() use ($fn_title, $fn_data){
 		
 	    if( is_array($fn_data) || is_object($fn_data) ) {
 			echo "<script>

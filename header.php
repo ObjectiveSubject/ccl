@@ -91,15 +91,20 @@
 								</div>
 							<?php endif; ?>						
 
-							<?php //temporarily remove the notices until we build an options page ?>
-							<?php if (! $notices ) : ?>
+
+							<?php
+							//if notices are available, then run notices UI
+							if ($notices ) : ?>
 								<div class="ccl-c-masthead__notice">
 									<span class="ccl-h5">
 										<span class="ccl-u-color-red">
 											<span class="ccl-b-icon alert" aria-hidden="true"></span> Notice:
 										</span>
-										<?php $notice = shuffle( $notices ); // Return a random notice ?>
-										<?php echo apply_filters( 'the_title', $notices[0] ); ?>
+										<ul class="ccl-u-clean-list">
+										<?php foreach( $notices as $key => $notice ): ?>
+											<li class="ccl-c-masthead__status-content"><?php echo apply_filters( 'the_title', $notice['notices_message'] ); ?></li>
+										 <?php endforeach; ?>
+										</ul>
 									</span>
 								</div>
 							<?php endif; ?>
