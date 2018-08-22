@@ -220,14 +220,14 @@ get_header(); ?>
                                         </div>
 
                                         <div class="ccl-c-modal__body">
-                                            <div class="ccl-c-modal__description">
-                                                <div class="ccl-u-weight-bold"><span class="ccl-b-icon alert"></span> Policies:</div>
-                                                <div class="ccl-u-ml-1">Available to current TCC students, staff, and faculty. Use your campus email address to sign up. You may make 1 reservation per day, for up to 3 hours. 
-                                                Pick up your room key at the Main Services Desk. We will release your reservation after 15 minutes if you do not check-in.</div>
-                                            </div>
-                                            <div class="ccl-c-room__form-content js-room-res-form-content ccl-u-mt-nudge">
 
-                                                <div class="ccl-l-row">
+                                            <div class="ccl-c-room__form-content js-room-res-form-content">
+                                                <div class="ccl-c-modal__description">
+                                                    <div class="ccl-u-weight-bold"><span class="ccl-b-icon alert"></span> Policies:</div>
+                                                    <div class="ccl-u-ml-1">Available to current TCC students, staff, and faculty. Use your campus email address to sign up. You may make 1 reservation per day, for up to 3 hours. 
+                                                    Pick up your room key at the Main Services Desk. We will release your reservation after 15 minutes if you do not check-in.</div>
+                                                </div>
+                                                <div class="ccl-l-row ccl-u-mt-nudge">
                                                     <div class="ccl-l-column ccl-l-span-quarter-md ccl-u-mb-1">
                                                         <label class="ccl-b-label">
                                                             <?php _e( 'First Name', 'ccl' ); ?>

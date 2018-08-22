@@ -780,9 +780,10 @@
             } else {
                 responseHTML =  ['<p class="ccl-h3 ccl-u-mt-0">Sorry, but we couldn\'t process your reservation.</p>','<p class="ccl-h4">Errors:</p>'];
                 $(responseObject.errors).each(function(i, error){
+                    console.log( error );
                     responseHTML.push('<p class="ccl-c-alert ccl-is-error">' + error + '</p>');
                 });
-                responseHTML.push('<p class="ccl-h4">Please talk to your nearest librarian for help.</p>');
+                responseHTML.push('<p class="ccl-h4">Please contact the main services desk for help: 909-621-8150</p>');
             }
 
             that.$formCancel.prop('disabled',false).text('Close');
