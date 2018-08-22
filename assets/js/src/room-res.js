@@ -779,9 +779,9 @@
                                 '<p class="ccl-h4">Please check your email to confirm your booking.</p>'];
             } else {
                 responseHTML =  ['<p class="ccl-h3 ccl-u-mt-0">Sorry, but we couldn\'t process your reservation.</p>','<p class="ccl-h4">Errors:</p>'];
-                $(responseObject.errors).each(function(i, error){
-                    console.log( error );
-                    responseHTML.push('<p class="ccl-c-alert ccl-is-error">' + error + '</p>');
+                $(responseObject).each(function(i, error){
+
+                    responseHTML.push( $('<p />').addClass('ccl-c-alert ccl-is-error').html(error.errors) );
                 });
                 responseHTML.push('<p class="ccl-h4">Please contact the main services desk for help: 909-621-8150</p>');
             }
