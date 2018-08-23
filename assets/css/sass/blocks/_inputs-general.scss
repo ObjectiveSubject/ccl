@@ -30,7 +30,8 @@ textarea.ccl-b-input {
 .ccl-b-input[type="text"] {
     
     .ccl-c-search-form & {
-        @extend .ccl-h3;
+        //reduced size of inputs 8/23
+        @extend .ccl-h4;
         @extend .ccl-u-mt-0;
         // color: black;
         border: 0;
