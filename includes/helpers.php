@@ -576,6 +576,12 @@ function get_header_notices() {
 
 	//get notice data
 	$notice_data =  \CCL\MetaBoxes\Notifications\notices_get_options('header_notices_items');
+	
+	//extensive error trapping because WPEngine is throwing errors
+	if( empty( $notice_data ) ){
+		return;
+		
+	}
 
 	//filter out messages that are not enabled, and that are after the expiration date	
 	$notice_data = array_filter( $notice_data, function( $array ) use( &$today )  {
