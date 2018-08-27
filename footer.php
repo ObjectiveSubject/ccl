@@ -98,7 +98,14 @@ $footer_options = get_option( 'footer-options' );
 
 </div><!-- #page -->
 
-<?php //get_template_part( 'partials/ux-feedback' ); ?>
+
+<?php 
+	//if feedback form is enabled, then show
+	if ( array_key_exists( 'footer-column-ux-feedback', $footer_options ) && $footer_options['footer-column-ux-feedback'] ){
+		get_template_part( 'partials/ux-feedback' );
+	}
+?>
+
 
 <span class="media-size"></span>
 

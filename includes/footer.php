@@ -98,6 +98,15 @@ function footer_settings_init() {
 		'footer-options',
 		'footer-content'
 	);
+	
+	add_settings_field(
+		'footer_column_ux_feedback', // as of WP 4.6 this value is used only internally
+		// use $args' label_for to populate the id inside the callback
+		__('User Experience Feedback Form', 'footer-content'),
+		'\CCL\Footer\footer_column_3_cb',
+		'footer-options',
+		'footer-content'
+	);	
 }
 
 /**
@@ -133,5 +142,20 @@ function footer_column_2_cb( $args ) {
 	$options = get_option( 'footer-options' );
 	?>
 	<pre><textarea id='footer-column-2' name='footer-options[footer-column-2]' rows='18' cols='80' type='textarea'><?php echo esc_textarea( $options['footer-column-2'] ); ?></textarea></pre>
+	<?php
+}
+
+/**
+ * Callback for footer column 3
+ * 
+ * Enable UX feedback form
+ *
+ * @param $args
+ */
+function footer_column_3_cb( $args ) {
+	$options = get_option( 'footer-options' );
+	?>
+		<input id="footer-column-ux-feedback" type="checkbox" name="footer-options[footer-column-ux-feedback]" value="1"<?php checked( isset( $options['footer-column-ux-feedback'] ) ); ?> />
+	
 	<?php
 }
