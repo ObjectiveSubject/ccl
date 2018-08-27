@@ -10,10 +10,34 @@
         <div class="ccl-c-modal__content">
 
             <div class="ccl-c-modal__header">
-                <?php global $post; ?>
+                <?php global $post; 
+                        global $wp_query;
+                        //debug_to_console( $wp_query );
+                        // debug_to_console( $wp_query->post->post_title );
+                        // debug_to_console( $wp_query->queried_object->post_title );
+                        // debug_to_console( get_queried_object() );
+                        
+                        if( is_singular() ){
+                            $post_title = $wp_query->post->post_title;
+                            $post_url = site_url( $wp_query->post->post_name );
+                        
+                        }elseif( is_archive() ){
+                            $post_title = get_the_archive_title() . " - " . $wp_query->queried_object->name;
+                            $post_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                            
+                        }elseif( is_search() ){
+                            $post_title = 'Search';
+                            $post_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];                           
+                        }else{
+                            $post_title = get_bloginfo( 'name' );
+                            $post_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; 
+                        }
+                        
+                ?>
+                
                 <div>
-                    <h5 class="ccl-c-modal__title" id="feedback-modal-label">Give us feedback on "<?php echo get_the_title( $post->ID ); ?>"</h5>
-                    <div class="ccl-u-weight-light"><?php echo get_permalink( $post->ID ); ?></div>                   
+                    <h5 class="ccl-c-modal__title" id="feedback-modal-label">Give us feedback on "<?php echo $post_title; ?>"</h5>
+                    <div class="ccl-u-weight-light"><?php echo $post_url; ?></div>                   
                 </div>
 
                 <button type="button" class="ccl-b-close" data-toggle="modal" aria-label="Close">
