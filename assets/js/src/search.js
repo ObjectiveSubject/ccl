@@ -443,8 +443,10 @@
 				break;
 				
 			case 'oac':
+				var oacParams;
+				oacParams = {query :  queryString };
 				
-				renderedURL = 'http://www.oac.cdlib.org/search?query=' + queryString + '&institution=Claremont+Colleges';
+				renderedURL = 'http://www.oac.cdlib.org/search?' +  $.param( oacParams ) + '&institution=Claremont+Colleges';
 				break;
 				
 			default:
