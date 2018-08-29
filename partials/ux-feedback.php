@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <div type="button" class="ccl-c-feedback__btn" data-toggle="modal" data-target="#feedback-modal">
-  Was this webpage helpful?
+  <span class="ccl-b-icon compass ccl-u-pr-nudge"></span> Was this webpage helpful?
 </div>
 
 <!-- Modal -->

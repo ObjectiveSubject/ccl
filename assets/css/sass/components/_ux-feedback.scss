@@ -1,21 +1,27 @@
 .ccl-c-feedback__btn {
     @extend .ccl-u-transition;
+    @extend .ccl-u-weight-bold;
     position: fixed;
-    bottom: -1px;
-    background: black;
+    bottom: 12px;
+    @extend .ccl-u-bg-school;
     border: 1px solid white;
     color: white;
-    padding: $spacer/2;
-    right: 2%;
-    font-size: 85%;
+    padding: $spacer/3;
+    right: 1.1%;
+    font-size: 90%;
     cursor: pointer;
     z-index: 10;
+    transform-origin: center center;
+    backface-visibility: hidden;    
+    
     
     &:hover,
     &:focus{
-        @extend .ccl-u-bg-school;
-        padding-bottom: $spacer;
-        box-shadow: $focus-box-shadow-lg black;        
+
+        transform: scale(1.05) translateZ(0);
+        box-shadow: $focus-box-shadow-lg black;
+        backface-visibility: hidden; 
+        
     }
 }
 
