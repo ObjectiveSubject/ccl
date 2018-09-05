@@ -17,6 +17,9 @@ function setup() {
 	
 	add_filter( 'searchwp_common_words', $n( 'ccl_searchwp_common_words' ) );
 	
+	//add_filter( 'searchwp_include', $n( 'ccl_searchwp_weight_eric' ), 10, 3 );
+	add_filter( 'searchwp_weight_mods', $n( 'ccl_searchwp_weight_mods' ) );	
+	
 	add_filter( 'searchwp_term_pattern_whitelist', $n( 'ccl_searchwp_term_pattern_whitelist') );	
 	
 	add_action( 'wp_ajax_retrieve_post_search_results', __NAMESPACE__ . '\\retrieve_post_search_results' );
@@ -95,6 +98,49 @@ function ccl_searchwp_term_pattern_whitelist( $whitelist ) {
     $whitelist = array_merge( $my_whitelist, $whitelist );
 
     return $whitelist;
+}
+
+
+function ccl_searchwp_weight_eric( $ids, $engine, $terms ) {
+	//$terms = strtolower( $terms );
+	
+	//debug_to_console( $ids );
+	//preg_match('/\eric\b/', $terms )
+
+	if( count($terms) == 1 && in_array( 'eric', $terms ) && !in_array(strtolower( "america" ), array_map('strtolower', $terms ) ) ){
+		return array( 2088 );
+	}
+
+}
+ 
+
+function ccl_searchwp_weight_mods( $sql ) {
+	
+	//REMEMBER!!! THE ID FOR THESE POSTS ARE NOT THE SAME IN STAGING SERVER, GRAB THE ID FROM THE PRODUCTION SITE!!!!!
+	global $wpdb;
+	$bubbled_up_IDs = '';
+	//Get search query
+	$query = isset( $_REQUEST['s'] ) ? sanitize_text_field( $_REQUEST['s'] ) : get_search_query();
+	
+	//Make search query lowercase
+	$query = function_exists( 'mb_strtolower' ) ? mb_strtolower( $query, 'UTF-8' ) : strtolower( $query );
+	//Get list of ids to bubble up for specific query
+	if( stripos( $query, 'eric' ) !== false ){
+		$bubbled_up_IDs = '897';
+	}elseif( stripos( $query, 'web of science' ) !== false ){
+		$bubbled_up_IDs = '814';
+	}elseif( stripos( $query, 'databases' ) !== false ){
+		$bubbled_up_IDs = '1424';
+	}elseif( stripos( $query, 'gis' ) !== false ){
+		$bubbled_up_IDs = '1192';
+	}
+	
+	
+	if( ! empty( $bubbled_up_IDs ) ){
+		$additional_weight = 1000;
+		$sql .= " + ( IF ( {$wpdb->prefix}posts.ID IN ($bubbled_up_IDs) , {$additional_weight}, 0 ) )";
+	}
+	return $sql;
 }
 
 
