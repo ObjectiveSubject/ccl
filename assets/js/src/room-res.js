@@ -772,16 +772,28 @@
 
             var responseHTML,
                 responseObject = JSON.parse(response);
+                
+                //for testing purposes
+                //console.log( responseObject );
 
             if ( responseObject.booking_id ) {
                 responseHTML =  ['<p class="ccl-h2 ccl-u-mt-0">Success!</p>',
                                 '<p class="ccl-h4">Your booking ID is <span class="ccl-u-color-school">' + responseObject.booking_id + '</span></p>',
                                 '<p class="ccl-h4">Please check your email to confirm your booking.</p>'];
             } else {
+                
                 responseHTML =  ['<p class="ccl-h3 ccl-u-mt-0">Sorry, but we couldn\'t process your reservation.</p>','<p class="ccl-h4">Errors:</p>'];
+                
+                
                 $(responseObject).each(function(i, error){
+                    //rewrite the error message of the error pertains to email domain
+                    if( error.errors.match( /\semail domain/ ) ){
+                        responseHTML.push( $('<p />').addClass('ccl-c-alert ccl-is-error').html('Please use a valid Claremont Colleges email address.') );
+                    }else{
+                        responseHTML.push( $('<p />').addClass('ccl-c-alert ccl-is-error').html(error.errors) );                       
+                    }             
 
-                    responseHTML.push( $('<p />').addClass('ccl-c-alert ccl-is-error').html(error.errors) );
+                    
                 });
                 responseHTML.push('<p class="ccl-h4">Please contact the main services desk for help: 909-621-8150</p>');
             }
