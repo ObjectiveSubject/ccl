@@ -360,7 +360,7 @@ endif;
                                 //if trial is set, then append to HTML
                                 if( $article['database_trial'] ): ?>
                                     <li class="ccl-c-database--trial">
-                                        <div class="ccl-u-weight-bold ">Trial <span class="ccl-b-icon clock" aria-hidden="true"></span></div>
+                                        <div class="ccl-u-weight-bold "><span class="ccl-b-icon clock" aria-hidden="true"></span> Trial<br /><a class="ccl-u-faded ccl-u-weight-light"href="http://claremont.libsurveys.com/trials">Give Feedback</a></div>
                                     </li>
                                 <?php endif; ?>
                             

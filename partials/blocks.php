@@ -150,7 +150,7 @@ if ( $blocks ) : ?>
 
             $has_block_items = ( isset ( $events ) && $events );
             $block_item_count = ( $has_block_items && is_array( $events ) ) ? count( $events ) : 0;
-            $enable_carousel = $block_item_count > 3;
+            $enable_carousel = $block_item_count > 2;
             
             if ( $has_block_items ) : ?>
 
@@ -230,7 +230,13 @@ if ( $blocks ) : ?>
 
             <?php
             date_default_timezone_set('America/Los_Angeles');
+            $news_events_items = array();
+            $Libcal_event_data  = null;
+            $promo_news_data    = null;
+            $closest_date       = null;
+            $today              = strtotime('today midnight');
 
+            
             if ( isset( $block['block_news_events'] ) ) {
 
                 $news_events = new WP_Query( array(
@@ -243,12 +249,76 @@ if ( $blocks ) : ?>
             } else { 
                 $news_events = null;
             };
+    
+    		$Libcal_event_data = \CCL\Helpers\get_event_data_promo_block();
 
-            $has_block_items = ( isset ( $news_events ) && $news_events->have_posts() );
-            $block_item_count = ( $has_block_items && is_array( $news_events->posts ) ) ? count( $news_events->posts ) : 0;
-            $enable_carousel = $block_item_count > 3;
+            //debug_to_console( $Libcal_event_data );
+            
+            //check for libcal data, and add the render results array
+            if( !empty( $Libcal_event_data ) ){
+                foreach( $Libcal_event_data as $key => $event ){
+                    
+    				$start = date( 'l, F d Y, g:i', strtotime( $event['start'] ) );
+    				$end   = $event['end'] ? '&ndash;' . date( 'g:ia', strtotime( $event['end'] ) ) : '';
+    
+    				$date_time = $start . $end;                
+                    
+                    array_push( $news_events_items, array(
+                            'title'         => $event['title'],
+                            'date_time'     => esc_html( $date_time ),
+                            'str_time'      => strtotime( $event['start'] ),
+                            'location'      => $event['location']['name'],
+                            'featured_img'  => $event['featured_image'] ?: CCL_TEMPLATE_URL . "/assets/images/ccl-exterior.jpg",
+                            'link'          => $event['url']['public'],
+                            'event_type'    => 'libcal'
+                        ) );
+                    
+                }                
+            }
+            
+            //check for data from the news item, and render to the results array
+            if( isset ( $news_events ) && $news_events->have_posts() ){
+                foreach( $news_events->posts as $key => $news ){
+                    array_push( $news_events_items, array(
+                            'title'         => $news->post_title,
+                            'date_time'     => date( 'F d Y', strtotime( $news->post_date ) ),
+                            'str_time'      => strtotime( $news->post_date ),
+                            'featured_img'  =>  get_the_post_thumbnail_url($news->ID, 'medium') ?: CCL_TEMPLATE_URL . "/assets/images/ccl-exterior.jpg",
+                            'link'          =>  get_permalink( $news->ID ),
+                            'event_type'    => 'news'
+                        ) );
+                }                
+            }
+            
 
-            if ( $has_block_items ) : ?>
+            //sort the results array by most recent
+            usort( $news_events_items, function ( $a, $b ) {
+            
+            	return $a['str_time'] - $b['str_time'];
+            } );
+            
+            
+            //get the date closest to today
+            // foreach( $news_events_items as $key => $item ){
+                
+            //     if( $item['str_time']  >= $today ){
+            //         debug_to_console( $item );
+            //         $closest_date = $key;
+            //         break;
+            //     }
+            // }
+
+            //make sure we have enough posts for the carousel
+            $block_item_count = ( $news_events_items && is_array( $news_events_items ) ) ? count( $news_events_items ) : 0;
+            
+            $block_item_count = ( isset( $block['block_description'] ) && $block['block_description'] ) ? $block_item_count + 1 : $block_item_count + 0;
+            
+            //$closest_date = ( isset( $closest_date ) && isset( $block['block_description'] ) && $block['block_description'] ) ? $closest_date + 1 : $closest_date + 0;
+            
+            $enable_carousel = $block_item_count > 2;
+
+
+            if ( $block_item_count ) : ?>
 
                 <div id="block-<?php echo $index; ?>" class="ccl-l-container">
 
@@ -295,24 +365,25 @@ if ( $blocks ) : ?>
 
                                 <?php endif; ?>
 
-                                <?php while ( $news_events->have_posts() ) : $news_events->the_post(); ?>
+                                <?php foreach( $news_events_items as $key => $promo ):?>
                                 
                                     <article class="ccl-c-carousel__slide">
 
-                                        <a href="<?php the_permalink(); ?>" title="Read <?php the_title() ?>">
+                                        <a href="<?php echo $promo['link']; ?>" title="Read <?php echo $promo['title']; ?>">
 
-                                            <?php the_post_thumbnail( 'medium', array( 'class' => 'ccl-u-display-block ccl-u-mb-nudge' ) ) ?>
+                                           <img src="<?php echo $promo['featured_img']; ?>" class="ccl-u-display-block ccl-u-mb-nudge" alt="<?php echo $promo['title']; ?>" />
 
-                                            <?php if ( 'event' === get_post_type() ) : ?>
-                                            
-                                                <p class="<?php echo has_post_thumbnail() ? 'ccl-h4' : 'ccl-h3' ?> ccl-u-mt-nudge"><?php the_title(); ?></p>
-                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">[Date & Time]</p>
-                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">[Venue]</p>
+                                            <?php if ( $promo['event_type'] === 'libcal' ) : ?>
+                                                
+                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">Events</p>
+                                                <p class="ccl-h3 ccl-u-mt-nudge"><?php echo $promo['title']; ?></p>
+                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded"><?php echo $promo['date_time']; ?></p>
+                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded"><?php echo $promo['location']; ?></p>
                                             
                                             <?php else : ?>
 
-                                                <div class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">News - <?php echo get_the_date() ?></div>
-                                                <p class="ccl-h4 ccl-u-mt-nudge"><?php the_title(); ?></p>
+                                                <p class="ccl-h4 ccl-u-mt-nudge ccl-u-faded">News</p>
+                                                <p class="ccl-h4 ccl-u-mt-nudge"><?php echo $promo['title']; ?></p>
                                                 
                                             <?php endif; ?>
 
@@ -320,7 +391,7 @@ if ( $blocks ) : ?>
                                     
                                     </article>
 
-                                <?php endwhile; wp_reset_query(); ?>
+                                <?php endforeach; ?>
                                 
                             </div>
 

@@ -55,6 +55,10 @@
 
 .ccl-c-promo__cta {
     @extend .ccl-u-mt-1;
+    a{
+        text-decoration: underline;    
+    }
+    
     & > * {
         margin-top: 0.5rem;
     }

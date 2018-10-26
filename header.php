@@ -78,6 +78,8 @@
 						
 						<li>
 							<?php if ( $events && ! empty( $events->events ) ) : ?>
+
+							
 								<div class="ccl-c-masthead__event">
 									<span class="ccl-h5"><span class="ccl-b-icon calendar" aria-hidden="true"></span>
 									

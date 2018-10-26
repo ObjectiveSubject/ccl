@@ -563,6 +563,47 @@ function get_header_events() {
 	return $event_data;
 }
 
+
+/**
+ * Retrieve events for the news-events block
+ *
+ * @return array|mixed|string|\WP_Error
+ */
+function get_event_data_promo_block() {
+
+	$event_cache  = get_transient( 'news_events_event_data' );
+
+	if ( $event_cache ) {
+		$event_data = $event_cache;
+	} else {
+
+		$parameters = array(
+			'limit' => 3
+		);
+
+		$event_data = \CCL\Integrations\LibCal\get_events( $parameters );
+		
+		$event_data = array_filter( $event_data->events, function($event){
+			if( !empty( $event->category ) ){
+				foreach( $event->category as $key => $cat ){
+					if( $cat->id == 35493 ){
+						return true;
+					}
+				}				
+			}
+
+			
+		} );
+
+		if ( ! is_wp_error ( $event_data ) ) {
+			set_transient( 'news_events_event_data', $event_data, 15 * MINUTE_IN_SECONDS ); // maybe cache for 15 minutes
+		}
+	}
+
+	return json_decode(json_encode($event_data), true);
+}
+
+
 /**
  * Header notices - get header notifications from options and filter for messages that are enabled and are before exp date
  *

@@ -41,6 +41,10 @@
     @extend .ccl-u-clean-list;
     margin-top: $spacer;
     font-weight: bold;
+    
+    a{
+        text-decoration: underline;
+    }
 
     & > * {
         line-height: 1;
@@ -51,6 +55,10 @@
 .ccl-c-profile-card__cta {
     @extend .ccl-h4;
     @extend .ccl-u-mt-0;
+    
+    a{
+        text-decoration: underline;
+    }
 }
 
 .ccl-c-profile-card__avatar {
