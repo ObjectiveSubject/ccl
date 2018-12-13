@@ -122,6 +122,8 @@
                 mainHoursData = ( typeof mainHoursData === 'string' ) ? JSON.parse( mainHoursData ) : mainHoursData;
                 
                 //get the open hours of the library and return these times as variables
+                //console.log( spaceData );
+                
                 that.getOpenHours( mainHoursData );   
                 
                 if( !that.openTime && !that.closingTime ){
@@ -270,11 +272,18 @@
             start, end,
             now = new Date().getTime();
             
+            
         //console.log( scheduleArray );
 
         $.each( scheduleArray, function( i, item ){
             start = new Date( item.from ).getTime();
             end = new Date( item.to ).getTime();
+            
+            // console.log( i, 'now', now, new Date(), 'closing time', new Date( that.closingTime ).toDateString() );
+            // console.log( i,  'greater than start time', that.openTime <= start );
+            // console.log( i, 'less than closing time', that.closingTime >= end );
+            // console.log( i, 'end of slot is greater than now', end > now  );
+            console.log( that.openTime <= start, that.closingTime >= end , end > now  );
             
             //add to schedule array if
             //beginning is after opening and end if before closing and end is greater than right now
@@ -333,6 +342,8 @@
         //use this recursive function to locate the day's hours for the date passed
         hoursObj = _findObjectByKeyVal( hoursObj[0].weeks, 'date', that.dateYmd );
         
+        //console.log( 'hours Today',  hoursObj );
+        
         //identify the date situation and create global variables
         if( 'hours' in hoursObj.times ){
             //use the function to convert a series of strings into an actual Date Object
@@ -352,21 +363,38 @@
             
             //console.log( hoursObj.date, ': custom Hours difference ', Math.abs(that.closingTime - that.openTime) / 36e5 );
     
-        }else if( hoursObj.times.status == '24hours' ){
+        }else if( hoursObj.times.status === '24hours' ){
             //if the status is 24 hours, we need to set the beginning end of this day
             var date = new Date( hoursObj.date );
+            date.setHours(0,0,0,0);
+            
+            //console.log( hoursObj, date );
 
-            that.openTime    = date.getTime();            
+            //that.openTime    = date.getTime();
+            
+            that.openTime       = date;
+            var endTime         = new Date( date );
+            that.closingTime    = endTime.setHours( 48,0,0,0 );
+            
+            
+            //var closing = new Date( that.openTime );
+            
+            //console.log( new Date(that.closingTime).toISOString() );
 
+            // tomorrow.setDate(tomorrow.getDate() + 1)
             //could be end.setHours(23,59,59,999);
             //that.closingTime = that.openTime.setDate(that.openTime.getDate() + 1 );
-            that.closingTime =   new Date( that.openTime + ( 1*24*60*60*1000 ) ).getTime();
+            // that.closingTime =   new Date( that.openTime + ( 1*24*60*60*1000 ) ).getTime();
+            // that.closingTime =   new Date( that.openTime.getDate() + 1 ).getTime();
+            //that.closingTime =   that.openTime.setDate(that.openTime.getDate() + 1);
+            
+            //console.log( 'date string', new Date( that.closingTime ).toDateString(), 'iso string', new Date( that.closingTime ).toISOString() );
             
             //console.log( hoursObj.date,  ': 24 hours difference ', Math.abs(that.closingTime - that.openTime) / 36e5 );
             
-            //console.log( '24 hour closing time',  new Date (that.openTime).toString() , new Date (that.closingTime ).toString() );
+            // console.log( '24 hour closing time',  new Date (that.openTime).toString() , new Date (that.closingTime ).toString() );
             
-            //console.log( '24 hour closing time', that.openTime, that.closingTime  );
+            console.log( '24 hour closing time', that.openTime, that.closingTime, new Date( that.closingTime ).toString()  );
         }
         
 
