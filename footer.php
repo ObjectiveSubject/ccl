@@ -108,7 +108,7 @@ $footer_options = get_option( 'footer-options' );
 	
 	//debug
 	debug_to_console( $wp_query );
-	debug_to_console(  in_array( $post->ID, $footer_options['footer_column_enable_chat_widget']  ) ); 
+	debug_to_console(  in_array( $wp_query->post->ID, $footer_options['footer_column_enable_chat_widget']  ) ); 
 	
 	if( is_array( $footer_options['footer_column_enable_chat_widget'] ) && ( in_array( $wp_query->post->ID, $footer_options['footer_column_enable_chat_widget'] ) || in_array( $wp_query->post->post_type,  $footer_options['footer_column_enable_chat_widget'] )   )  ){
 		
