@@ -1,10 +1,11 @@
-.ccl-c-feedback__btn {
-    @extend .ccl-u-transition;
+.ccl-c-feedback__btn,
+#libchat_1b65997655cf4c593b1b25474e5f5f2c > button{
+    transition: transform 0.5s;
     @extend .ccl-u-weight-bold;
     position: fixed;
     bottom: 12px;
     @extend .ccl-u-bg-school;
-    border: 1px solid white;
+    border: 1px solid white !important;
     color: white;
     padding: $spacer/3;
     right: 1.1%;
@@ -13,6 +14,11 @@
     z-index: 10;
     transform-origin: center center;
     backface-visibility: hidden;    
+    will-change: transform;
+    border-radius: 0 !important;
+    transform: translateZ(0);
+    font-smoothing: antialiased !important;
+    
     
     
     &:hover,

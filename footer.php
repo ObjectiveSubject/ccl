@@ -4,6 +4,9 @@
  */
 
 $footer_options = get_option( 'footer-options' );
+
+//debug
+//debug_to_console( $footer_options );
 ?>
 
 	<aside class="ccl-c-school-band ccl-u-py-2" style="background-color:#F5F5F5" role="complementary" aria-label="Claremont Colleges School Logos">
@@ -101,7 +104,23 @@ $footer_options = get_option( 'footer-options' );
 
 <?php 
 	//if feedback form is enabled, then show
-	if ( array_key_exists( 'footer-column-ux-feedback', $footer_options ) && $footer_options['footer-column-ux-feedback'] ){
+	global $post;
+	
+	//debug
+	// debug_to_console( $post );
+	// debug_to_console(  in_array( $post->ID, $footer_options['footer_column_enable_chat_widget']  ) ); 
+	
+	if( is_array( $footer_options['footer_column_enable_chat_widget'] ) && ( in_array( $post->ID, $footer_options['footer_column_enable_chat_widget'] ) || in_array( $post->post_type,  $footer_options['footer_column_enable_chat_widget'] )   )  ){
+		
+		?>
+			<script src="https://v2.libanswers.com/load_chat.php?hash=1b65997655cf4c593b1b25474e5f5f2c"></script>
+			
+			<div id="libchat_1b65997655cf4c593b1b25474e5f5f2c"></div>
+		
+		<?php
+		
+		
+	} elseif( array_key_exists( 'footer-column-ux-feedback', $footer_options ) && $footer_options['footer-column-ux-feedback'] ){
 		get_template_part( 'partials/ux-feedback' );
 	}
 ?>

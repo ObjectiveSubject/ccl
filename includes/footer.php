@@ -106,7 +106,16 @@ function footer_settings_init() {
 		'\CCL\Footer\footer_column_3_cb',
 		'footer-options',
 		'footer-content'
-	);	
+	);
+	
+	add_settings_field(
+		'footer_column_enable_chat_widget', // as of WP 4.6 this value is used only internally
+		// use $args' label_for to populate the id inside the callback
+		__('Select pages to display LibAnswers chat widget', 'footer-content'),
+		'\CCL\Footer\enable_chat_widget',
+		'footer-options',
+		'footer-content'
+	);
 }
 
 /**
@@ -158,4 +167,39 @@ function footer_column_3_cb( $args ) {
 		<input id="footer-column-ux-feedback" type="checkbox" name="footer-options[footer-column-ux-feedback]" value="1"<?php checked( isset( $options['footer-column-ux-feedback'] ) ); ?> />
 	
 	<?php
+}
+
+
+function enable_chat_widget( $args ){
+	
+	$options = get_option( 'footer-options' );
+	
+	// echo '<pre>';
+	// print_r( $options );
+	// echo '</pre>';
+
+	?>
+	
+	    <div id="footer_column_enable_chat_widget" style="height:400px; width:50%; overflow-y:scroll; background-color: white;" >
+	    	<input id="database" type="checkbox" value="database" name="footer-options[footer_column_enable_chat_widget][]" <?php  echo ( is_array( $options['footer_column_enable_chat_widget'] ) && in_array( 'database' , $options['footer_column_enable_chat_widget']) ) ? 'checked' : ''; ?> >
+	    	<label for="database">All database subpages</label>
+	    	<br />
+	    	
+	        <?php
+	        if( $pages = get_pages() ){
+	        	
+	            foreach( $pages as $page ){
+	            	?>
+	            	
+	            	<input id="<?php echo $page->ID; ?>" type="checkbox"  name="footer-options[footer_column_enable_chat_widget][]" value="<?php echo $page->ID; ?>" <?php  echo  ( is_array( $options['footer_column_enable_chat_widget'] ) && in_array( $page->ID , $options['footer_column_enable_chat_widget']) ) ? 'checked' : ''; ?> > 
+	            	<label for="<?php echo $page->ID; ?>"> <?php echo $page->post_title; ?></label>
+	                <br />
+	                <?php
+	            }
+	        }
+	        ?>
+	    </div>
+	
+	<?php
+	
 }
