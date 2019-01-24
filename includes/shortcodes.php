@@ -355,16 +355,10 @@ return $html;
  	ob_start();
  	?>
  	
-	<div class="needs-js">chat loading...</div>
-	
-	<script type="text/javascript">
-	  (function() {
-	    var x = document.createElement("script"); x.type = "text/javascript"; x.async = true;
-	    x.src = (document.location.protocol === "https:" ? "https://" : "http://") + "libraryh3lp.com/js/libraryh3lp.js?9486";
-	    var y = document.getElementsByTagName("script")[0]; y.parentNode.insertBefore(x, y);
-	  })();
-	</script> 	
+ 		<div id="libchat_b84c8281113ba327450d2f88292ce846"></div>
  	
+	 	<script src="https://v2.libanswers.com/load_chat.php?hash=b84c8281113ba327450d2f88292ce846"></script>
+	 	
  	<?php
  	$html = ob_get_contents();
  	ob_get_clean();
@@ -372,6 +366,18 @@ return $html;
  	return $html;
  	
  }
+ 
+ 
+ //old code from the chat widget
+ //	<div class="needs-js">chat loading...</div>
+	
+	// <script type="text/javascript">
+	//   (function() {
+	//     var x = document.createElement("script"); x.type = "text/javascript"; x.async = true;
+	//     x.src = (document.location.protocol === "https:" ? "https://" : "http://") + "libraryh3lp.com/js/libraryh3lp.js?9486";
+	//     var y = document.getElementsByTagName("script")[0]; y.parentNode.insertBefore(x, y);
+	//   })();
+	// </script> 
  
  function youtube_video_fn($attributes = false, $content = null ){
  	//Define variables
