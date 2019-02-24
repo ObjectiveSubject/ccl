@@ -1,6 +1,6 @@
 /*! CCL - v0.1.0
  * http://github.com/ObjectiveSubject/ccl
- * Copyright (c) 2018; * Licensed GPLv2+ */
+ * Copyright (c) 2019; * Licensed GPLv2+ */
 
 /**
  * Global Variables. 
